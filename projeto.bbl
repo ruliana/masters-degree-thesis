@@ -14,5 +14,24 @@
 \abntrefinfo{Gil}{GIL}{1991}
 {GIL, A.~C. \emph{Como elaborar projetos de pesquisa}. 3. ed. S\~ao Paulo:
   Atlas, 1991.}
+  
+\bibitem[Fayyad 1996]{fayyad96}
+\abntrefinfo{Fayyad}{FAYYAD}{1996}
+@INPROCEEDINGS{Fayyad1996-yz,
+  title     = "Knowledge Discovery and Data Mining: Towards a Unifying
+               Framework",
+  booktitle = "{KDD}",
+  author    = "Fayyad, Usama M and Piatetsky-Shapiro, Gregory and Smyth,
+               Padhraic and {Others}",
+  abstract  = "Abstract This paper presents a first step towards a unifying
+               framework for Knowledge Discovery in Databases. We describe
+               finks between data milfing, knowledge discovery, and other
+               related fields. We then define the KDD process and basic data
+               mining algorithms,",
+  publisher = "aaai.org",
+  volume    =  96,
+  pages     = "82--88",
+  year      =  1996
+}
 
 \end{thebibliography}
