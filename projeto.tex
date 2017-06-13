@@ -227,33 +227,10 @@ Existem diversos trabalhos sobre movimentação profissional, principalmente sob
 
 A movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre.
 
-%====================================
-\subsection{Definições}
-
-Para facilitar a compreensão do texto, abaixo são apresentadas definições para os termos encontrados no restante desse trabalho. Os conceitos são baseados nos trabalhos de \citeonline{Barabasi2016-rn}, \citeonline{Van_Steen2010-tf} e \citeonline{Goldbarg2012-uc}.
-
-\begin{description}    
-    \item[Nó] ou \textbf{Vértice} são termos usados para descrever entidades em um grafo. A literatura de Ciência de Redes normalmente opta por \enquote{nó} em detrimento a \enquote{vértice}, enquanto a literatura de Teoria de Grafos utiliza claramente o termo \enquote{vértice}. Nesse trabalho, os termos são usados como sinônimos.
-    
-    \item[Conexão] ou \textbf{Aresta} são termos usados para descrever as relações entre pares de nós. A literatura de Ciência de Redes utiliza \enquote{conexão}, enquanto a Teoria de Grafos utiliza \enquote{aresta}. Da mesma forma que o item anterior, esse trabalho usa ambos os termos como sinônimos.
-    
-    \item[Grau] o número de conexões de um nó. Em um grafo direcionado, o \textit{grau de entrada} representa o número de conexões que chegam ao nó, enquanto que o \textit{grau de saída} se refere ao número de conexões que partem do nó.
-\end{description}
-
 \subsection{Considerações sobre Carreira}
 
 A definir\ldots
 
-%====================================
-\subsubsection{Atração entre ocupações}
-
-\todo[inline]{procurar referências na área de RH, não encontrei em uma primeira tentativa (termos errados, talvez?)}
-
-Para os propósitos desse trabalho, definimos o conceito de \enquote{atração} para o grau em que uma ocupação atrai mais profissionais do que outra.
-
-Em termos quantitativos, isso significa que o fluxo de profissionais entre duas ocupações é mais intenso em uma direção que em outra. Isso não significa necessariamente que uma ocupação é mais desejável que outra em qualquer sentido social.
-
-\todo[inline]{Deve ter algo sobre isso em redes de fluxo =/}
 
 %====================================
 \section{CIÊNCIA DE REDES}
@@ -261,7 +238,7 @@ Em termos quantitativos, isso significa que o fluxo de profissionais entre duas 
 
 A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse nos começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert [{REFS}].
 
-Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército [{REFS}].
+Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército~\cite{Maxwell2009-kq}.\todo{Citei uma página aqui do próprio site do exército, vale como referência? =/}
 
 O \citeonline{National_Research_Council2006-lv} define a Ciência de Redes como \enquote{o estudo da representação em rede de fenômenos físicos, biológicos e sociais levando a modelos preditivos desses fenômenos}~\footnote{Em tradução livre, \enquote{the study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.}}.
 
@@ -274,15 +251,15 @@ Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se di
     
     \item[\textit{Matemática e Quantitativa}.] A Ciência de Redes baseia-se fortemente na Teoria de Grafos, na Estatística e em Algoritmos para criação de modelos e sua avaliação. A descoberta de princípios gerais de organização das redes só é possível com uma sólida base formal Matemática.
     
-    \item[\textit{Computacional}.] Redes reais por vezes são de grande tamanho, com milhares ou milhões de nós, como a Internet ou as relações entre trabalho e pessoas. As características de algumas topologias, como a distribuição dos graus dos nós, somente são distinguíveis quando o número de nós e conexões é bastante grande. Adicionalmente, as análises comparativas com modelos nulos pressupõe a geração de grandes quantidades de redes aleatórias de composição similar às redes em estudo, um trabalho que não é possível sem o uso intenso de computadores. Algoritmos e técnicas de processamentos de grandes volumes de dados são ferramentas essenciais para esses estudos.
+    \item[\textit{Computacional}.] Redes reais por vezes são de grande tamanho, com milhares ou milhões de nós, como a Internet ou as relações entre trabalho e pessoas. As características de algumas topologias, como a distribuição dos graus dos nós, somente são distinguíveis quando o número de nós e conexões é bastante grande. Adicionalmente, as análises comparativas com modelos nulos pressupõe a geração de grandes quantidades de redes aleatórias de composição similar às redes em estudo, um trabalho que não é possível sem o uso intensivo de computadores. Algoritmos e técnicas de processamentos de grandes volumes de dados são ferramentas essenciais para esses estudos.
 \end{description}
 
 %====================================
 \subsection{Redes Aleatórias e Redes Reais} \label{sec:redes-aleatorias}
 
-No estudo de redes reais, as redes aleatórias funcionam como \enquote{modelo nulo}, ou seja, se uma métrica observada em uma rede real diverge significativamente de uma rede aleatória equivalente, algum princípio organizacional não existente no modelo é responsável pela divergência~\cite{Zweig2016-rb}.
+No estudo de redes reais, as redes aleatórias funcionam como \enquote{modelo nulo}, ou seja, se uma métrica observada em uma rede real diverge significativamente de uma rede aleatória equivalente, algum princípio organizacional inexistente no modelo é responsável pela divergência~\cite{Zweig2016-rb}.
 
-O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Trabalhos em redes sociais (como em \citeonline{Holland1970-dx}) e ecologia (com em \citeonline{Connor1979-vw}) já a utilizaram, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
+O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já autilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
 
 De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: seja $G^\textit{rand}$ um \textit{modelo} de rede aleatória, $M \defn S \to \R$ uma métrica global definida para todos os grafos de um conjunto $S$, e $G \in S$ uma rede sob análise. O valor esperado $E(M|G^\textit{rand})$ é comparado a $M(G)$ quanto a sua relevância estatística. Uma \enquote{métrica global}, nesse caso, é uma medição sobre toda a rede como, por exemplo, a distância média dos menores caminhos entre todos os seus nós.
 
@@ -290,11 +267,11 @@ De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: se
 %%NÃO ENTENDI ESSA ÚLTIMA FRASE. ESSA RELAÇÃO ENTRE TAMANHO E ERRO NÃO É CLARA 
 %Ronie: Não consegui melhorar muito a frase, pensei melhor e acho que um exemplo deve ajudar a passar melhor a mensagem. Escrevi um abaixo, veja o que acha, pls :)
 
-Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético um $M^\Delta = -2$, significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. As se aplicar as mesmas métricas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já o $M^\Delta$, nesse caso, é diretamente dependente do tamanho da rede e irá aumentar para redes maiores pela própria definição de métrica. Entretanto, traçar a correlação das duas métricas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
+Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicar as mesmas métricas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente dependente do tamanho da rede e irá aumentar para redes maiores pela própria definição de métrica. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
 
 Dependendo das métricas utilizadas, as equações acima sofrem variações para adequação ao uso, como, por exemplo, a \textit{reciprocidade}, proposta por~\citeonline{Garlaschelli2004-db}, explicada na Seção~\ref{sec:reciprocidade}.
 
-Já as métricas locais, que possuem um valor para cada nó ou cada conexão, podem ser comparadas através de seus estimadores estatísticos, como a média ou mediana, efetivamente transformando uma métrica local em uma métrica global. Outra forma de avaliação consiste em comparar a distribuição esperada nos modelos de redes aleatórias com a distribuição observada na rede em estudo. Além da comparação gráfica pode-se comparar a \textit{significância estatística} da distribuição esperada da métrica.
+Já as métricas locais, que possuem um valor para cada nó ou cada conexão, podem ser comparadas através de seus estimadores estatísticos, como a média ou mediana, efetivamente transformando-as em métricas globais. Outra forma de avaliação consiste em comparar a distribuição esperada nos modelos de redes aleatórias com a distribuição observada na rede em estudo. Além da comparação gráfica pode-se comparar a \textit{significância estatística} da distribuição esperada da métrica.
 
 \todo[inline]{Entrar com uma formalização aqui sobre a distribuição}
 
