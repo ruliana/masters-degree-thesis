@@ -228,19 +228,23 @@ Ao longo da vida profissional é comum para o indivíduo passar por diversas mov
 
 Este projeto de pesquisa usa uma base de dados de mercado com 10 milhões de currículos e 23 milhões de experiências profissionais da empresa Vagas Tecnologia com o objetivo de fazer um estudo analítico sobre a movimentação de profissionais entre ocupações durante o curso de suas carreiras~\todo{Acho que esse objetivo geral está perfeito, que acha?}. O problema é modelado com uma estrutura em grafos e é analisado com conceitos e técnicas de Ciência da Redes.
 
-Esse trabalho se prontifica a levantar hipóteses sobre os mecanismos\todo{[propriedades, funcionamento, comportamento]} na movimentação de profissionais
+Para concluir o objetivo, propõe-se levantar hipóteses sobre os o comportamento da movimentação de profissionais traduzindo estruturas observadas na rede para o domínio da dinâmica de carreira.
 
-Existem diversos trabalhos sobre movimentação profissional, principalmente sobre os fatores que motivam a mudança, como os expostos por~\citeonline{Ng2007-zp}~\todo{Ronie: tem mais uma série de papers, ler e mencionar (na introdução, talvez?)}. Porém, nenhum trabalho pôde ser encontrado analisando redes profissionais sob a ótica da Ciência de Redes, ponto onde esse trabalho tem sua principal contribuição.
+Propõe-se, então, validar as hipóteses encontradas. Isso é feito comparando-se a estrutura da rede com modelos nulos, ou seja, com redes de estrutura similar, porém geradas aleatoriamente.
+
+Como esse trabalho é baseado somente nos dados de currículos não é possível responder o que motiva os profissionais nos comportamentos observados, mas é possível afirmar que ele ocorre. Nesse ponto, futuros trabalhos podem se apoiar nos resultados aqui obtidos para expandir a compreensão desses comportamentos.
+
+Existem diversas pesquisas sobre movimentação profissional, principalmente sobre os fatores que motivam a mudança, como os expostos por~\citeonline{Ng2007-zp}. Porém, nenhum trabalho pôde ser encontrado analisando redes profissionais sob a ótica da Ciência de Redes, ponto onde esse trabalho tem sua principal contribuição.
 
 A movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre.
 
-%----------------------
-\textbf{Objetivo Geral}
+\todo[inline]{Abaixo o que defini como objetivos. Eles JÁ foram inseridos nos parágrafos acima. Concorda com eles? A redação os deixou claro? :) }
+    
+Objetivo Geral:
 
 Compreender a movimentação de profissionais entre ocupações utilizando como amostra o banco de dados de currículos da empresa VAGAS.com e técnicas de Ciência de Redes.
 
-%----------------------
-\textbf{Objetivo Específico}
+Objetivo Específico:
 
 Levantar hipóteses sobre os mecanismos ou propriedades na movimentação de profissionais utilizando comparações com modelos nulos.
 
@@ -283,7 +287,7 @@ Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se di
 
 No estudo de redes reais, as redes aleatórias funcionam como \enquote{modelo nulo}, ou seja, se uma métrica observada em uma rede real diverge significativamente de uma rede aleatória equivalente, algum princípio organizacional inexistente no modelo é responsável pela divergência~\cite{Zweig2016-rb}.
 
-O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já autilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
+O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já a utilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
 
 De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: seja $G^\textit{rand}$ um \textit{modelo} de rede aleatória, $M \defn S \to \R$ uma métrica global definida para todos os grafos de um conjunto $S$, e $G \in S$ uma rede sob análise. O valor esperado $E(M|G^\textit{rand})$ é comparado a $M(G)$ quanto a sua relevância estatística. Uma \enquote{métrica global}, nesse caso, é uma medição sobre toda a rede como, por exemplo, a distância média dos menores caminhos entre todos os seus nós.
 
