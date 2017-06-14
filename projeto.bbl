@@ -5,33 +5,162 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{1.52 }
 
-\bibitem[Andrade 1999]{andrade99}
-\abntrefinfo{Andrade}{ANDRADE}{1999}
-{ANDRADE, M.~M. de. \emph{Como preparar trabalhos para cursos de
-  p{\'o}s-gradua{\c c}\~ao}. 3. ed. S\~ao Paulo: Atlas, 1999.}
+\bibitem[Barab{\'a}si e Albert 1999]{Barabasi1999-sn}
+\abntrefinfo{Barab{\'a}si e Albert}{BARAB{\'A}SI; ALBERT}{1999}
+{BARAB{\'A}SI, A.-L.; ALBERT, R. Emergence of scaling in random networks.
+\emph{Science}, American Association for the Advancement of Science, v.~286,
+  n.~5439, p. 509--512, 15~out. 1999.
+ISSN 0036-8075, 1095-9203.}
 
-\bibitem[Gil 1991]{gil91}
-\abntrefinfo{Gil}{GIL}{1991}
-{GIL, A.~C. \emph{Como elaborar projetos de pesquisa}. 3. ed. S\~ao Paulo:
-  Atlas, 1991.}
-  
-\bibitem[Fayyad 1996]{fayyad96}
-\abntrefinfo{Fayyad}{FAYYAD}{1996}
-@INPROCEEDINGS{Fayyad1996-yz,
-  title     = "Knowledge Discovery and Data Mining: Towards a Unifying
-               Framework",
-  booktitle = "{KDD}",
-  author    = "Fayyad, Usama M and Piatetsky-Shapiro, Gregory and Smyth,
-               Padhraic and {Others}",
-  abstract  = "Abstract This paper presents a first step towards a unifying
-               framework for Knowledge Discovery in Databases. We describe
-               finks between data milfing, knowledge discovery, and other
-               related fields. We then define the KDD process and basic data
-               mining algorithms,",
-  publisher = "aaai.org",
-  volume    =  96,
-  pages     = "82--88",
-  year      =  1996
-}
+\bibitem[Barab{\'a}si e P{\'o}sfai 2016]{Barabasi2016-rn}
+\abntrefinfo{Barab{\'a}si e P{\'o}sfai}{BARAB{\'A}SI; P{\'O}SFAI}{2016}
+{BARAB{\'A}SI, A.-L.; P{\'O}SFAI, M. \emph{Network Science}. 1 edition. ed.
+  [S.l.]: Cambridge University Press, 2016.
+ISBN 9781107076266.}
+
+\bibitem[Barrat et al. 2004]{Barrat2004-xf}
+\abntrefinfo{Barrat et al.}{BARRAT et al.}{2004}
+{BARRAT, A. et al. The architecture of complex weighted networks.
+\emph{Proc. Natl. Acad. Sci. U. S. A.}, v.~101, n.~11, p. 3747--3752, 16~mar.
+  2004.
+ISSN 0027-8424.}
+
+\bibitem[Carkci 2014]{Carkci2014-jk}
+\abntrefinfo{Carkci}{CARKCI}{2014}
+{CARKCI, M. \emph{Dataflow and Reactive Programming Systems: A Practical
+  Guide}. 1 edition. ed. [S.l.]: CreateSpace Independent Publishing Platform,
+  2014.
+ISBN 9781497422445.}
+
+\bibitem[Connor e Simberloff 1979]{Connor1979-vw}
+\abntrefinfo{Connor e Simberloff}{CONNOR; SIMBERLOFF}{1979}
+{CONNOR, E.~F.; SIMBERLOFF, D. The assembly of species communities: Chance or
+  competition?
+\emph{Ecology}, Ecological Society of America, v.~60, n.~6, p. 1132--1140,
+  1~dez. 1979.
+ISSN 0012-9658, 1939-9170.}
+
+\bibitem[Dongen 2000]{Van_Dongen2000-qm}
+\abntrefinfo{Dongen}{DONGEN}{2000}
+{DONGEN, S. van.
+\emph{Graph Clustering by Flow Simulation (Markov Clustering Algorithm)}.
+Tese (Doutorado) --- University of Ultrech, 2000.}
+
+\bibitem[Dongen 2008]{Van_Dongen2008-kx}
+\abntrefinfo{Dongen}{DONGEN}{2008}
+{DONGEN, S. van. \emph{Work flows and protocols for mcl and friends}. 8~mar.
+  2008.
+\url{https://micans.org/mcl/man/clmprotocols.html}.
+Accessed: 2017-4-29.}
+
+\bibitem[Gansner e North 2000]{Gansner2000-oo}
+\abntrefinfo{Gansner e North}{GANSNER; NORTH}{2000}
+{GANSNER, E.~R.; NORTH, S.~C. An open graph visualization system and its
+  applications to software engineering.
+\emph{Softw. Pract. Exp.}, John Wiley \& Sons, Inc., New York, NY, USA, v.~30,
+  n.~11, p. 1203--1233, set. 2000.
+ISSN 0038-0644.}
+
+\bibitem[Garlaschelli e Loffredo 2004]{Garlaschelli2004-db}
+\abntrefinfo{Garlaschelli e Loffredo}{GARLASCHELLI; LOFFREDO}{2004}
+{GARLASCHELLI, D.; LOFFREDO, M.~I. Patterns of link reciprocity in directed
+  networks.
+\emph{Phys. Rev. Lett.}, v.~93, n. 26 Pt 1, p. 268701, 31~dez. 2004.
+ISSN 0031-9007.}
+
+\bibitem[Hintjens 2013]{Hintjens2013-tz}
+\abntrefinfo{Hintjens}{HINTJENS}{2013}
+{HINTJENS, P. \emph{{ZeroMQ}}. [S.l.]: O'Reilly Media, 2013.
+ISBN 9781449334062.}
+
+\bibitem[Hoaglin, Mosteller e Tukey 1983]{Hoaglin1983-aq}
+\abntrefinfo{Hoaglin, Mosteller e Tukey}{HOAGLIN; MOSTELLER; TUKEY}{1983}
+{HOAGLIN, D.~C.; MOSTELLER, F.; TUKEY, J.~W. \emph{Understanding robust and
+  exploratory data analysis}. [S.l.]: Wiley New York, 1983.}
+
+\bibitem[Hohpe e Woolf 2003]{Hohpe2003-nj}
+\abntrefinfo{Hohpe e Woolf}{HOHPE; WOOLF}{2003}
+{HOHPE, G.; WOOLF, B. \emph{Enterprise Integration Patterns: Designing,
+  Building, and Deploying Messaging Solutions}. 1 edition. ed. [S.l.]:
+  Addison-Wesley Professional, 2003.
+ISBN 9780321200686.}
+
+\bibitem[Holland e Leinhardt 1970]{Holland1970-dx}
+\abntrefinfo{Holland e Leinhardt}{HOLLAND; LEINHARDT}{1970}
+{HOLLAND, P.~W.; LEINHARDT, S. A method for detecting structure in sociometric
+  data.
+\emph{Am. J. Sociol.}, journals.uchicago.edu, v.~76, n.~3, p. 492--513, 1970.
+ISSN 0002-9602.}
+
+\bibitem[Maxwell 2009]{Maxwell2009-kq}
+\abntrefinfo{Maxwell}{MAXWELL}{2009}
+{MAXWELL, S. \emph{Army Research Lab invests in network science research}.
+  2009.
+\url{https://www.army.mil/article/31705/Army_Research_Lab_invests_in_network_science_research}.
+Accessed: 2017-6-13.}
+
+\bibitem[{National Research Council} et al.
+  2006]{National_Research_Council2006-lv}
+\abntrefinfo{{National Research Council} et al.}{{National Research Council} et
+  al.}{2006}
+{{National Research Council} et al. \emph{Network Science}. [S.l.]: National
+  Academies Press, 2006.
+ISBN 9780309100267.}
+
+\bibitem[Newman 2001]{Newman2001-sl}
+\abntrefinfo{Newman}{NEWMAN}{2001}
+{NEWMAN, M.~E. Scientific collaboration networks. {II}. shortest paths,
+  weighted networks, and centrality.
+\emph{Phys. Rev. E Stat. Nonlin. Soft Matter Phys.}, APS, v.~64, n. 1 Pt 2, p.
+  016132, jul. 2001.
+ISSN 1539-3755.}
+
+\bibitem[Newman 2004]{Newman2004-by}
+\abntrefinfo{Newman}{NEWMAN}{2004}
+{NEWMAN, M. E.~J. Analysis of weighted networks.
+\emph{Phys. Rev. E Stat. Nonlin. Soft Matter Phys.}, APS, v.~70, n. 5 Pt 2, p.
+  056131, nov. 2004.
+ISSN 1539-3755.}
+
+\bibitem[Ng et al. 2007]{Ng2007-zp}
+\abntrefinfo{Ng et al.}{NG et al.}{2007}
+{NG, T. W.~H. et al. Determinants of job mobility: A theoretical integration
+  and extension.
+\emph{J. Occup. Organ. Psychol.}, Blackwell Publishing Ltd, v.~80, n.~3, p.
+  363--386, 1~set. 2007.
+ISSN 0963-1798, 2044-8325.}
+
+\bibitem[Opsahl, Agneessens e Skvoretz 2010]{Opsahl2010-zg}
+\abntrefinfo{Opsahl, Agneessens e Skvoretz}{OPSAHL; AGNEESSENS; SKVORETZ}{2010}
+{OPSAHL, T.; AGNEESSENS, F.; SKVORETZ, J. Node centrality in weighted networks:
+  Generalizing degree and shortest paths.
+\emph{Soc. Networks}, v.~32, n.~3, p. 245--251, 2010.
+ISSN 0378-8733.}
+
+\bibitem[Serrano e Bogu{\~n}{\'a} 2005]{Serrano2005-ms}
+\abntrefinfo{Serrano e Bogu{\~n}{\'a}}{SERRANO; BOGU{\~N}{\'A}}{2005}
+{SERRANO, M.~{\'A}.; BOGU{\~N}{\'A}, M. Weighted configuration model.
+\emph{AIP Conf. Proc.}, American Institute of Physics, v.~776, n.~1, p.
+  101--107, 21~jun. 2005.
+ISSN 0094-243X.}
+
+\bibitem[Squartini et al. 2013]{Squartini2013-ni}
+\abntrefinfo{Squartini et al.}{SQUARTINI et al.}{2013}
+{SQUARTINI, T. et al. Reciprocity of weighted networks.
+\emph{Sci. Rep.}, v.~3, p.~2729, 2013.
+ISSN 2045-2322.}
+
+\bibitem[Watts e Strogatz 1998]{Watts1998-wt}
+\abntrefinfo{Watts e Strogatz}{WATTS; STROGATZ}{1998}
+{WATTS, D.~J.; STROGATZ, S.~H. Collective dynamics of 'small-world'networks.
+\emph{Nature}, nature.com, 1998.
+ISSN 0028-0836.}
+
+\bibitem[Zweig 2016]{Zweig2016-rb}
+\abntrefinfo{Zweig}{ZWEIG}{2016}
+{ZWEIG, K.~A. Random graphs as null models. In:  \emph{Network Analysis
+  Literacy}. [S.l.]: Springer Vienna, 2016,  (Lecture Notes in Social
+  Networks). p. 183--214.
+ISBN 9783709107409, 9783709107416.}
 
 \end{thebibliography}
