@@ -404,11 +404,13 @@ Dois modelos são propostos nesse trabalho, adaptando-se modelos conhecidos a re
 \todo[inline]{Aqui eu fiz uma besteira sem tamanho. Propus dois modelos de rede aleatória para lidar com o peso das conexões, achando que seria uma mera questão de transformar o grafo (me deixei levar pelo artigo do \cite{Newman2004-by} que transforma grafos ponderados em multigrafos e pelo confuso artigo de \cite{Serrano2005-ms} em que ela faz a análise de um modelo aleatório para redes ponderadas, mas deixa o algoritmo implícito). Daí, durante a escrita (e analisando como a topologia ficaria) percebi que as propostas descaracterizam as conexões da rede (narf!). De qualquer maneira, deixei elas escritas, quem sabe deixando a ideia cozinhar um pouco não vem algo. O problema agora é que está BEM difícil achar um modelo nulo para rede ponderada e os modelos para redes simples não me parecem satisfatórios, pois uma das características mais fortes do MCar é justamente o fluxo de pessoas. Por conta disso, incluí mais um modelo, o de parâmetro oculto, talvez seja mais fácil adaptá-lo.}
 
 %====================================
-\subsubsection{Modelo de Erdős-Rényi e Gilbert}
+\subsubsection{Modelos de Erdős-Rényi e Gilbert}
 
-Os Modelo de Erdős-Rényi e o Modelo de Gilbert geram redes aleatórias com densidade de conexão variada. Esses dois modelos são bastante estudados e também os mais antigos, os artigos de Gilbert e Erdős-Rényi datam de 1959. Muitos dos valores esperados para suas métricas já estão disponíveis como modelos puramente matemáticos, ou seja, é possível calculá-los sem que seja necessário criar a rede de fato.
+O Modelo de Erdős-Rényi e o Modelo de Gilbert são bastante estudados e também os mais antigos, os artigos de Gilbert e Erdős-Rényi datam de 1959. Muitos dos valores esperados para suas métricas já estão disponíveis como modelos puramente matemáticos, ou seja, é possível calculá-los sem que seja necessário criar a rede de fato.
 
-Existem dois modelos de redes aleatórias, o primeiro, conhecido como $G(N,L)$ é de Erdős-Rényi e é criado a partir de um número fixo de nós $N$ e conexões $L$. Entretanto, o modelo mais usado é conhecido como $G(N,p)$ proposto por Gilbert, criado a partir de $N$ nós e com probabilidade fixa $p$ de conexão entre dois nós quaisquer. Os modelos são equivalentes em suas propriedades, porém o segundo simplifica o cálculo de algumas características \cite{Barabasi2016-rn}.
+Esses modelos criam redes simples com probabilidade de conexão entre nós aleatória.
+
+O modelo de Erdős-Rényi, conhecido como $G(N,L)$, é criado a partir de um número fixo de nós $N$ e conexões $L$. Entretanto, o modelo mais usado é conhecido como $G(N,p)$ proposto por Gilbert, criado a partir de $N$ nós e com probabilidade fixa $p$ de conexão entre dois nós quaisquer. Os modelos são equivalentes em suas propriedades, porém o segundo simplifica o cálculo de algumas características \cite{Barabasi2016-rn}.
 
 Ambos os modelos criam redes simples. O algoritmo para geração de rede $G(N, p)$ pode ser descrito da seguinte forma:
 
