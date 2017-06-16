@@ -238,7 +238,7 @@ Existem diversas pesquisas sobre movimentação profissional, principalmente sob
 
 A movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre.
 
-\todo[inline]{Abaixo o que defini como objetivos. Eles JÁ foram inseridos nos parágrafos acima. Concorda com eles? A redação os deixou claro? :) }
+\todo[inline]{Abaixo o que defini como objetivos. Eles JÁ foram inseridos nos parágrafos acima. Concorda com eles? A redação os deixou claro? :)}
     
 Objetivo Geral:
 
@@ -253,7 +253,6 @@ Encontrar indícios que suportem as hipóteses levantadas.
 Validar as hipóteses levantadas.
 
 Fornecer subsídio com dados para que as hipóteses possam ser consideradas para validação por cientistas de redes sociais.
-
 
 \subsection{Considerações sobre Carreira}
 
@@ -339,39 +338,57 @@ Para o trabalho presente, as métricas mais relevantes são apresentadas a segui
 %====================================
 \subsection{Conceitos de Redes}
 
-É preciso descrever os conceitos utilizados em redes para compreensão desse trabalho. Apesar desses conceitos serem básicos à Teoria de Grafos, uma breve descrição é oferecida nas seções seguintes para completude desse obra. Adicionalmente, é traçado um paralelo entre o conceito abstrato e seu significado nesse trabalho, dando contexto a ele. Assim, os seguintes conceitos serão revistos aqui com base nas descrições apresentadas em [REFS]:
+É preciso descrever os conceitos utilizados em redes para compreensão desse trabalho. Apesar de serem básicos em Teoria de Grafos, uma breve descrição é oferecida nas seções seguintes para completude desse obra.
 
-Um grafo ou rede é uma abstração usada quando o foco do trabalho está no relacionamentos entre entidades. Nessa abstração, as outras características das entidades que não o relacionamento são quase completamente descartadas.
+Um grafo ou rede é uma abstração usada quando o foco do estudo está no relacionamentos entre entidades. Nessa abstração, outras características das entidades que não o relacionamento são quase completamente descartadas.
 
 Redes são representadas graficamente por formas geométricas, em geral pequenos círculos para representar as entidades, conectados por linhas representando os relacionamentos.
 
 [Figura ilustrativa]
 
-Quando os relacionamentos possuem uma certa direção eles formam \textit{redes direcionadas}. Por exemplo, uma rede que representa os presentes que as pessoas receberam é uma rede em que há \textit{direção}, o presente é dado de uma pessoa \textit{para} outra. Em outros casos, quando não há uma direção no relacionamento, a rede é chamada \textit{não-direcionada}. Por exemplo, em uma rede de relacionamentos, os indivíduos se conhecem mutuamente. 
+Quando os relacionamentos possuem uma certa direção eles formam \textit{redes direcionadas}. Por exemplo, uma rede que representa as trocas de presentes natalinos é uma rede em que há \textit{direção}, o presente é dado de uma pessoa \textit{para} outra. Em outros casos, quando não há uma direção no relacionamento, a rede é chamada \textit{não-direcionada}. Por exemplo, em uma rede de relacionamentos os indivíduos se conhecem mutuamente. 
 
-Se a intensidade do relacionamento é relevante as conexões ganham um \textit{peso} que pode representar a distância entre as entidades 
+Se a intensidade do relacionamento é relevante as conexões ganham um \textit{peso}. Seu significado depende da rede em questão, em uma rede de transporte o peso pode significar a distância entre locais de entrega, em uma rede de dados pode significar o volume do tráfego entre os ponto, em uma rede social pode significar o número de mensagens trocadas entre duas pessoas. Redes onde existe a presença de conexões com peso são chamadas \textit{redes ponderadas}.
 
-\todo[inline]{Lista que deve ser expandida. Evitar mais de um parágrafo por item, estou assumindo que o público tem conhecimento desses conceitos e eles aqui só servem como \enquote{lembrança} e para deixar claro o que uso no trabalho quando houver ambiguidade (creio que existe muito pouca, se existir).}
+Algumas redes permitem múltiplas conexões entre dois nós. Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. \citeonline{Newman2004-by} propõe que algumas redes ponderadas podem ser representadas como multigrafos, principalmente onde a conexão representa um fluxo. Nessa representação alternativa cada unidade de peso é representada por uma conexão independente de peso um, em alguns cenários isso possibilita o emprego em redes ponderadas de técnicas que desconsideram o peso das conexões.
 
-\begin{itemize}
-\item Grafos não direcionados \Checkmark
-\item Grafos direcionados \Checkmark
-\item Arestas/Conexões ponderadas
-\item Loops
-\item Multi-grafo
-\item Cliques
-\item Hubs
-\item Componentes
-\item Menor caminho (distância geodésica)
-\item Raio de uma Rede
-\item Diâmetro de uma Rede
-\item Graus
-\item Grau médio, mediana, desvio padrão e dispersão
-\item Sequência de Graus
-\item Probabilidade de Grau
-\item Importância de Graus na redes
-\end{itemize}
+Em algumas redes, não há sentido em nós que conectam a si mesmos, por exemplo, em uma rede social onde as conexões representam quem conhece quem, uma conexão de alguém consigo mesmo não é relevante para o estudo da rede (desconsiderando-se questões filosóficas). Já em outras redes, é natural considerar esse tipo de conexão\todo{Encontrar um exemplo}. Conexões de um nó com ele mesmo são chamados \textit{laços} ou \textit{loops}.
 
+Redes que não permitem laços, pesos ou múltiplas conexões entre dois nós são chamadas \textit{redes simples}. Nessa pesquisa, a rede em questão é direcionada, ponderada e sem laços.
+
+Quando uma rede simples possui todas as conexões possíveis entre seus nós ela é chamada \textit{rede completa}. O número de conexões $L$ nessa rede é dada pela Equação~\ref{eq:rede-completa}, onde $N$ é o número de nós da rede. A Equação~\ref{eq:rede-completa-direcionada} que fornece o número de conexões $\linkboth{L}$ em uma rede direcionada.
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}XX@{}}
+    \begin{equation} \label{eq:rede-completa}
+       L = \frac{N(N - 1)}{2}
+    \end{equation} &
+    \begin{equation} \label{eq:rede-completa-direcionada}
+        \linkboth{L} = N(N - 1)
+    \end{equation}
+\end{tabularx}
+
+É possível perceber que o número de conexões possíveis cresce exponencialmente com a quantidade de nós.
+
+Se uma parte da rede forma um grafo completo, esse grafo é chamado \textit{clique}. O clique é um conceito importante quando se trata de detecção de comunidades.
+
+Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente.
+
+Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau.
+
+Medidas de centralidade de grau são, por exemplo, a média ou mediana dos graus da rede. Entretanto, algumas topologias possuem um dispersão muito grande de graus, ou seja, o desvio padrão ou distância interquartil variam consideravelmente. Nesses casos, é útil calcular-se a \textit{distribuição de grau} utilizando histogramas ou calculando-se a probabilidade da presença da graus na rede. Esses conceitos são detalhados na Seção~\ref{sec:distribuicao-grau-forca}.
+
+A \textit{sequência de grau} é o nome que se dá ao vetor com $n$ posições, onde $n$ é o número de nós e cada posição possui o grau de um nó. Sendo $\delta_i$ o grau do nó $i$, onde $G$ é uma rede com $n$ nós e $i \in G$, a sequência de grau pode ser definida como:
+
+\begin{equation} \label{eq:sequencia-grau}
+\textit{Seq}_G \defn \{\delta_i, \delta_{i+1}, \ldots, \delta_n\}
+\end{equation}
+
+A sequência de grau é utilizada tanto no cálculo da distribuição de grau quanto em algoritmos que criam redes aleatórias em que a distribuição exata de graus é preservada.
+
+Outro conceito importante no estudo de redes é o de menor caminho entre dois nós, explicado em mais detalhes na Seção~\ref{sec:distancia-geodesica}. O menor caminho é também chamado \textit{caminho geodésico} e a distância entre dois nós através do menor caminho é chamada \textit{distância geodésica}.
+
+Similar ao caminho geodésico duas outras variações para redes ponderadas são importantes nesse estudo. A primeira é o \textit{caminho mais provável}, ou seja, partindo-se de um nó e caminhando-se aleatoriamente pela rede, onde a probabilidade de se tomar um caminho é definida pelo peso da conexão, o caminho mais provável é formado pelas conexões percorridas até se encontrar um determinado nó. A segunda variação é o \textit{caminho de menor gargalo}, ela é definida como o caminho entre dois nós que maximiza o menor peso em qualquer uma das conexões que o forma~\cite{Goldbarg2012-uc}.
 
 %====================================
 \subsection{Modelos de Redes Aleatórias}
@@ -411,7 +428,7 @@ O processo do CM é baseado na reconexão aleatória entre nós, porém preserva
 
 Como os encaixes são utilizados aos pares no algoritmo, é fácil perceber que é necessário um número par de encaixes para que ele termine. Como o número de encaixes corresponde a sequência de graus, um dos requisitos para que esse algoritmo se complete é que a soma dos graus seja par. Se a sequência de graus for extraída de uma rede real, isso não é um problema, pois toda rede tem a soma de graus par. Porém, é uma restrição a ser levada em conta ao se gerar a sequência de graus a partir de uma distribuição pré-definida.
 
-Outra limitação do algoritmo é que ele gera \textit{loops} e conexões múltiplas. Em redes de grande tamanho, o número de conexões geradas dessa forma é bastante pequeno e a recomendação é que o fato pode ser ignorado~\cite{Barabasi2016-rn}. Por outro lado, em redes livres de escala, os \textit{hubs} são justamente os nós com maior probabilidade de receberem \textit{loops} e conexões múltiplas.
+Outra limitação do algoritmo é que ele gera laços e conexões múltiplas. Em redes de grande tamanho, o número de conexões geradas dessa forma é bastante pequeno e a recomendação é que o fato pode ser ignorado~\cite{Barabasi2016-rn}. Por outro lado, em redes livres de escala, os \textit{hubs} são justamente os nós com maior probabilidade de receberem laços e conexões múltiplas.
 
 A simplicidade do algoritmo permite uma análise probabilística simples. Por exemplo, a probabilidade de uma conexão entre dois nós $P_{ij}$ é:
 
@@ -419,7 +436,7 @@ A simplicidade do algoritmo permite uma análise probabilística simples. Por ex
 P_{ij} \defn \frac{k_i k_j}{2L - 1}
 \end{equation}
 
-\todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$. Desconsiderar o grau de $k_i$ permitiria fazer a conta de probabilidade sem considerar \textit{loops}, não?}
+\todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$. Desconsiderar o grau de $k_i$ permitiria fazer a conta de probabilidade sem considerar laços, não?}
 
 Onde $k_i$ e $k_j$ são os graus dos nós e $L$ é o número total de conexões na rede. Como a soma de graus da rede é igual a duas vezes o número de conexões (cada conexão contribui com 1 para o grau de cada nó que conecta) ou seja $K = 2L$, a mesma fórmula pode ser expressa como:
 
@@ -429,7 +446,7 @@ P_{ij} \defn \frac{k_i k_j}{K - 1}
 
 Onde $K$ é a soma da sequência de graus.
 
-É possível evitar os \textit{loops} e conexões múltiplas incluindo-se no algoritmo a restrição de sortear um novo par de encaixes se eles pertencerem ao mesmo nó ou se já houver uma conexão entre eles, entretanto, a análise de probabilidades se torna extremamente complicada.
+É possível evitar os laços e conexões múltiplas incluindo-se no algoritmo a restrição de sortear um novo par de encaixes se eles pertencerem ao mesmo nó ou se já houver uma conexão entre eles, entretanto, a análise de probabilidades se torna extremamente complicada.
 
 O Modelo de Configuração pode ser facilmente adaptado para redes direcionadas com as seguintes adaptações:
 
@@ -459,7 +476,7 @@ Com base nos trabalhos mencionados acima, propõe-se o seguinte algoritmo adapta
 \item Unifique as conexões múltiplas atribuindo a elas o peso igual ao número de conexões.
 \end{enumerate}
 
-Esse algoritmo ainda possui o problema de permitir \textit{loops} em uma rede onde eles não deveriam existir, mas as múltiplas conexões são desejadas e esperadas.
+Esse algoritmo ainda possui o problema de permitir laços em uma rede onde eles não deveriam existir, mas as múltiplas conexões são desejadas e esperadas.
 
 Finalmente, a maior dificuldade em relação ao algoritmo proposto é que, apesar da distribuição de força entre os nós ser preservada, a distribuição de grau da rede é descaracterizada, pois, apesar da força de cada nó ser preservada individualmente, as conexões são decompostas e podem se conectar a nós diferentes. Um nó de força 10 e grau 1 terminará como um nó de força 10 e grau 10, já que a probabilidade de 10 conexões aleatoriamente selecionadas resultarem nos mesmos pares de nós é muito pequena.\todo{Calcular a probabilidade}
 
@@ -480,7 +497,7 @@ Abaixo é descrito a algoritmo equivalente de Modelo de Configuração Ponderada
 %====================================
 \subsubsection{Modelo Aleatório de Preservação de Grau} \label{sec:modelo-preservacao-grau}
 
-Esse modelo preserva a distribuição de graus da mesma forma que o Modelo de Configuração, com a vantagem de naturalmente não permitir \textit{loops} \cite{Barabasi2016-rn}.
+Esse modelo preserva a distribuição de graus da mesma forma que o Modelo de Configuração, com a vantagem de naturalmente não permitir laços \cite{Barabasi2016-rn}.
 
 O Modelo Aleatório de Preservação de Grau consiste em escolher duas conexões aleatoriamente e trocar os nós entre elas. O algoritmo se segue:
 
@@ -554,7 +571,7 @@ Cada uma das métricas seguintes acompanha uma descrição de qual seu significa
 Para comparação com os modelos nulos, são considerados estimadores de centralidade (média e mediana), dispersão (desvio padrão e intervalo interquartil), distribuição e correlação entre as várias métricas.
 
 %====================================
-\subsubsection{Distância Geodésica}
+\subsubsection{Distância Geodésica} \label{sec:distancia-geodesica}
 
 O menor caminho entre dois nós é chamado \textit{caminho geodésico} e o número de conexões em um caminho geodésico é chamado \textit{distância geodésica}.
 %% SUGIRO QUE TODO CONCEITO SEJA COLOCADO EM ITÁLICO E NÃO ENTRE ASPAS.
@@ -781,7 +798,7 @@ A equação para reciprocidade, $\rho$, proposta por ~\citeonline{Garlaschelli20
 
 Onde $R^\textit{rand}$ é a reciprocidade encontrada em uma rede aleatória equivalente.
 
-Considerando que a reciprocidade em uma rede aleatória é dada em função da sua quantidade de nós $N$ e conexões $L$, considerando-se $\noloop{L}$ como o número de conexões excluindo-se \textit{loops}, é possível obter $R^\textit{rand}$ como:
+Considerando que a reciprocidade em uma rede aleatória é dada em função da sua quantidade de nós $N$ e conexões $L$, considerando-se $\noloop{L}$ como o número de conexões excluindo-se laços, é possível obter $R^\textit{rand}$ como:
 
 \begin{equation}
 R^\textit{rand} \defn \frac{\noloop{L}}{N(N - 1)}
@@ -884,7 +901,7 @@ Onde $K(k)$ é o conjunto de nós formado pelos nós de grau $k$ da rede. Ou sej
 P_{ij} \defn \frac{k_i k_j}{K}
 \end{equation}
 
-Onde $k_i$ e $k_j$ são os graus dos dois nós e $K$ é a soma de graus da rede. No caso de uma rede que não permite \textit{loops}, a probabilidade de um nó $i$ se conectar a um nó $j$ é:~\todo{Checar se a Equação está correta!}
+Onde $k_i$ e $k_j$ são os graus dos dois nós e $K$ é a soma de graus da rede. No caso de uma rede que não permite laços, a probabilidade de um nó $i$ se conectar a um nó $j$ é:~\todo{Checar se a Equação está correta!}
 
 \begin{equation}
 \noloop{P}_{ij} \defn \frac{k_i k_j}{K - k_i}
