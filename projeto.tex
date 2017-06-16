@@ -436,15 +436,15 @@ A simplicidade do algoritmo permite uma análise probabilística simples. Por ex
 P_{ij} \defn \frac{k_i k_j}{2L - 1}
 \end{equation}
 
-\todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$. Desconsiderar o grau de $k_i$ permitiria fazer a conta de probabilidade sem considerar laços, não?}
+\todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$.}
 
-Onde $k_i$ e $k_j$ são os graus dos nós e $L$ é o número total de conexões na rede. Como a soma de graus da rede é igual a duas vezes o número de conexões (cada conexão contribui com 1 para o grau de cada nó que conecta) ou seja $K = 2L$, a mesma fórmula pode ser expressa como:
+Onde $k_i$ e $k_j$ são os graus dos nós e $L$ é o número total de conexões na rede. Como a soma de graus da rede é igual a duas vezes o número de conexões, ou seja $K = 2L$, a mesma fórmula pode ser expressa como:
 
 \begin{equation}
 P_{ij} \defn \frac{k_i k_j}{K - 1}
 \end{equation}
 
-Onde $K$ é a soma da sequência de graus.
+Onde $K$ é a soma dos graus.
 
 É possível evitar os laços e conexões múltiplas incluindo-se no algoritmo a restrição de sortear um novo par de encaixes se eles pertencerem ao mesmo nó ou se já houver uma conexão entre eles, entretanto, a análise de probabilidades se torna extremamente complicada.
 
