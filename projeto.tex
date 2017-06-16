@@ -447,6 +447,26 @@ Os modelos apresentados acima podem ser generalizados para uma rede direcionada 
 %====================================
 \subsubsection{Modelo de Watts-Strogatz}
 
+O modelo de Watts-Strogatz cria uma rede aleatória com a propriedade de mundo pequeno e com um alto coeficiente de agrupamento. Uma rede de mundo pequeno é uma em que a menor distância entre dois nós selecionados aleatoriamente é muito pequena em relação ao tamanho da rede (Seção~\ref{sec:small-world}). Um alto coeficiente de agrupamento significa que os vizinho de um nó qualquer também são vizinhos entre si (Seção~\ref{sec:coeficiente-agrupamento}).
+
+Uma rede produzida pela modelo de Gilbert ou Erdős-Rényi possuem uma distância pequena entre dois nós quaisquer, a distância média esperada é $\avg{d} \approx ln N / ln \avg{k}$, onde $N$ é o número de nós da rede e $\avg{k}$ é a quantidade média de conexões dos nós. Ou seja, redes aleatórias apresentam a propriedade de mundo pequeno.
+
+Entretanto, esses redes possuem um coeficiente de agrupamento baixo, é esperado que os vizinhos de um nó qualquer tenham pouca ou nenhuma conexão entre si. O coeficiente de agrupamento esperado é $\avg{k}/N$.
+
+Por outro lado, uma \textit{rede reticulada} possui um alto coeficiente de agrupamento, mas uma distância entre dois nós aleatórios bastante alta. Um \textit{rede reticulada} é uma onde seus nós são dispostos regularmente em um plano e cada um se conecta aos seus vizinhos mais próximos, uma cidade com quarteirões perfeitamente quadrados é um exemplo de rede reticulada. O modelo de Watts-Strogatz cria uma rede mais próxima às redes reais, com distância entre nós como uma rede aleatória e o coeficiente de agrupamento similar ao esperado em um reticulado.
+
+O algoritmo para geração de uma rede aleatória Watts-Strogatz pode ser definido como:
+
+\begin{enumerate}
+\item Inicie com uma rede circular com $N$ nós.
+
+\item Conecte cada nó aos seu sucessor e ao seguinte no círculo.
+
+\item Com probabilidade $p$, reconecte um dos nós de cada conexão a outro aleatoriamente escolhido.
+\end{enumerate}
+
+Quando $p = 0$ o modelo é um reticulado, ele apresenta grande distância entre dois nós aleatórios e alto coeficiente de agrupamento. Quando $p = 1$ o modelo se torna um equivalente ao de Erdős-Rényi, com pequena distância entre nós aleatórios e baixo coeficiente de agrupamento. Pequenas distâncias e alto coeficiente de agrupamento surgiram com $0.001 < p < 0.1$ nos experimentos de Watts e Strogatz para redes de 1.000 nós e média de 10 conexões por nó.
+
 %====================================
 \subsubsection{Modelo de Barabási-Albert} \label{sec:modelo-barabasi-albert}
 
