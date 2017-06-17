@@ -1011,7 +1011,7 @@ A similaridade é usada para medir se dois nós ou conexões são similares estr
 
 A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico.
 
-Existem diversas formulações para a similaridade, \citeonline{Lu2011-og} revisam dez deles, sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada o índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
+Existem diversas formulações para a similaridade, \citeonline{Lu2011-og} revisam dez delas, sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada o índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
 
 Sendo $i$ e $j$ nós da rede, $N_i$ o conjunto de vizinhos do nó $i$ e $N_i^+ \defn N_i \cup \{i\}$, as Equações~\ref{eq:similaridade-1} define a similaridade por vizinhança e a Equação~\ref{eq:similaridade-2} define a mesma similaridade, considerando a existência de conexão direta entre os nós sendo comparados.
 
@@ -1033,19 +1033,19 @@ Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída, a s
 
 Onde $\linkin{N}_i$ é o número vizinhos de $i$ em que as conexões chegam a ele e $\linkout{N}_i$ é o número de vizinhos onde a conexão parte de $i$.
 
-No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Lu2011-og}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{iN})$, onde $N$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
+No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Ahn2010-uh}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{iN})$, onde $N$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
 
 \begin{equation}
 \weighteddir{S}_{ij} \defn \frac{\vec{w_i} \cdot \vec{w_j}}{|\vec{w_i}|^2 + |\vec{w_j}|^2 - \vec{w_i} \cdot \vec{w_j}}
 \end{equation}
 
-Para agrupamento de conexões, como proposto por \citeonline{Evans2009-lq} e \citeonline{Lu2011-og}, é preciso definir a similaridade entre conexões. Sendo o vetor $\vec{r}_{i} \defn (r_{i1}, r_{i2}, \ldots, r_{iN})$ definido de acordo com a Equação~\ref{eq:similaridade-conexao-parcial}:
+Para agrupamento de conexões, como proposto por \citeonline{Evans2009-lq} e \citeonline{Ahn2010-uh}, é preciso definir a similaridade entre conexões. Sendo o vetor $\vec{r}_{i} \defn (r_{i1}, r_{i2}, \ldots, r_{iN})$ definido de acordo com a Equação~\ref{eq:similaridade-conexao-parcial}:
 
 \begin{equation} \label{eq:similaridade-conexao-parcial}
 r_{ij} \defn \frac{1}{k_i} \sum_{h \in N_i} w_{ih}\delta_{ij} + w_{ij}
 \end{equation}
 
-Onde $\delta_{ij} = 1$ se $i = j$ e zero caso contrário. A similaridade entre conexões $R_{(i,h),(h,j)}$ pode ser definida como \cite{Lu2011-og}:
+Onde $\delta_{ij} = 1$ se $i = j$ e zero caso contrário. A similaridade entre conexões $R_{(i,h),(h,j)}$ pode ser definida como \cite{Ahn2010-uh}:
 
 \begin{equation}
 R_{(i,h),(j,h)} \defn \frac{\vec{r_i} \cdot \vec{r_j}}{|\vec{r_i}|^2 + |\vec{r_j}|^2 -  \vec{r_i} \cdot \vec{r_j}}
