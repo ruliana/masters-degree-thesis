@@ -507,6 +507,7 @@ P_{ij} \defn \frac{k_i k_j}{2L - 1}
 \end{equation}
 
 \todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$.}
+%% QUANDO ELE COLOCA A EQUAÇÃO DESSA FORMA ELE ESTÁ DESCONSIDERANDO O NÓ KI. NO LIMITE A EQUAÇÃO SE TORNA Pij=KiKj/2L.
 
 Onde $k_i$ e $k_j$ são os graus dos nós e $L$ é o número total de conexões na rede. Como a soma de graus da rede é igual a duas vezes o número de conexões, ou seja $K = 2L$, a mesma fórmula pode ser expressa como:
 
@@ -519,7 +520,7 @@ Onde $K$ é a soma dos graus.
 É possível evitar os laços e conexões múltiplas incluindo-se no algoritmo a restrição de sortear um novo par de encaixes se eles pertencerem ao mesmo nó ou se já houver uma conexão entre eles, entretanto, a análise de probabilidades se torna mais complexa.
 
 O Modelo de Configuração pode ser facilmente adaptado para redes direcionadas com as seguintes adaptações:
-
+%% ESSA PROPOSTA DE ADAPTAÇÃO PARA REDES DIRECIONADAS É SUA? CASO AFIRMATIVO É PRECISO DESTACAR COMO UMA CONTRIBUIÇÃO DA DISSERTAÇÃO
 \begin{enumerate}
 \item Atribua um grau de saída e um grau de entrada a cada nó.
 \item Crie uma lista de \textit{encaixes de saída} e uma lista de \textit{encaixes de entrada} com a sequência de graus da saída e a sequência de graus de entrada, respectivamente.
@@ -528,7 +529,7 @@ O Modelo de Configuração pode ser facilmente adaptado para redes direcionadas 
 \end{enumerate}
 
 Pelo algoritmo, nota-se que as listas de encaixe precisam ser do mesmo tamanho, ou seja, a soma da sequência de graus de saída precisa ser igual a soma da sequência de graus de entrada.
-
+%% ILUSTRAR
 %====================================
 \subsubsection{Modelo de Configuração Ponderada} \label{sec:modelo-configuracao-ponderada}
 
@@ -537,18 +538,19 @@ O Modelo de Configuração descrito na Seção \ref{sec:modelo-configuracao} é 
 A proposta de Newman é perfeitamente aplicável para esse trabalho, onde a rede modela exatamente o \textit{fluxo de pessoas} entre duas ocupações e o peso da conexão significa o fluxo de pessoas entre elas.
 
 Com base nos trabalhos mencionados acima, propõe-se o seguinte algoritmo adaptado para o Modelo de Configuração:
-
+%% É PRECISO EXPLICITAR NOS OBJETIVOS (OU EM UMA SEÇÃO CHAMADA CONTRIBUIÇÕES) QUE ESTAMOS APRESENTANDO UMA ADAPTAÇÃO DO MODELO DE CONFIGURAÇÃO PARA TRATAR REDES PONDERADAS
 \begin{enumerate}
 \item Atribua uma força (como descrito na Seção~\ref{sec:forca}) a cada nó e crie uma sequência de forças de maneira análoga à sequência de graus.
 \item Crie uma lista com os encaixes para os nós com um número de encaixes igual a força de cada nó.
-\item Selecione aleatoriamente dois encaixes da lista e crie uma conexão entre elas. Remova os encaixes usados.
+\item Selecione aleatoriamente dois encaixes da lista e crie uma conexão entre eles. Remova da lista os encaixes usados.
 \item Repita o processo com a lista restante até que ela se esvazie.
 \item Unifique as conexões múltiplas atribuindo a elas o peso igual ao número de conexões.
 \end{enumerate}
 
 Esse algoritmo ainda possui o problema de permitir laços em uma rede onde eles não deveriam existir, mas as múltiplas conexões são desejadas e esperadas.
-
-Finalmente, a maior dificuldade em relação ao algoritmo proposto é que, apesar da distribuição de força entre os nós ser preservada, a distribuição de grau da rede é descaracterizada, pois, apesar da força de cada nó ser preservada individualmente, as conexões são decompostas e podem se conectar a nós diferentes. Um nó de força 10 e grau 1 terminará como um nó de força 10 e grau 10, já que a probabilidade de 10 conexões aleatoriamente selecionadas resultarem nos mesmos pares de nós é muito pequena.\todo{Calcular a probabilidade}
+%% E POR QUE VOCÊ NÃO COLOCA UMA VERIFICAÇÃO PARA BLOQUEAR OS LAÇOS?
+%% ILUSTRE COM UM EXEMPLO
+Finalmente, a maior dificuldade em relação ao algoritmo proposto é que, apesar da distribuição de força entre os nós ser preservada, a distribuição de graus da rede é descaracterizada, pois, apesar da força de cada nó ser preservada individualmente, as conexões são decompostas e podem se conectar a nós diferentes. Um nó de força 10 e grau 1 terminará como um nó de força 10 e grau 10, já que a probabilidade de 10 conexões aleatoriamente selecionadas resultarem nos mesmos pares de nós é muito pequena.\todo{Calcular a probabilidade}
 
 \todo[inline]{Traçar o equivalente de probabilidade de conexão entre dois nós, mas agora considerando a força e justificar a observação sobre assortatividade}.
 
@@ -557,11 +559,11 @@ Abaixo é descrito a algoritmo equivalente de Modelo de Configuração Ponderada
 \begin{enumerate}
 \item Atribua uma força de entrada e uma força de saída a cada nó e crie duas sequências de forças, uma para cada tipo.
 \item Crie duas listas de encaixes, uma lista possui os encaixes de entrada, com um número de encaixes igual à força de entrada de cada nó. O mesmo procedimento deve ser feito para se criar uma lista de encaixes de saída.
-\item Selecione aleatoriamente um encaixe da lista de entrada e outro da lista de saída e crie uma conexão entre elas. Remova os encaixes usados.
+\item Selecione aleatoriamente um encaixe da lista de entrada e outro da lista de saída e crie uma conexão entre elas. Remova da lista os encaixes usados.
 \item Repita o processo caso as listas se esvaziem.
 \item Unifique as conexões múltiplas de mesma direção atribuindo a elas o peso igual ao número de conexões.
 \end{enumerate}
-
+%% ILUSTRE COM UM EXEMPLO
 \todo[inline]{Sugerir uma modificação levando em conta a assortatividade? Fica interessante que dá para comparar se algumas características da rede aparecem apenas por conta disso.}
 
 %====================================
@@ -588,7 +590,7 @@ Esse algoritmo permanece idêntico para redes direcionadas, pois preserva també
 \subsubsection{Modelo Aleatório de Preservação de Força}
 
 O modelo proposto aqui segue a mesma justificativa apresentada na Seção~\ref{sec:modelo-configuracao-ponderada}, seguindo a proposta de \cite{Newman2004-by} de transformar uma rede ponderada em um multigrafo.
-
+%% SE ESTÁ SENDO PROPOSTO AQUI, DEVE SER DESTACADO NOS OBJETIVOS/CONTRIBUIÇÕES
 O algoritmo é similar ao Modelo Aleatório de Preservação de Grau, mas sem a necessidade de se verificar se uma conexão já existe.
 
 \begin{enumerate}
@@ -641,7 +643,9 @@ O algoritmo é similar ao Modelo de Preservação de Grau e pode ser descrito co
  
 O artigo original não detalha um ponto de parada específico, porém a aplicação repetida dos passos leva a criação de uma rede com assertividade controlada por $p$. Com $p = 0$ a rede se comporta como uma rede aleatória, $p = 1$ leva a uma rede completamente assortativa.
  
-\citeonline{Barabasi2016-rn} propõem uma modificação no passo 3 para gerar redes dissortativas, reconectando os nós de grau mais diverso entre si com probabilidade $p$, formando as conexões $(a, d)$ e $(b, c)$.
+\citeonline{Barabasi2016-rn} propõem uma modificação no Passo 3 para gerar redes dissortativas, reconectando os nós de grau mais diverso entre si com probabilidade $p$, formando as conexões $(a, d)$ e $(b, c)$.
+
+%% PRECISAMOS APRESENTAR EXEMPLOS DE CADA MODELO
 
 %====================================
 \subsection{Métricas}
