@@ -1120,10 +1120,6 @@ Essa hipótese se baseia na anterior, justificando que quanto mais longe a estru
 
 \end{description}
 
-
-
-
-
 O clube de caratê de Zachary.
 
 Agrupamento hierárquico (áreas dentro de áreas)
@@ -1153,9 +1149,65 @@ Distância geodésica é um outro nome para o comprimento do caminho mais curto 
 
 \subsection{Propriedades Topológicas}
 
+Algumas redes possuem propriedades em sua estrutura que afetam seu funcionamento, desde resistência e falhas em redes de comunicação até facilidade na propagação de doenças contagiosas.
+
+Duas das propriedades ganharam notoriedade na virada do século com os trabalhos de \citeonline{Watts1998-wt} e \citeonline{Barabasi1999}. Elas geraram um interesse crescente por redes na comunidade científica e culminaram no surgimento de uma novo campo de estudo conhecido como Ciência de Redes \cite{Barabasi2016-rn}.
+
 \subsubsection{Mundo Pequeno} \label{sec:small-world}
 
-\subsubsection{Sem escala} \label{sec:scale-free}
+Também conhecido como \enquote{seis graus de separação}, o imaginário popular diz que quaisquer duas pessoas no planeta estão a até seis amigos de distância uma da outra. Curiosamente, esse número é condizente com estudos como o de \citeonline{Backstrom2012-ny} conduzido com a rede de relacionamentos \textit{Facebook}.
+
+A propriedade de mundo pequeno foi descrita pela primeira vez por Frigyes Karinthy em 1929, escritor e jornalista húngaro, em uma estória chamada \enquote{Correntes}. Nela, Karinthy conecta um trabalhador da indústria automobilística a si mesmo:
+
+\blockcquote{Karinthy1929-jg}{O trabalhador conhece o gerente da fábrica, que conhece Ford; Ford está em bons termos com o diretor geral da Publicações Hearst, que no último ano se tornou um bom amigo de Árpád Pásztor, alguém que não apenas eu conheço, mas é um grande amigo meu.~\footnote{em tradução livre do autor}}
+
+Durante o século XX, a propriedade de mundo pequeno aparece esparsamente mais algumas vezes e volta a ganhar atenção com o jogo \enquote{Seis Graus de Kevin Bacon} criado por três estudantes do \textit{Albright College} na década de 90 e finalmente com o trabalho de Duncan Watts e Steven Strogatz em 1998 \cite{Barabasi2016-rn}.
+
+O fenômeno alcançou um nível de popularidade tão grande que até hoje alguns de seus efeitos podem ser observados, por exemplo, até o momento da escrita dessa pesquisa, o site de busca \textit{Google} ainda fornece a distância entre Kevin Bacon e outros atores ao se digitar no buscador o nome do ator precedido pelo texto \enquote{\textit{bacon number}}.
+
+A propriedade de mundo pequeno se refere ao tamanho do caminho entre dois nós aleatoriamente selecionados na rede. De maneira simplificada, enquanto que o número de conexões cresce exponencialmente com a adição de novos nós em uma rede, a menor distância entre dois nós quaisquer cresce em ritmo logarítmico. 
+
+Em uma rede aleatória, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e pode segue a Equação\ref{eq:mundo-pequeno-1} \cite{Barabasi2016-rn}.
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}XX@{}}
+    \begin{equation} \label{eq:mundo-pequeno-1}
+        \avg{d}^\textit{erdos} \sim ln N
+    \end{equation} &
+    \begin{equation} \label{eq:coef-agrupamento-erdos}
+        \avg{C}^\textit{erdos} = \frac{\avg{k}}{N}
+    \end{equation}
+\end{tabularx}
+
+Sendo $\avg{k}$ é o grau médio da rede e $N$ o número de nós da rede.
+
+\citeonline{Barabasi2016-rn} especulam que o fato da propriedade de pequeno mundo causar surpresa está no fato da noção de proximidade ser frequentemente associada à distância física, que pode ser modelada como uma rede reticulada e não possui a propriedade de mundo pequeno.
+
+Em um reticulado circular, como é o caso da rede em estado inicial do modelo de Watts-Strogatz, a distância geodésica média $\avg{d}^ \textit{retic}$ é dada pela Equação~\ref{eq:distancia-reticulado} e seu coeficiente de agrupamento pela Equação~\ref{eq:coef-agrupamento-reticulado}.
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}XX@{}}
+    \begin{equation} \label{eq:distancia-reticulado}
+        \avg{d}^\textit{retic} = \frac{N}{2\avg{k}}
+    \end{equation} &
+    \begin{equation} \label{eq:coef-agrupamento-reticulado}
+        \avg{C}^\textit{retic} = \frac{3(\avg{k} - 2)}{4 (\avg{k} -1 )}
+    \end{equation}
+\end{tabularx}
+
+Redes aleatórias, por sua vez, apresentam a propriedade de mundo pequeno, mas possuem um coeficiente de agrupamento baixo. Em diversas redes reais é possível observar a propriedade de mundo pequeno, como em uma rede aleatória, simultaneamente com um alto coeficiente de agrupamento, como em redes reticuladas.
+
+Em uma rede aleatória Erdős-Rényi, o coeficiente de agrupamento esperado da rede $\avg{C}^\textit{erdos}$ é dada pela Equação~\ref{eq:coef-agrupamento-erdos}.
+
+É possível observar que quando o número de nós cresce, $\avg{d}^\textit{retic} \sim N$ enquanto $\avg{d}^\textit{erdos} \sim ln N$. Ou seja, a distância em uma rede reticulada cresce linearmente com o número de nós, enquanto que essa distância cresce em proporção logarítmica uma rede aleatória. Já os coeficientes de agrupamento tendem a constantes ao se aumentar o número de nós, $\avg{C}^\textit{retic} \sim 3 / 4$ enquanto que $\avg{C}^\textit{erdos} \sim 0$.\todo{Espero ter entendido direito essa coisa do \enquote{assintoticamente equivalente} =/}
+
+Isso levou \citeonline{Watts1998-wt} a proporem um modelo de rede aleatória que combinasse ambas as características. (Seção~\ref{sec:small-world}).
+
+Posteriormente, \citeonline{Barabasi1999-sn} observam que redes reais possuem \textit{hubs}, nós que agregam uma grande quantidade de conexões, e propõem um modelo aleatório capaz de produzir redes de mundo pequeno, com conectividade similar às redes reais, porém sem o mesmo coeficiente de agrupamento.
+
+\subsubsection{Livre de Escala} \label{sec:scale-free}
+
+As redes livres de escala são redes em que a distribuição das co
 
 
 \section{O MAPA DE CARREIRAS}
