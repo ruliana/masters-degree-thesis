@@ -239,23 +239,8 @@ Existem diversas pesquisas sobre movimentação profissional, principalmente sob
 
 A movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre.
 
-\todo[inline]{Abaixo o que defini como objetivos. Eles JÁ foram inseridos nos parágrafos acima. Concorda com eles? A redação os deixou claro? :)}
-    
-Objetivo Geral:
-
-Compreender a movimentação de profissionais entre ocupações utilizando como amostra o banco de dados de currículos da empresa VAGAS.com e técnicas de Ciência de Redes.
-
-Objetivos Específicos:
-
-Levantar hipóteses sobre os mecanismos ou propriedades na movimentação de profissionais utilizando comparações com modelos nulos.
-
-Encontrar indícios que suportem as hipóteses levantadas.
-
-Validar as hipóteses levantadas.
-
-Fornecer subsídios com dados para que as hipóteses possam ser consideradas para validação por cientistas de redes sociais.
-
 %% PARA MIM O OBJETIVO GERAL E OS ESPECÍFICOS ESTÃO ADEQUADOS
+% Ronie (2017-06-17) Removi o texto provisório e deixei só a redação principal.
 
 \subsection{Considerações sobre Carreira}
 
@@ -272,6 +257,8 @@ Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órg�
 
 O \citeonline{National_Research_Council2006-lv} define a Ciência de Redes como \enquote{o estudo da representação em rede de fenômenos físicos, biológicos e sociais levando a modelos preditivos desses fenômenos}~\footnote{Em tradução livre, \enquote{the study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.}}.
 %% RETIRAR O ET AL. DA CITAÇÃO DO NATIONAL RESEARCH COUNCIL
+% Ronie (2017-06-17) Então, o pior é que o texto é de três (ou quatro) institutos diferentes =/ Removo mesmo?
+
 Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se diferencia de uma abordagem tradicional pelos seguintes pontos:
 
 \begin{description}
@@ -285,65 +272,7 @@ Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se di
 \end{description}
 
 %====================================
-\subsection{Redes Aleatórias e Redes Reais} \label{sec:redes-aleatorias}
-
-No estudo de redes reais, as redes aleatórias funcionam como \enquote{modelo nulo}, ou seja, se uma métrica observada em uma rede real diverge significativamente de uma rede aleatória equivalente, algum princípio organizacional inexistente no modelo é responsável pela divergência~\cite{Zweig2016-rb}.
-
-O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já a utilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
-
-De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: seja $G^\textit{rand}$ um \textit{modelo} de rede aleatória, $M \defn S \to \R$ uma métrica global definida para todos os grafos de um conjunto $S$, e $G \in S$ uma rede sob análise. O valor esperado $E(M|G^\textit{rand})$ é comparado a $M(G)$ quanto a sua relevância estatística. Uma \enquote{métrica global}, nesse caso, é uma medição sobre toda a rede como, por exemplo, a distância média dos menores caminhos entre todos os seus nós.
-
-É possível comparar as métricas globais obtidas com seus valores esperados dividindo-se ou subtraindo-se o valor esperado do valor obtido~\cite{Zweig2016-rb}. No caso simples, $M^d \defn M(G) / E(M|G^\textit{rand})$ representa o quão divergente é $G$ em relação ao esperado em uma rede aleatória, valores próximos a 1 significam que a característica representada por essa métrica não diverge do encontrado em uma rede gerada ao acaso. Valores acima e abaixo de 1 significam características acima do esperado ou suprimidas. Já em $M^\Delta \defn M(G) - E(M|G^\textit{rand})$, os números acima e abaixo de 0 contribuem para a rejeição do modelo nulo. O uso das duas métricas permite traçar correlações entre diversas redes em estudo.
-%%NÃO ENTENDI ESSA ÚLTIMA FRASE. ESSA RELAÇÃO ENTRE TAMANHO E ERRO NÃO É CLARA 
-%Ronie: Não consegui melhorar muito a frase, pensei melhor e acho que um exemplo deve ajudar a passar melhor a mensagem. Escrevi um abaixo, veja o que acha, pls :)
-%% É PRECISO DEFINIR Md E MDelta ANTES DE APRESENTAR OS CONCEITOS. VOCÊ EXPLICA, MAS NÃO CONCEITUA. 
-
-Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicar as mesmas métricas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente dependente do tamanho da rede e irá aumentar para redes maiores pela própria definição de métrica. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
-
-Dependendo das métricas utilizadas, as equações acima sofrem variações para adequação ao uso, como, por exemplo, a \textit{reciprocidade}, proposta por~\citeonline{Garlaschelli2004-db}, explicada na Seção~\ref{sec:reciprocidade}.
-
-Já as métricas locais, que possuem um valor para cada nó ou cada conexão, podem ser comparadas através de seus estimadores estatísticos, como a média ou mediana, efetivamente transformando-as em métricas globais. Outra forma de avaliação consiste em comparar a distribuição esperada nos modelos de redes aleatórias com a distribuição observada na rede em estudo. Além da comparação gráfica pode-se comparar a \textit{significância estatística} da distribuição esperada da métrica.
-
-\todo[inline]{Entrar com uma formalização aqui sobre a distribuição}
-
-Essas abordagens foram usadas na descoberta de \textit{redes de mundo pequeno} por \citeonline{Watts1998-wt} e de \textit{redes livres de escala} por \citeonline{Barabasi1999-sn}.
-
-No caso das redes de mundo pequeno, observou-se que as redes reais em estudo possuíam uma \textit{distância geodésica} média similar a das redes aleatórias, porém seu \textit{coeficiente de agrupamento} divergia significativamente, ou seja, a organização das redes em estudo não poderia ser explicada meramente por aleatoriedade, algum princípio organizacional deveria existir para que elas assumissem esse formato. \textit{Distância geodésica} é meramente um nome mais conveniente para a menor distância entre dois nós e \textit{coeficiente de agrupamento} é uma métrica de quanto os vizinhos de um nó estão conectados entre si, formando grupos. \textit{Redes de mundo pequeno} são redes em que a distância geodésica entre dois nós quaisquer é muito curta, mesmo em uma rede imensa, na ordem de uma dezena de passos de distância em uma rede de bilhões de nós. As redes de mundo pequeno são detalhadas na Seção~\ref{sec:small-world}. 
-
-%% VOCÊ ESTÁ USANDO MUITOS CONCEITOS SEM INTRODUZÍ-LOS, POR EXEMPLO, REDES DE MUNDO PEQUENO, REDES LIVRES DE ESCALA, DISTÂNCIA GEODÉSICA, COEFICIENTE DE AGRUPAMENTO, ETC. A PRIMEIRA VEZ QUE VOCÊ USAR UM CONCEITO COLOQUE ELE EM ITÁLICO. VOCÊ PODE CRIAR UM GLOSSÁRIO SE FOR CONVENIENTE.
-% Ronie: fiz alterações, veja se melhorou :)
-%% MELHOROU, MAS MINHA SUGESTÃO É QUE VOCÊ MOVA A ATUAL SEÇÃO 2.2 PARA ANTES DESSA, POIS É NELA EM QUE VOCÊ APRESENTA OS CONCEITOS. INCLUA NESSA SEÇÃO OS CONCEITOS INTRODUZIDOS AQUI, POIS ELA PRECEDERÁ ESSA
-
-De forma similar, as redes reais com a propriedade de serem livres de escala divergem das redes aleatórias no número de conexões em seus nós. Enquanto as redes aleatórias possuem uma quantidade de conexões por nó distribuída de maneira similar a uma curva normal, nas redes livres de escala essa distribuição é logarítmica, em que poucos nós acumulam uma grande quantidade de conexões, formando \enquote{hubs}, enquanto a maior parte dos nós possuem poucas conexões. Redes livres de escala são detalhadas na Seção~\ref{sec:scale-free}.
-
-A comparação com modelos nulos é uma forma de \textit{análise exploratória de dados}~\cite{Zweig2016-rb}, em que a descoberta de uma divergência é na verdade a descoberta de uma questão. Nos casos exemplificados acima, as pesquisas levaram à seguinte questão: \enquote{Quais princípios ou restrições existem para que essas redes assumam tais características?}. No caso das redes livres de escala, \citeonline{Barabasi2016-rn} argumentam que os dois princípios  \textit{suficientes} e \textit{necessários} que levam a redes com essa topologia são o \enquote{crescimento} e a \enquote{conexão preferencial} (mais sobre ambos na Seção~\ref{sec:modelo-barabasi-albert}), oferecendo respostas à questão levantada pela análise contra o modelo nulo.
-
-A proposta de princípios organizacionais leva a novos modelos de redes aleatórias que incorporam esses princípios. Se esses modelos forem capazes de gerar redes com as características observadas nas redes reais que motivaram sua proposição, eles são plausíveis, ou seja, são \textit{suficientes} para explicá-las. No entanto, somente a análise matemática é capaz de dizer se os princípios são \textit{necessários}, ou seja, que não é possível o surgimento de uma rede com essa topologia sem os princípios propostos.
-
-Esse processo leva à criação do modelo de rede aleatória de Watts-Strogatz~\cite{Watts1998-wt}, que possui restrições adicionais à criação de redes aleatórias que tornam o modelo capaz de gerar redes em que a distância média dos menores caminhos e o coeficiente de agrupamento são compatíveis aos observados em redes reais. Da mesma maneira, o modelo Barabási-Albert é capaz de gerar redes que obedecem à distribuição de grau das redes reais em estudo~\cite{Barabasi1999-sn}.
-
-Esses novos modelos servem como modelo nulo para futuros trabalhos. Se uma rede real possui métricas compatíveis com redes geradas pelo modelo Barabási-Albert, então é possível caracterizar essa rede como uma rede livre de escala. Métricas divergentes significam que o modelo não captura princípios suficientes para explicá-la, gerando novas questões a serem respondidas.
-
-Para se chegar ao valor esperado de uma métrica em um modelo nulo (ou seja, o valor de $E(M|G^\textit{rand})$) é possível criar um modelo matemático que permita derivá-la a partir de outras características da rede ou, se um modelo matemático não for possível, obter o valor esperado de uma amostra gerada pelo modelo aleatório.
-%% O FINAL DA FRASE ACIMA NÃO ESTÁ CONECTANDO BEM, FAVOR VERIFICAR E AJUSTAR
-
-A primeira abordagem, por exemplo, é usada por \citeonline{Barabasi1999-sn} que chegam a distribuição do número de conexões por grau esperada em uma rede livre de escala como sendo $p_k \thicksim k^{-\gamma}$ em que $2 \leq \gamma \leq 3$, onde $p_k$ é a probabilidade de se encontrar um nó com $k$ conexões e $\gamma$ é um parâmetro chamado \textit{expoente de grau}. Em \citeonline{Barabasi2016-rn} várias outras propriedades também são modeladas matematicamente, como por exemplo, o número esperado de conexões no nó mais conectado.
-
-A obtenção do valor esperado através de amostragem, por outro lado, é usada pelos autores citados acima, mas pode ser mais claramente observada em \citeonline{Squartini2013-ni}, onde os modelos utilizados não possuem ainda uma solução matemática para o cálculo do valor esperado da métrica (no caso, a reciprocidade).
-
-Os modelos a serem escolhidos como modelos nulos para um estudo devem levar em consideração quais características eles preservam, pois a escolha inadequada dos modelos leva a conclusões errôneas. Sempre é possível substituir um modelo nulo por outro mais adequado, invalidando ou reforçando as conclusões prévias.
-
-A rede presente nesse trabalho possui claros requisitos quanto aos modelos de redes aleatórias aplicáveis ao seu estudo. Por ser uma rede ponderada e direcionada, modelos que desconsideram esses atributos perdem informação durante a comparação em busca de relevância estatística. Modelos de redes aleatórias onde ambos os atributos estão presentes são consideravelmente mais complexos e não tão abundantes, mas são mais adequados.
-
-Redes possuem um vasto repertório de medições, quase todas emprestadas da Teoria de Grafos. Algumas medições estruturais, como a \textit{distribuição de grau}, são quase ubíquas e relevantes em grande parte dos estudos de redes, pois várias propriedades são derivadas dessa característica. Outras métricas, no entanto, fazem sentido apenas em determinados tipos de redes. Por exemplo, pode não haver sentido em medir a reciprocidade (Seção ~\ref{sec:reciprocidade}) em uma rede de transporte, mas é uma métrica importante em uma rede social. Por outro lado, mesmo no estudo de redes sociais a reciprocidade pode ser irrelevante, como no caso do estudo de redes de mundo pequeno onde o foco está na distância média da rede.
-
-Independentemente da comparação com modelos nulos, as medições também são usadas para comparação direta com outras redes ou para comparações dentro dela própria. Por exemplo, as medidas de similaridade podem revelar ocupações que possuem um conjunto de requisitos semelhantes para exercê-las, as medidas de reciprocidade e não-reciprocidade podem ser usadas para se estabelecer uma progressão em uma sequência de ocupações.
-
-Para o trabalho presente, as métricas mais relevantes são apresentadas a seguir, bem como suas variações para redes ponderadas e direcionadas.
-
-%====================================
 \subsection{Conceitos de Redes}
-%% ESSA SEÇÃO DEVE APARECER ANTES DA ANTERIOR
 
 É preciso descrever os conceitos utilizados em redes para compreensão desse trabalho. Apesar de serem básicos em Teoria de Grafos, uma breve descrição é oferecida nas seções seguintes para completude dessa obra.
 
@@ -368,10 +297,10 @@ Quando uma rede simples possui todas as conexões possíveis entre seus nós ela
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
     \begin{equation} \label{eq:rede-completa}
-       L = \frac{N(N - 1)}{2}
+    L = \frac{N(N - 1)}{2}
     \end{equation} &
     \begin{equation} \label{eq:rede-completa-direcionada}
-        \linkboth{L} = N(N - 1)
+    \linkboth{L} = N(N - 1)
     \end{equation}
 \end{tabularx}
 
@@ -380,10 +309,20 @@ Quando uma rede simples possui todas as conexões possíveis entre seus nós ela
 Se uma parte da rede forma um grafo completo, esse grafo é chamado \textit{clique}. O clique é um conceito importante quando se trata de detecção de comunidades.
 
 %% DE TEMPOS EM TEMPOS COLOQUE UMA FIGURA ILUSTRANDO OS CONCEITOS APRESENTADOS. NUMA ÚNICA FIGURA VOCÊ PODE ILUSTRAR A REDE PONDERADA, CLIQUES, ETC.
+% Ronie (2017-06-17) Boa! Vou procurar algumas figuras open-source que eu possa utilizar provisoriamente, depois substituo por figura minhas, que acha?
 
-Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente.
+Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós está conectado ao supergrafo.
 
 %% ENTÃO UM COMPONENTE É O MESMO QUE UM SUBGRAFO?
+% Ronie (2017-06-17) É um subgrafo desconectado do supergrafo. Mexi no texto para tentar tornar mais claro, pode ver se melhorou? :) (definitivamente aqui vai bem uma figura =/)
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=1.0]{componente.png}
+    \caption{Rede com três componentes}
+    \source{Wikimedia - David Eppstein}
+    \label{fig:exemplo-grafo}
+\end{figure}
 
 Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau.
 
@@ -402,6 +341,78 @@ Outro conceito importante no estudo de redes é o de menor caminho entre dois n�
 Similar ao caminho geodésico duas outras variações para redes ponderadas são importantes nesse estudo. A primeira é o \textit{caminho mais provável}, ou seja, partindo-se de um nó e caminhando-se aleatoriamente pela rede, onde a probabilidade de se tomar um caminho é definida pelo peso da conexão, o caminho mais provável é formado pelas conexões percorridas até se encontrar um determinado nó. A segunda variação é o \textit{caminho de menor gargalo}, definida como o caminho entre dois nós que maximiza o menor peso em qualquer uma das conexões que o forma \cite{Goldbarg2012-uc}.
 
 \textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortativade} é o conceito contrário, onde nós com características diferentes tentem a ser conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
+
+%====================================
+\subsection{Redes Aleatórias e Redes Reais} \label{sec:redes-aleatorias}
+
+No estudo de redes reais, as redes aleatórias funcionam como \enquote{modelo nulo}, ou seja, se uma métrica observada em uma rede real diverge significativamente de uma rede aleatória equivalente, algum princípio organizacional inexistente no modelo é responsável pela divergência~\cite{Zweig2016-rb}.
+
+O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já a utilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
+
+De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: seja $G^\textit{rand}$ um \textit{modelo} de rede aleatória, $M \defn S \to \R$ uma métrica global definida para todos os grafos de um conjunto $S$, e $G \in S$ uma rede sob análise. O valor esperado $E(M|G^\textit{rand})$ é comparado a $M(G)$ quanto a sua relevância estatística. Uma \enquote{métrica global}, nesse caso, é uma medição sobre toda a rede como, por exemplo, a distância média dos menores caminhos entre todos os seus nós.
+
+É possível comparar as métricas globais obtidas com seus valores esperados dividindo-se ou subtraindo-se o valor esperado do valor obtido~\cite{Zweig2016-rb}. Definindo $M^d$ como a proporção entre o valor obtido da métrica na rede sendo estudada $M(G)$ e o valor esperado em uma rede aleatória equivalente $E(M|G^\textit{rand})$, proporção $M^d \defn M(G) / E(M|G^\textit{rand})$ representa o quão divergente é a rede $G$ em relação ao esperado em uma rede aleatória, valores próximos a 1 significam que a $M^d$ não diverge do encontrado em uma rede gerada ao acaso. Valores acima e abaixo de 1 significam características acima do esperado ou suprimidas.
+
+De maneira equivalente, pode-se definir $M^\Delta$ como a diferença absoluta entre o valor da métrica na rede em estudo $M(G)$ e o valor esperador em uma rede aleatória equivalente $E(M|G^\textit{rand})$. Na diferença absoluta $M^\Delta \defn M(G) - E(M|G^\textit{rand})$, os números acima e abaixo de 0 contribuem para a rejeição do modelo nulo. O uso das duas métricas permite traçar correlações entre diversas redes em estudo.
+%%NÃO ENTENDI ESSA ÚLTIMA FRASE. ESSA RELAÇÃO ENTRE TAMANHO E ERRO NÃO É CLARA 
+%Ronie: Não consegui melhorar muito a frase, pensei melhor e acho que um exemplo deve ajudar a passar melhor a mensagem. Escrevi um abaixo, veja o que acha, pls :)
+%% É PRECISO DEFINIR Md E MDelta ANTES DE APRESENTAR OS CONCEITOS. VOCÊ EXPLICA, MAS NÃO CONCEITUA.
+% Ronie (2017-06-17) Não sei se entendi bem, tentei de novo, é mais ou menos por aí? 
+
+Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicar as mesmas métricas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente dependente do tamanho da rede e irá aumentar para redes maiores pela própria definição de métrica. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
+
+Dependendo das métricas utilizadas, as equações acima sofrem variações para adequação ao uso, como, por exemplo, a \textit{reciprocidade}, proposta por~\citeonline{Garlaschelli2004-db}, explicada na Seção~\ref{sec:reciprocidade}.
+
+Já as métricas locais, que possuem um valor para cada nó ou cada conexão, podem ser comparadas através de seus estimadores estatísticos, como a média ou mediana, efetivamente transformando-as em métricas globais. Outra forma de avaliação consiste em comparar a distribuição esperada nos modelos de redes aleatórias com a distribuição observada na rede em estudo. Além da comparação gráfica pode-se comparar a \textit{significância estatística} da distribuição esperada da métrica.
+
+\todo[inline]{Entrar com uma formalização aqui sobre a distribuição}
+
+Essas abordagens foram usadas na descoberta de \textit{redes de mundo pequeno} por \citeonline{Watts1998-wt} e de \textit{redes livres de escala} por \citeonline{Barabasi1999-sn}.
+
+No caso das redes de mundo pequeno, observou-se que as redes reais em estudo possuíam uma \textit{distância geodésica} média similar a das redes aleatórias, porém seu \textit{coeficiente de agrupamento} divergia significativamente, ou seja, a organização das redes em estudo não poderia ser explicada meramente por aleatoriedade, algum princípio organizacional deveria existir para que elas assumissem esse formato. \textit{Distância geodésica} é meramente um nome mais conveniente para a menor distância entre dois nós e \textit{coeficiente de agrupamento} é uma métrica de quanto os vizinhos de um nó estão conectados entre si, formando grupos. \textit{Redes de mundo pequeno} são redes em que a distância geodésica entre dois nós quaisquer é muito curta, mesmo em uma rede imensa, na ordem de uma dezena de passos de distância em uma rede de bilhões de nós. As redes de mundo pequeno são detalhadas na Seção~\ref{sec:small-world}. 
+
+%% VOCÊ ESTÁ USANDO MUITOS CONCEITOS SEM INTRODUZÍ-LOS, POR EXEMPLO, REDES DE MUNDO PEQUENO, REDES LIVRES DE ESCALA, DISTÂNCIA GEODÉSICA, COEFICIENTE DE AGRUPAMENTO, ETC. A PRIMEIRA VEZ QUE VOCÊ USAR UM CONCEITO COLOQUE ELE EM ITÁLICO. VOCÊ PODE CRIAR UM GLOSSÁRIO SE FOR CONVENIENTE.
+% Ronie: fiz alterações, veja se melhorou :)
+%% MELHOROU, MAS MINHA SUGESTÃO É QUE VOCÊ MOVA A ATUAL SEÇÃO 2.2 PARA ANTES DESSA, POIS É NELA EM QUE VOCÊ APRESENTA OS CONCEITOS. INCLUA NESSA SEÇÃO OS CONCEITOS INTRODUZIDOS AQUI, POIS ELA PRECEDERÁ ESSA
+% Ronie (2017-06-17) Okay, vou primeiro mover a seção sem alterar o texto, depois reviso e altero para fazer sentido. O texto atual vai ficar bem mais técnico :)
+
+De forma similar, as redes reais com a propriedade de serem livres de escala divergem das redes aleatórias no número de conexões em seus nós. Enquanto as redes aleatórias possuem uma quantidade de conexões por nó distribuída de maneira similar a uma curva normal, nas redes livres de escala essa distribuição é logarítmica, em que poucos nós acumulam uma grande quantidade de conexões, formando \enquote{hubs}, enquanto a maior parte dos nós possuem poucas conexões. Redes livres de escala são detalhadas na Seção~\ref{sec:scale-free}.
+
+A comparação com modelos nulos é uma forma de \textit{análise exploratória de dados}~\cite{Zweig2016-rb}, em que a descoberta de uma divergência é na verdade a descoberta de uma questão. Nos casos exemplificados acima, as pesquisas levaram à seguinte questão: \enquote{Quais princípios ou restrições existem para que essas redes assumam tais características?}. No caso das redes livres de escala, \citeonline{Barabasi2016-rn} argumentam que os dois princípios  \textit{suficientes} e \textit{necessários} que levam a redes com essa topologia são o \enquote{crescimento} e a \enquote{conexão preferencial} (mais sobre ambos na Seção~\ref{sec:modelo-barabasi-albert}), oferecendo respostas à questão levantada pela análise contra o modelo nulo.
+
+A proposta de princípios organizacionais leva a novos modelos de redes aleatórias que incorporam esses princípios. Se esses modelos forem capazes de gerar redes com as características observadas nas redes reais que motivaram sua proposição, eles são plausíveis, ou seja, são \textit{suficientes} para explicá-las. No entanto, somente a análise matemática é capaz de dizer se os princípios são \textit{necessários}, ou seja, que não é possível o surgimento de uma rede com essa topologia sem os princípios propostos.
+
+Esse processo leva à criação do modelo de rede aleatória de Watts-Strogatz~\cite{Watts1998-wt}, que possui restrições adicionais à criação de redes aleatórias que tornam o modelo capaz de gerar redes em que a distância média dos menores caminhos e o coeficiente de agrupamento são compatíveis aos observados em redes reais. Da mesma maneira, o modelo Barabási-Albert é capaz de gerar redes que obedecem à distribuição de grau das redes reais em estudo~\cite{Barabasi1999-sn}.
+
+Esses novos modelos servem como modelo nulo para futuros trabalhos. Se uma rede real possui métricas compatíveis com redes geradas pelo modelo Barabási-Albert, então é possível caracterizar essa rede como uma rede livre de escala. Métricas divergentes significam que o modelo não captura princípios suficientes para explicá-la, gerando novas questões a serem respondidas.
+
+Para se chegar ao valor esperado de uma métrica em um modelo nulo (ou seja, o valor de $E(M|G^\textit{rand})$) é possível gerar um conjunto de redes a partir do modelo, computar o a métrica de cada uma e chegar a um valor médio entre todas elas.
+
+Em modelos nulos mais simples (ou mais profundamente estudados), é possível chegar ao valor esperado por equações matemáticas derivadas de análise combinatória.
+
+Por exemplo, para obter a distância geodésica média esperada em uma rede de 1000 nós e 2000 conexões, é possível gerar algumas centenas de redes com essa configuração usando o modelo de Erdős-Rényi, medir a distância de todas e tirar sua média. Esse é o valor esperado da distância geodésica média para essa configuração de rede.
+
+Entretanto, o modelo de Erdős-Rényi é um dos mais estudados na literatura e o valor esperado da métrica acima pode ser obtido por $ln N / ln (2L / N)$, onde $N$ é o número de nós e $L$ é o número de conexões.
+
+Em um experimento ilustrativo, foram geradas 100 redes de 1000 nós e 2000 conexões, a distância geodésica média obtida foi $\approx 5,01 \pm 0,02$, enquanto que a fórmula acima prevê $\approx 4,98$, ou seja, a distância esperada entre dois nós quaisquer de uma rede como essa é $5$.
+
+Dessa forma, modelos nulos mais bem estudados fornecem os valores esperados sem que seja necessário recorrer a geração artificial das redes. Por outro lado, alguns modelos nulos criam redes com características desejadas, mas não possuem ainda os valores esperados como formulação matemática.
+%% O FINAL DA FRASE ACIMA NÃO ESTÁ CONECTANDO BEM, FAVOR VERIFICAR E AJUSTAR
+% Ronie (2017-06-17) Acabei expandindo e colocando um exemplo, veja se melhorou :)
+
+A abordagem matemática, por exemplo, é usada por \citeonline{Barabasi1999-sn} que chegam a distribuição do número de conexões por grau esperada em uma rede livre de escala como sendo $p_k \thicksim k^{-\gamma}$ em que $2 \leq \gamma \leq 3$, onde $p_k$ é a probabilidade de se encontrar um nó com $k$ conexões e $\gamma$ é um parâmetro chamado \textit{expoente de grau}. Em \citeonline{Barabasi2016-rn} várias outras propriedades também são modeladas matematicamente, como por exemplo, o número esperado de conexões no nó mais conectado.
+
+A obtenção do valor esperado através de amostragem, por outro lado, é usada pelos autores citados acima, mas pode ser mais claramente observada em \citeonline{Squartini2013-ni}, onde os modelos utilizados não possuem ainda uma solução matemática para o cálculo do valor esperado da métrica (no caso, a reciprocidade).
+
+Os modelos a serem escolhidos como modelos nulos para um estudo devem levar em consideração quais características eles preservam, pois a escolha inadequada dos modelos leva a conclusões errôneas. Sempre é possível substituir um modelo nulo por outro mais adequado, invalidando ou reforçando as conclusões prévias.
+
+A rede presente nesse trabalho possui claros requisitos quanto aos modelos de redes aleatórias aplicáveis ao seu estudo. Por ser uma rede ponderada e direcionada, modelos que desconsideram esses atributos perdem informação durante a comparação em busca de relevância estatística. Modelos de redes aleatórias onde ambos os atributos estão presentes são consideravelmente mais complexos e não tão abundantes, mas são mais adequados.
+
+Redes possuem um vasto repertório de medições, quase todas emprestadas da Teoria de Grafos. Algumas medições estruturais, como a \textit{distribuição de grau}, são quase ubíquas e relevantes em grande parte dos estudos de redes, pois várias propriedades são derivadas dessa característica. Outras métricas, no entanto, fazem sentido apenas em determinados tipos de redes. Por exemplo, pode não haver sentido em medir a reciprocidade (Seção ~\ref{sec:reciprocidade}) em uma rede de transporte, mas é uma métrica importante em uma rede social. Por outro lado, mesmo no estudo de redes sociais a reciprocidade pode ser irrelevante, como no caso do estudo de redes de mundo pequeno onde o foco está na distância média da rede.
+
+Independentemente da comparação com modelos nulos, as medições também são usadas para comparação direta com outras redes ou para comparações dentro dela própria. Por exemplo, as medidas de similaridade podem revelar ocupações que possuem um conjunto de requisitos semelhantes para exercê-las, as medidas de reciprocidade e não-reciprocidade podem ser usadas para se estabelecer uma progressão em uma sequência de ocupações.
+
+Para o trabalho presente, as métricas mais relevantes são apresentadas a seguir, bem como suas variações para redes ponderadas e direcionadas.
 
 %====================================
 \subsection{Modelos de Redes Aleatórias}
@@ -459,11 +470,20 @@ Os modelos apresentados acima podem ser generalizados para uma rede direcionada 
 \subsubsection{Modelo de Watts-Strogatz}
 
 O modelo de Watts-Strogatz cria uma rede aleatória com a propriedade de mundo pequeno e com um alto coeficiente de agrupamento. Uma rede de mundo pequeno é aquela em que a menor distância entre dois nós selecionados aleatoriamente é muito pequena em relação ao tamanho da rede (Seção~\ref{sec:small-world}). Um alto coeficiente de agrupamento significa que os vizinhos de um nó qualquer também são vizinhos entre si (Seção~\ref{sec:coeficiente-agrupamento}).
-%% ILUSTRAR COM FIGURAS
+%% ILUSTRAR COM FIGURAS'
+% Ronie (2017-06-17) Vou explicar o coeficiente de agrupamento com figuras na seção 2.1, assim, qdo chegar aqui o conceito já vai estar ok. De qq maneira acho que boa ideia colocar uma figura para ilustrar o modelo aqui (Acho que a imagem não ficou lá grandes coisas, mas tento melhorar depois).
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.6]{small-world.png}
+    \caption{Modelo de Watts-Strogatz}
+    \source{\citeonline{Watts1998-wt}, traduzido pelo autor}
+\end{figure}    
+
 Uma rede produzida pela modelo de Gilbert ou Erdős-Rényi possui uma distância pequena entre dois nós quaisquer, a distância média esperada é $\avg{d} \approx ln N / ln \avg{k}$, onde $N$ é o número de nós da rede e $\avg{k}$ é a quantidade média de conexões dos nós. Ou seja, redes aleatórias apresentam a propriedade de mundo pequeno. Entretanto, essas redes possuem um coeficiente de agrupamento baixo e é esperado que os vizinhos de um nó qualquer tenham pouca ou nenhuma conexão entre si. O coeficiente de agrupamento esperado é $\avg{k}/N$.
 
 %% A QUANTIDADE MÉDIA DE CONEXÕES DOS NÓS É O MESMO QUE O GRAU MÉDIO DOS NÓS?
-
+% Ronie (2017-06-17): Sim, o grau é definido como o número de conexões de um nó. Também é equivalente ao número de vizinhos dele. Agora com a seção com conceitos acima acho que vai ficar mais claro.
 
 Por outro lado, uma \textit{rede reticulada} possui um alto coeficiente de agrupamento, mas uma distância bastante alta entre dois nós aleatórios. Uma \textit{rede reticulada} é aquela cujos nós são dispostos regularmente em um plano e cada um se conecta aos seus vizinhos mais próximos. Uma cidade com quarteirões perfeitamente quadrados é um exemplo de rede reticulada. O modelo de Watts-Strogatz cria uma rede mais próxima às redes reais, com distância entre nós como uma rede aleatória e o coeficiente de agrupamento similar ao esperado em um reticulado.
 
