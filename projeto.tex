@@ -67,7 +67,8 @@
 % 3 - Se mudar de ideia qto à notação, é só trocar aqui
 %     e o trabalho todo fica certo.
 % Notação matemática
-\newcommand{\R}{\mathbb{R}}
+\newcommand{\R}{\mathbb{R}} % Reais
+\renewcommand\vec{\mathbf} % vetor como negrito
 \newcommand{\avg}[1]{\left\langle #1 \right\rangle} % ... média
 \newcommand{\defn}{\coloneqq} % Usamos "=", ":=" ou "\equiv?"
 \newcommand{\noloop}[1]{#1^\nlcirclearrowleft} % ... sem loops
@@ -1006,6 +1007,52 @@ Já em redes ponderadas, as mesmas correlações podem ser feitas levando-se em 
 %====================================
 \subsubsection{Similaridade}
 
+A similaridade é usada para medir se dois nós ou conexões são similares estruturalmente, ou seja, independente do seu conteúdo. De maneira simplificada, dois nós são tão mais similares quanto houverem vizinhos comuns. Já a similaridade de conexão, como definida por \citeonline{Ahn2010-uh}, parte de conexões que compartilham um nó e verifica se os nós não compartilhados são similares.
+
+A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico.
+
+Existem diversas formulações para a similaridade, \citeonline{Lu2011-og} revisam dez deles, sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada o índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
+
+Sendo $i$ e $j$ nós da rede, $N_i$ o conjunto de vizinhos do nó $i$ e $N_i^+ \defn N_i \cup \{i\}$, as Equações~\ref{eq:similaridade-1} define a similaridade por vizinhança e a Equação~\ref{eq:similaridade-2} define a mesma similaridade, considerando a existência de conexão direta entre os nós sendo comparados.
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}XX@{}}
+    \begin{equation} \label{eq:similaridade-1}
+        S_{ij} \defn \frac{|N_i \cap N_j|}{|N_i \cup N_j|} 
+    \end{equation} &
+    \begin{equation} \label{eq:similaridade-2}
+        S_{ij}^+ \defn \frac{|N_i^+ \cap N_j^+|}{|N_i^+ \cup N_j^+|} 
+    \end{equation}
+\end{tabularx}
+
+Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída, a similaridade em uma rede direcionada $\linkboth{S}_{ij}$ é dada pela média entre similaridade de entrada e saída (Equação~\ref{eq:similaridade-3}).
+
+\begin{equation} \label{eq:similaridade-3}
+    \linkboth{S}_{ij} \defn \frac{1}{2} \left( \frac{|\linkin{N}_i \cap \linkin{N}_j|}{|\linkin{N}_i \cup \linkin{N}_j|} + \frac{|\linkout{N}_i \cap \linkout{N}_j|}{|\linkout{N}_i \cup \linkout{N}_j|} \right)
+\end{equation}
+
+Onde $\linkin{N}_i$ é o número vizinhos de $i$ em que as conexões chegam a ele e $\linkout{N}_i$ é o número de vizinhos onde a conexão parte de $i$.
+
+No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Lu2011-og}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{iN})$, onde $N$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
+
+\begin{equation}
+\weighteddir{S}_{ij} \defn \frac{\vec{w_i} \cdot \vec{w_j}}{|\vec{w_i}|^2 + |\vec{w_j}|^2 - \vec{w_i} \cdot \vec{w_j}}
+\end{equation}
+
+Para agrupamento de conexões, como proposto por \citeonline{Evans2009-lq} e \citeonline{Lu2011-og}, é preciso definir a similaridade entre conexões. Sendo o vetor $\vec{r}_{i} \defn (r_{i1}, r_{i2}, \ldots, r_{iN})$ definido de acordo com a Equação~\ref{eq:similaridade-conexao-parcial}:
+
+\begin{equation} \label{eq:similaridade-conexao-parcial}
+r_{ij} \defn \frac{1}{k_i} \sum_{h \in N_i} w_{ih}\delta_{ij} + w_{ij}
+\end{equation}
+
+Onde $\delta_{ij} = 1$ se $i = j$ e zero caso contrário. A similaridade entre conexões $R_{(i,h),(h,j)}$ pode ser definida como \cite{Lu2011-og}:
+
+\begin{equation}
+R_{(i,h),(j,h)} \defn \frac{\vec{r_i} \cdot \vec{r_j}}{|\vec{r_i}|^2 + |\vec{r_j}|^2 -  \vec{r_i} \cdot \vec{r_j}}
+\end{equation}
+
+Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é principalmente, usada na detecção de comunidades.
+
 %====================================
 \subsubsection{Modularidade} \label{sec:modularidade}
 
@@ -1425,13 +1472,13 @@ A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador d
 Aqui estão as hipóteses para o MCar baseadas nas métricas de rede.
 
 \begin{hypothesis}[Atração Profissional]
-A força de entrada no nó significa o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou por sua atratividade.
+    A força de entrada no nó significa o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou por sua atratividade.
 \end{hypothesis}
 
 \todo[inline]{Verificar e checar duplamente a correlação}
 
 \begin{hypothesis}[Correlação Negativa entre a Força de Entrada e a Mediana Salarial]
-Existe uma correlação negativa entre a força de entrada e a mediana salarial, ou seja, quanto maior a força, menor a mediana do salário.
+    Existe uma correlação negativa entre a força de entrada e a mediana salarial, ou seja, quanto maior a força, menor a mediana do salário.
 \end{hypothesis}
 
 Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} em que quanto maior a oferta de mão de obra, menor o salário pago. Entretanto, não é possível afirmar que existe um excesso de profissionais para uma certa ocupação, pois nesse trabalho não foi possível medir se a ocupação está \textit{saturada}. 
@@ -1441,15 +1488,15 @@ Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} 
 Por outro lado, é possível observar na lista XX que essas ocupações coincidem intuitivamente com as noções de \enquote{início de carreira} e \enquote{ocupação operacional}.
 
 \begin{hypothesis}[Pontos de Saída do Mercado de Trabalho]
-Se $\linkin{s}_i \gg \linkout{s}_i$, a movimentação não mapeada não é suficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
+    Se $\linkin{s}_i \gg \linkout{s}_i$, a movimentação não mapeada não é suficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
 \end{hypothesis}
 
 \begin{hypothesis}[Pontos de Entrada do Mercado de Trabalho]
-De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
+    De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
 \end{hypothesis}
 
 \begin{hypothesis}[Trabalho de Passagem]
-Uma ocupação com alta intermediação significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
+    Uma ocupação com alta intermediação significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
 \end{hypothesis}
 
 \todo[inline]{Não é bem isso que eu quero dizer, mas não estou achando a ideia correta. No que observei até agora, as carreiras normalmente afunilam em um cargo e depois abrem para o topo, é obviamente um ponto de crítico, mas estou com dificuldade de elaborá-lo.}
@@ -1464,17 +1511,21 @@ A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topogra
 \end{figure}
 
 \begin{hypothesis}[Equivalência Profissional] \label{hip:equivalencia}
-Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, significa que não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
+    Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, significa que não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
 \end{hypothesis}
 
 Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar extraídos por agrupamento, é possível observar características de reciprocidade bastante distintas. Enquanto alguns componentes possuem alta reciprocidade, outros são claramente anti-recíprocos, sugerindo que há um caminho claro para os profissionais que se encontram naquele componente.
 
 \begin{hypothesis}[Inferência de Habilidades] \label{hip:habilidades}
-Um fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.\todo{Existe o modelo CHA (Competência, Habilidade, Atitude) que talvez possa ser usado para expandir isso, se for conveniente.}
+    Um fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.\todo{Existe o modelo CHA (Competência, Habilidade, Atitude) que talvez possa ser usado para expandir isso, se for conveniente.}
 \end{hypothesis}
 
 \begin{hypothesis}[Identificação de Carreiras]
-Uma comunidade dentro do MCar significa que o fluxo de profissionais dentro desse grupo é maior do que com outros nós, indicando que é um conjunto de ocupações que pode ser exercido por profissionais com habilidades similares (Hipótese~\ref{hip:habilidades}). Se a comunidade possui uma direção de fluxo óbvio entre as ocupações, isso indica progressão (Hipótese~\ref{hip:equivalencia}). Ambas as propriedades presentes caracterizam uma carreira.
+    Uma comunidade dentro do MCar significa que o fluxo de profissionais dentro desse grupo é maior do que com outros nós, indicando que é um conjunto de ocupações que pode ser exercido por profissionais com habilidades similares (Hipótese~\ref{hip:habilidades}). Se a comunidade possui uma direção de fluxo óbvio entre as ocupações, isso indica progressão (Hipótese~\ref{hip:equivalencia}). Ambas as propriedades presentes caracterizam uma carreira.
+\end{hypothesis}
+
+\begin{hypothesis}[Diferença de Nomenclatura]
+    Se dois nós possuem similaridade máxima $\linkboth{S}(i,j) = 1$, ou seja, possuem exatamente os mesmos vizinhos, mas não há conexão entre eles, então esses nós são potencialmente nomenclaturas diferentes para a mesma ocupação.
 \end{hypothesis}
 
 É importante notar que essa pesquisa não fornece dados suficientes para comprovação das hipóteses acima, embora a análise empírica indique plausabilidade. A listagem XX mostra as 20 ocupações onde com maior desequilíbrio no MCar.
