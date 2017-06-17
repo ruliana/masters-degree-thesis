@@ -378,17 +378,19 @@ Em algumas topologias de rede surgem nós com um número de conexões muito acim
 
 Medidas de centralidade de grau são, por exemplo, a média ou mediana dos graus da rede. Entretanto, algumas topologias possuem um dispersão muito grande de graus, ou seja, o desvio padrão ou distância interquartil variam consideravelmente. Nesses casos, é útil calcular-se a \textit{distribuição de grau} utilizando histogramas ou calculando-se a probabilidade da presença da graus na rede. Esses conceitos são detalhados na Seção~\ref{sec:distribuicao-grau-forca}.
 
-A \textit{sequência de grau} é o nome que se dá ao vetor com $n$ posições, onde $n$ é o número de nós e cada posição possui o grau de um nó. Sendo $\delta_i$ o grau do nó $i$, onde $G$ é uma rede com $n$ nós e $i \in G$, a sequência de grau pode ser definida como:
+A \textit{sequência de grau} é o nome que se dá a sequência ordenada com $n$ posições, onde $n$ é o número de nós e cada posição possui o grau de um nó, os graus são ordenado do menor para o maior grau. Sendo $\delta_i$ o grau do nó $i$, onde $G$ é uma rede com $n$ nós e $i \in G$, a sequência de grau pode ser definida como:
 
 \begin{equation} \label{eq:sequencia-grau}
-\textit{Seq}_G \defn \{\delta_i, \delta_{i+1}, \ldots, \delta_n\}
+\textit{Seq}_G \defn \{\delta_i, \delta_{i+1}, \ldots, \delta_n\}, \delta_i \le \delta_{i+1}
 \end{equation}
 
 A sequência de grau é utilizada tanto no cálculo da distribuição de grau quanto em algoritmos que criam redes aleatórias em que a distribuição exata de graus é preservada.
 
 Outro conceito importante no estudo de redes é o de menor caminho entre dois nós, explicado em mais detalhes na Seção~\ref{sec:distancia-geodesica}. O menor caminho é também chamado \textit{caminho geodésico} e a distância entre dois nós através do menor caminho é chamada \textit{distância geodésica}.
 
-Similar ao caminho geodésico duas outras variações para redes ponderadas são importantes nesse estudo. A primeira é o \textit{caminho mais provável}, ou seja, partindo-se de um nó e caminhando-se aleatoriamente pela rede, onde a probabilidade de se tomar um caminho é definida pelo peso da conexão, o caminho mais provável é formado pelas conexões percorridas até se encontrar um determinado nó. A segunda variação é o \textit{caminho de menor gargalo}, ela é definida como o caminho entre dois nós que maximiza o menor peso em qualquer uma das conexões que o forma~\cite{Goldbarg2012-uc}.
+Similar ao caminho geodésico duas outras variações para redes ponderadas são importantes nesse estudo. A primeira é o \textit{caminho mais provável}, ou seja, partindo-se de um nó e caminhando-se aleatoriamente pela rede, onde a probabilidade de se tomar um caminho é definida pelo peso da conexão, o caminho mais provável é formado pelas conexões percorridas até se encontrar um determinado nó. A segunda variação é o \textit{caminho de menor gargalo}, ela é definida como o caminho entre dois nós que maximiza o menor peso em qualquer uma das conexões que o forma \cite{Goldbarg2012-uc}.
+
+\textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortativade} é o conceito contrário, onde nós com características diferentes tentem a ser conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
 
 %====================================
 \subsection{Modelos de Redes Aleatórias}
@@ -615,7 +617,21 @@ Da mesma forma que os modelos anteriores, esse modelo tende a criar uma rede ass
 %====================================
 \subsubsection{Modelo de Xulvi-Brunet e Sokolov}
 
-Esse modelo procura gerar redes com correlação de grau pré-definida. Ele pode ser usado como para comparação da rede sob estudo com um modelo nulo com assortatividade ou disassortatividade máximas. 
+Esse modelo procura gerar redes com correlação de grau pré-definida. Ele é um modelo nulo com assortatividade ou dissortatividade controlada por um parâmetro $p$. \cite{Xulvi-Brunet2004-qg}.
+
+O algoritmo é similar ao Modelo de Preservação de Grau e pode ser descrito como:
+
+\begin{enumerate}
+\item Selecione aleatoriamente duas conexões da rede.
+\item Ordene os nós das conexões $a, b, c, d$, pelo seu grau de modo que $k_a \le k_b \le k_c \le k_d$.
+\item Com probabilidade $p$, reconecte os nós de maior grau entre si formando $(c, d)$ e os nós de menor grau entre si formando $(a, b)$, caso contrário, reconecte os nós aleatoriamente.
+\item Se alguma das conexões geradas já existir, abandone-as e repita a operação com outras duas conexões escolhidas aleatoriamente.
+\item Repita até uma condição de parada pré-estabelecida.  
+\end{enumerate}
+ 
+O artigo original não detalha um ponto de parada específico, porém a aplicação repetida dos passos leva a criação de uma rede com assertividade controlada por $p$. Com $p = 0$ a rede se comporta como uma rede aleatória, $p = 1$ leva a uma rede completamente assortativa.
+ 
+\citeonline{Barabasi2016-rn} propõem uma modificação no passo 3 para gerar redes dissortativas, reconectando os nós de grau mais diverso entre si com probabilidade $p$, formando as conexões $(a, d)$ e $(b, c)$.
 
 %====================================
 \subsection{Métricas}
@@ -933,9 +949,9 @@ Para o equivalente de $\rho$, em que se leva em consideração as conexões espe
 A reciprocidade nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
 
 %====================================
-\subsubsection{Assortatividade}
+\subsubsection{Assortatividade} \label{sec:assortatividade}
 
-Assortatividade é um termo emprestado da biologia que significa \enquote{preferência de acasalamento} [REF]. Na Ciência de Redes o termo é usado para denotar a tendência de um nó se conectar a nós similares. Usualmente, quando não acompanhado de uma definição que diga o contrário, assortatividade se refere a preferência de nós se conectarem a outros de \textit{mesmo grau}. O reverso dessa propriedade é chamada disassortatividade.
+Assortatividade é um termo emprestado da biologia que significa \enquote{preferência de acasalamento} [REF]. Na Ciência de Redes o termo é usado para denotar a tendência de um nó se conectar a nós similares. Usualmente, quando não acompanhado de uma definição que diga o contrário, assortatividade se refere a preferência de nós se conectarem a outros de \textit{mesmo grau}. O reverso dessa propriedade é chamada dissortatividade.
 
 É possível medir a assortatividade usando \textit{correlação de graus}, ou seja, a média dos graus dos vizinhos de um nó.
 
@@ -977,7 +993,7 @@ Ou seja, a variância dos graus dividida pela média dos graus. Sendo o a variâ
 
 Comparando-se o valor de correlação de grau da rede real com o valor esperado para uma rede de assortatividade neutra é possível entender se a assortatividade da rede sob estudo é devida apenas à aleatoriedade ou se há outros fatores de influência.
 
-Contudo, há um limite para a definição acima. Em algumas redes com \textit{hubs} ela irá prever um probabilidade superior a 1 para a conexão entre \textit{hubs}, efetivamente assumindo que a rede possui múltiplas conexões, o que é impossível em redes simples. Isso faz com que a rede seja \textit{estruturalmente disassortativa} \cite{Barabasi2016-rn}. Comparar correlação de grau com os valores esperados da Equação~\ref{eq:correlacao-grau} pode fazer parecer que a rede em estudo é disassortativa além do previsto pelo modelo nulo. Entretanto, esse resultado é esperado por conta da disassortatividade estrutural, ou seja, um rede aleatória também teria correlação de grau disassortativa.
+Contudo, há um limite para a definição acima. Em algumas redes com \textit{hubs} ela irá prever um probabilidade superior a 1 para a conexão entre \textit{hubs}, efetivamente assumindo que a rede possui múltiplas conexões, o que é impossível em redes simples. Isso faz com que a rede seja \textit{estruturalmente disassortativa} \cite{Barabasi2016-rn}. Comparar correlação de grau com os valores esperados da Equação~\ref{eq:correlacao-grau} pode fazer parecer que a rede em estudo é disassortativa além do previsto pelo modelo nulo. Entretanto, esse resultado é esperado por conta da dissortatividade estrutural, ou seja, um rede aleatória também teria correlação de grau disassortativa.
 
 Para contornar esse problema, é possível utilizar o Modelo Aleatório de Preservação de Grau (Seção~\ref{sec:modelo-preservacao-grau}) para se gerar redes de topologia idêntica, mas com a assortatividade \enquote{neutra} no limite que sua estrutura permite. Comparando-se as redes geradas desse modo com a rede sob estudo, é possível verificar se a assortatividade é de fato causada por outros fatores ou é apenas efeito da topologia.
 
