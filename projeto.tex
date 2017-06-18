@@ -51,27 +51,19 @@
 
 % Permite criar formatações específicas, controla
 % numerações e produz índices para teoremas e hipóteses.
-\usepackage[hyperref]{ntheorem}
+\usepackage{amsthm}
+\usepackage{thmtools}
 
-% Hack para possibilitar quebra de longas linhas de
-% texto no cabeçalho do teorema >_<
-\makeatletter
-\patchcmd{\@xthm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
-\patchcmd{\@ythm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
-
-\newtheoremstyle{hypo}%
-  {\item{\theorem@headerfont
-          ##1\ ##2\theorem@separator}\hskip\labelsep\relax}%
-  {\item{\theorem@headerfont
-          \MakeUppercase{##1}\ ##2:\ ##3\theorem@separator}\hskip\labelsep\relax}
-\makeatother
-
-% Definição do estilo para "Hipótese"
-\theoremstyle{hypo}
-\theoremseparator{:}
-\theoremheaderfont{\normalfont\scshape}
-\theorembodyfont{\itshape}
-\newtheorem{hypothesis}{Hipótese}
+\declaretheoremstyle[spaceabove=1.5ex,
+                     spacebelow=0ex,
+                     headindent=\parindent,
+                     headformat=\MakeUppercase{\NAME} \NUMBER:\MakeUppercase{\NOTE},
+                     notebraces={}{},
+                     headpunct=:,
+                     bodyfont=\itshape,
+                     name=Hipótese]
+                     {hypostyle}
+\declaretheorem[style=hypostyle]{hypothesis}
 
 % Notações matemáticas usadas com frequência no texto.
 % Isso possui três vantagens:
@@ -1708,33 +1700,47 @@ O intervalo de confiança 95\% para todos os valores do resumo de cinco números
 
 A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador de Densidade de Kernel usando um distribuição gaussiana como função kernel. A largura de banda escolhida para cada estimativa é o menor valor limite para que a distribuição se mantenha unimodal.
 
-\section{HIPÓTESES}
+\section{UM ESTUDO ANALÍTICO DO MCar USANDO CIÊNCIA DE REDES: RESULTADOS PRELIMINARES}
 
-\todo[inline]{Título provisório}
+A comparação de uma rede real com modelos nulos indica fenômenos que não acontecem por aleatoriedade. Essa aplicação é uma análise exploratória, ela levanta a questão de por que eles acontecem se o acaso não é uma explicação aceitável.
 
-Aqui estão as hipóteses para o MCar baseadas nas medidas de rede.
+Ao se correlacionar as medidas usadas em Ciência de Redes cria-se mais um conjunto de questões sobre o significado da correlação. Algumas dessas correlações se destacam pois ecoam com fenômenos conhecidos da movimentação de profissionais, fornecendo hipóteses plausíveis de seu funcionamento.
+
+Um estudo confirmatório não é possível apenas com os dados desse trabalho, pois eles requerem um aprofundamento em ciências sociais que foge do âmbito proposto. Entretanto, o volume de dados e o rigor da análise estatística fornecem indícios sólidos que servem como combustível para pesquisas mais ambiciosas, ou podem ser usados como complemento em estudo sociais.
+
+Ainda assim, os achados nesse capítulo são plausíveis por construção, já que são propostos baseados em medições sobre dados reais.
+
+Abaixo, essas propostas são enumeradas e justificadas.
 
 \begin{hypothesis}[Atração Profissional]
-    A força de entrada no nó significa o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou por sua atratividade.
+    A força de entrada do nó (Seção~\ref{sec:forca}) significa o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou por sua atratividade.
+\end{hypothesis}
+
+Algumas ocupações, como \enquote{Auxiliar Administrativo}, possuem um grande número de profissionais em seu fluxo de entrada comparativamente com outras ocupações próximas. Independente da motivação, um grande número de profissionais converge para elas.
+
+\begin{hypothesis}[Correlação Negativa entre a Força de Entrada e a Mediana Salarial]
+    Existe uma correlação negativa entre a força de entrada (Seção~\ref{sec:forca}) e a mediana salarial, ou seja, maior a força entrada, menor a mediana do salário.
 \end{hypothesis}
 
 \todo[inline]{Verificar e checar duplamente a correlação}
 
-\begin{hypothesis}[Correlação Negativa entre a Força de Entrada e a Mediana Salarial]
-    Existe uma correlação negativa entre a força de entrada e a mediana salarial, ou seja, quanto maior a força, menor a mediana do salário.
-\end{hypothesis}
+Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} em que quanto maior a oferta de mão de obra, menor o salário pago. Entretanto, não é possível afirmar que existe um excesso de profissionais para uma certa ocupação, pois nesse trabalho não foi possível medir se a ocupação está \textit{saturada}.
 
-Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} em que quanto maior a oferta de mão de obra, menor o salário pago. Entretanto, não é possível afirmar que existe um excesso de profissionais para uma certa ocupação, pois nesse trabalho não foi possível medir se a ocupação está \textit{saturada}. 
+Outra interpretação plausível é que essas ocupações possuem requisitos de entrada menos exigentes, tais como conhecimento técnico ou experiência. Isso significa um trabalho menos especializado com salários menores, porém, com baixa barreira de entrada.
+
 %% MINHA LEITURA É UM POUCO DIFERENTE. COMO O GRAFO É CONSTRUÍDO A PARTIR DE DADOS REAIS, QUANTO MAIOR A FORÇA DE ENTRADA, MAIS PROFISSIONAIS CONVERGEM PARA ESSA PROFISSÃO E, NORMALMENTE, AS PROFISSÕES QUE POSSUEM MAIORES SALÁRIOS SÃO AQUELAS QUE TÊM MENOS PESSOAS, POIS ESTÃO MAIS NO TOPO DA PIRÂMIDE. PORTANTO, EU ENTENDO QUE A OFERTA DE MÃO DE OBRA É UM ELEMENTO IMPORTANTE, MAS TAMBÉM DEVEMOS CONSIDERAR AS HABILIDADES REQUERIDAS PARA A POSIÇÃO.
 % Ronie: Sim, essa é uma discussão muito boa! Eu gostaria de me aprofundar mais nela se houver tempo hábil.
+% Ronie (2017-06-18) Tentei passar sua interpretação para o texto, veja se é mais ou menos isso :)
 
-Por outro lado, é possível observar na lista XX que essas ocupações coincidem intuitivamente com as noções de \enquote{início de carreira} e \enquote{ocupação operacional}.
-
-Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas.
+\begin{comment}
+É possível observar na lista XX que essas ocupações coincidem intuitivamente com as noções de \enquote{início de carreira} e \enquote{ocupação operacional}.
+\end{comment}
 
 \begin{hypothesis}[Pontos de Saída do Mercado de Trabalho]
-    Se $\linkin{s}_i \gg \linkout{s}_i$, a movimentação não mapeada não é suficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
+    Se $\linkin{s}_i \gg \linkout{s}_i$ (Equações~\ref{eq:forca-entrada} e ~\ref{eq:forca-saida}), a movimentação não mapeada é insuficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
 \end{hypothesis}
+
+Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas.
 
 \begin{hypothesis}[Pontos de Entrada do Mercado de Trabalho]
     De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
