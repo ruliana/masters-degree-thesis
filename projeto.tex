@@ -315,10 +315,13 @@ Se uma parte da rede forma um grafo completo, esse grafo é chamado \textit{cliq
 %% DE TEMPOS EM TEMPOS COLOQUE UMA FIGURA ILUSTRANDO OS CONCEITOS APRESENTADOS. NUMA ÚNICA FIGURA VOCÊ PODE ILUSTRAR A REDE PONDERADA, CLIQUES, ETC.
 % Ronie (2017-06-17) Boa! Vou procurar algumas figuras open-source que eu possa utilizar provisoriamente, depois substituo por figura minhas, que acha?
 
+%% PARA A QUALIFICAÇÃO ESTÁ OK SIM
+
 Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós está conectado ao supergrafo.
 
 %% ENTÃO UM COMPONENTE É O MESMO QUE UM SUBGRAFO?
 % Ronie (2017-06-17) É um subgrafo desconectado do supergrafo. Mexi no texto para tentar tornar mais claro, pode ver se melhorou? :) (definitivamente aqui vai bem uma figura =/)
+% CADA NOVO CONCEITO PRECISA SER EXPLICADO. SE VOCÊ FALA DE SUPERGRAFO, ENTÃO EXPLIQUE O QUE É UM.
 
 \begin{figure}[ht]
     \centering
@@ -357,13 +360,13 @@ De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: se
 
 É possível comparar as métricas globais obtidas com seus valores esperados dividindo-se ou subtraindo-se o valor esperado do valor obtido~\cite{Zweig2016-rb}. Definindo $M^d$ como a proporção entre o valor obtido da métrica na rede sendo estudada $M(G)$ e o valor esperado em uma rede aleatória equivalente $E(M|G^\textit{rand})$, proporção $M^d \defn M(G) / E(M|G^\textit{rand})$ representa o quão divergente é a rede $G$ em relação ao esperado em uma rede aleatória, valores próximos a 1 significam que a $M^d$ não diverge do encontrado em uma rede gerada ao acaso. Valores acima e abaixo de 1 significam características acima do esperado ou suprimidas.
 
-De maneira equivalente, pode-se definir $M^\Delta$ como a diferença absoluta entre o valor da métrica na rede em estudo $M(G)$ e o valor esperador em uma rede aleatória equivalente $E(M|G^\textit{rand})$. Na diferença absoluta $M^\Delta \defn M(G) - E(M|G^\textit{rand})$, os números acima e abaixo de 0 contribuem para a rejeição do modelo nulo. O uso das duas métricas permite traçar correlações entre diversas redes em estudo.
+De maneira equivalente, pode-se definir $M^\Delta$ como a diferença absoluta entre o valor da métrica na rede em estudo $M(G)$ e o valor esperado em uma rede aleatória equivalente $E(M|G^\textit{rand})$. Na diferença absoluta $M^\Delta \defn M(G) - E(M|G^\textit{rand})$, os números acima e abaixo de 0 contribuem para a rejeição do modelo nulo. O uso das duas métricas permite traçar correlações entre diversas redes em estudo.
 %%NÃO ENTENDI ESSA ÚLTIMA FRASE. ESSA RELAÇÃO ENTRE TAMANHO E ERRO NÃO É CLARA 
 %Ronie: Não consegui melhorar muito a frase, pensei melhor e acho que um exemplo deve ajudar a passar melhor a mensagem. Escrevi um abaixo, veja o que acha, pls :)
 %% É PRECISO DEFINIR Md E MDelta ANTES DE APRESENTAR OS CONCEITOS. VOCÊ EXPLICA, MAS NÃO CONCEITUA.
 % Ronie (2017-06-17) Não sei se entendi bem, tentei de novo, é mais ou menos por aí? 
 
-Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicar as mesmas métricas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente dependente do tamanho da rede e irá aumentar para redes maiores pela própria definição de métrica. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
+Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicar as mesmas métricas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente proporcional ao tamanho da rede e aumentará para redes maiores pela própria definição de métrica. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
 
 Dependendo das métricas utilizadas, as equações acima sofrem variações para adequação ao uso, como, por exemplo, a \textit{reciprocidade}, proposta por~\citeonline{Garlaschelli2004-db}, explicada na Seção~\ref{sec:reciprocidade}.
 
@@ -374,11 +377,6 @@ Já as métricas locais, que possuem um valor para cada nó ou cada conexão, po
 Essas abordagens foram usadas na descoberta de \textit{redes de mundo pequeno} por \citeonline{Watts1998-wt} e de \textit{redes livres de escala} por \citeonline{Barabasi1999-sn}.
 
 No caso das redes de mundo pequeno, observou-se que as redes reais em estudo possuíam uma \textit{distância geodésica} média similar a das redes aleatórias, porém seu \textit{coeficiente de agrupamento} divergia significativamente, ou seja, a organização das redes em estudo não poderia ser explicada meramente por aleatoriedade, algum princípio organizacional deveria existir para que elas assumissem esse formato. \textit{Distância geodésica} é meramente um nome mais conveniente para a menor distância entre dois nós e \textit{coeficiente de agrupamento} é uma métrica de quanto os vizinhos de um nó estão conectados entre si, formando grupos. \textit{Redes de mundo pequeno} são redes em que a distância geodésica entre dois nós quaisquer é muito curta, mesmo em uma rede imensa, na ordem de uma dezena de passos de distância em uma rede de bilhões de nós. As redes de mundo pequeno são detalhadas na Seção~\ref{sec:small-world}. 
-
-%% VOCÊ ESTÁ USANDO MUITOS CONCEITOS SEM INTRODUZÍ-LOS, POR EXEMPLO, REDES DE MUNDO PEQUENO, REDES LIVRES DE ESCALA, DISTÂNCIA GEODÉSICA, COEFICIENTE DE AGRUPAMENTO, ETC. A PRIMEIRA VEZ QUE VOCÊ USAR UM CONCEITO COLOQUE ELE EM ITÁLICO. VOCÊ PODE CRIAR UM GLOSSÁRIO SE FOR CONVENIENTE.
-% Ronie: fiz alterações, veja se melhorou :)
-%% MELHOROU, MAS MINHA SUGESTÃO É QUE VOCÊ MOVA A ATUAL SEÇÃO 2.2 PARA ANTES DESSA, POIS É NELA EM QUE VOCÊ APRESENTA OS CONCEITOS. INCLUA NESSA SEÇÃO OS CONCEITOS INTRODUZIDOS AQUI, POIS ELA PRECEDERÁ ESSA
-% Ronie (2017-06-17) Okay, vou primeiro mover a seção sem alterar o texto, depois reviso e altero para fazer sentido. O texto atual vai ficar bem mais técnico :)
 
 De forma similar, as redes reais com a propriedade de serem livres de escala divergem das redes aleatórias no número de conexões em seus nós. Enquanto as redes aleatórias possuem uma quantidade de conexões por nó distribuída de maneira similar a uma curva normal, nas redes livres de escala essa distribuição é logarítmica, em que poucos nós acumulam uma grande quantidade de conexões, formando \enquote{hubs}, enquanto a maior parte dos nós possuem poucas conexões. Redes livres de escala são detalhadas na Seção~\ref{sec:scale-free}.
 
