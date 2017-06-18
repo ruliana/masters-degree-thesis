@@ -223,7 +223,7 @@ Esse trabalho utiliza técnicas de Ciência de Redes para fazer uma análise exp
 
 Ao longo da vida profissional é comum para o indivíduo passar por diversas movimentações na carreira. Um estudante de engenharia pode iniciar como Trainee em uma empresa e progredir para Engenheiro, Supervisor de Obras e Diretor de Engenharia. Na área de computação é possível ver um Programador se tornar Analista-Programador, Coordenador de Desenvolvimento, Gerente de Projetos, chegando a Diretor de Operações. Esses são casos em que a movimentação de carreira segue um padrão mais tradicional de progressão, mas também há situações extremas de transições de carreira na qual um Analista-Programador resolve se tornar um Chef de Cozinha. Em qualquer um dos casos, as movimentações de carreira são sempre uma etapa de grande relevância profissional e que, ao mesmo tempo, podem causar estresse, insegurança e alguns desconfortos pelos novos desafios que surgirão.
 
-Este projeto de pesquisa usa uma base de dados de mercado com 10 milhões de currículos e 23 milhões de experiências profissionais da empresa Vagas Tecnologia com o objetivo de fazer um estudo analítico sobre a movimentação de profissionais entre ocupações durante o curso de suas carreiras. O problema é modelado com uma estrutura em grafos e é analisado com conceitos e técnicas de Ciência da Redes.
+Este projeto de pesquisa usa uma base de dados de mercado com 10 milhões de currículos e 23 milhões de experiências profissionais da empresa Vagas Tecnologia com o objetivo de fazer um estudo analítico sobre a movimentação de profissionais entre ocupações durante o curso de suas carreiras. O problema é modelado com uma estrutura em grafos e é analisado com conceitos e técnicas de Ciência de Redes.
 
 Para concluir o objetivo, propõe-se levantar hipóteses sobre os o comportamento da movimentação de profissionais traduzindo estruturas observadas na rede para o domínio da dinâmica de carreira.
 
@@ -234,6 +234,8 @@ Como esse trabalho é baseado somente nos dados de currículos não é possível
 Existem diversas pesquisas sobre movimentação profissional, principalmente sobre os fatores que motivam a mudança, como os expostos por~\citeonline{Ng2007-zp}. Porém, nenhum trabalho pôde ser encontrado analisando redes profissionais sob a ótica da Ciência de Redes, ponto onde esse trabalho tem sua principal contribuição.
 
 A movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre.
+
+Como esse trabalho é baseado em uma rede com conexões que possuem peso e direção, outra contribuição relevante está na proposta de adaptações e derivações de modelos de redes aleatórias existentes para que comportem essas características.
 
 %% PARA MIM O OBJETIVO GERAL E OS ESPECÍFICOS ESTÃO ADEQUADOS
 % Ronie (2017-06-17) Removi o texto provisório e deixei só a redação principal.
@@ -587,6 +589,7 @@ Onde $K$ é a soma dos graus.
 O Modelo de Configuração pode ser facilmente adaptado para redes direcionadas com as seguintes adaptações:
 
 %% ESSA PROPOSTA DE ADAPTAÇÃO PARA REDES DIRECIONADAS É SUA? CASO AFIRMATIVO É PRECISO DESTACAR COMO UMA CONTRIBUIÇÃO DA DISSERTAÇÃO
+% Ronie (2017-06-18) Coloquei essas contribuições de uma maneira bem genérica como último parágrafo na introdução, será que é suficiente?
 
 \begin{enumerate}
 \item Atribua um grau de saída e um grau de entrada a cada nó.
@@ -596,8 +599,31 @@ O Modelo de Configuração pode ser facilmente adaptado para redes direcionadas 
 \end{enumerate}
 
 Pelo algoritmo, nota-se que as listas de encaixe precisam ser do mesmo tamanho, ou seja, a soma da sequência de graus de saída precisa ser igual a soma da sequência de graus de entrada.
-%% ILUSTRAR
+
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][separação dos encaixes e reconexão] {
+        \includegraphics[scale=0.3]{dissertacao-modelo-de-configuracao-2.png}
+        \label{fig:modelo-configuracao-reconexao}
+    } \\    
+    \subfloat[][rede original] {
+        \includegraphics[scale=0.4]{dissertacao-modelo-de-configuracao-1.png}
+        \label{fig:modelo-configuracao-antes}
+    } \qquad \quad
+    \subfloat[][rede gerada pelo modelo] {
+        \includegraphics[scale=0.4]{dissertacao-modelo-de-configuracao-3.png}
+        \label{fig:modelo-configuracao-depois}
+    }    
+    \caption{Modelo de Configuração}
+    \label{fig:modelo-configuracao}
+    \source{Elaboração do autor}
+\end{figure}
+
+A Figura~\ref{fig:modelo-configuracao} ilustra o processo em uma rede de seis nós e sete conexões. A rede original pode ser vista na Figura~\ref{fig:modelo-configuracao-antes}, cada conexão gera um encaixe para cada nó que conecta, marcados em cores na Figura~\ref{fig:modelo-configuracao-reconexao}, os encaixes então são reconectados aleatoriamente, modificando as conexões, mas preservando o grau de cada nó. O processo resulta na rede exibida na Figura~\ref{fig:modelo-configuracao-depois}.
+
 %====================================
+
 \subsubsection{Modelo de Configuração Ponderada} \label{sec:modelo-configuracao-ponderada}
 
 O Modelo de Configuração descrito na Seção \ref{sec:modelo-configuracao} é aplicável a redes direcionadas ou não. Porém, para aplicação em redes ponderadas, são necessárias adaptações. Uma adaptação possível é proposta por \citeonline{Serrano2005-ms}, embora sua proposta limite-se a análise probabilística, sem apresentar explicitamente o algoritmo equivalente. Em seu artigo, \citeonline{Newman2004-by}, propõe que diversas redes ponderadas podem ser analisadas projetando seu equivalente em \textit{multigrafos}, ou seja, transformando uma rede ponderada em uma rede sem pesos, mas que permita que nós tenham múltiplas conexões entre si. Em particular, os argumentos de Newman se baseiam em redes que representam fluxos, de forma que uma conexão de peso 10, representando um fluxo de 10 unidades passando entre dois nós, pode ser transformada em 10 conexões entre os mesmos nós, cada uma representando uma unidade.
