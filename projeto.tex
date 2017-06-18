@@ -308,6 +308,10 @@ Quando uma rede simples possui todas as conexões possíveis entre seus nós ela
 
 Se uma parte da rede forma um grafo completo, esse grafo é chamado \textit{clique}. O clique é um conceito importante quando se trata de detecção de comunidades.
 
+\todo[inline]{Explicar rede reticulada}
+
+\todo[inline]{Incluir figuras para ilustrar os conceitos}
+
 %% DE TEMPOS EM TEMPOS COLOQUE UMA FIGURA ILUSTRANDO OS CONCEITOS APRESENTADOS. NUMA ÚNICA FIGURA VOCÊ PODE ILUSTRAR A REDE PONDERADA, CLIQUES, ETC.
 % Ronie (2017-06-17) Boa! Vou procurar algumas figuras open-source que eu possa utilizar provisoriamente, depois substituo por figura minhas, que acha?
 
@@ -321,7 +325,7 @@ Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em 
     \includegraphics[scale=1.0]{componente.png}
     \caption{Rede com três componentes}
     \source{Wikimedia - David Eppstein}
-    \label{fig:exemplo-grafo}
+    \label{fig:exemplo-componente}
 \end{figure}
 
 Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau.
@@ -528,6 +532,7 @@ P_{ij} \defn \frac{k_i k_j}{2L - 1}
 
 \todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$.}
 %% QUANDO ELE COLOCA A EQUAÇÃO DESSA FORMA ELE ESTÁ DESCONSIDERANDO O NÓ KI. NO LIMITE A EQUAÇÃO SE TORNA Pij=KiKj/2L.
+% Ronie (2017-06-17): Pois é... mas pensei que se ele desconsiderasse o nó i, então ele deveria desconsiderar o _grau_ Ki, tornando a equação Pij=KiKj/(2L - Ki) =/ Estou pensando certo? Por outro lado, entendo que no limite a equação é como vc propôs. Eu poderia escrevê-la Pij ~ KiKj/2L (assintoticamente equivalente)?
 
 Onde $k_i$ e $k_j$ são os graus dos nós e $L$ é o número total de conexões na rede. Como a soma de graus da rede é igual a duas vezes o número de conexões, ou seja $K = 2L$, a mesma fórmula pode ser expressa como:
 
@@ -559,16 +564,19 @@ A proposta de Newman é perfeitamente aplicável para esse trabalho, onde a rede
 
 Com base nos trabalhos mencionados acima, propõe-se o seguinte algoritmo adaptado para o Modelo de Configuração:
 %% É PRECISO EXPLICITAR NOS OBJETIVOS (OU EM UMA SEÇÃO CHAMADA CONTRIBUIÇÕES) QUE ESTAMOS APRESENTANDO UMA ADAPTAÇÃO DO MODELO DE CONFIGURAÇÃO PARA TRATAR REDES PONDERADAS
+
 \begin{enumerate}
 \item Atribua uma força (como descrito na Seção~\ref{sec:forca}) a cada nó e crie uma sequência de forças de maneira análoga à sequência de graus.
 \item Crie uma lista com os encaixes para os nós com um número de encaixes igual a força de cada nó.
-\item Selecione aleatoriamente dois encaixes da lista e crie uma conexão entre eles. Remova da lista os encaixes usados.
+\item Selecione aleatoriamente dois encaixes da lista, se os encaixes pertencerem a mesmo nó, descarte-os e repita esse passo.
+\item Crie uma conexão entre os encaixes selecionados. Remova-os da lista de encaixes.
 \item Repita o processo com a lista restante até que ela se esvazie.
 \item Unifique as conexões múltiplas atribuindo a elas o peso igual ao número de conexões.
 \end{enumerate}
 
-Esse algoritmo ainda possui o problema de permitir laços em uma rede onde eles não deveriam existir, mas as múltiplas conexões são desejadas e esperadas.
 %% E POR QUE VOCÊ NÃO COLOCA UMA VERIFICAÇÃO PARA BLOQUEAR OS LAÇOS?
+% Ronie (2017-06-17) *cara de tacho* ¬¬ ... é... pq não? =/ Coloquei agora :P 
+
 %% ILUSTRE COM UM EXEMPLO
 Finalmente, a maior dificuldade em relação ao algoritmo proposto é que, apesar da distribuição de força entre os nós ser preservada, a distribuição de graus da rede é descaracterizada, pois, apesar da força de cada nó ser preservada individualmente, as conexões são decompostas e podem se conectar a nós diferentes. Um nó de força 10 e grau 1 terminará como um nó de força 10 e grau 10, já que a probabilidade de 10 conexões aleatoriamente selecionadas resultarem nos mesmos pares de nós é muito pequena.\todo{Calcular a probabilidade}
 
@@ -579,7 +587,8 @@ Abaixo é descrito a algoritmo equivalente de Modelo de Configuração Ponderada
 \begin{enumerate}
 \item Atribua uma força de entrada e uma força de saída a cada nó e crie duas sequências de forças, uma para cada tipo.
 \item Crie duas listas de encaixes, uma lista possui os encaixes de entrada, com um número de encaixes igual à força de entrada de cada nó. O mesmo procedimento deve ser feito para se criar uma lista de encaixes de saída.
-\item Selecione aleatoriamente um encaixe da lista de entrada e outro da lista de saída e crie uma conexão entre elas. Remova da lista os encaixes usados.
+\item Selecione aleatoriamente um encaixe da lista de entrada e outro da lista de saída. Se os encaixes pertencerem ao mesmo nó, remova-os e repita esse passo.
+\item Crie uma conexão entre os encaixes selecionados. Remova-os das respectivas listas.
 \item Repita o processo caso as listas se esvaziem.
 \item Unifique as conexões múltiplas de mesma direção atribuindo a elas o peso igual ao número de conexões.
 \end{enumerate}
@@ -672,7 +681,7 @@ O artigo original não detalha um ponto de parada específico, porém a aplicaç
 
 As métricas descritas nessa seção são usadas para comparação com os modelos nulos selecionados para o trabalho, bem como para encontrar características relevantes dentro da própria rede.
 %% PARA MIM MÉTRICA E PROPRIEDADE SÃO COISAS DISTINTAS
-% Ronie: De acordo, vou usar métrica/medições para esse cálculos que caracterizam a topologia da rede.
+% Ronie: De acordo, ajustei o testo e vou usar métrica/medições para esse cálculos que caracterizam a topologia da rede.
 
 Cada uma das métricas seguintes acompanha uma descrição de qual seu significado dentro do contexto de movimentação de profissionais entre ocupações.
 
@@ -1192,7 +1201,7 @@ Também conhecido como \enquote{seis graus de separação}, o imaginário popula
 
 A propriedade de mundo pequeno foi descrita pela primeira vez por Frigyes Karinthy em 1929, escritor e jornalista húngaro, em uma estória chamada \enquote{Correntes}. Nela, Karinthy conecta um trabalhador da indústria automobilística a si mesmo:
 
-\blockcquote{Karinthy1929-jg}{O trabalhador conhece o gerente da fábrica, que conhece Ford; Ford está em bons termos com o diretor geral da Publicações Hearst, que no último ano se tornou um bom amigo de Árpád Pásztor, alguém que não apenas eu conheço, mas é um grande amigo meu.~\footnote{em tradução livre do autor}}
+\blockcquote{Karinthy1929-jg}{O trabalhador conhece o gerente da fábrica, que conhece Ford; Ford está em bons termos com o diretor geral da Publicações Hearst, que no último ano se tornou um bom amigo de Árpád Pásztor, alguém que não apenas conheço, mas é um grande amigo.~\footnote{em tradução livre do autor}}
 
 Durante o século XX, a propriedade de mundo pequeno aparece esparsamente mais algumas vezes e volta a ganhar atenção com o jogo \enquote{Seis Graus de Kevin Bacon} criado por três estudantes do \textit{Albright College} na década de 90 e finalmente com o trabalho de Duncan Watts e Steven Strogatz em 1998 \cite{Barabasi2016-rn}.
 
@@ -1200,11 +1209,11 @@ O fenômeno alcançou um nível de popularidade tão grande que até hoje alguns
 
 A propriedade de mundo pequeno se refere ao tamanho do caminho entre dois nós aleatoriamente selecionados na rede. De maneira simplificada, enquanto que o número de conexões cresce exponencialmente com a adição de novos nós em uma rede, a menor distância entre dois nós quaisquer cresce em ritmo logarítmico. 
 
-Em uma rede aleatória, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e pode segue a Equação\ref{eq:mundo-pequeno-1} \cite{Barabasi2016-rn}.
+Em uma rede aleatória, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e pode segue a Equação\ref{eq:distancia-erdos} \cite{Barabasi2016-rn}.
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
-    \begin{equation} \label{eq:mundo-pequeno-1}
+    \begin{equation} \label{eq:distancia-erdos}
         \avg{d}^\textit{erdos} \sim ln N
     \end{equation} &
     \begin{equation} \label{eq:coef-agrupamento-erdos}
@@ -1240,8 +1249,71 @@ Posteriormente, \citeonline{Barabasi1999-sn} observam que redes reais possuem \t
 
 \subsubsection{Livre de Escala} \label{sec:scale-free}
 
-As redes livres de escala são redes em que a distribuição das co
+As redes livres de escala são redes em que a distribuição das conexões entre os nós segue uma \textit{lei de potência}.
 
+A lei de potência é uma relação entre as variáveis $x$ e $y$ expressa da seguinte forma $y = ax^{k}$, onde $a$ e $k$ são constantes. Isso significa que $y$ varia exponencialmente em relação a $x$, grosseiramente, se $x$ dobra de tamanho, $y$ quadruplica. No caso das redes livres de escala, a relação é negativa, em que muitos nós possuem poucas conexões e poucos nós possuem muitas conexões, esse comportamento da lei de potência é exemplificado graficamente na figura~\ref{fig:exemplo-lei-potencia}, com $k = -2$.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][escala regular] {
+        \includegraphics[scale=0.4]{power-law-example-1.png}
+    }
+    \subfloat[][escala logarítmica] {
+        \includegraphics[scale=0.4]{power-law-example-2.png}
+    }    
+    \caption{Exemplo de lei de potência com $k = -2$}
+    \label{fig:exemplo-lei-potencia}
+    \source{Elaboração do autor}
+\end{figure}
+
+Em seu artigo, \citeonline{Barabasi1999-sn} propõem que a distribuição de probabilidade de grau, ou seja, a probabilidade de existir na rede um nó com $k$ conexões, segue aproximadamente a lei de potência $p(k) \sim k^{-\gamma} $ onde $2 \le \gamma \le 3$ em redes reais.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][escala regular] {
+        \includegraphics[scale=0.4]{scale-free-example-1.png}
+    }
+    \subfloat[][escala logarítmica] {
+        \includegraphics[scale=0.4]{scale-free-example-2.png}
+    }    
+    \caption{Distribuição de probabilidade de grau $p(k) \sim k^{-\gamma}$ com $2 \le \gamma \le 3$}
+    \label{fig:exemplo-livre-escala}
+    \source{Elaboração do autor}
+\end{figure}
+
+Em termos práticos, as redes livres de escala possuem uma grande quantidade de nós de pouco grau e alguns nós com grau exponencialmente altos, os \textit{hubs}. Essa topologia possui importantes aplicações em diversas áreas, por exemplo, em uma rede de comunicações, a falha de nós aleatórios causa pouco dano a rede, pois chance maior é que a falha aconteça em nós com poucas conexões, por outro lado, ataques direcionados aos \textit{hubs} de comunicação podem derrubá-la, pois o número de nós é relativamente pequeno em comparação ao tamanho da rede e suas conexões atingem uma grande quantidade de nós. Outro exemplo está na dispersão de doenças contagiosas; em redes com a presença de \textit{hubs}, como os aeroportos em uma rede de transporte, a tendência é que eles conectem uma grande quantidade de grupos e acelerarem a dispersão por toda a rede.
+
+Redes puramente aleatórias, como as que seguem o modelo de Erdős-Rényi, não são capazes de criar essa topologia. Barabási propõe que essas redes surgem devido a dois processos distintos: \textit{crescimento} e \textit{conexão preferencial}.
+
+O \textit{crescimento} significa que redes reais não surgem com um número fixo de nós e adicionam conexões entre si, mas que a rede começa com poucos de ambos e novos são adicionados com o passar do tempo. É possível observar isso no crescimento da redes de comunicação, energia, transporte e em redes de interação de proteínas.
+
+Nos exemplos acima nota-se que o tempo de crescimento não é um fator relevante, mas sim que haja crescimento. Em 1991 a WWW possuía apenas uma página, enquanto que hoje estima-se que possua mais de um trilhão delas \cite{Barabasi2016-rn}. Por outro lado, a rede de interação de proteínas tem pouco mais de 20.000 nós e levou 4 bilhões de anos para ser construída.
+
+O segundo processo que leva a criação de redes livres de escala é a \textit{conexão preferencial}. Esse processo diz que, ao ser incorporado em uma rede, um nó prefere se conectar a outros que já possuam muitas conexões, em um fenômeno também conhecido como \enquote{rico fica mais rico}. Os exemplos variam desde um novo aluno na sala de aula, que tem maior chance de conhecer alunos que já são populares, quanto à própria WWW, autores de páginas novas criam \textit{links} para outras já bem conhecidas.
+
+\citeonline[pág. 191]{Barabasi2016-rn} argumentam que ambas os processos são \textit{suficientes} e \textit{necessários} para a criação de redes livres de escala, ou seja, não apenas que a presença de ambos é capaz de gerar redes livres de escala, como não é possível gerá-las sem que ambos o processos estejam envolvidos, ao menos implicitamente.
+
+De posse desses argumentos, é possível prever aproximadamente a topologia esperada de uma rede livre de escala medindo-se taxas de incorporação de novos nós na rede, bem como sua conexão preferencial.
+
+Em redes reais, no entanto, novos nós surgem e nós também desaparecem, alguns nós têm conexão preferencial maior do que outros não somente por conta de seu número de conexões. O modelo de Bianconi-Barabási considera conexões preferenciais variadas para os nós e o modelo é capaz de explicar como alguns novos nós rapidamente se tornam \textit{hubs}, ultrapassando \textit{hubs} antigos.
+
+\citeonline{Barabasi2016-rn} também propõem modelos para os efeitos de remoção de nós, envelhecimento, criação de conexões entre nós já existentes e crescimento acelerado.\todo{Fiquei meio na dúvida aqui, não quero explicar todos eles (pois não vou usá-los), mas gostaria de dizer que eles existem. Expando isso um pouco ou removo?}
+
+Quanto a distância geodésica média $\avg{d}^\textit{ba}$ e o coeficiente de agrupamento $\avg{C}\textit{ba}$, o modelo de Barabási-Albert prevê:
+
+\noindent
+\begin{tabularx}{\linewidth}{@{}XX@{}}
+    \begin{equation} \label{eq:distancia-barabasi-albert}
+    \avg{d}^\textit{ba} \sim \frac{\ln N}{\ln \ln N}
+    \end{equation} &
+    \begin{equation} \label{eq:coef-agrupamento-barabasi-albert}
+    \avg{C}^\textit{ba} \sim \frac{(\ln N)^2}{N}
+    \end{equation}
+\end{tabularx}
+
+Onde $N$ é o número de nós. É possível observar que a distância permanece similar ao modelo de Erdős-Rényi (Equação~\ref{eq:distancia-erdos}), porém o coeficiente de agrupamento tende a diminuir com o crescimento da rede, diferentemente do modelo de Watts-Strogatz que se assemelha ao coeficiente de um reticulado (Equação~\ref{eq:coef-agrupamento-reticulado}).
+
+\todo[inline]{Explicar pq recebe o nome de livre de escala}
 
 \section{O MAPA DE CARREIRAS}
 
