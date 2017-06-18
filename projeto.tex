@@ -632,6 +632,7 @@ A proposta de Newman é perfeitamente aplicável para esse trabalho, onde a rede
 
 Com base nos trabalhos mencionados acima, propõe-se o seguinte algoritmo adaptado para o Modelo de Configuração:
 %% É PRECISO EXPLICITAR NOS OBJETIVOS (OU EM UMA SEÇÃO CHAMADA CONTRIBUIÇÕES) QUE ESTAMOS APRESENTANDO UMA ADAPTAÇÃO DO MODELO DE CONFIGURAÇÃO PARA TRATAR REDES PONDERADAS
+% Ronie (2017-06-18) Fiz só uma pequeno parágrafo genérico lá na introdução, acha que precisa detalhar?
 
 \begin{enumerate}
 \item Atribua uma força (como descrito na Seção~\ref{sec:forca}) a cada nó e crie uma sequência de forças de maneira análoga à sequência de graus.
@@ -745,15 +746,14 @@ O artigo original não detalha um ponto de parada específico, porém a aplicaç
 %% PRECISAMOS APRESENTAR EXEMPLOS DE CADA MODELO
 
 %====================================
-\subsection{Métricas}
+\subsection{Medidas de Rede}
 
 As métricas descritas nessa seção são usadas para comparação com os modelos nulos selecionados para o trabalho, bem como para encontrar características relevantes dentro da própria rede.
 %% PARA MIM MÉTRICA E PROPRIEDADE SÃO COISAS DISTINTAS
 % Ronie: De acordo, ajustei o testo e vou usar métrica/medições para esse cálculos que caracterizam a topologia da rede.
 %% EU ENTENDO QUE VOCÊ USA MÉTRICA, POIS A LITERATURA USA MÉTRICA, CERTO? SE A LITERATURA NÃO CHAMAR DE MÉTRICA EU CHAMARIA DE MEDIDA, POIS MATEMATICAMENTE UMA MÉTRICA TEM QUE ATENDER AS PROPRIEDADES DE SER DEFINIDAMENTE POSITIVA, SIMÉTRICA, RESPEITAR A DESIGULDADE TRIANGULAR E SER NULA APENAS PARA PONTOS COINCIDENTES. COMO NÓS NÃO VAMOS PROVAR QUE CADA ITEM APRESENTADO AQUI É UMA MÉTRICA, USAR A EXPRESSÃO MEDIDA PODE NOS POUPAR DE IMPRECISÕES MATEMÁTICAS.
+% Ronie: Ok! Vou trocar :)
 
-Cada uma das métricas seguintes acompanha uma descrição de qual seu significado dentro do contexto de movimentação de profissionais entre ocupações.
-%% ENTENDO QUE ESSE PARÁGRAFO ACIMA DEVE SAIR DAQUI.
 Para comparação com os modelos nulos, são considerados estimadores de centralidade (média e mediana), dispersão (desvio padrão e intervalo interquartil), distribuição e correlação entre as várias métricas.
 
 %====================================
@@ -831,11 +831,6 @@ Analogamente à força de entrada, a força de saída pode ser calculada como:
 \end{equation}
 
 Onde $\wout_{ij}$ é o peso da conexão direcionada de $i$ para $j$.
-
-\todo[inline]{O que significa a força de saída para uma ocupação?}
-
-Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas. 
-%% O PARÁGRAFO ACIMA DEVE SER MOVIDO PARA UMA SEÇÃO ESPECÍFICA
 
 %====================================
 \subsubsection{Distribuição de Graus e Forças} \label{sec:distribuicao-grau-forca}
@@ -1057,9 +1052,6 @@ Para o equivalente de $\rho$, em que se leva em consideração as conexões espe
 \begin{equation}
 \weighted{\rho} \defn \frac{\weighted{R} - \avg{\weighted{R}_\textit{rand}}}{1 -  \avg{\weighted{R}_\textit{rand}}}
 \end{equation}
-
-A reciprocidade nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
-%% MOVER PARA A SEÇÃO ESPECÍFICA
 
 %====================================
 \subsubsection{Assortatividade} \label{sec:assortatividade}
@@ -1596,7 +1588,7 @@ Para que o grafo possa ser exibido bidimensionalmente, é preciso que seus vért
 
 O algoritmo de \textit{Force-Directed} (ref) é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz. A saída do Graphviz é um arquivo texto com a posição X e Y do vértice em um plano cartesiano.
 
-\subsubsection{Descoberta de Proto-Carreiras}
+\subsubsection{Identificação de Carreiras}
 
 %% O QUE É UMA PROTO-CARREIRA?
 
@@ -1712,6 +1704,8 @@ Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} 
 
 Por outro lado, é possível observar na lista XX que essas ocupações coincidem intuitivamente com as noções de \enquote{início de carreira} e \enquote{ocupação operacional}.
 
+Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas.
+
 \begin{hypothesis}[Pontos de Saída do Mercado de Trabalho]
     Se $\linkin{s}_i \gg \linkout{s}_i$, a movimentação não mapeada não é suficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
 \end{hypothesis}
@@ -1734,6 +1728,8 @@ A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topogra
   \caption{Ilustração da centralidade de intermediação na carreira de topografia. O nó mais central é o "topógrafo".}
   \label{fig:carreira-topografia}
 \end{figure}
+
+A reciprocidade nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
 
 \begin{hypothesis}[Equivalência Profissional] \label{hip:equivalencia}
     Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, significa que não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
