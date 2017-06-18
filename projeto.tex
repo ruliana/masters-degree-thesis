@@ -223,7 +223,7 @@ Esse trabalho utiliza técnicas de Ciência de Redes para fazer uma análise exp
 
 Ao longo da vida profissional é comum para o indivíduo passar por diversas movimentações na carreira. Um estudante de engenharia pode iniciar como Trainee em uma empresa e progredir para Engenheiro, Supervisor de Obras e Diretor de Engenharia. Na área de computação é possível ver um Programador se tornar Analista-Programador, Coordenador de Desenvolvimento, Gerente de Projetos, chegando a Diretor de Operações. Esses são casos em que a movimentação de carreira segue um padrão mais tradicional de progressão, mas também há situações extremas de transições de carreira na qual um Analista-Programador resolve se tornar um Chef de Cozinha. Em qualquer um dos casos, as movimentações de carreira são sempre uma etapa de grande relevância profissional e que, ao mesmo tempo, podem causar estresse, insegurança e alguns desconfortos pelos novos desafios que surgirão.
 
-Este projeto de pesquisa usa uma base de dados de mercado com 10 milhões de currículos e 23 milhões de experiências profissionais da empresa Vagas Tecnologia com o objetivo de fazer um estudo analítico sobre a movimentação de profissionais entre ocupações durante o curso de suas carreiras~\todo{Acho que esse objetivo geral está perfeito, que acha?}. O problema é modelado com uma estrutura em grafos e é analisado com conceitos e técnicas de Ciência da Redes.
+Este projeto de pesquisa usa uma base de dados de mercado com 10 milhões de currículos e 23 milhões de experiências profissionais da empresa Vagas Tecnologia com o objetivo de fazer um estudo analítico sobre a movimentação de profissionais entre ocupações durante o curso de suas carreiras. O problema é modelado com uma estrutura em grafos e é analisado com conceitos e técnicas de Ciência da Redes.
 
 Para concluir o objetivo, propõe-se levantar hipóteses sobre os o comportamento da movimentação de profissionais traduzindo estruturas observadas na rede para o domínio da dinâmica de carreira.
 
@@ -249,7 +249,7 @@ A definir\ldots
 
 A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse no começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert [{REFS}].
 
-Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército~\cite{Maxwell2009-kq}.\todo{Citei uma página aqui do próprio site do exército, vale como referência? =/}
+Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército~\cite{Maxwell2009-kq}.
 
 O \citeonline{National_Research_Council2006-lv} define a Ciência de Redes como \enquote{o estudo da representação em rede de fenômenos físicos, biológicos e sociais levando a modelos preditivos desses fenômenos}~\footnote{Em tradução livre, \enquote{the study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.}}.
 %% RETIRAR O ET AL. DA CITAÇÃO DO NATIONAL RESEARCH COUNCIL
@@ -274,19 +274,50 @@ Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se di
 
 Um \textit{grafo} ou \textit{rede} é uma abstração usada quando o foco do estudo está no relacionamentos entre entidades. Nessa abstração, outras características das entidades que não o relacionamento são quase completamente descartadas.
 
-Redes são representadas graficamente por formas geométricas, em geral pequenos círculos para representar as entidades, conectados por linhas representando os relacionamentos.
+Redes são representadas graficamente por formas geométricas, em geral pequenos círculos para representar as entidades, conectados por linhas representando os relacionamentos (Figura~\ref{fig:exemplo-tipos-grafo}).
 
-[Figura ilustrativa]
+\begin{figure}[ht]
+    \centering
+    \subfloat[][simples] {
+        \includegraphics[scale=0.5]{simple.pdf}
+        \label{fig:exemplo-grafo-simples}
+    }
+    \subfloat[][direcionado] {
+        \includegraphics[scale=0.5]{directed.pdf}
+        \label{fig:exemplo-grafo-direcionado}
+    }    
+    \subfloat[][ponderado] {
+        \includegraphics[scale=0.44]{weighted.pdf}
+        \label{fig:exemplo-grafo-ponderado}
+    }    
+    \caption{Redes ou Grafos}
+    \label{fig:exemplo-tipos-grafo}
+    \source{Elaboração do autor}
+\end{figure}
 
-Quando os relacionamentos possuem uma certa direção eles formam \textit{redes direcionadas}. Por exemplo, uma rede que representa as trocas de presentes natalinos é uma rede em que há \textit{direção}, o presente é dado de uma pessoa \textit{para} outra. Em outros casos, quando não há uma direção no relacionamento, a rede é chamada \textit{não-direcionada}. Por exemplo, em uma rede de relacionamentos os indivíduos se conhecem mutuamente. 
+Quando os relacionamentos possuem uma certa direção eles formam \textit{redes direcionadas} (Figura~\ref{fig:exemplo-grafo-direcionado}). Por exemplo, uma rede que representa as trocas de presentes natalinos é uma rede em que há \textit{direção}, o presente é dado de uma pessoa \textit{para} outra. Em outros casos, quando não há uma direção no relacionamento, a rede é chamada \textit{não-direcionada}. Por exemplo, em uma rede de relacionamentos os indivíduos se conhecem mutuamente. 
 
-Se a intensidade do relacionamento é relevante as conexões ganham um \textit{peso}. Seu significado depende da rede em questão. Por exemplo, em uma rede de transportes o peso pode significar a distância entre locais de entrega, em uma rede de dados pode significar o volume do tráfego entre os pontos, e em uma rede social pode significar o número de mensagens trocadas entre duas pessoas. Redes onde existe a presença de conexões com peso são chamadas \textit{redes ponderadas}.
+Se a intensidade do relacionamento é relevante as conexões ganham um \textit{peso} (Figura~\ref{fig:exemplo-grafo-ponderado}). Seu significado depende da rede em questão. Por exemplo, em uma rede de transportes o peso pode significar a distância entre locais de entrega, em uma rede de dados pode significar o volume do tráfego entre os pontos, e em uma rede social pode significar o número de mensagens trocadas entre duas pessoas. Redes onde existe a presença de conexões com peso são chamadas \textit{redes ponderadas}.
 
-Algumas redes permitem múltiplas conexões entre dois nós. Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. \citeonline{Newman2004-by} propõe que algumas redes ponderadas podem ser representadas como multigrafos, principalmente onde a conexão representa um fluxo. Nessa representação alternativa cada unidade de peso é representada por uma conexão independente de peso um, em alguns cenários isso possibilita o emprego em redes ponderadas de técnicas que desconsideram o peso das conexões.
+Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exemplo-grafo-multiplo}). Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. \citeonline{Newman2004-by} propõe que algumas redes ponderadas podem ser representadas como multigrafos, principalmente onde a conexão representa um fluxo. Nessa representação alternativa cada unidade de peso é representada por uma conexão independente de peso um, em alguns cenários isso possibilita o emprego em redes ponderadas de técnicas que desconsideram o peso das conexões.
 
-Em algumas redes, não há sentido em nós que conectam a si mesmos, por exemplo, em uma rede social onde as conexões representam quem conhece quem, uma conexão de alguém consigo mesmo não é relevante para o estudo da rede (desconsiderando-se questões filosóficas). Já em outras redes, é natural considerar esse tipo de conexão\todo{Encontrar um exemplo}. Conexões de um nó com ele mesmo são chamados \textit{laços} ou \textit{loops}.
+\begin{figure}[ht]
+    \centering
+    \subfloat[][laços e direção] {
+        \includegraphics[scale=0.5]{loop.pdf}
+        \label{fig:exemplo-grafo-laco}
+    }
+    \subfloat[][múltiplas conexões] {
+        \includegraphics[scale=0.5]{multiple.pdf}
+        \label{fig:exemplo-grafo-multiplo}
+    }    
+    \caption{Redes com laços e conexões múltiplas}
+    \source{Elaboração do autor}
+\end{figure}
 
-Redes que não permitem laços, pesos ou múltiplas conexões entre dois nós são chamadas \textit{redes simples}. Nessa pesquisa, a rede em questão é direcionada, ponderada e sem laços.
+Em algumas redes, não há sentido em nós que conectam a si mesmos, por exemplo, em uma rede social onde as conexões representam quem conhece quem, uma conexão de alguém consigo mesmo não é relevante para o estudo da rede (desconsiderando-se questões filosóficas). Já em outras redes, é natural considerar esse tipo de conexão\todo{Encontrar um exemplo}. Conexões de um nó com ele mesmo são chamados \textit{laços} ou \textit{loops} (Figura~\ref{fig:exemplo-grafo-laco}).
+
+Redes que não permitem laços, pesos ou múltiplas conexões entre dois nós são chamadas \textit{redes simples} (Figura~\ref{fig:exemplo-grafo-simples}). Nessa pesquisa, a rede em questão é direcionada, ponderada e sem laços.
 
 Quando uma rede simples possui todas as conexões possíveis entre seus nós ela é chamada \textit{rede completa}. O número de conexões $L$ nessa rede é dado pela Equação~\ref{eq:rede-completa}, onde $N$ é o número de nós da rede. A Equação~\ref{eq:rede-completa-direcionada} fornece o número de conexões $\linkboth{L}$ em uma rede direcionada.
 
@@ -304,24 +335,35 @@ Quando uma rede simples possui todas as conexões possíveis entre seus nós ela
 
 Se uma parte da rede forma um grafo completo, esse grafo é chamado \textit{clique}. O clique é um conceito importante quando se trata de detecção de comunidades.
 
-\todo[inline]{Explicar rede reticulada}
+Uma \textit{rede reticulada} ou simplesmente \textit{reticulado} (\textit{lattice}) é uma rede onde os nós estão colocados em um plano (n-dimensional, mas é comum planos bidimensionais) e são conectados entre si, formando um padrão regular. Os reticulados são usados como modelos simples em diversas áreas de pesquisa, por exemplo, uma cidade pode ser representada grosseiramente como um reticulado bidimensional e a porosidade de materiais pode ser estudada com reticulados tridimensionais (percolação).
 
-\todo[inline]{Incluir figuras para ilustrar os conceitos}
+\begin{figure}[ht]
+    \centering
+    \subfloat[][bidimensionais] {
+        \includegraphics[scale=0.4]{lattice.jpg}
+    }
+    \subfloat[][circular ou anel] {
+        \includegraphics[scale=0.6]{ring-lattice.png}
+    }    
+    \caption{Exemplos de redes reticuladas}
+    \source{(Provisório)}
+\end{figure}
 
 %% DE TEMPOS EM TEMPOS COLOQUE UMA FIGURA ILUSTRANDO OS CONCEITOS APRESENTADOS. NUMA ÚNICA FIGURA VOCÊ PODE ILUSTRAR A REDE PONDERADA, CLIQUES, ETC.
 % Ronie (2017-06-17) Boa! Vou procurar algumas figuras open-source que eu possa utilizar provisoriamente, depois substituo por figura minhas, que acha?
 
 %% PARA A QUALIFICAÇÃO ESTÁ OK SIM
 
-Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós está conectado ao supergrafo.
+Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede.
 
 %% ENTÃO UM COMPONENTE É O MESMO QUE UM SUBGRAFO?
 % Ronie (2017-06-17) É um subgrafo desconectado do supergrafo. Mexi no texto para tentar tornar mais claro, pode ver se melhorou? :) (definitivamente aqui vai bem uma figura =/)
 % CADA NOVO CONCEITO PRECISA SER EXPLICADO. SE VOCÊ FALA DE SUPERGRAFO, ENTÃO EXPLIQUE O QUE É UM.
+% Ronie (2017-06-18) Vou tentar alterar a explicação para excluir o termo. Esse é o tipo da coisa que puxa a outra :D
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[scale=1.0]{componente.png}
+    \includegraphics[scale=0.7]{componente.png}
     \caption{Rede com três componentes}
     \source{Wikimedia - David Eppstein}
     \label{fig:exemplo-componente}
@@ -341,16 +383,20 @@ A sequência de grau é utilizada tanto no cálculo da \textit{distribuição de
 
 Outro conceito importante no estudo de redes é o de menor caminho entre dois nós, explicado em mais detalhes na Seção~\ref{sec:distancia-geodesica}. O menor caminho é também chamado \textit{caminho geodésico} e a distância entre dois nós através do menor caminho é chamada \textit{distância geodésica}.
 
+\todo[inline]{Incluir figura com caminho geodésico, caminho mais provável e caminho de menor gargalo}
+
 Similar ao caminho geodésico duas outras variações para redes ponderadas são importantes nesse estudo. A primeira é o \textit{caminho mais provável}, ou seja, partindo-se de um nó e caminhando-se aleatoriamente pela rede, onde a probabilidade de se tomar um caminho é definida pelo peso da conexão, o caminho mais provável é formado pelas conexões percorridas até se encontrar um determinado nó. A segunda variação é o \textit{caminho de menor gargalo}, definida como o caminho entre dois nós que maximiza o menor peso em qualquer uma das conexões que o forma \cite{Goldbarg2012-uc}.
 
-\textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortativade} é o conceito contrário, onde nós com características diferentes tentem a ser conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
+\todo[inline]{Explicar coeficiente de agrupamento (figuras ajudam)}
+
+\textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortatividade} é o conceito contrário, onde nós com características diferentes tentem a ser conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
 
 %====================================
 \subsection{Redes Aleatórias e Redes Reais} \label{sec:redes-aleatorias}
 
 No estudo de redes reais, as redes aleatórias funcionam como \enquote{modelo nulo}, ou seja, se uma métrica observada em uma rede real diverge significativamente de uma rede aleatória equivalente, algum princípio organizacional inexistente no modelo é responsável pela divergência~\cite{Zweig2016-rb}.
 
-O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já a utilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não estabelecem o problema explicitamente como um problema de rede.
+O modelo nulo funciona de forma análoga à hipótese nula em estatística e é uma das principais ferramentas do estudo de redes reais. É importante notar que essa abordagem predata a ciência de redes. Os trabalhos de \citeonline{Holland1970-dx} em redes sociais e de \citeonline{Connor1979-vw} em ecologia já a utilizaram esse método, mesmo quando, no caso do artigo de \textit{Connor}, não formula o problema explicitamente como uma rede.
 
 De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: seja $G^\textit{rand}$ um \textit{modelo} de rede aleatória, $M \defn S \to \R$ uma métrica global definida para todos os grafos de um conjunto $S$, e $G \in S$ uma rede sob análise. O valor esperado $E(M|G^\textit{rand})$ é comparado a $M(G)$ quanto a sua relevância estatística. Uma \enquote{métrica global}, nesse caso, é uma medição sobre toda a rede como, por exemplo, a distância média dos menores caminhos entre todos os seus nós.
 
@@ -467,7 +513,7 @@ Os modelos apresentados acima podem ser generalizados para uma rede direcionada 
 %====================================
 \subsubsection{Modelo de Watts-Strogatz}
 
-O modelo de Watts-Strogatz cria uma rede aleatória com a propriedade de mundo pequeno e com um alto coeficiente de agrupamento. Uma rede de mundo pequeno é aquela em que a menor distância entre dois nós selecionados aleatoriamente é muito pequena em relação ao tamanho da rede (Seção~\ref{sec:small-world}). Um alto coeficiente de agrupamento significa que os vizinhos de um nó qualquer também são vizinhos entre si (Seção~\ref{sec:coeficiente-agrupamento}).
+O modelo de Watts-Strogatz cria uma rede aleatória com a propriedade de mundo pequeno e com um alto coeficiente de agrupamento. Uma rede de mundo pequeno (Seção~\ref{sec:small-world}) é aquela em que a menor distância entre dois nós selecionados aleatoriamente é muito pequena em relação ao tamanho da rede. Um alto coeficiente de agrupamento (Seção~\ref{sec:coeficiente-agrupamento}) significa que os vizinhos de um nó qualquer também são vizinhos entre si.
 %% ILUSTRAR COM FIGURAS'
 % Ronie (2017-06-17) Vou explicar o coeficiente de agrupamento com figuras na seção 2.1, assim, qdo chegar aqui o conceito já vai estar ok. De qq maneira acho que boa ideia colocar uma figura para ilustrar o modelo aqui (Acho que a imagem não ficou lá grandes coisas, mas tento melhorar depois).
 
@@ -495,7 +541,7 @@ O algoritmo para geração de uma rede aleatória Watts-Strogatz pode ser defini
 \item Com probabilidade $p$, reconecte um dos nós de cada conexão a outro aleatoriamente escolhido.
 \end{enumerate}
 
-Quando $p = 0$ o modelo é um reticulado, ele apresenta grande distância entre dois nós aleatórios e alto coeficiente de agrupamento. Quando $p = 1$ o modelo se torna um equivalente ao de Erdős-Rényi, com pequena distância entre nós aleatórios e baixo coeficiente de agrupamento. Pequenas distâncias e alto coeficiente de agrupamento surgiram com $0.001 < p < 0.1$ nos experimentos de Watts e Strogatz para redes de 1.000 nós e média de 10 conexões por nó [REF].
+Quando $p = 0$ o modelo é um reticulado, ele apresenta grande distância entre dois nós aleatórios e alto coeficiente de agrupamento. Quando $p = 1$ o modelo se torna um equivalente ao de Erdős-Rényi, com pequena distância entre nós aleatórios e baixo coeficiente de agrupamento. Pequenas distâncias e alto coeficiente de agrupamento surgiram com $0.001 < p < 0.1$ nos experimentos de Watts e Strogatz para redes de 1.000 nós e média de 10 conexões por nó~\cite{Watts1998-wt}.
 
 %====================================
 \subsubsection{Modelo de Barabási-Albert} \label{sec:modelo-barabasi-albert}
@@ -539,7 +585,9 @@ Onde $K$ é a soma dos graus.
 É possível evitar os laços e conexões múltiplas incluindo-se no algoritmo a restrição de sortear um novo par de encaixes se eles pertencerem ao mesmo nó ou se já houver uma conexão entre eles, entretanto, a análise de probabilidades se torna mais complexa.
 
 O Modelo de Configuração pode ser facilmente adaptado para redes direcionadas com as seguintes adaptações:
+
 %% ESSA PROPOSTA DE ADAPTAÇÃO PARA REDES DIRECIONADAS É SUA? CASO AFIRMATIVO É PRECISO DESTACAR COMO UMA CONTRIBUIÇÃO DA DISSERTAÇÃO
+
 \begin{enumerate}
 \item Atribua um grau de saída e um grau de entrada a cada nó.
 \item Crie uma lista de \textit{encaixes de saída} e uma lista de \textit{encaixes de entrada} com a sequência de graus da saída e a sequência de graus de entrada, respectivamente.
@@ -794,7 +842,7 @@ Onde $N_s$ é a quantidade de nós com força $s$.
 
 Em redes ponderadas é possível traçar correlações entre força e grau. Se há uma \textit{correlação positiva}, isso significa que nós mais conectados possuem também peso maior, ou seja, em uma rede com \textit{hubs}, não somente eles conectam uma quantidade maior de nós como a conexão entre eles também é mais forte. É possível ilustrar esse caso com a rede de computadores que forma a internet. Os \textit{backbones} (\textit{hubs}) dessa rede não apenas conectam mais computadores, como o tráfego de suas conexões é muito mais intenso do que o tráfego entre dois computadores no extremo da rede. Por outro lado, uma \textit{correlação negativa} entre grau e força significa que nós menos conectados possuem conexões mais fortes entre si do que com nós de alta conexão. Um caso ilustrativo para esse cenário é uma rede de relacionamentos entre as pessoas: as conexões locais, como família, tendem a possuir muito mais interação entre si do que interações com celebridades.
 %% É POSSÍVEL AFIRMAR QUE MENOS CONEXÕES IMPLICAM EM MAIOR FORÇA? ISSO NÃO ME PARECE PRECISO.
-% Ronie: Não, não implica mesmo. Na verdade a correlação entre número de conexões e força é uma métrica bastante interessante. Às vezes o número de conexões é grande e a força tb. (Mas deu pra ver que meu texto ficou confuso).
+% Ronie: Não, não implica mesmo. Na verdade a correlação entre número de conexões e força é uma métrica bastante interessante. Às vezes o número de conexões é grande e a força tb. (Mas deu pra ver que meu texto ficou confuso, alterei ele, veja como ficou?).
 
 A correlação entre grau e força pode indicar modelos nulos adequados para redes reais, correlações perfeitas podem significar que a força pode ser descartada no modelo nulo (por não agregar informação) ou que pode ser derivada posteriormente a partir da sequência de graus resultante.\todo{Aqui tem coisa!}
 
@@ -844,7 +892,7 @@ Em uma rede direcionada e ponderada é preciso considerar não apenas o número 
 
 Onde $\weighteddir{\delta}_{hj} = |\weighteddir{d}_{hj}|$ é o número de menores caminhos considerando a distância geodésica para grafos direcionados e ponderados (Equação~\ref{eq:distancia-ponderada}). Na versão original, essa equação possui um parâmetro para ajuste do peso, nesse trabalho o parâmetro foi considerado com valor 1 e foi removido da equação por questões de simplicidade.
 
-\subsubsection{Coeficiente de Agrupamento}
+\subsubsection{Coeficiente de Agrupamento} \label{sec:coeficiente-agrupamento}
 
 O coeficiente de agrupamento local é a medida de quanto os vizinhos de um nó estão conectados entre si e é dado por:
 
@@ -1388,9 +1436,10 @@ Ao final do processo o grafo possui cerca de 8.348 ocupações distintas e 14.03
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
 O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações.
-% AQUI NA INTRODUÇÃO SUGIRO COLOCAR UM FLUXOGRAMA COM OS BLOCOS DE CONSTRUÇÃO DO MCAR. NA LINHA ABAIXO MENCIONE QUE CADA SEÇÃO VAI DESCREVER UM BLOCO DO PROCESSO.
+%% AQUI NA INTRODUÇÃO SUGIRO COLOCAR UM FLUXOGRAMA COM OS BLOCOS DE CONSTRUÇÃO DO MCAR. NA LINHA ABAIXO MENCIONE QUE CADA SEÇÃO VAI DESCREVER UM BLOCO DO PROCESSO.
+% Ronie (2017-06-18) A imagem está um pouco mais abaixo, nesse momento me limitei a colocar apenas uma referência para ela :) Acho que depois podemos ajustar o texto.
 
-As seções a seguir descrevem os passos envolvidos na montagem do grafo.
+A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo. Nessa seção, cada um deles é explicado em detalhes.
 
 \subsubsection{Os Dados}
 
@@ -1402,7 +1451,8 @@ Os dados fonte para essa pesquisa são currículos anonimizados de usuários do 
 
 Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos usados nesse trabalho. O primeiro formato é descrito por \citeonline{Van_Dongen2008-kx} como \enquote{formato ABC}. Cada linha representa uma aresta, e cada aresta possui três campos separados por um ou mais espaços. Em um grafo direcionado, o primeiro campo é a aresta de partida, o segundo é a aresta de chegada e o campo final representa o peso da aresta. No caso do MCar, o peso representa o número de pessoas que se movimentou de uma ocupação à outra. Esse formato é usado na separação de carreiras através da \textit{clusterização} do grafo usando o \textit{Markov Clustering Algorithm} (MCL)~\cite{Van_Dongen2000-qm} e na montagem de visualizações exploratórias usando o programa \enquote{Graphviz}~\cite{Gansner2000-oo}.
 
-\noindent\begin{minipage}{\linewidth}
+\noindent
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[frame=single,caption=Arquivo em Formato ABC,label=lst:formato-abc,captionpos=b]
 medico-examinador medico-do-trabalho 23
 medico-do-trabalho coordenador-medico 10

@@ -1,3 +1,4 @@
+projeto.pdf
 *.aux
 *.bbl
 *.bcf
@@ -14,7 +15,6 @@
 *.log
 *.lot
 *.out
-*.pdf
 *.synctex.gz
 *.tdo
 *.thm
