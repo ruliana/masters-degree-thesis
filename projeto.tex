@@ -574,7 +574,7 @@ P_{ij} \defn \frac{k_i k_j}{2L - 1}
 
 \todo[inline]{Essa conta está estranha. Peguei ela do livro do Barabási, mas acredito que a conta é $k_i k_j / 2L$ OU $k_i k_j / 2L - k_i$.}
 %% QUANDO ELE COLOCA A EQUAÇÃO DESSA FORMA ELE ESTÁ DESCONSIDERANDO O NÓ KI. NO LIMITE A EQUAÇÃO SE TORNA Pij=KiKj/2L.
-% Ronie (2017-06-17): Pois é... mas pensei que se ele desconsiderasse o nó i, então ele deveria desconsiderar o _grau_ Ki, tornando a equação Pij=KiKj/(2L - Ki) =/ Estou pensando certo? Por outro lado, entendo que no limite a equação é como vc propôs. Eu poderia escrevê-la Pij ~ KiKj/2L (assintoticamente equivalente)?
+% Ronie (2017-06-17): Pois é... mas pensei que se ele desconsiderasse o nó i, então ele deveria desconsiderar o _grau_ Ki, tornando a equação Pij=KiKj/(2L - Ki) =/ Estou pensando certo? Por outro lado, entendo que no limite a equação é como vc propôs. Eu poderia escrevê-la Pij ~ KiKj/2L (assintoticamente equivalente)? SIM, MAS DEIXE CLARO QUE A APROXIMAÇÃO VALE PARA VALORES GRANDES DE L
 
 Onde $k_i$ e $k_j$ são os graus dos nós e $L$ é o número total de conexões na rede. Como a soma de graus da rede é igual a duas vezes o número de conexões, ou seja $K = 2L$, a mesma fórmula pode ser expressa como:
 
@@ -636,7 +636,7 @@ Com base nos trabalhos mencionados acima, propõe-se o seguinte algoritmo adapta
 \begin{enumerate}
 \item Atribua uma força (como descrito na Seção~\ref{sec:forca}) a cada nó e crie uma sequência de forças de maneira análoga à sequência de graus.
 \item Crie uma lista com os encaixes para os nós com um número de encaixes igual a força de cada nó.
-\item Selecione aleatoriamente dois encaixes da lista, se os encaixes pertencerem a mesmo nó, descarte-os e repita esse passo.
+\item Selecione aleatoriamente dois encaixes da lista, se os encaixes pertencerem ao mesmo nó, descarte-os e repita esse passo.
 \item Crie uma conexão entre os encaixes selecionados. Remova-os da lista de encaixes.
 \item Repita o processo com a lista restante até que ela se esvazie.
 \item Unifique as conexões múltiplas atribuindo a elas o peso igual ao número de conexões.
@@ -750,9 +750,10 @@ O artigo original não detalha um ponto de parada específico, porém a aplicaç
 As métricas descritas nessa seção são usadas para comparação com os modelos nulos selecionados para o trabalho, bem como para encontrar características relevantes dentro da própria rede.
 %% PARA MIM MÉTRICA E PROPRIEDADE SÃO COISAS DISTINTAS
 % Ronie: De acordo, ajustei o testo e vou usar métrica/medições para esse cálculos que caracterizam a topologia da rede.
+%% EU ENTENDO QUE VOCÊ USA MÉTRICA, POIS A LITERATURA USA MÉTRICA, CERTO? SE A LITERATURA NÃO CHAMAR DE MÉTRICA EU CHAMARIA DE MEDIDA, POIS MATEMATICAMENTE UMA MÉTRICA TEM QUE ATENDER AS PROPRIEDADES DE SER DEFINIDAMENTE POSITIVA, SIMÉTRICA, RESPEITAR A DESIGULDADE TRIANGULAR E SER NULA APENAS PARA PONTOS COINCIDENTES. COMO NÓS NÃO VAMOS PROVAR QUE CADA ITEM APRESENTADO AQUI É UMA MÉTRICA, USAR A EXPRESSÃO MEDIDA PODE NOS POUPAR DE IMPRECISÕES MATEMÁTICAS.
 
 Cada uma das métricas seguintes acompanha uma descrição de qual seu significado dentro do contexto de movimentação de profissionais entre ocupações.
-
+%% ENTENDO QUE ESSE PARÁGRAFO ACIMA DEVE SAIR DAQUI.
 Para comparação com os modelos nulos, são considerados estimadores de centralidade (média e mediana), dispersão (desvio padrão e intervalo interquartil), distribuição e correlação entre as várias métricas.
 
 %====================================
@@ -782,9 +783,7 @@ Como o MCar é um grafo direcionado e ponderado, a distância geodésica conside
 
 Onde $w_{ih}$ é o peso da conexão entre os nós $i$ e $h$ ou indefinido se a conexão é inexistente.
 
-Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa peso em um arco e $\wout_{ij}$ é indefinido se não há uma conexão entre $i$ e $j$:
-%% AS SETAS DEVERIAM ESTAR SOBRE A LETRA QUE INDICA O VETOR E NÃO SOBRE O SUBÍNDICE DO VETOR. ACABEI DE NOTAR QUE A SETA SOBRE O SUBÍNDICE INDICA A DIREÇÃO DA CONEXÃO. NÃO CONHECIA ESSA NOTAÇÃO!
-% Ronie: Me surpreendeu também, encontrei ela em alguns artigos e achei bem mais fácil de ler as fórmulas do que usar letras. Entretanto, notei que ela _não_ é um consenso. Por isso mesmo fiz de um jeito que é possível alterar a notação do trabalho todo de um jeito bem rápido.
+Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa O peso em um arco e $\wout_{ij}$ é indefinido se não há uma conexão entre $i$ e $j$:
 
 \begin{equation} \label{eq:distancia-ponderada-direcionada}
 \weighteddir{d}_{ij} \defn min\left(\frac{1}{\wout_{ih}} + \ldots + \frac{1}{\wout_{hj}}\right)
@@ -793,7 +792,7 @@ Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa 
 %====================================
 \subsubsection{Centralidade de Grau e Força} \label{sec:forca}
 
-A centralidade de grau ou \textit{degree centrality} mede o quão conectado é um nó, quanto maior o número de conexões, maior a centralidade de grau.
+A \textit{centralidade de grau} ou \textit{degree centrality} mede o quão conectado é um nó, quanto maior o número de conexões, maior a centralidade de grau.
 
 A centralidade de grau é simplesmente o grau de um nó e pode ser calculada segundo a Equação~\ref{eq:centralidade-grau}.
 %% SEMPRE QUE VOCÊ REFERENCIAR UMA SEÇÃO OU EQUAÇÃO ESPECÍFICA, COLOQUE A PRIMEIRA LETRA EM MAIÚSCULO
@@ -805,7 +804,7 @@ c_k(i) \defn \sum_{j} a_{ij}
 
 Em que $a_{ij}$ é 1 se existe uma conexão não direcionada $i, j$ e 0 caso contrário, e $i,j \in N$. 
 
-Para redes direcionadas, a centralidade pode ser separada de acordo com a direção das conexões. A \textit{centralidade de grau de entrada} corresponde ao número de conexões que termina em um nó, já a \textit{centralidade de grau de saída} corresponde ao número de conexões que parte de um nó.
+Para redes direcionadas, a centralidade pode ser separada de acordo com a direção das conexões. A \textit{centralidade de grau de entrada} corresponde ao número de conexões que termina em um nó, já a \textit{centralidade de grau de saída} corresponde ao número de conexões que partem de um nó.
 
 No caso de um grafo ponderado não direcionado, a centralidade de grau deve considerar não somente o número de conexões, mas também seus pesos. \citeonline{Barrat2004-xf} propõem o equivalente da centralidade de grau para grafos ponderados, a \textit{força} (\textit{strength}) do nó, como a soma do peso das conexões adjacentes ao nó.
 
@@ -817,7 +816,7 @@ Onde $w_{ij}$ possui o valor do peso entre os nós $i$ e $j$, ou 0 se não há c
 
 O presente trabalho trata de uma rede ponderada e direcionada, portanto são apresentadas variações de \textit{força} considerando a direção e peso das conexões.
 
-O equivalente a centralidade de grau de entrada, nesse caso, é a força de entrada, análoga a Equação~\ref{eq:forca} considerando apenas as conexões de entrada no nó.
+O equivalente a centralidade de grau de entrada, nesse caso, é a força de entrada, análoga a Equação~\ref{eq:forca}, considerando apenas as conexões de entrada no nó.
 
 \begin{equation} \label{eq:forca-entrada}
 \linkin{s}_i \defn \sum_{j} \win_{ij}
@@ -836,6 +835,7 @@ Onde $\wout_{ij}$ é o peso da conexão direcionada de $i$ para $j$.
 \todo[inline]{O que significa a força de saída para uma ocupação?}
 
 Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas. 
+%% O PARÁGRAFO ACIMA DEVE SER MOVIDO PARA UMA SEÇÃO ESPECÍFICA
 
 %====================================
 \subsubsection{Distribuição de Graus e Forças} \label{sec:distribuicao-grau-forca}
@@ -845,6 +845,7 @@ A distribuição de graus reflete a probabilidade de se encontrar um nó de grau
 Muitas características importantes das redes dependem dessa distribuição, desde o comportamento na transmissão de doenças até o quão uma rede de comunicações é vulnerável a ataques ou falhas. Um dos fatores que contribuíram para a distinção de redes complexas das demais iniciou-se com a descoberta de \cite{Barabasi1999-sn} que redes reais frequentemente possuíam distribuição logarítmica de grau, com poucos nós detendo a maior parte das conexões (alto grau) e a maior parte dos nós com apenas poucas conexões (baixo grau). Em outras palavras, é possível observar na distribuição de grau das redes reais a existência de \textit{hubs}, ausentes em redes puramente aleatórias.
 
 É possível ter um vislumbre da distribuição de graus de uma rede específica através de um simples histograma, onde o eixo $x$ possui o grau e o eixo $y$ o número de nós encontrados na rede com aquele grau. Entretanto, para se obter uma distribuição apropriada, é preciso normalizar as colunas do histograma para que elas somem 1, para isto, basta dividir o valor de cada coluna pela soma de todos os graus da rede.
+%% ILUSTRAR COM UMA REDE E SEU HISTOGRAMA
 
 Assumindo $N$ como o número de nós da rede e $N_k$ como o número de nós de grau $k$, a probabilidade $P_k$ de se encontrar um nó com grau $k$ é definida como:
 
@@ -858,7 +859,7 @@ Essa distribuição, da maneira como foi descrita, é uma distribuição discret
 N_k = NP_k
 \end{equation} 
 
-De maneira análoga, a distribuição de forças de uma rede é feita substituindo-se o grau $k$ pela força $s$ do nó. Força é definida com a soma dos pesos das conexões que incidem sobre um nó (mais na Seção~\ref{sec:forca}). A probabilidade $P_s$ de se encontrar um nó de força $s$ em uma rede com $N$ nós é:
+De maneira análoga, a \textit{distribuição de forças} de uma rede é feita substituindo-se o grau $k$ pela força $s$ do nó. Força é definida como a soma dos pesos das conexões que incidem sobre um nó (mais na Seção~\ref{sec:forca}). A probabilidade $P_s$ de se encontrar um nó de força $s$ em uma rede com $N$ nós é:
 
 \begin{equation} \label{eq:probabilidade-forca}
 P_s \defn \frac{N_s}{N}
@@ -866,13 +867,13 @@ P_s \defn \frac{N_s}{N}
 
 Onde $N_s$ é a quantidade de nós com força $s$.
 
-Em redes ponderadas é possível traçar correlações entre força e grau. Se há uma \textit{correlação positiva}, isso significa que nós mais conectados possuem também peso maior, ou seja, em uma rede com \textit{hubs}, não somente eles conectam uma quantidade maior de nós como a conexão entre eles também é mais forte. É possível ilustrar esse caso com a rede de computadores que forma a internet. Os \textit{backbones} (\textit{hubs}) dessa rede não apenas conectam mais computadores, como o tráfego de suas conexões é muito mais intenso do que o tráfego entre dois computadores no extremo da rede. Por outro lado, uma \textit{correlação negativa} entre grau e força significa que nós menos conectados possuem conexões mais fortes entre si do que com nós de alta conexão. Um caso ilustrativo para esse cenário é uma rede de relacionamentos entre as pessoas: as conexões locais, como família, tendem a possuir muito mais interação entre si do que interações com celebridades.
+Em redes ponderadas é possível traçar correlações entre força e grau. Se há uma \textit{correlação positiva}, isso significa que nós mais conectados possuem também peso maior, ou seja, em uma rede com \textit{hubs}, não somente eles conectam uma quantidade maior de nós, como a conexão entre eles também é mais forte. É possível ilustrar esse caso com a rede de computadores que forma a internet. Os \textit{backbones} (\textit{hubs}) dessa rede não apenas conectam mais computadores, como o tráfego de suas conexões é muito mais intenso do que o tráfego entre dois computadores no extremo da rede. Por outro lado, uma \textit{correlação negativa} entre grau e força significa que nós menos conectados possuem conexões mais fortes entre si do que com nós de alta conexão. Um caso ilustrativo para esse cenário é uma rede de relacionamentos entre as pessoas: as conexões locais, como família, tendem a possuir muito mais interação entre si do que interações com celebridades.
 %% É POSSÍVEL AFIRMAR QUE MENOS CONEXÕES IMPLICAM EM MAIOR FORÇA? ISSO NÃO ME PARECE PRECISO.
 % Ronie: Não, não implica mesmo. Na verdade a correlação entre número de conexões e força é uma métrica bastante interessante. Às vezes o número de conexões é grande e a força tb. (Mas deu pra ver que meu texto ficou confuso, alterei ele, veja como ficou?).
 
 A correlação entre grau e força pode indicar modelos nulos adequados para redes reais, correlações perfeitas podem significar que a força pode ser descartada no modelo nulo (por não agregar informação) ou que pode ser derivada posteriormente a partir da sequência de graus resultante.\todo{Aqui tem coisa!}
 
-Em grafos direcionados, é possível separar cada uma das distribuições em distribuições de entrada e saída. As \textit{probabilidades de distribuição de saída de grau} (Eq. \ref{eq:probabilidade-grau-saida}), \textit{distribuição de entrada de grau} (Eq. \ref{eq:probabilidade-grau-entrada}), \textit{distribuição de saída de força} (Eq. \ref{eq:probabilidade-forca-saida}) e \textit{distribuição de entrada de força} (eq. \ref{eq:probabilidade-forca-entrada}) são similares às Equações \ref{eq:probabilidade-grau} e \ref{eq:probabilidade-forca} e são listadas abaixo de maneira resumida:
+Em grafos direcionados, é possível separar cada uma das distribuições em distribuições de entrada e saída. A \textit{probabilidade de distribuição de saída de grau} (Eq. \ref{eq:probabilidade-grau-saida}), \textit{probabilidade de distribuição de entrada de grau} (Eq. \ref{eq:probabilidade-grau-entrada}), \textit{probabilidade de distribuição de saída de força} (Eq. \ref{eq:probabilidade-forca-saida}) e \textit{probabilidade de distribuição de entrada de força} (Eq. \ref{eq:probabilidade-forca-entrada}) são similares às Equações \ref{eq:probabilidade-grau} e \ref{eq:probabilidade-forca} e são listadas abaixo de maneira resumida:
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -900,7 +901,7 @@ Closeness centrality.
 %====================================
 \subsubsection{Centralidade de Intermediação}
 
-A centralidade de intermediação ou \textit{betweenness centrality} é a medida de quão um nó é importante em relação ao fluxo que passa por uma rede. Ela é feita contando-se o número de caminhos geodésicos dos quais um nó participa: quanto maior a participação, maior sua centralidade por intermediação.
+A \textit{centralidade de intermediação} ou \textit{betweenness centrality} é a medida de quão um nó é importante em relação ao fluxo que passa por uma rede. Ela é feita contando-se o número de caminhos geodésicos dos quais um nó participa: quanto maior a participação, maior sua centralidade por intermediação.
 
 Mais precisamente, a intermediação do nó $i$, $c_b(i)$, é calculada por:
 
@@ -908,7 +909,7 @@ Mais precisamente, a intermediação do nó $i$, $c_b(i)$, é calculada por:
 c_b(i) \defn \sum_{h \neq i \neq j} \frac{\delta_{hj}(i)}{\delta_{hj}}
 \end{equation}
 
-Onde $N$ é o conjunto de nós e $h, i, j \in N$. A função $\delta_{hj}$ é o número de caminhos geodésicos entre os nós $h$ e $j$ e $\delta_{hj}(i)$ é número de caminhos de geodésicos entre $h$ e $j$ que passam pelo nó $i$.
+Onde $N$ é o conjunto de nós e $h, i, j \in N$. A função $\delta_{hj}$ é o número de caminhos geodésicos entre os nós $h$ e $j$, e $\delta_{hj}(i)$ é número de caminhos de geodésicos entre $h$ e $j$ que passam pelo nó $i$.
 
 Em uma rede direcionada e ponderada é preciso considerar não apenas o número de caminhos, mas também seu peso. No caso do trabalho presente, isso significa o número de profissionais que passam por uma ocupação. \citeonline{Opsahl2010-zg} propõem uma versão de intermediação para esse caso:
 
@@ -920,7 +921,7 @@ Onde $\weighteddir{\delta}_{hj} = |\weighteddir{d}_{hj}|$ é o número de menore
 
 \subsubsection{Coeficiente de Agrupamento} \label{sec:coeficiente-agrupamento}
 
-O coeficiente de agrupamento local é a medida de quanto os vizinhos de um nó estão conectados entre si e é dado por:
+O \textit{coeficiente de agrupamento local} é a medida de quanto os vizinhos de um nó estão conectados entre si e é dado por:
 
 \begin{equation}
 c_c(i) \defn \begin{cases}
@@ -950,7 +951,7 @@ Em um grafo ponderado, \citeonline{Barrat2004-xf} oferecem a seguinte versão do
 
 Onde $N(i)$ é o conjunto de vizinhos de $i$, $w_{ij}$ é o peso da conexão entre os nós $i$ e $j$ e $s(i)$ é a força do nó (Equação~\ref{eq:forca}).
 
-O coeficiente de agrupamento global de um grafo é dado pela média dos coeficientes locais:
+O \textit{coeficiente de agrupamento global} de um grafo é dado pela média dos coeficientes locais:
 
 \begin{equation}
 C_c \defn \frac{1}{|N'|} \sum_{i \in N'} c_c(i)
@@ -961,9 +962,9 @@ Onde $N'$ é o conjunto de nós com grau maior que 1, ou seja, $N' = \left\lbrac
 %====================================
 \subsubsection{Reciprocidade de Conexões} \label{sec:reciprocidade}
 
-Em uma rede direcionada, a reciprocidade de conexões corresponde à tendência de pares de nós formarem conexões mútuas entre si~\cite{Garlaschelli2004-db}.
+Em uma rede direcionada, a \textit{reciprocidade de conexões} corresponde à tendência de pares de nós formarem conexões mútuas entre si~\cite{Garlaschelli2004-db}.
 
-A equação para o reciprocidade global em uma rede é dada por:
+A equação para a reciprocidade global em uma rede é dada por:
 
 \begin{equation} \label{eq:reciprocidade}
 R \defn \frac{\linkboth{L}}{L}
@@ -1023,7 +1024,7 @@ A conexão não-recíproca $\recout{w}_{ij}$ é dada por:
 
 Sendo que, por definição, $\recout{w}_{ij} > 0 \Rightarrow \recboth{w}_{ji} = 0$ e vice-versa. Para fins de notação, define-se $\recin{w}_{ij} \defn \recout{w}_{ji}$.
 
-Definidos os pesos recíprocos e não-recíprocos, é possível usa a força definida nas Equações~\ref{eq:forca-entrada} e~\ref{eq:forca-saida} para definir a \textit{força recíproca} (Equação~\ref{eq:forca-reciproca}), \textit{força não-recíproca de saída}  (Equação~\ref{eq:forca-reciproca-saida}) e \textit{força não-recíproca de entrada}  (Equação~\ref{eq:forca-reciproca-entrada}):
+Definidos os pesos recíprocos e não-recíprocos, é possível usar a força definida nas Equações~\ref{eq:forca-entrada} e~\ref{eq:forca-saida} para definir a \textit{força recíproca} (Equação~\ref{eq:forca-reciproca}), \textit{força não-recíproca de saída}  (Equação~\ref{eq:forca-reciproca-saida}) e \textit{força não-recíproca de entrada}  (Equação~\ref{eq:forca-reciproca-entrada}):
 
 \begin{align}
 \recboth{s}_i &\defn \sum_{i \neq j} \recboth{w}_{ij} \label{eq:forca-reciproca} \\
@@ -1058,11 +1059,12 @@ Para o equivalente de $\rho$, em que se leva em consideração as conexões espe
 \end{equation}
 
 A reciprocidade nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
+%% MOVER PARA A SEÇÃO ESPECÍFICA
 
 %====================================
 \subsubsection{Assortatividade} \label{sec:assortatividade}
 
-Assortatividade é um termo emprestado da biologia que significa \enquote{preferência de acasalamento} [REF]. Na Ciência de Redes o termo é usado para denotar a tendência de um nó se conectar a nós similares. Usualmente, quando não acompanhado de uma definição que diga o contrário, assortatividade se refere a preferência de nós se conectarem a outros de \textit{mesmo grau}. O reverso dessa propriedade é chamada dissortatividade.
+\textit{Assortatividade} é um termo emprestado da biologia que significa \enquote{preferência de acasalamento} [REF]. Na Ciência de Redes o termo é usado para denotar a tendência de um nó se conectar a nós similares. Usualmente, quando não acompanhado de uma definição que diga o contrário, assortatividade se refere a preferência de nós se conectarem a outros de \textit{mesmo grau}. O reverso dessa propriedade é chamada \textit{dissortatividade}.
 
 É possível medir a assortatividade usando \textit{correlação de graus}, ou seja, a média dos graus dos vizinhos de um nó.
 
@@ -1070,7 +1072,7 @@ Assortatividade é um termo emprestado da biologia que significa \enquote{prefer
 k_\textit{nn}(k_i) \defn \frac{1}{k_i} \sum_{j \in N(i)} k_j
 \end{equation}
 
-Onde $N(i)$ é o conjunto de vizinhos de $i$.
+Onde $N(i)$ é o conjunto de vizinhos de $i$, e $k_i$ é o grau do nó $i$.
 
 A correlação de grau de todos os nós com grau $k$ pode ser calculada como:
 
@@ -1117,13 +1119,13 @@ Já em redes ponderadas, as mesmas correlações podem ser feitas levando-se em 
 %====================================
 \subsubsection{Similaridade}
 
-A similaridade é usada para medir se dois nós ou conexões são similares estruturalmente, ou seja, independente do seu conteúdo. De maneira simplificada, dois nós são tão mais similares quanto houverem vizinhos comuns. Já a similaridade de conexão, como definida por \citeonline{Ahn2010-uh}, parte de conexões que compartilham um nó e verifica se os nós não compartilhados são similares.
+A \textit{similaridade} é usada para medir se dois nós ou conexões são similares estruturalmente, ou seja, independente do seu conteúdo. De maneira simplificada, dois nós são tão mais similares quanto houverem vizinhos comuns. Já a \textit{similaridade de conexão}, como definida por \citeonline{Ahn2010-uh}, parte de conexões que compartilham um nó e verifica se os nós não compartilhados são similares.
 
-A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico.
+A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico [REF].
 
-Existem diversas formulações para a similaridade, \citeonline{Lu2011-og} revisam dez delas, sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada o índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
+Existem diversas formulações para a similaridade e \citeonline{Lu2011-og} revisam dez delas sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada no índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
 
-Sendo $i$ e $j$ nós da rede, $N_i$ o conjunto de vizinhos do nó $i$ e $N_i^+ \defn N_i \cup \{i\}$, as Equações~\ref{eq:similaridade-1} define a similaridade por vizinhança e a Equação~\ref{eq:similaridade-2} define a mesma similaridade, considerando a existência de conexão direta entre os nós sendo comparados.
+Sejam $i$ e $j$ nós da rede, $N_i$ o conjunto de vizinhos do nó $i$ e $N_i^+ \defn N_i \cup \{i\}$, a Equação~\ref{eq:similaridade-1} define a similaridade por vizinhança e a Equação~\ref{eq:similaridade-2} define a mesma similaridade considerando a existência de conexão direta entre os nós sendo comparados.
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -1135,7 +1137,7 @@ Sendo $i$ e $j$ nós da rede, $N_i$ o conjunto de vizinhos do nó $i$ e $N_i^+ \
     \end{equation}
 \end{tabularx}
 
-Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída, a similaridade em uma rede direcionada $\linkboth{S}_{ij}$ é dada pela média entre similaridade de entrada e saída (Equação~\ref{eq:similaridade-3}).
+Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída. A similaridade em uma rede direcionada $\linkboth{S}_{ij}$ é dada pela média entre similaridade de entrada e saída (Equação~\ref{eq:similaridade-3}).
 
 \begin{equation} \label{eq:similaridade-3}
     \linkboth{S}_{ij} \defn \frac{1}{2} \left( \frac{|\linkin{N}_i \cap \linkin{N}_j|}{|\linkin{N}_i \cup \linkin{N}_j|} + \frac{|\linkout{N}_i \cap \linkout{N}_j|}{|\linkout{N}_i \cup \linkout{N}_j|} \right)
@@ -1143,13 +1145,13 @@ Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída, a s
 
 Onde $\linkin{N}_i$ é o número vizinhos de $i$ em que as conexões chegam a ele e $\linkout{N}_i$ é o número de vizinhos onde a conexão parte de $i$.
 
-No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Ahn2010-uh}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{iN})$, onde $N$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
+No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Ahn2010-uh}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{iN})$ como sendo o vetor de pesos das conexões do nó $i$, onde $N$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
 
 \begin{equation}
 \weighteddir{S}_{ij} \defn \frac{\vec{w_i} \cdot \vec{w_j}}{|\vec{w_i}|^2 + |\vec{w_j}|^2 - \vec{w_i} \cdot \vec{w_j}}
 \end{equation}
 
-Para agrupamento de conexões, como proposto por \citeonline{Evans2009-lq} e \citeonline{Ahn2010-uh}, é preciso definir a similaridade entre conexões. Sendo o vetor $\vec{r}_{i} \defn (r_{i1}, r_{i2}, \ldots, r_{iN})$ definido de acordo com a Equação~\ref{eq:similaridade-conexao-parcial}:
+Para o agrupamento de conexões, como proposto por \citeonline{Evans2009-lq} e \citeonline{Ahn2010-uh}, é preciso definir a similaridade entre conexões. Sendo o vetor $\vec{r}_{i} \defn (r_{i1}, r_{i2}, \ldots, r_{iN})$ definido de acordo com a Equação~\ref{eq:similaridade-conexao-parcial}:
 
 \begin{equation} \label{eq:similaridade-conexao-parcial}
 r_{ij} \defn \frac{1}{k_i} \sum_{h \in N_i} w_{ih}\delta_{ij} + w_{ij}
@@ -1161,14 +1163,14 @@ Onde $\delta_{ij} = 1$ se $i = j$ e zero caso contrário. A similaridade entre c
 R_{(i,h),(j,h)} \defn \frac{\vec{r_i} \cdot \vec{r_j}}{|\vec{r_i}|^2 + |\vec{r_j}|^2 -  \vec{r_i} \cdot \vec{r_j}}
 \end{equation}
 
-Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é principalmente, usada na detecção de comunidades.
+Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é usada principalmente na detecção de comunidades.
 
 %====================================
 \subsubsection{Modularidade} \label{sec:modularidade}
 
-A modularidade é uma métrica voltada para a detecção de comunidades. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
+A \textit{modularidade} é uma métrica voltada para a detecção de comunidades. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
 
-Essa métrica é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela fornece um indício se um grupo de nós são mais densamente conectados que o esperado em um modelo nulo, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
+Essa métrica é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela fornece um indício se um grupo de nós é mais densamente conectado que o esperado em um modelo nulo, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
 
 A modularidade $m_c$ de um grupo $c$ de nós pode ser definida como:
 
@@ -1192,13 +1194,13 @@ Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-gl
 \Delta M_{AB} \defn \frac{l_{AB}}{L} - \frac{k_A k_B}{2L^2}
 \end{equation}
 
-Onde $l_{AB}$ é o número de links que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L < 1$ então a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{resolução da modularidade}.
+Onde $l_{AB}$ é o número de links que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L < 1$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{resolução da modularidade}.
 
-É possível observar que a resolução da modularidade é diretamente proporcional ao número de conexões total da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
+É possível observar que a resolução da modularidade é diretamente proporcional ao número total de conexões da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
 
 \todo[inline]{Demonstrar separando a carreira de TI aqui}
 
-O significado de comunidades sob a perspectiva desse trabalho é detalhada na Seção~\ref{sec:deteccao-comunidade}.
+O significado de comunidades sob a perspectiva desse trabalho é detalhado na Seção~\ref{sec:deteccao-comunidade}.
 
 %====================================
 \subsection{Detecção de Comunidade} \label{sec:deteccao-comunidade}
@@ -1259,25 +1261,25 @@ Distância geodésica é um outro nome para o comprimento do caminho mais curto 
 
 \subsection{Propriedades Topológicas}
 
-Algumas redes possuem propriedades em sua estrutura que afetam seu funcionamento, desde resistência e falhas em redes de comunicação até facilidade na propagação de doenças contagiosas.
+Algumas redes possuem propriedades estruturais que afetam seu funcionamento, desde resistência e falhas em redes de comunicação até facilidade na propagação de doenças contagiosas.
 
-Duas das propriedades ganharam notoriedade na virada do século com os trabalhos de \citeonline{Watts1998-wt} e \citeonline{Barabasi1999}. Elas geraram um interesse crescente por redes na comunidade científica e culminaram no surgimento de uma novo campo de estudo conhecido como Ciência de Redes \cite{Barabasi2016-rn}.
+Duas propriedades ganharam notoriedade na virada do século com os trabalhos de \citeonline{Watts1998-wt} e \citeonline{Barabasi1999}. Elas geraram um interesse crescente por redes na comunidade científica e culminaram no surgimento de uma novo campo de estudo conhecido como Ciência de Redes \cite{Barabasi2016-rn}.
 
 \subsubsection{Mundo Pequeno} \label{sec:small-world}
 
 Também conhecido como \enquote{seis graus de separação}, o imaginário popular diz que quaisquer duas pessoas no planeta estão a até seis amigos de distância uma da outra. Curiosamente, esse número é condizente com estudos como o de \citeonline{Backstrom2012-ny} conduzido com a rede de relacionamentos \textit{Facebook}.
 
-A propriedade de mundo pequeno foi descrita pela primeira vez por Frigyes Karinthy em 1929, escritor e jornalista húngaro, em uma estória chamada \enquote{Correntes}. Nela, Karinthy conecta um trabalhador da indústria automobilística a si mesmo:
+A propriedade de \textit{mundo pequeno} foi descrita pela primeira vez por Frigyes Karinthy em 1929, escritor e jornalista húngaro, em uma estória chamada \enquote{Correntes}. Nela, Karinthy conecta um trabalhador da indústria automobilística a si mesmo:
 
 \blockcquote{Karinthy1929-jg}{O trabalhador conhece o gerente da fábrica, que conhece Ford; Ford está em bons termos com o diretor geral da Publicações Hearst, que no último ano se tornou um bom amigo de Árpád Pásztor, alguém que não apenas conheço, mas é um grande amigo.~\footnote{em tradução livre do autor}}
 
-Durante o século XX, a propriedade de mundo pequeno aparece esparsamente mais algumas vezes e volta a ganhar atenção com o jogo \enquote{Seis Graus de Kevin Bacon} criado por três estudantes do \textit{Albright College} na década de 90 e finalmente com o trabalho de Duncan Watts e Steven Strogatz em 1998 \cite{Barabasi2016-rn}.
+Durante o Século XX, a propriedade de mundo pequeno aparece esparsamente mais algumas vezes e volta a ganhar atenção com o jogo \enquote{Seis Graus de Kevin Bacon} criado por três estudantes do \textit{Albright College} na década de 90 e finalmente com o trabalho de Duncan Watts e Steven Strogatz em 1998 \cite{Barabasi2016-rn}.
 
 O fenômeno alcançou um nível de popularidade tão grande que até hoje alguns de seus efeitos podem ser observados, por exemplo, até o momento da escrita dessa pesquisa, o site de busca \textit{Google} ainda fornece a distância entre Kevin Bacon e outros atores ao se digitar no buscador o nome do ator precedido pelo texto \enquote{\textit{bacon number}}.
 
-A propriedade de mundo pequeno se refere ao tamanho do caminho entre dois nós aleatoriamente selecionados na rede. De maneira simplificada, enquanto que o número de conexões cresce exponencialmente com a adição de novos nós em uma rede, a menor distância entre dois nós quaisquer cresce em ritmo logarítmico. 
+A propriedade de mundo pequeno se refere ao tamanho do caminho entre dois nós aleatoriamente selecionados na rede. De maneira simplificada, enquanto o número de conexões cresce exponencialmente com a adição de novos nós em uma rede, a menor distância entre dois nós quaisquer cresce em ritmo logarítmico. 
 
-Em uma rede aleatória, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e pode segue a Equação\ref{eq:distancia-erdos} \cite{Barabasi2016-rn}.
+Em uma rede aleatória, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e segue a Equação\ref{eq:distancia-erdos} \cite{Barabasi2016-rn}.
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -1289,9 +1291,9 @@ Em uma rede aleatória, a menor distância esperada entre dois nós corresponde 
     \end{equation}
 \end{tabularx}
 
-Sendo $\avg{k}$ é o grau médio da rede e $N$ o número de nós da rede.
+Onde $\avg{k}$ é o grau médio da rede e $N$ o número de nós da rede.
 
-\citeonline{Barabasi2016-rn} especulam que o fato da propriedade de pequeno mundo causar surpresa está no fato da noção de proximidade ser frequentemente associada à distância física, que pode ser modelada como uma rede reticulada e não possui a propriedade de mundo pequeno.
+\citeonline{Barabasi2016-rn} especulam que o fato da propriedade de mundo pequeno causar surpresa é por causa da noção de proximidade ser frequentemente associada à distância física, que pode ser modelada como uma rede reticulada e não possui a propriedade de mundo pequeno.
 
 Em um reticulado circular, como é o caso da rede em estado inicial do modelo de Watts-Strogatz, a distância geodésica média $\avg{d}^ \textit{retic}$ é dada pela Equação~\ref{eq:distancia-reticulado} e seu coeficiente de agrupamento pela Equação~\ref{eq:coef-agrupamento-reticulado}.
 
@@ -1307,19 +1309,15 @@ Em um reticulado circular, como é o caso da rede em estado inicial do modelo de
 
 Redes aleatórias, por sua vez, apresentam a propriedade de mundo pequeno, mas possuem um coeficiente de agrupamento baixo. Em diversas redes reais é possível observar a propriedade de mundo pequeno, como em uma rede aleatória, simultaneamente com um alto coeficiente de agrupamento, como em redes reticuladas.
 
-Em uma rede aleatória Erdős-Rényi, o coeficiente de agrupamento esperado da rede $\avg{C}^\textit{erdos}$ é dada pela Equação~\ref{eq:coef-agrupamento-erdos}.
+Em uma rede aleatória Erdős-Rényi, o coeficiente de agrupamento esperado da rede $\avg{C}^\textit{erdos}$ é dado pela Equação~\ref{eq:coef-agrupamento-erdos}.
 
-É possível observar que quando o número de nós cresce, $\avg{d}^\textit{retic} \sim N$ enquanto $\avg{d}^\textit{erdos} \sim ln N$. Ou seja, a distância em uma rede reticulada cresce linearmente com o número de nós, enquanto que essa distância cresce em proporção logarítmica uma rede aleatória. Já os coeficientes de agrupamento tendem a constantes ao se aumentar o número de nós, $\avg{C}^\textit{retic} \sim 3 / 4$ enquanto que $\avg{C}^\textit{erdos} \sim 0$.\todo{Espero ter entendido direito essa coisa do \enquote{assintoticamente equivalente} =/}
+É possível observar que quando o número de nós cresce, $\avg{d}^\textit{retic} \sim N$, enquanto $\avg{d}^\textit{erdos} \sim ln N$. Ou seja, a distância em uma rede reticulada cresce linearmente com o número de nós, enquanto que essa distância cresce em proporção logarítmica numa rede aleatória. Já os coeficientes de agrupamento tendem a constantes ao se aumentar o número de nós, $\avg{C}^\textit{retic} \sim 3 / 4$, enquanto $\avg{C}^\textit{erdos} \sim 0$.\todo{Espero ter entendido direito essa coisa do \enquote{assintoticamente equivalente} =/}. Isso levou \citeonline{Watts1998-wt} a proporem um modelo de rede aleatória que combinasse ambas as características (Seção~\ref{sec:small-world}).
 
-Isso levou \citeonline{Watts1998-wt} a proporem um modelo de rede aleatória que combinasse ambas as características. (Seção~\ref{sec:small-world}).
-
-Posteriormente, \citeonline{Barabasi1999-sn} observam que redes reais possuem \textit{hubs}, nós que agregam uma grande quantidade de conexões, e propõem um modelo aleatório capaz de produzir redes de mundo pequeno, com conectividade similar às redes reais, porém sem o mesmo coeficiente de agrupamento.
+Posteriormente, \citeonline{Barabasi1999-sn} observam que redes reais possuem \textit{hubs}, nós que agregam uma grande quantidade de conexões, e propuseram um modelo aleatório capaz de produzir redes de mundo pequeno, com conectividade similar às redes reais, porém sem o mesmo coeficiente de agrupamento.
 
 \subsubsection{Livre de Escala} \label{sec:scale-free}
 
-As redes livres de escala são redes em que a distribuição das conexões entre os nós segue uma \textit{lei de potência}.
-
-A lei de potência é uma relação entre as variáveis $x$ e $y$ expressa da seguinte forma $y = ax^{k}$, onde $a$ e $k$ são constantes. Isso significa que $y$ varia exponencialmente em relação a $x$, grosseiramente, se $x$ dobra de tamanho, $y$ quadruplica. No caso das redes livres de escala, a relação é negativa, em que muitos nós possuem poucas conexões e poucos nós possuem muitas conexões, esse comportamento da lei de potência é exemplificado graficamente na figura~\ref{fig:exemplo-lei-potencia}, com $k = -2$.
+As \textit{redes livres de escala} são redes em que a distribuição das conexões entre os nós segue uma \textit{lei de potência}. A lei de potência é uma relação entre as variáveis $x$ e $y$ expressa da seguinte forma $y = ax^{k}$, onde $a$ e $k$ são constantes. Isso significa que $y$ varia exponencialmente em relação a $x$; grosseiramente, se $x$ dobra de tamanho, $y$ quadruplica. No caso das redes livres de escala, a relação é negativa, em que muitos nós possuem poucas conexões e poucos nós possuem muitas conexões. Esse comportamento da lei de potência é exemplificado graficamente na Figura~\ref{fig:exemplo-lei-potencia}, com $k = -2$.
 
 \begin{figure}[ht]
     \centering
@@ -1334,7 +1332,7 @@ A lei de potência é uma relação entre as variáveis $x$ e $y$ expressa da se
     \source{Elaboração do autor}
 \end{figure}
 
-Em seu artigo, \citeonline{Barabasi1999-sn} propõem que a distribuição de probabilidade de grau, ou seja, a probabilidade de existir na rede um nó com $k$ conexões, segue aproximadamente a lei de potência $p(k) \sim k^{-\gamma} $ onde $2 \le \gamma \le 3$ em redes reais.
+Em seu artigo, \citeonline{Barabasi1999-sn} propõem que a distribuição de probabilidade de grau, ou seja, a probabilidade de existir na rede um nó com $k$ conexões, segue aproximadamente a lei de potência $p(k) \sim k^{-\gamma} $, onde $2 \le \gamma \le 3$ em redes reais.
 
 \begin{figure}[ht]
     \centering
@@ -1349,25 +1347,25 @@ Em seu artigo, \citeonline{Barabasi1999-sn} propõem que a distribuição de pro
     \source{Elaboração do autor}
 \end{figure}
 
-Em termos práticos, as redes livres de escala possuem uma grande quantidade de nós de pouco grau e alguns nós com grau exponencialmente altos, os \textit{hubs}. Essa topologia possui importantes aplicações em diversas áreas, por exemplo, em uma rede de comunicações, a falha de nós aleatórios causa pouco dano a rede, pois chance maior é que a falha aconteça em nós com poucas conexões, por outro lado, ataques direcionados aos \textit{hubs} de comunicação podem derrubá-la, pois o número de nós é relativamente pequeno em comparação ao tamanho da rede e suas conexões atingem uma grande quantidade de nós. Outro exemplo está na dispersão de doenças contagiosas; em redes com a presença de \textit{hubs}, como os aeroportos em uma rede de transporte, a tendência é que eles conectem uma grande quantidade de grupos e acelerarem a dispersão por toda a rede.
+Em termos práticos, as redes livres de escala possuem uma grande quantidade de nós de pouco grau e alguns nós com grau exponencialmente altos, os \textit{hubs}. Essa topologia possui importantes aplicações em diversas áreas, por exemplo, em uma rede de comunicações, a falha de nós aleatórios causa pouco dano a rede, pois há uma chance maior de que a falha aconteça em nós com poucas conexões. Por outro lado, ataques direcionados aos \textit{hubs} de comunicação podem derrubá-la, pois o número de nós é relativamente pequeno em comparação ao tamanho da rede e suas conexões atingem uma grande quantidade de nós. Outro exemplo está na dispersão de doenças contagiosas, em redes com a presença de \textit{hubs}, como os aeroportos em uma rede de transporte, a tendência é que eles conectem uma grande quantidade de grupos e acelerarem a dispersão por toda a rede.
 
 Redes puramente aleatórias, como as que seguem o modelo de Erdős-Rényi, não são capazes de criar essa topologia. Barabási propõe que essas redes surgem devido a dois processos distintos: \textit{crescimento} e \textit{conexão preferencial}.
 
 O \textit{crescimento} significa que redes reais não surgem com um número fixo de nós e adicionam conexões entre si, mas que a rede começa com poucos de ambos e novos são adicionados com o passar do tempo. É possível observar isso no crescimento da redes de comunicação, energia, transporte e em redes de interação de proteínas.
 
-Nos exemplos acima nota-se que o tempo de crescimento não é um fator relevante, mas sim que haja crescimento. Em 1991 a WWW possuía apenas uma página, enquanto que hoje estima-se que possua mais de um trilhão delas \cite{Barabasi2016-rn}. Por outro lado, a rede de interação de proteínas tem pouco mais de 20.000 nós e levou 4 bilhões de anos para ser construída.
+Nos exemplos acima nota-se que o tempo de crescimento não é um fator relevante, mas sim que haja crescimento. Em 1991 a WWW possuía apenas uma página, enquanto hoje estima-se que ela possua mais de um trilhão delas \cite{Barabasi2016-rn}. Por outro lado, a rede de interação de proteínas tem pouco mais de 20.000 nós e levou 4 bilhões de anos para ser construída.
 
-O segundo processo que leva a criação de redes livres de escala é a \textit{conexão preferencial}. Esse processo diz que, ao ser incorporado em uma rede, um nó prefere se conectar a outros que já possuam muitas conexões, em um fenômeno também conhecido como \enquote{rico fica mais rico}. Os exemplos variam desde um novo aluno na sala de aula, que tem maior chance de conhecer alunos que já são populares, quanto à própria WWW, autores de páginas novas criam \textit{links} para outras já bem conhecidas.
+O segundo processo que leva a criação de redes livres de escala é a \textit{conexão preferencial}. Esse processo diz que, ao ser incorporado em uma rede, um nó prefere se conectar a outros que já possuam muitas conexões, em um fenômeno também conhecido como \enquote{o rico fica mais rico}. Os exemplos variam desde um novo aluno na sala de aula, que tem maior chance de conhecer alunos que já são populares, até a própria WWW, autores de páginas novas criam \textit{links} para outras já bem conhecidas.
 
-\citeonline[pág. 191]{Barabasi2016-rn} argumentam que ambas os processos são \textit{suficientes} e \textit{necessários} para a criação de redes livres de escala, ou seja, não apenas que a presença de ambos é capaz de gerar redes livres de escala, como não é possível gerá-las sem que ambos o processos estejam envolvidos, ao menos implicitamente.
+\citeonline[pág. 191]{Barabasi2016-rn} argumentam que ambos os processos são \textit{suficientes} e \textit{necessários} para a criação de redes livres de escala, ou seja, não apenas que a presença de ambos é capaz de gerar redes livres de escala, como não é possível gerá-las sem que ambos os processos estejam envolvidos, ao menos implicitamente.
 
 De posse desses argumentos, é possível prever aproximadamente a topologia esperada de uma rede livre de escala medindo-se taxas de incorporação de novos nós na rede, bem como sua conexão preferencial.
 
-Em redes reais, no entanto, novos nós surgem e nós também desaparecem, alguns nós têm conexão preferencial maior do que outros não somente por conta de seu número de conexões. O modelo de Bianconi-Barabási considera conexões preferenciais variadas para os nós e o modelo é capaz de explicar como alguns novos nós rapidamente se tornam \textit{hubs}, ultrapassando \textit{hubs} antigos.
+Em redes reais, no entanto, novos nós surgem e desaparecem, e alguns nós têm conexão preferencial maior do que outros não somente por conta de seu número de conexões. O modelo de Bianconi-Barabási considera conexões preferenciais variadas para os nós e o modelo é capaz de explicar como alguns novos nós rapidamente se tornam \textit{hubs}, ultrapassando \textit{hubs} antigos.
 
 \citeonline{Barabasi2016-rn} também propõem modelos para os efeitos de remoção de nós, envelhecimento, criação de conexões entre nós já existentes e crescimento acelerado.\todo{Fiquei meio na dúvida aqui, não quero explicar todos eles (pois não vou usá-los), mas gostaria de dizer que eles existem. Expando isso um pouco ou removo?}
 
-Quanto a distância geodésica média $\avg{d}^\textit{ba}$ e o coeficiente de agrupamento $\avg{C}\textit{ba}$, o modelo de Barabási-Albert prevê:
+Quanto à distância geodésica média $\avg{d}^\textit{ba}$ e o coeficiente de agrupamento $\avg{C}\textit{ba}$, o modelo de Barabási-Albert prevê:
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -1387,7 +1385,7 @@ Onde $N$ é o número de nós. É possível observar que a distância permanece 
 
 \subsection{Introdução}
 
-O Mapa de Carreiras (MCar) traz o resumo da trajetória profissional de cerca de 10 milhões de pessoas e uma de suas manifestações pode ser vista no site \url{http://www.vagas.com.br/mapa-de-carreiras} (figura~\ref{fig:exemplo-grafo}). Internamente, essas informações estão armazenadas em um grafo e são periodicamente atualizadas. Nesse grafo, os vértices representam \textit{ocupações} e as arestas representam as \textit{movimentações} dos profissionais entre ocupações.
+O Mapa de Carreiras (MCar) traz o resumo da trajetória profissional de cerca de 10 milhões de pessoas e uma de suas manifestações pode ser vista no site \url{http://www.vagas.com.br/mapa-de-carreiras} (Figura~\ref{fig:exemplo-grafo}). Internamente, essas informações estão armazenadas em um grafo e são periodicamente atualizadas. Nesse grafo, os vértices representam \textit{ocupações} e as arestas representam as \textit{movimentações} dos profissionais entre ocupações.
 
 \begin{figure}[ht]
   \centering
@@ -1478,7 +1476,7 @@ Os dados fonte para essa pesquisa são currículos anonimizados de usuários do 
 Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos usados nesse trabalho. O primeiro formato é descrito por \citeonline{Van_Dongen2008-kx} como \enquote{formato ABC}. Cada linha representa uma aresta, e cada aresta possui três campos separados por um ou mais espaços. Em um grafo direcionado, o primeiro campo é a aresta de partida, o segundo é a aresta de chegada e o campo final representa o peso da aresta. No caso do MCar, o peso representa o número de pessoas que se movimentou de uma ocupação à outra. Esse formato é usado na separação de carreiras através da \textit{clusterização} do grafo usando o \textit{Markov Clustering Algorithm} (MCL)~\cite{Van_Dongen2000-qm} e na montagem de visualizações exploratórias usando o programa \enquote{Graphviz}~\cite{Gansner2000-oo}.
 
 \noindent
-\begin{minipage}{\linewidth}
+REVER ASSIM\begin{minipage}{\linewidth}
 \begin{lstlisting}[frame=single,caption=Arquivo em Formato ABC,label=lst:formato-abc,captionpos=b]
 medico-examinador medico-do-trabalho 23
 medico-do-trabalho coordenador-medico 10
