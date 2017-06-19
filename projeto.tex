@@ -1719,7 +1719,9 @@ Um estudo confirmatório não é possível apenas com os dados desse trabalho, p
 
 Ainda assim, os achados nesse capítulo são plausíveis por construção, já que são propostos baseados em medições sobre dados reais.
 
-Abaixo, essas propostas são enumeradas e justificadas.
+As hipótese propostas são pontos de partida para diversas aplicações. Por exemplo, a criação de uma classificação de ocupações baseada em agrupamento. É esperado que ela retrate com mais precisão um conjunto de funções em que seus membros compartilham habilidades compartilhadas. Também é possível inferir capacitações através do histórico profissional e compreender com mais clareza a movimentação profissional.
+
+Abaixo, as propostas são enumeradas e justificadas.
 
 \begin{hypothesis}[Atração Profissional]
     A força de entrada do nó (Seção~\ref{sec:forca}) significa o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou por sua atratividade.
@@ -1797,13 +1799,26 @@ Usando a carreira de topógrafo da Figura~\ref{fig:carreira-topografia} como exe
 
 \section{CRONOGRAMA}
 
-A arquitetura está concluída, bem como todo o sistema responsável pela montagem do grafo. O sistema responsável por gerar quartis, intervalos de confiança e KDEs está implementado para salário e precisa ser generalizado para outros atributos numéricos. Esse trabalho deve consumir parte de Abril e Maio.
+Aqui apresentamos um panorama resumido de como o trabalho evoluiu até o momento e como é esperado seu desenvolvimento até sua entrega.
 
-Os componentes que testam automaticamente a detectam quais atributos estão associados a um perfil salarial diferente deve ocupar o restante de Maio e ocupar até Julho.
+Os dados que são fonte para a pesquisa estão prontos e no formato adequado, nenhum processamento extra é necessário nesse ponto. A descrição de como ele é obtido está concluída, sendo necessário apenas ajustes para uma melhor compreensão do texto e detalhes menores na descrição da estrutura dos dados. Grande parte dos meses de Fevereiro e Março foram usados na elaboração do texto e aparecem no cronograma da Figura~\ref{fig:cronograma} descritos como \textit{Descrição da Fonte de Dados}.
 
-A parte do sistema que prevê a próxima ocupação dado um currículo inicia em Julho e se prolonga até Setembro.
+O conceitos de Ciência de Redes suficientes para esse trabalho já estão absorvidos e o referencial teórico está quase completamente escrito. Ainda falta uma elaboração melhor do texto para facilitar a compreensão dos algoritmos dos modelos nulos, mas é previsto que até o final de Junho esses ajustes estejam concluídos.
 
-Os meses finais são reservados para ajustes no sistema e na dissertação, bem como eventuais atrasos no cronograma.
+A metodologia da pesquisa também está definida e descrita no trabalho. Por outro lado, é provável que durante o início dos experimentos, mais material precise ser estudado e adicionado a ele, bem como ajustes na metodologia, mas espera-se que ao final de Agosto a pesquisa esteja consolidada o suficiente para que nenhuma nova adição seja necessária. São esperadas apenas alterações esporádicas no texto para refletir essa consolidação. No cronograma da Figura~\ref{fig:cronograma}, essas etapas estão descritas como \textit{Referencial Teórico} e \textit{Metodologia}.
+
+A partir do final de Junho iniciam os experimentos. A maior parte dos modelos nulos e medições necessárias já existem em bibliotecas nas linguagens R e Python, o que acelera a experimentação. Entretanto, há trabalho de codificação de algoritmos a ser feito, pois nem todos os modelos estão disponíveis em bibliotecas. Como a fonte de dados do trabalho é um grafo direcionado e ponderado e a literatura é escassa para esse tipo de rede, alguns modelos e medições adaptadas foram propostas, o que significa que seus algoritmos precisam ser implementados computacionalmente. Dada a experiência do pesquisador com desenvolvimento de software, espera-se que essas implementações junto com a própria experimentação não ultrapasse Setembro. No cronograma da Figura~\ref{fig:cronograma} essa etapa é descrita como \textit{Experimentação}. A implementação dos algoritmos e a experimentação não são separadas no cronograma pois espera-se que ocorram concomitantemente.
+
+Uma vez que os primeiros resultados forem obtidos, espera-se começar sua consolidação e transferência para o trabalho escrito. Essa etapa deve acontecer esporadicamente enquanto a atividade principal da experimentação ocorre. É esperado que os experimentos já estejam concluídos até Outubro e que esse mês seja quase totalmente reservado na descrição dos resultados. No cronograma da Figura~\ref{fig:cronograma} a etapa como um todo recebe o nome de \textit{Descrição dos Resultados}.
+
+Finalmente, as revisões finais do trabalho devem começar timidamente em Outubro, quando os resultados forem confrontados com o que foi descrito até o momento. Novembro é reservado para ajustes de texto causados pelo resultado dos experimentos e melhorias na redação. No cronograma da Figura~\ref{fig:cronograma} essa etapa final é chamada \textit{Consolidação do Trabalho}.
+
+\begin{figure*}[htb]
+    \centering
+    \includegraphics[scale=0.4]{dissertacao-cronograma.png}
+    \caption{Cronograma}
+    \label{fig:cronograma}
+\end{figure*}
 
 \begin{comment}
 \section{Geladeira}
