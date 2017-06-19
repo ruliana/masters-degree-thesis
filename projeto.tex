@@ -90,6 +90,8 @@
 \newcommand{\recin}[1]{#1^\leftlsquigarrow} % ... entrada não-recíproca
 \newcommand{\recout}[1]{#1^\leadsto} % ... saída não-recíproca
 \newcommand{\recboth}[1]{#1^\leftrightsquigarrow} % ... recíproca
+% Capacidades
+\newcommand{\capac}{\textit{cap}}
 
 % Para listagens de programação ou 
 % textos onde a formatação importa
@@ -474,9 +476,13 @@ Para o trabalho presente, as medidas mais relevantes são apresentadas a seguir,
 %====================================
 \subsection{Modelos de Redes Aleatórias}
 
-Aqui são apresentados diversos modelos de redes aleatórias. Três modelos são apresentados por serem frequentes como referência em trabalhos similares: Erdős-Rényi, Watts-Strogatz e Barabási-Albert.
+Os modelos de redes aleatórias são usado como modelos nulos na verificação da relevância de propriedades na rede em estudo.
 
-Dois modelos são propostos nesse trabalho, adaptando-se modelos conhecidos a redes ponderadas e direcionadas:
+Aqui são apresentados diversos modelos de redes aleatórias. Dois deles são apresentados por serem frequentes como referência em trabalhos similares: Erdős-Rényi e Watts-Strogatz.
+
+Quatro outros são apresentados por serem diretamente aplicáveis a esse trabalho: Modelo de Configuração, Modelo de Preservação de Força, Modelo de Parâmetro Oculto e Modelo de Xulvi-Brunet e Sokolov.
+
+Finalmente, dois modelos são propostos nesse trabalho, adaptando-se modelos conhecidos a redes ponderadas e direcionadas:
 \begin{itemize}
 \item Modelo de Configuração Ponderada (\textit{Weighted Configuration Model} - WCM), derivado do Modelo de Configuração.
 \item Modelo Aleatório de Preservação de Força (\textit{Strength-Preservation Randomization Model} - SPRM), derivado do Modelo Aleatório de Preservação de Grau.
@@ -910,7 +916,7 @@ Closeness centrality.
 \end{comment}
 
 %====================================
-\subsubsection{Centralidade de Intermediação}
+\subsubsection{Centralidade de Intermediação} \label{sec:intermediacao}
 
 A \textit{centralidade de intermediação} ou \textit{betweenness centrality} é a medida de quão um nó é importante em relação ao fluxo que passa por uma rede. Ela é feita contando-se o número de caminhos geodésicos dos quais um nó participa: quanto maior a participação, maior sua centralidade por intermediação.
 
@@ -1072,7 +1078,7 @@ Para o equivalente de $\rho$, em que se leva em consideração as conexões espe
 %====================================
 \subsubsection{Assortatividade} \label{sec:assortatividade}
 
-\textit{Assortatividade} é um termo emprestado da biologia que significa \enquote{preferência de acasalamento} [REF]. Na Ciência de Redes o termo é usado para denotar a tendência de um nó se conectar a nós similares. Usualmente, quando não acompanhado de uma definição que diga o contrário, assortatividade se refere a preferência de nós se conectarem a outros de \textit{mesmo grau}. O reverso dessa propriedade é chamada \textit{dissortatividade}.
+\textit{Mistura assortativa} é um termo emprestado da ecologia e da epidemiologia que significa que elementos que compartilham características tendem a se associar mais frequentemente entre si do que com outros \cite{Newman2003-jn}. Na Ciência de Redes o termo é chamado \textit{assortatividade} e é usado para denotar a tendência de um nó se conectar a nós similares. Usualmente, quando não acompanhado de uma definição que diga o contrário, assortatividade se refere a preferência de nós se conectarem a outros de \textit{mesmo grau}. O reverso dessa propriedade é chamada \textit{dissortatividade}.
 
 É possível medir a assortatividade usando \textit{correlação de graus}, ou seja, a média dos graus dos vizinhos de um nó.
 
@@ -1129,7 +1135,7 @@ Já em redes ponderadas, as mesmas correlações podem ser feitas levando-se em 
 
 A \textit{similaridade} é usada para medir se dois nós ou conexões são similares estruturalmente, ou seja, independente do seu conteúdo. De maneira simplificada, dois nós são tão mais similares quanto houverem vizinhos comuns. Já a \textit{similaridade de conexão}, como definida por \citeonline{Ahn2010-uh}, parte de conexões que compartilham um nó e verifica se os nós não compartilhados são similares.
 
-A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico [REF].
+A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico \cite{Barabasi2016-rn}.
 
 Existem diversas formulações para a similaridade e \citeonline{Lu2011-og} revisam dez delas sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada no índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
 
@@ -1707,6 +1713,9 @@ A comparação de uma rede real com modelos nulos indica fenômenos que não aco
 Ao se correlacionar as medidas usadas em Ciência de Redes cria-se mais um conjunto de questões sobre o significado da correlação. Algumas dessas correlações se destacam pois ecoam com fenômenos conhecidos da movimentação de profissionais, fornecendo hipóteses plausíveis de seu funcionamento.
 
 Um estudo confirmatório não é possível apenas com os dados desse trabalho, pois eles requerem um aprofundamento em ciências sociais que foge do âmbito proposto. Entretanto, o volume de dados e o rigor da análise estatística fornecem indícios sólidos que servem como combustível para pesquisas mais ambiciosas, ou podem ser usados como complemento em estudo sociais.
+%% POR QUE NÃO TEMOS DADOS SUFICIENTES PARA VALIDAR, PELO MENOS NO CONTEXTO EM ESTUDO, AS HIPÓTESES COLOCADAS ACIMA.
+%% ALÉM DISSO, SE SÃO HIPÓTESES EU SUGIRO QUE AS DESTAQUEMOS COMO TAL E NA PARTE EXPERIMENTAL A GENTE VÁ TENTANDO VALIDÁ-LAS. FIZ O EXERCÍCIO DE CRIAR AS HIPÓTESES ACIMA, VEJA O QUE ACHA. COMO ESSAS HIPÓTESES SE REFEREM AO MCAR, SUGIRO COLOCÁ-LAS EM UMA SEÇÃO SEPARADA E DEIXARMOS AQUI COMO UMA REVISÃO CONCEITUAL. ISSO AJUDA A COMPOR A PROPOSTA DE SUA DISSERTAÇÃO. MUITO INTERESSANTE!!! NA REALIDADE, SUA DISSERTAÇÃO É UMA ANÁLISE EXPLORATÓRIA SOBRE O MCAR E, PORTANTO, A MOVIMENTAÇÃO DE CARREIRA. NESSE SENTIDO, TODOS OS INSIGHTS DEVEM SER DESTACADOS COMO CONTRIBUIÇÃO AO INVÉS DE APARECEREM DILUÍDOS NUM CAPÍTULO DE REVISAO CONCEITUAL
+% Ronie: Gostei MUITO! Acho que ficou muito mais claro e a separação faz bastante sentido. Fazemos um capítulo para isso ou colocamos junto com o desenvolvimento, tentando validá-la? 
 
 Ainda assim, os achados nesse capítulo são plausíveis por construção, já que são propostos baseados em medições sobre dados reais.
 
@@ -1740,19 +1749,17 @@ Outra interpretação plausível é que essas ocupações possuem requisitos de 
     Se $\linkin{s}_i \gg \linkout{s}_i$ (Equações~\ref{eq:forca-entrada} e ~\ref{eq:forca-saida}), a movimentação não mapeada é insuficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
 \end{hypothesis}
 
-Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas.
+Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas, mas esse número não é suficiente para explicar $\linkin{s}_i \gg \linkout{s}_i$.
 
 \begin{hypothesis}[Pontos de Entrada do Mercado de Trabalho]
     De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
 \end{hypothesis}
 
 \begin{hypothesis}[Trabalho de Passagem]
-    Uma ocupação com alta intermediação significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
+    Uma ocupação com alta intermediação (Seção~\ref{sec:intermediacao}) significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
 \end{hypothesis}
 
-\todo[inline]{Não é bem isso que eu quero dizer, mas não estou achando a ideia correta. No que observei até agora, as carreiras normalmente afunilam em um cargo e depois abrem para o topo, é obviamente um ponto de crítico, mas estou com dificuldade de elaborá-lo.}
-
-A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topografia, onde o nó em destaque representa a ocupação com maior centralidade de intermediação.
+A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topografia, onde o nó em destaque representa a ocupação com maior centralidade de intermediação. Essas ocupações merecem atenção especial no planejamento de carreira pois são um ponto de convergência para ocupações que levam a ela e são pontos de difusão para as que partem dela.
 
 \begin{figure}[ht]
   \centering
@@ -1761,30 +1768,33 @@ A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topogra
   \label{fig:carreira-topografia}
 \end{figure}
 
-A reciprocidade nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
-
 \begin{hypothesis}[Equivalência Profissional] \label{hip:equivalencia}
     Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, significa que não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
 \end{hypothesis}
 
-Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar extraídos por agrupamento, é possível observar características de reciprocidade bastante distintas. Enquanto alguns componentes possuem alta reciprocidade, outros são claramente anti-recíprocos, sugerindo que há um caminho claro para os profissionais que se encontram naquele componente.
+A reciprocidade (Seção~\ref{sec:reciprocidade}) nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
 
-\begin{hypothesis}[Inferência de Habilidades] \label{hip:habilidades}
-    Um fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.\todo{Existe o modelo CHA (Competência, Habilidade, Atitude) que talvez possa ser usado para expandir isso, se for conveniente.}
-\end{hypothesis}
+Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar extraídos por agrupamento, é possível observar características de reciprocidade bastante distintas. Enquanto alguns componentes possuem alta reciprocidade, outros são claramente anti-recíprocos, sugerindo que há um caminho claro para os profissionais que se encontram naquele grupo.
 
-\begin{hypothesis}[Identificação de Carreiras]
-    Uma comunidade dentro do MCar significa que o fluxo de profissionais dentro desse grupo é maior do que com outros nós, indicando que é um conjunto de ocupações que pode ser exercido por profissionais com habilidades similares (Hipótese~\ref{hip:habilidades}). Se a comunidade possui uma direção de fluxo óbvio entre as ocupações, isso indica progressão (Hipótese~\ref{hip:equivalencia}). Ambas as propriedades presentes caracterizam uma carreira.
-\end{hypothesis}
-
-\begin{hypothesis}[Diferença de Nomenclatura]
+\begin{hypothesis}[Detecção de Nomenclatura Equivalente]
     Se dois nós possuem similaridade máxima $\linkboth{S}(i,j) = 1$, ou seja, possuem exatamente os mesmos vizinhos, mas não há conexão entre eles, então esses nós são potencialmente nomenclaturas diferentes para a mesma ocupação.
 \end{hypothesis}
 
-É importante notar que essa pesquisa não fornece dados suficientes para comprovação das hipóteses acima, embora a análise empírica indique plausabilidade. A listagem XX mostra as 20 ocupações onde com maior desequilíbrio no MCar.
-%% POR QUE NÃO TEMOS DADOS SUFICIENTES PARA VALIDAR, PELO MENOS NO CONTEXTO EM ESTUDO, AS HIPÓTESES COLOCADAS ACIMA.
-%% ALÉM DISSO, SE SÃO HIPÓTESES EU SUGIRO QUE AS DESTAQUEMOS COMO TAL E NA PARTE EXPERIMENTAL A GENTE VÁ TENTANDO VALIDÁ-LAS. FIZ O EXERCÍCIO DE CRIAR AS HIPÓTESES ACIMA, VEJA O QUE ACHA. COMO ESSAS HIPÓTESES SE REFEREM AO MCAR, SUGIRO COLOCÁ-LAS EM UMA SEÇÃO SEPARADA E DEIXARMOS AQUI COMO UMA REVISÃO CONCEITUAL. ISSO AJUDA A COMPOR A PROPOSTA DE SUA DISSERTAÇÃO. MUITO INTERESSANTE!!! NA REALIDADE, SUA DISSERTAÇÃO É UMA ANÁLISE EXPLORATÓRIA SOBRE O MCAR E, PORTANTO, A MOVIMENTAÇÃO DE CARREIRA. NESSE SENTIDO, TODOS OS INSIGHTS DEVEM SER DESTACADOS COMO CONTRIBUIÇÃO AO INVÉS DE APARECEREM DILUÍDOS NUM CAPÍTULO DE REVISAO CONCEITUAL
-% Ronie: Gostei MUITO! Acho que ficou muito mais claro e a separação faz bastante sentido. Fazemos um capítulo para isso ou colocamos junto com o desenvolvimento, tentando validá-la? 
+Se duas ocupações possuem as mesmas entradas e saídas, mas não se conectam entre si, é um indício que elas na verdade são nomes diferentes para a mesma função. Entretanto, outros casos são possíveis, como ocupações que são paralelos em termos de progressão de carreira, mas não executam o mesmo trabalho. Por outro lado, se outros dados além da estrutura também forem similares, como a nuvem de palavras, essas ocupações são potencialmente nomenclaturas diferentes para a mesma função.
+
+\begin{hypothesis}[Capacitação Parcial] \label{hip:capacitacao-suficiente}
+    O fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.\todo{Existe o modelo CHA (Competência, Habilidade, Atitude) que talvez possa ser usado para expandir isso, se for conveniente.}
+\end{hypothesis}
+
+Se há uma movimentação entre profissionais de uma ocupação $a$ para uma ocupação $b$, significa que os profissionais de $a$ possuem capacitação, ao menos parcial, para exercer $b$. Esse conceito pode ser expresso mais precisamente considerando $\capac(x)$ como o conjunto de \textit{capacidades} para se exercer uma ocupação $x$, essa hipótese implica que $\capac(a) \cap \capac(b)  \ne \emptyset$ a menos que $\capac(b) = \emptyset$.
+
+Usando a carreira de topógrafo da Figura~\ref{fig:carreira-topografia} como exemplo, o \textit{Nivelador} possui um subconjunto das capacidades para exercer a função de \textit{Topógrafo}, esse subconjunto não deve ser vazio a menos que a ocupação de \textit{Topógrafo} não exija nenhuma capacitação.
+
+\begin{hypothesis}[Identificação de Carreiras]
+    Uma comunidade dentro do MCar significa que o fluxo de profissionais dentro desse grupo é maior do que com outros nós, indicando que é um conjunto de ocupações que pode ser exercido por profissionais com capacitações em comum (Hipótese~\ref{hip:capacitacao-suficiente}). Se a comunidade possui uma direção de fluxo óbvio entre as ocupações, isso indica progressão (Hipótese~\ref{hip:equivalencia}). Ambas as propriedades presentes caracterizam uma carreira.
+\end{hypothesis}
+
+
 \section{CRONOGRAMA}
 
 A arquitetura está concluída, bem como todo o sistema responsável pela montagem do grafo. O sistema responsável por gerar quartis, intervalos de confiança e KDEs está implementado para salário e precisa ser generalizado para outros atributos numéricos. Esse trabalho deve consumir parte de Abril e Maio.
