@@ -208,8 +208,10 @@ São Paulo\\
 \textbf{RESUMO}
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
-Esse trabalho utiliza técnicas de Ciência de Redes para fazer uma análise exploratória da movimentação entre ocupações profissionais no Brasil. O trabalho usa uma base de dados real com cerca de 10 milhões de currículos. São propostas hipóteses sobre a movimentação profissional e são fornecidos indícios que as suportem. Uma compreensão aprimorada das movimentações é de interesse para governos, empresas e pessoas no planejamento de carreiras ou em suprir deficiências do mercado de trabalho.\todo{O texto ficou meio seco, não?}
-\\[0.5cm]
+A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, sendo impactada diretamente pela cultura, formação e interesses pessoais. As movimentações de carreira representam passagens entre diferentes trabalhos (por exemplo, empresas ou cargos) e invariavelmente geram expectativas e angústias nos profissionais. A Vagas.com é uma das principais empresas de recrutamento on-line do Brasil, possuindo o histórico de movimentação de carreira de mais de 10 milhões de brasileiros em mais de 7 mil cargos diferentes. A Vagas.com criou um serviço gratuito, denominado Mapa de Carreiras (MCar), que exibe as principais trajetórias profissionais do mercado obtidas a partir de dados informados nos currículos cadastrados na Vagas.com. Esse projeto de pesquisa utiliza uma área do conhecimento que vem se desenvolvendo muito ao longo das duas últimas décadas, denominada Ciência de Redes, para realizar um estudo analítico sobre o MCar. O MCar é uma rede complexa direcionada e ponderada, na qual os nós representam as ocupações profissionais e os arcos indicam a quantidade de profissionais que percorreram o caminho entre cada par de ocupações. Nesse contexto essa dissertação propõe contribuições em duas frentes: 1) proposição de adaptações e derivações de modelos de redes aleatórias existentes para que comportem as características do MCar; e 2) estudos analíticos que permitam compreender ou inferir movimentações profissionais a partir dos dados reais do Mapa de Carreiras.
+
+%%\todo{O texto ficou meio seco, não?}
+%%\\[0.5cm]
 \begin{flushleft}
 {\bf Palavras-chave:} \it{redes, grafos, carreira, ocupações}
 \end{flushleft}
@@ -1406,7 +1408,7 @@ O Mapa de Carreiras (MCar) traz o resumo da trajetória profissional de cerca de
 \begin{figure}[ht]
   \centering
   \includegraphics[scale=0.8, frame]{mapa-enfermeira-assistencial.png}
-  \caption{Foco em uma ocupação}
+  \caption{Recorte parcial do MCar focando uma ocupação.}
   \source{Mapa de Carreiras}
   \label{fig:exemplo-grafo}
 \end{figure}
@@ -1418,7 +1420,7 @@ No contexto do Mapa de Carreiras, uma \textit{ocupação} significa uma atividad
 % ENTÃO UM VÉRTICE NA VERDADE SERÁ UM VETOR DE CARACTERÍSTICAS COM ESSAS INFORMAÇÕES. PRECISAMOS DEFINIR EXATAMENTE QUAIS CARACTERÍSTICAS COMPORÃO O VETOR DE CARACTERÍSTICAS DOS VÉRTICES. Ronie: Coloco isso dentro da Metodologia?
 % COLOQUE A DESCRIÇÃO (VETOR DE CARACTERÍSTICAS) DO VÉRTICE AQUI MESMO.
 
-As arestas que conectam as ocupações representam \textit{movimentações} entre elas, ou seja, o fluxo de pessoas que exercia uma certa ocupação e passou a exercer outra. Acompanhar as arestas permite observar o movimento dos profissionais em suas carreiras. O peso das arestas é o número de profissionais que fizeram a trajetória de uma ocupação para outra. A figura~\ref{fig:exemplo-medico-do-trabalho} exibe as arestas a partir da ocupação \enquote{Médico do Trabalho} como exibidos pelo site do Mapa da Carreiras.
+As arestas que conectam as ocupações representam \textit{movimentações} entre elas, ou seja, o fluxo de pessoas que exercia uma certa ocupação e passou a exercer outra. Acompanhar as arestas permite observar o movimento dos profissionais em suas carreiras. O peso das arestas é o número de profissionais que fizeram a trajetória de uma ocupação para outra. A Figura~\ref{fig:exemplo-medico-do-trabalho} exibe as arestas a partir da ocupação \enquote{Médico do Trabalho}, como exibidas pelo site do Mapa da Carreiras.
 
 \begin{figure}[ht]
   \centering
@@ -1430,19 +1432,20 @@ As arestas que conectam as ocupações representam \textit{movimentações} entr
 
 % TODOS OS EXMPLOS DEVERIAM SER DA ÁREA QUE VAMOS ABORDAR, OU SEJA, TI. ISSO TRAZ MAIS DIDÁTICA E FOCO AO DOCUMENTO.
 
-É importante esclarecer que a visualização observada no site do Mapa da Carreiras foi construída para permitir uma navegação simplificada para o usuário (ref). Para essa pesquisa, os dados utilizados são os mesmos, mas em formatos mais adequados ao projeto. Por exemplo, o equivalente da figura~\ref{fig:exemplo-medico-do-trabalho} utilizada para análise exploratória pode ser vista na figura~\ref{fig:grafo-medico-do-trabalho}. Nela, é possível observar ocupações que não estão diretamente relacionadas a \enquote{Médico do Trabalho}, mas que estão no mesmo agrupamento, como \enquote{Médico Plantonista}.
+É importante esclarecer que a visualização observada no site do Mapa da Carreiras foi construída para permitir uma navegação simplificada para o usuário (ref). Para essa pesquisa, os dados utilizados são os mesmos, mas em formatos mais adequados ao projeto. Por exemplo, o equivalente da Figura~\ref{fig:exemplo-medico-do-trabalho} utilizada para análise exploratória pode ser vista na Figura~\ref{fig:grafo-medico-do-trabalho}. Nela, é possível observar ocupações que não estão diretamente relacionadas a \enquote{Médico do Trabalho}, mas que estão no mesmo agrupamento, como \enquote{Médico Plantonista}.
 
 \begin{figure}[ht]
   \centering
   \includegraphics[scale=0.6]{cluster_24.pdf}
-  \caption{Grafo ao redor de Médico do Trabalho}
+  \caption{Subgrafo ao redor de Médico do Trabalho.}
   \source{Elaboração do autor}
   \label{fig:grafo-medico-do-trabalho}
 \end{figure}
 
-O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado com ciclos, porém os vértices não são autorreferentes.
+O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado, ponderado e com ciclos, porém os vértices não são autorreferentes.
 
-Por conta dos ciclos, não é possível criar uma ordenação topológica que represente uma clara progressão de carreira para o grafo como um todo. Entretanto, é possível extrair grupos de ocupações que possuem movimentações mais frequentes entre si. Esses agrupamentos são comumente acíclicos, o que possibilita traçar essa progressão entre as ocupações que o compõem. Nos experimentos do Capítulo XX é possível observar que essa característica é mais frequentemente observada em grupos formados por ocupações que requerem maior qualificação técnica, como \enquote{Comércio Exterior} ou \enquote{Médico do Trabalho}, como visto na figura~\ref{fig:grafo-medico-do-trabalho}. Já nas ocupações ditas \enquote{operacionais}, o fluxo de movimentação entre ocupações acentua a característica cíclica do grafo. Particularmente, é possível observar um forte ciclo entre as ocupações \enquote{Recepcionista}, \enquote{Vendedor} e \enquote{Auxiliar Administrativo}, como mostrado pela figura~\ref{fig:grafo-ciclo-operacional}.
+Por conta dos ciclos, não é possível criar uma ordenação topológica que represente uma clara progressão de carreira para o grafo como um todo. Entretanto, é possível extrair grupos de ocupações que possuem movimentações mais frequentes entre si. Esses agrupamentos são comumente acíclicos, o que possibilita traçar essa progressão entre as ocupações que o compõem. Nos experimentos do Capítulo XX é possível observar que essa característica é mais frequentemente observada em grupos formados por ocupações que requerem maior qualificação técnica, como \enquote{Comércio Exterior} ou \enquote{Médico do Trabalho}, como visto na figura~\ref{fig:grafo-medico-do-trabalho}. Já nas ocupações ditas \enquote{operacionais}, o fluxo de movimentação entre ocupações acentua a característica cíclica do grafo. Particularmente, é possível observar um forte ciclo entre as ocupações \enquote{Recepcionista}, \enquote{Vendedor} e \enquote{Auxiliar Administrativo}, como mostrado pela F
+igura~\ref{fig:grafo-ciclo-operacional}.
 
 \begin{figure}[ht]
   \centering
@@ -1471,15 +1474,14 @@ Duas outras limitações no grafo ocorrem por conta da experiência profissional
 Por outro lado, o campo de texto livre permite a captura de ocupações que pouco provavelmente apareceriam em uma lista curada, como \enquote{IRLA} (Instalador Reparador de Linhas Aéreas) ou \enquote{Rigger} (pessoa no solo que orienta o posicionamento de carga para o operador de guindaste).
 
 Ao final do processo o grafo possui cerca de 8.348 ocupações distintas e 14.031 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em Fevereiro de 2017.
-
+%% COLOQUE O DIA EXATO DE CAPTURA DOS DADOS, OK?
 
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
-O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações.
+O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações. A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo. Nessa seção, cada um deles é explicado em detalhes.
 %% AQUI NA INTRODUÇÃO SUGIRO COLOCAR UM FLUXOGRAMA COM OS BLOCOS DE CONSTRUÇÃO DO MCAR. NA LINHA ABAIXO MENCIONE QUE CADA SEÇÃO VAI DESCREVER UM BLOCO DO PROCESSO.
 % Ronie (2017-06-18) A imagem está um pouco mais abaixo, nesse momento me limitei a colocar apenas uma referência para ela :) Acho que depois podemos ajustar o texto.
 
-A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo. Nessa seção, cada um deles é explicado em detalhes.
 
 \subsubsection{Os Dados}
 
@@ -1503,11 +1505,11 @@ medico medico-do-trabalho 23
 \end{lstlisting}
 \end{minipage}
 
-O segundo formato é uma lista de registros onde cada um ocupa uma única linha. Cada registro é codificado como uma \textit{array} de atributos no formato JSON (\textit{Javascript Object Notation}). Esse formato é usado em várias etapas da montagem do MCar e seu conteúdo varia de etapa para etapa. Os campos relevantes são descritos nas respectivas seções a seguir.
+O segundo formato é uma lista de registros onde cada um ocupa uma única linha. Cada registro é codificado como um \textit{array} de atributos no formato JSON (\textit{Javascript Object Notation}). Esse formato é usado em várias etapas da montagem do MCar e seu conteúdo varia de etapa para etapa. Os campos relevantes são descritos nas respectivas seções a seguir.
 
 \subsubsection{O Processamento da Informação}
 
-O volume de dados e a variedade de análises desse trabalho impõe algumas restrições de ordem prática que precisam ser contornadas. O volume de dados é grande o suficiente para exceder a memória de um computador convencional, algumas das ferramentas utilizadas não se comunicam com outras exceto através de arquivos texto e o tempo para processamento facilmente excede alguns dias se os processadores não forem adequadamente utilizados.
+O volume de dados e a variedade de análises desse trabalho impõe algumas restrições de ordem prática. O volume de dados é grande o suficiente para exceder a memória de um computador convencional, algumas das ferramentas utilizadas não se comunicam com outras exceto através de arquivos texto e o tempo para processamento facilmente excede alguns dias se os processadores não forem adequadamente utilizados.
 
 Essas restrições e a necessidade de atualizar continuamente os dados do MCar levaram a implementação de um sistema que executasse todos os passos para sua montagem de maneira automática.
 
@@ -1523,7 +1525,7 @@ O \textit{ZeroMQ} possui interfaces para diversas linguagens de programação, m
 
 A maior parte dos processos foi implementada usando a linguagem Ruby, mas alguns processos foram implementados usando Python ou programas específicos, como o MCL para \textit{clusterização} e o Graphviz para posicionamento do grafo em um plano bidimensional.
 
-A montagem do grafo é mostrada na figura~\ref{fig:montagem-do-grafo}.
+O processo de montagem do grafo está resumido no fluxo apresentado na Figura~\ref{fig:montagem-do-grafo}.
 
 \begin{figure}[ht]
   \centering
@@ -1532,9 +1534,9 @@ A montagem do grafo é mostrada na figura~\ref{fig:montagem-do-grafo}.
   \label{fig:montagem-do-grafo}
 \end{figure}
 
-\subsubsection{Extração do Experiências Profissionais} \label{sec:extracao-experiencia}
+\subsubsection{Extração das Experiências Profissionais} \label{sec:extracao-experiencia}
 
-O primeiro processo do \textit{pipeline} extrai os registros do bancos de dados relacional e os grava em arquivos texto. O processo não extrai currículos, mas sim experiências profissionais. Cada registro representa uma única experiência.
+O primeiro processo do \textit{pipeline} extrai os registros do banco de dados relacional e os grava em arquivos texto. O processo não extrai currículos, mas sim experiências profissionais. Cada registro representa uma única experiência.
 
 Os dados extraídos são:
 
@@ -1558,11 +1560,11 @@ Para transformar o texto digitado em uma ocupação normalizada os erros de digi
 
 Ocupações com múltiplas palavras também são ordenadas alfabeticamente. Dessa forma, ocupações como \enquote{Auxiliar Financeiro-Administrativo} e \enquote{Auxiliar Administrativo-Financeiro} resultam na classe \enquote{administrativo auxiliar financeiro}.
 
-As classes resultantes lembram vagamente o termo original, como no exemplo acima. No processo descrito na seção~\ref{sec:criar-dicionario}, é criado um dicionário entre a classe equivalente e um nome que tenha significado para o usuário.
+As classes resultantes lembram vagamente o termo original, como no exemplo acima. No processo descrito na Seção~\ref{sec:criar-dicionario}, é criado um dicionário entre a classe equivalente e um nome que tenha significado para o usuário.
 
 \subsubsection{Remoção de Ocupações Incorretas} \label{sec:remocao-ocupacoes-incorretas}
 
-Mesmo após a remoção de casos únicos, alguns nomes presentes nesse campo não podem ser realmente considerados ocupações. São erros comuns que a etapa de normalização não é capaz de corrigir ou representam um entendimento equivocado por parte do usuário.
+Mesmo após a remoção de casos únicos, alguns nomes presentes nesse campo podem não ser considerados ocupações. São erros comuns que a etapa de normalização não é capaz de corrigir ou representam um entendimento equivocado por parte do usuário.
 
 Casos emblemáticos são os textos \enquote{sim}, \enquote{não} ou \enquote{o mesmo} encontrados no campo destinado ao nome da ocupação. A remoção desses casos precisou ser feita manualmente, ou seja, especialistas da empresa revisaram a lista de ocupações e criaram um dicionário com os erros mais comuns utilizados nessa etapa do processo. Esse dicionário foi aprimorado com sugestões dos usuários após a publicação do MCar.
 
@@ -1580,11 +1582,11 @@ Como o objetivo final é criar um grafo que sumarize o \textit{movimento} de pes
 
 Na mesma etapa, removem-se experiências profissionais que se sobreponham. Uma vez sobrepostas, não é possível afirmar que uma é sequência natural da outra ou que sequer tenham relação entre si. É comum encontrar no banco de dados carreiras paralelas em que gestores também são professores ou técnicos que também sejam voluntários. Da mesma maneira que experiências desconexas, as que se sobrepõem por mais de dois meses são removidas.
 
-\subsubsection{Remoção de Currículos por Experiência}
+\subsubsection{Remoção de Currículos sem Experiência}
 
 Após o processo anterior, são removidos os registros que possuam apenas uma ou nenhuma experiência profissional.
 
-\subsubsection{Geração de Pares de Experiência}
+\subsubsection{Geração de Pares de Experiências}
 
 As experiências profissionais de cada currículo são pareadas por ordem cronológica. Por exemplo, um currículo que tenha a seguinte sequência de ocupações \enquote{Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro}, produz os pares \enquote{Faxineiro \textrightarrow~Copeiro} e \enquote{Copeiro \textrightarrow~Chapeiro}.
 
@@ -1619,9 +1621,7 @@ O algoritmo de \textit{Force-Directed} (ref) é usado para posicioná-los corret
 % Me parece que "proto-carreiras" não é um nome lá muito bom, mas foi o que consegui por enquanto =/ Ronie 2017-04-29
 % Aqui também tem uma dose não saudável de especulação baseado no tempo que fiquei olhando para esse grafo. Pode ser o caso de colocar números em tudo (gosto disso), ou eliminar boa parte do texto. Ronie 2017-04-30
 
-O grafo gerado no passo~\ref{sec:grafo-final} é usado nesse processo para gerar agrupamentos.
-
-Entre duas ocupações o maior fluxo de movimentações indica uma certa preferência por uma das duas. Por exemplo, se o número de movimentações entre \enquote{Analista de Sistemas \textrightarrow~Coordenador de Projeto} for maior que o reverso \enquote{Coordenador de Projeto \textrightarrow~Analista da Sistemas}, considera-se que \enquote{Coordenador de Projeto} é uma ocupação que sucede \enquote{Analista de Sistemas}. Algumas vezes o fluxo entre as ocupações é tão similar que não é possível dizer que há uma ordem de sucessão, como no caso apresentado no ciclo de ocupações operacionais na figura~\ref{fig:grafo-ciclo-operacional}; em outros, o sentido contrário possui um fluxo várias vezes menor ou não há fluxo contrário, como o caso do grafo sobre \enquote{Médico do Trabalho} na figura~\ref{fig:grafo-medico-do-trabalho}.
+O grafo gerado no Passo~\ref{sec:grafo-final} é usado nesse processo para gerar agrupamentos. Entre duas ocupações o maior fluxo de movimentações indica uma certa preferência por uma das duas. Por exemplo, se o número de movimentações entre \enquote{Analista de Sistemas \textrightarrow~Coordenador de Projeto} for maior que o reverso \enquote{Coordenador de Projeto \textrightarrow~Analista da Sistemas}, considera-se que \enquote{Coordenador de Projeto} é uma ocupação que sucede \enquote{Analista de Sistemas}. Algumas vezes o fluxo entre as ocupações é tão similar que não é possível dizer que há uma ordem de sucessão, como no caso apresentado no ciclo de ocupações operacionais na Figura~\ref{fig:grafo-ciclo-operacional}; em outros, o sentido contrário possui um fluxo várias vezes menor ou não há fluxo contrário, como o caso do grafo sobre \enquote{Médico do Trabalho} na Figura~\ref{fig:grafo-medico-do-trabalho}.
 
 \todo[inline]{Ronie: estou pensando que a seção abaixo pode ser movida para \enquote{conclusões} ou mais para frente, que acha?}
 
@@ -1629,11 +1629,11 @@ Quando o fluxo de pessoas de uma ocupação para outra é relevante, é possíve
 
 A grosso modo, o agrupamento e o fluxo de migração das ocupações revela o que se pode considerar um \enquote{protótipo de carreira}. Ou seja, um esboço onde um indivíduo em uma ocupação dentro desse grupo tem uma probabilidade maior de se manter nele e de se movimentar para ocupações no topo do grupo.
 
-Existe, no entanto, um grupo que não obedece às características descritas acima. Ao se tentar ordená-lo topologicamente, não há uma ordem de preferência clara entre as ocupações, o que indica que não há uma noção de sucessão como em outros grupos, como exemplificado anteriormente na figura~\ref{fig:grafo-ciclo-operacional}. Ele também possui algumas ocupações que conectam uma grande quantidade de outras ocupações, como \enquote{Auxiliar Administrativo}, que possui movimentações com XX ocupações, cerca de XX\% das ocupações do MCar.
+Existe, no entanto, um grupo que não obedece às características descritas acima. Ao se tentar ordená-lo topologicamente, não há uma ordem de preferência clara entre as ocupações, o que indica que não há uma noção de sucessão como em outros grupos, como exemplificado anteriormente na Figura~\ref{fig:grafo-ciclo-operacional}. Ele também possui algumas ocupações que conectam uma grande quantidade de outras ocupações, como \enquote{Auxiliar Administrativo}, que possui movimentações com XX ocupações, cerca de XX\% das ocupações do MCar.
 
 Ao analisar o grupo, nota-se que a escolaridade mais frequente nessas ocupações é a de \enquote{segundo grau completo}, significando que essas ocupações não necessitam de treinamento especializado para serem desempenhadas, o que é um indício que esse grupo reflete a própria definição de \enquote{operacional}.
 
-Algumas outras ocupações também possuem \enquote{segundo grau completo} como escolaridade mais frequente, mas se comportam como os grupos com uma direção clara de preferência entre as ocupações. Uma análise manual da descrição das suas ocupações e das palavras-chave relacionadas sugere que essas são ocupações \enquote{técnicas}. Ou seja, uma ocupação que requer um treinamento não-trivial, mas não tão exigente quanto uma graduação. Como exemplo, é possível observar a carreira de cozinheiro na figura~\ref{fig:exemplo-grafo-cozinheiro}.
+Algumas outras ocupações também possuem \enquote{segundo grau completo} como escolaridade mais frequente, mas se comportam como os grupos com uma direção clara de preferência entre as ocupações. Uma análise manual da descrição das suas ocupações e das palavras-chave relacionadas sugere que essas são ocupações \enquote{técnicas}. Ou seja, uma ocupação que requer um treinamento não-trivial, mas não tão exigente quanto uma graduação. Como exemplo, é possível observar a carreira de cozinheiro na Figura~\ref{fig:exemplo-grafo-cozinheiro}.
 
 \begin{figure}[htb]
   \centering
@@ -1642,9 +1642,11 @@ Algumas outras ocupações também possuem \enquote{segundo grau completo} como 
   \label{fig:exemplo-grafo-cozinheiro}
 \end{figure}
 
+%% O QUE DEFINE SEGUIR O CAMINHO "AGRUPAMENTO DE OCUPAÇÕES POR CURRÍCULO" OU "AGRUPAMENTO DE OCUPAÇÕES"?
+
 \subsubsection{Agrupamento de Ocupações}
 
-Esse processo agrupa os dados gerados pelo processo descrito na seção\ref{sec:remocao-ocupacoes-incorretas} por ocupação. Cada ocupação normalizada agora possui uma lista com suas grafias originais, uma lista com as descrições daquela experiência profissional escrita por cada indivíduo, bem como a quantidade de ocupações agrupadas.
+Esse processo agrupa os dados gerados pelo processo descrito na Seção \ref{sec:remocao-ocupacoes-incorretas} por ocupação. Cada ocupação normalizada agora possui uma lista com suas grafias originais, uma lista com as descrições daquela experiência profissional escrita por cada indivíduo, bem como a quantidade de ocupações agrupadas.
 
 \subsubsection{Remoção de Ocupações com Pouca Frequência}
 
@@ -1652,9 +1654,9 @@ Mesmo com o processo de correção e normalização, algumas experiências profi
 
 \subsubsection{Criação de Dicionário para Exibição} \label{sec:criar-dicionario}
 
-Os textos resultantes do processo de normalização descrito na seção~\ref{sec:normalizacao} não são adequados para exibição. Esse processo contabiliza o número de grafias exatamente idênticas para cada ocupação normalizada e assume como \enquote{nome de exibição} a grafia mais frequente.
+Os textos resultantes do processo de normalização descrito na Seção~\ref{sec:normalizacao} não são adequados para exibição. Esse processo contabiliza o número de grafias exatamente idênticas para cada ocupação normalizada e assume como \enquote{nome de exibição} a grafia mais frequente.
 
-A limitação desse processo é que algumas ocupações são descritas no masculino ou no feminino dependendo do número de profissionais do gênero exercendo esse ocupação. Por exemplo, uma das ocupações de Direito é descrita como \enquote{Advogado} (no masculino) pois existem um pouco mais profissionais do gênero masculino exercendo a profissão, por outro lado, outra ocupação correlacionada é descrita como \enquote{Advogada Coordenadora} pelo motivo contrário.
+A limitação desse processo é que algumas ocupações são descritas no masculino ou no feminino dependendo do número de profissionais do gênero exercendo essa ocupação. Por exemplo, uma das ocupações de Direito é descrita como \enquote{Advogado} (no masculino) pois existem um pouco mais profissionais do gênero masculino exercendo a profissão, por outro lado, outra ocupação correlacionada é descrita como \enquote{Advogada Coordenadora} pelo motivo contrário.
 
 Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de gênero misto (ref), optou-se por não se modificar o gênero artificialmente, preservando a grafia da predominância do gênero na ocupação.
 
@@ -1688,7 +1690,7 @@ A idade, o salário e o tempo de permanência são sumarizados usando o \textit{
 
 O \textit{resumo de cinco números} consiste no valor mínimo, 1º quartil, mediana, 3º quartil e valor máximo. Esse resumo é proposto por \citeonline{Hoaglin1983-aq} como estatística descritiva de uma amostra.
 
-O intervalo de confiança 95\% para todos os valores do resumo de cinco números é obtido por \textit{bootstrap} com 10.000 iterações. A técnica permite identificar os valores mais confiáveis independentemente do tamanho da amostra e das distribuições. A tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos de confiança para a ocupação de \enquote{Programador}.
+O intervalo de confiança 95\% para todos os valores do resumo de cinco números é obtido por \textit{bootstrap} com 10.000 iterações. A técnica permite identificar os valores mais confiáveis independentemente do tamanho da amostra e das distribuições. A Tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos de confiança para a ocupação de \enquote{Programador}.
 
 \begin{table}[htb]
 \centering
@@ -1708,36 +1710,40 @@ A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador d
 
 \section{UM ESTUDO ANALÍTICO DO MCar USANDO CIÊNCIA DE REDES: RESULTADOS PRELIMINARES}
 
-A comparação de uma rede real com modelos nulos indica fenômenos que não acontecem por aleatoriedade. Essa aplicação é uma análise exploratória, ela levanta a questão de por que eles acontecem se o acaso não é uma explicação aceitável.
+A comparação de uma rede real com modelos nulos indica fenômenos que não acontecem por aleatoriedade. Essa aplicação é uma análise exploratória que levanta a questão de por que eles acontecem se o acaso não é uma explicação aceitável.
 
-Ao se correlacionar as medidas usadas em Ciência de Redes cria-se mais um conjunto de questões sobre o significado da correlação. Algumas dessas correlações se destacam pois ecoam com fenômenos conhecidos da movimentação de profissionais, fornecendo hipóteses plausíveis de seu funcionamento.
+Ao se correlacionar as medidas usadas em Ciência de Redes cria-se mais um conjunto de questões sobre o significado da correlação. Algumas dessas correlações se destacam, pois ecoam com fenômenos conhecidos da movimentação de profissionais, fornecendo hipóteses plausíveis de seu funcionamento.
 
-Um estudo confirmatório não é possível apenas com os dados desse trabalho, pois eles requerem um aprofundamento em ciências sociais que foge do âmbito proposto. Entretanto, o volume de dados e o rigor da análise estatística fornecem indícios sólidos que servem como combustível para pesquisas mais ambiciosas, ou podem ser usados como complemento em estudo sociais.
+%% O QUE VOCÊ QUER DIZER COM "AO SE CORRELACIONAR...CRIA-SE MAIS UM CJTO DE QUESTÕES SOBRE O SIGNIFICADO DA CORRELAÇÃO"?
+
+Um estudo confirmatório não é possível apenas com os dados desse trabalho, pois eles requerem um aprofundamento em ciências sociais que foge do âmbito proposto. Entretanto, o volume de dados e o rigor da análise estatística fornecem indícios sólidos que servem como motivadores para pesquisas mais ambiciosas, ou podem ser usados como complemento em estudos sociais. Ainda assim, os achados nesse capítulo são plausíveis por construção, já que são propostos baseados em medições sobre dados reais.
+
+%% ESSE PARÁGRAFO ACIMA FICOU UM POUCO "ROLANDO LERO"
+
 %% POR QUE NÃO TEMOS DADOS SUFICIENTES PARA VALIDAR, PELO MENOS NO CONTEXTO EM ESTUDO, AS HIPÓTESES COLOCADAS ACIMA.
 %% ALÉM DISSO, SE SÃO HIPÓTESES EU SUGIRO QUE AS DESTAQUEMOS COMO TAL E NA PARTE EXPERIMENTAL A GENTE VÁ TENTANDO VALIDÁ-LAS. FIZ O EXERCÍCIO DE CRIAR AS HIPÓTESES ACIMA, VEJA O QUE ACHA. COMO ESSAS HIPÓTESES SE REFEREM AO MCAR, SUGIRO COLOCÁ-LAS EM UMA SEÇÃO SEPARADA E DEIXARMOS AQUI COMO UMA REVISÃO CONCEITUAL. ISSO AJUDA A COMPOR A PROPOSTA DE SUA DISSERTAÇÃO. MUITO INTERESSANTE!!! NA REALIDADE, SUA DISSERTAÇÃO É UMA ANÁLISE EXPLORATÓRIA SOBRE O MCAR E, PORTANTO, A MOVIMENTAÇÃO DE CARREIRA. NESSE SENTIDO, TODOS OS INSIGHTS DEVEM SER DESTACADOS COMO CONTRIBUIÇÃO AO INVÉS DE APARECEREM DILUÍDOS NUM CAPÍTULO DE REVISAO CONCEITUAL
 % Ronie: Gostei MUITO! Acho que ficou muito mais claro e a separação faz bastante sentido. Fazemos um capítulo para isso ou colocamos junto com o desenvolvimento, tentando validá-la? 
 
-Ainda assim, os achados nesse capítulo são plausíveis por construção, já que são propostos baseados em medições sobre dados reais.
 
 As hipótese propostas são pontos de partida para diversas aplicações. Por exemplo, a criação de uma classificação de ocupações baseada em agrupamento. É esperado que ela retrate com mais precisão um conjunto de funções em que seus membros compartilham habilidades compartilhadas. Também é possível inferir capacitações através do histórico profissional e compreender com mais clareza a movimentação profissional.
 
 Abaixo, as propostas são enumeradas e justificadas.
 
 \begin{hypothesis}[Atração Profissional]
-    A força de entrada do nó (Seção~\ref{sec:forca}) significa o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou por sua atratividade.
+    A força de entrada do nó (Seção~\ref{sec:forca}) indica o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou seja por sua atratividade.
 \end{hypothesis}
 
-Algumas ocupações, como \enquote{Auxiliar Administrativo}, possuem um grande número de profissionais em seu fluxo de entrada comparativamente com outras ocupações próximas. Independente da motivação, um grande número de profissionais converge para elas.
+Algumas ocupações, como \enquote{Auxiliar Administrativo}, possuem um grande número de profissionais em seu fluxo de entrada comparativamente com outras ocupações próximas. Independentemente da motivação, um grande número de profissionais converge para elas.
 
 \begin{hypothesis}[Correlação Negativa entre a Força de Entrada e a Mediana Salarial]
-    Existe uma correlação negativa entre a força de entrada (Seção~\ref{sec:forca}) e a mediana salarial, ou seja, maior a força entrada, menor a mediana do salário.
+    Existe uma correlação negativa entre a força de entrada (Seção~\ref{sec:forca}) e a mediana salarial, ou seja, quanto maior a força de entrada, menor a mediana do salário.
 \end{hypothesis}
 
 \todo[inline]{Verificar e checar duplamente a correlação}
 
 Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} em que quanto maior a oferta de mão de obra, menor o salário pago. Entretanto, não é possível afirmar que existe um excesso de profissionais para uma certa ocupação, pois nesse trabalho não foi possível medir se a ocupação está \textit{saturada}.
-
-Outra interpretação plausível é que essas ocupações possuem requisitos de entrada menos exigentes, tais como conhecimento técnico ou experiência. Isso significa um trabalho menos especializado com salários menores, porém, com baixa barreira de entrada.
+%% NÃO VEJO COMO DEFINIR A SATURAÇÃO DE UMA OCUPAÇÃO, VOCÊ CONSEGUE DEFINIR ISSO?
+Outra interpretação plausível é que essas ocupações possuem requisitos de entrada menos exigentes, tais como um baixo conhecimento técnico ou experiência. Isso significa um trabalho menos especializado com salários menores, porém, com baixa barreira de entrada.
 
 %% MINHA LEITURA É UM POUCO DIFERENTE. COMO O GRAFO É CONSTRUÍDO A PARTIR DE DADOS REAIS, QUANTO MAIOR A FORÇA DE ENTRADA, MAIS PROFISSIONAIS CONVERGEM PARA ESSA PROFISSÃO E, NORMALMENTE, AS PROFISSÕES QUE POSSUEM MAIORES SALÁRIOS SÃO AQUELAS QUE TÊM MENOS PESSOAS, POIS ESTÃO MAIS NO TOPO DA PIRÂMIDE. PORTANTO, EU ENTENDO QUE A OFERTA DE MÃO DE OBRA É UM ELEMENTO IMPORTANTE, MAS TAMBÉM DEVEMOS CONSIDERAR AS HABILIDADES REQUERIDAS PARA A POSIÇÃO.
 % Ronie: Sim, essa é uma discussão muito boa! Eu gostaria de me aprofundar mais nela se houver tempo hábil.
@@ -1757,11 +1763,13 @@ Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo
     De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
 \end{hypothesis}
 
+%% PARA CADA UMA DAS HIPÓTESES VOCÊ DEVE ILUSTRAR COM UMA FIGURA
+
 \begin{hypothesis}[Trabalho de Passagem]
-    Uma ocupação com alta intermediação (Seção~\ref{sec:intermediacao}) significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
+    Uma ocupação com alta centralidade de intermediação (Seção~\ref{sec:intermediacao}) significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
 \end{hypothesis}
 
-A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topografia, onde o nó em destaque representa a ocupação com maior centralidade de intermediação. Essas ocupações merecem atenção especial no planejamento de carreira pois são um ponto de convergência para ocupações que levam a ela e são pontos de difusão para as que partem dela.
+A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topografia, onde o nó em destaque representa a ocupação com maior centralidade de intermediação. Essas ocupações merecem atenção especial no planejamento de carreira, pois são um ponto de convergência para ocupações que levam a ela e são pontos de difusão para as que partem dela.
 
 \begin{figure}[ht]
   \centering
@@ -1769,12 +1777,12 @@ A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topogra
   \caption{Ilustração da centralidade de intermediação na carreira de topografia. O nó mais central é o "topógrafo".}
   \label{fig:carreira-topografia}
 \end{figure}
-
+%% NESSA FIGURA VOCÊ PRECISA MOSTRAR O VALOR DA CENTRALIDADE DE INTERMEDIAÇÃO DE CADA NÓ, ASSIM VOCÊ MOSTRA QUANTITATIVAMENTE A DIFERENÇA.
 \begin{hypothesis}[Equivalência Profissional] \label{hip:equivalencia}
-    Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, significa que não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
+    Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, então não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
 \end{hypothesis}
 
-A reciprocidade (Seção~\ref{sec:reciprocidade}) nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$ permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
+A reciprocidade (Seção~\ref{sec:reciprocidade}) nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$, permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
 
 Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar extraídos por agrupamento, é possível observar características de reciprocidade bastante distintas. Enquanto alguns componentes possuem alta reciprocidade, outros são claramente anti-recíprocos, sugerindo que há um caminho claro para os profissionais que se encontram naquele grupo.
 
@@ -1783,6 +1791,7 @@ Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar e
 \end{hypothesis}
 
 Se duas ocupações possuem as mesmas entradas e saídas, mas não se conectam entre si, é um indício que elas na verdade são nomes diferentes para a mesma função. Entretanto, outros casos são possíveis, como ocupações que são paralelos em termos de progressão de carreira, mas não executam o mesmo trabalho. Por outro lado, se outros dados além da estrutura também forem similares, como a nuvem de palavras, essas ocupações são potencialmente nomenclaturas diferentes para a mesma função.
+%% NESTE MOMENTO ME OCORRERAM DUAS POSSIBILIDADES DE APRESENTAÇÃO DESTE CAPÍTULO: 1) APRESENTAR INICIALMENTE PARTES DO MCar NAS QUAIS APARECEM OS CASOS DISCUTIDOS NAS HIPÓTESES; OU 2) APÓS CADA HIPÓTESE APRESENTAR EXEMPLOS NO MCar QUE ILUSTRAM (VALIDAM) AS HIPÓTESES.
 
 \begin{hypothesis}[Capacitação Parcial] \label{hip:capacitacao-suficiente}
     O fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.\todo{Existe o modelo CHA (Competência, Habilidade, Atitude) que talvez possa ser usado para expandir isso, se for conveniente.}
@@ -1803,7 +1812,7 @@ Aqui apresentamos um panorama resumido de como o trabalho evoluiu até o momento
 
 Os dados que são fonte para a pesquisa estão prontos e no formato adequado, nenhum processamento extra é necessário nesse ponto. A descrição de como ele é obtido está concluída, sendo necessário apenas ajustes para uma melhor compreensão do texto e detalhes menores na descrição da estrutura dos dados. Grande parte dos meses de Fevereiro e Março foram usados na elaboração do texto e aparecem no cronograma da Figura~\ref{fig:cronograma} descritos como \textit{Descrição da Fonte de Dados}.
 
-O conceitos de Ciência de Redes suficientes para esse trabalho já estão absorvidos e o referencial teórico está quase completamente escrito. Ainda falta uma elaboração melhor do texto para facilitar a compreensão dos algoritmos dos modelos nulos, mas é previsto que até o final de Junho esses ajustes estejam concluídos.
+Os conceitos de Ciência de Redes suficientes para esse trabalho já estão absorvidos e o referencial teórico está quase completamente escrito. Ainda falta uma elaboração melhor do texto para facilitar a compreensão dos algoritmos dos modelos nulos, mas é previsto que até o final de Junho esses ajustes estejam concluídos.
 
 A metodologia da pesquisa também está definida e descrita no trabalho. Por outro lado, é provável que durante o início dos experimentos, mais material precise ser estudado e adicionado a ele, bem como ajustes na metodologia, mas espera-se que ao final de Agosto a pesquisa esteja consolidada o suficiente para que nenhuma nova adição seja necessária. São esperadas apenas alterações esporádicas no texto para refletir essa consolidação. No cronograma da Figura~\ref{fig:cronograma}, essas etapas estão descritas como \textit{Referencial Teórico} e \textit{Metodologia}.
 
