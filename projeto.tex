@@ -208,9 +208,8 @@ São Paulo\\
 \textbf{RESUMO}
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
-A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, sendo impactada diretamente pela cultura, formação e interesses pessoais. As movimentações de carreira representam passagens entre diferentes trabalhos (por exemplo, empresas ou cargos) e invariavelmente geram expectativas e angústias nos profissionais. A Vagas.com é uma das principais empresas de recrutamento on-line do Brasil, possuindo o histórico de movimentação de carreira de mais de 10 milhões de brasileiros em mais de 7 mil cargos diferentes. A Vagas.com criou um serviço gratuito, denominado Mapa de Carreiras (MCar), que exibe as principais trajetórias profissionais do mercado obtidas a partir de dados informados nos currículos cadastrados na Vagas.com. Esse projeto de pesquisa utiliza uma área do conhecimento que vem se desenvolvendo muito ao longo das duas últimas décadas, denominada Ciência de Redes, para realizar um estudo analítico sobre o MCar. O MCar é uma rede complexa direcionada e ponderada, na qual os nós representam as ocupações profissionais e os arcos indicam a quantidade de profissionais que percorreram o caminho entre cada par de ocupações. Nesse contexto essa dissertação propõe contribuições em duas frentes: 1) proposição de adaptações e derivações de modelos de redes aleatórias existentes para que comportem as características do MCar; e 2) estudos analíticos que permitam compreender ou inferir movimentações profissionais a partir dos dados reais do Mapa de Carreiras.
+A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, sendo impactada diretamente pela cultura, formação e interesses pessoais. As movimentações de carreira representam passagens entre diferentes trabalhos (por exemplo, empresas ou cargos) e invariavelmente geram expectativas e angústias nos profissionais. A Vagas.com é uma das principais empresas de recrutamento on-line do Brasil, possuindo o histórico de movimentação de carreira de mais de 10 milhões de brasileiros em mais de 8 mil cargos diferentes. A Vagas.com criou um serviço gratuito, denominado Mapa de Carreiras (MCar), que exibe as principais trajetórias profissionais do mercado obtidas a partir de dados informados nos currículos cadastrados na Vagas.com. Esse projeto de pesquisa utiliza uma área do conhecimento que vem se desenvolvendo muito ao longo das duas últimas décadas, denominada Ciência de Redes, para realizar um estudo analítico sobre o MCar. O MCar é uma rede complexa direcionada e ponderada, na qual os nós representam as ocupações profissionais e os arcos indicam a quantidade de profissionais que percorreram o caminho entre cada par de ocupações. Nesse contexto essa dissertação propõe contribuições em duas frentes: 1) proposição de adaptações e derivações de modelos de redes aleatórias existentes para que comportem as características do MCar; e 2) estudos analíticos que permitam compreender ou inferir movimentações profissionais a partir dos dados reais do Mapa de Carreiras.
 
-%%\todo{O texto ficou meio seco, não?}
 %%\\[0.5cm]
 \begin{flushleft}
 {\bf Palavras-chave:} \it{redes, grafos, carreira, ocupações}
@@ -264,13 +263,11 @@ A definir\ldots
 \section{CIÊNCIA DE REDES}
 %====================================
 
-A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse no começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert [{REFS}].
+A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse no começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert~\cite{Watts1998-wt,Barabasi1999-sn}.
 
 Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército~\cite{Maxwell2009-kq}.
 
 O \citeonline{National_Research_Council2006-lv} define a Ciência de Redes como \enquote{o estudo da representação em rede de fenômenos físicos, biológicos e sociais levando a modelos preditivos desses fenômenos}~\footnote{Em tradução livre, \enquote{the study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.}}.
-%% RETIRAR O ET AL. DA CITAÇÃO DO NATIONAL RESEARCH COUNCIL
-% Ronie (2017-06-17) Então, o pior é que o texto é de três (ou quatro) institutos diferentes =/ Removo mesmo?
 
 Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se diferencia de uma abordagem tradicional pelos seguintes pontos:
 
@@ -289,7 +286,7 @@ Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se di
 
 É preciso descrever os conceitos utilizados em redes para compreensão desse trabalho. Apesar de serem básicos em Teoria de Grafos, uma breve descrição é oferecida nas seções seguintes para completude dessa obra.
 
-Um \textit{grafo} ou \textit{rede} é uma abstração usada quando o foco do estudo está no relacionamentos entre entidades. Nessa abstração, outras características das entidades que não o relacionamento são quase completamente descartadas.
+Um \textit{grafo} ou \textit{rede} é uma abstração usada quando o foco do estudo está no relacionamentos entre entidades. Nessa abstração, outras características das entidades que não o relacionamento são descartadas.
 
 Redes são representadas graficamente por formas geométricas, em geral pequenos círculos para representar as entidades, conectados por linhas representando os relacionamentos (Figura~\ref{fig:exemplo-tipos-grafo}).
 
@@ -316,7 +313,7 @@ Quando os relacionamentos possuem uma certa direção eles formam \textit{redes 
 
 Se a intensidade do relacionamento é relevante as conexões ganham um \textit{peso} (Figura~\ref{fig:exemplo-grafo-ponderado}). Seu significado depende da rede em questão. Por exemplo, em uma rede de transportes o peso pode significar a distância entre locais de entrega, em uma rede de dados pode significar o volume do tráfego entre os pontos, e em uma rede social pode significar o número de mensagens trocadas entre duas pessoas. Redes onde existe a presença de conexões com peso são chamadas \textit{redes ponderadas}.
 
-Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exemplo-grafo-multiplo}). Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. \citeonline{Newman2004-by} propõe que algumas redes ponderadas podem ser representadas como multigrafos, principalmente onde a conexão representa um fluxo. Nessa representação alternativa cada unidade de peso é representada por uma conexão independente de peso um, em alguns cenários isso possibilita o emprego em redes ponderadas de técnicas que desconsideram o peso das conexões.
+Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exemplo-grafo-multiplo}). Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. \citeonline{Newman2004-by} propõe que algumas redes ponderadas podem ser representadas como multigrafos, principalmente onde a conexão representa um fluxo. Nessa representação alternativa cada unidade de peso é representada por uma conexão independente de peso um, isso possibilita o emprego de técnicas que desconsideram o peso das conexões em alguns cenários.
 
 \begin{figure}[ht]
     \centering
@@ -363,7 +360,6 @@ Uma \textit{rede reticulada} ou simplesmente \textit{reticulado} (\textit{lattic
         \includegraphics[scale=0.6]{ring-lattice.png}
     }    
     \caption{Exemplos de redes reticuladas}
-    \source{(Provisório)}
 \end{figure}
 
 %% DE TEMPOS EM TEMPOS COLOQUE UMA FIGURA ILUSTRANDO OS CONCEITOS APRESENTADOS. NUMA ÚNICA FIGURA VOCÊ PODE ILUSTRAR A REDE PONDERADA, CLIQUES, ETC.
@@ -371,7 +367,7 @@ Uma \textit{rede reticulada} ou simplesmente \textit{reticulado} (\textit{lattic
 
 %% PARA A QUALIFICAÇÃO ESTÁ OK SIM
 
-Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede.
+Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede. Uma exemplo de rede com três componentes pode ser observado na Figura~\ref{fig:exemplo-componente}.
 
 %% ENTÃO UM COMPONENTE É O MESMO QUE UM SUBGRAFO?
 % Ronie (2017-06-17) É um subgrafo desconectado do supergrafo. Mexi no texto para tentar tornar mais claro, pode ver se melhorou? :) (definitivamente aqui vai bem uma figura =/)
@@ -386,11 +382,11 @@ Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em 
     \label{fig:exemplo-componente}
 \end{figure}
 
-Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau.
+Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau. Esse é um conceito central no estudo de redes complexas.
 
-Medidas de centralidade de grau são, por exemplo, a média ou mediana dos graus da rede. Entretanto, algumas topologias possuem um dispersão muito grande de graus, ou seja, o desvio padrão ou distância interquartil varia consideravelmente. Nesses casos, é útil calcular-se a \textit{distribuição de grau} utilizando histogramas ou calculando-se a probabilidade da presença da graus na rede. Esses conceitos são detalhados na Seção~\ref{sec:distribuicao-grau-forca}.
+Medidas de centralidade de grau são, por exemplo, a média ou mediana dos graus da rede. Entretanto, algumas topologias possuem um dispersão muito grande de graus, ou seja, o desvio padrão ou distância interquartil varia consideravelmente. Nesses casos, é útil calcular-se a \textit{distribuição de grau} utilizando histogramas ou calculando-se a probabilidade da presença de graus na rede. Esses conceitos são detalhados na Seção~\ref{sec:distribuicao-grau-forca}.
 
-A \textit{sequência de grau} é o nome que se dá a sequência ordenada com $n$ posições, onde $n$ é o número de nós e cada posição possui o grau de um nó. Os graus são ordenados do menor para o maior grau. Sendo $\delta_i$ o grau do nó $i$, onde $G$ é uma rede com $n$ nós e $i \in G$, a sequência de grau pode ser definida como:
+A \textit{sequência de grau} é o nome que se dá a sequência ordenada com $n$ posições, onde $n$ é o número de nós e cada posição possui o grau de um nó. A sequência é ordenada do menor para o maior grau. Sendo $\delta_i$ o grau do nó $i$, onde $G$ é uma rede com $n$ nós e $i \in G$, a sequência de grau pode ser definida como:
 
 \begin{equation} \label{eq:sequencia-grau}
 \textit{Seq}_G \defn \{\delta_i, \delta_{i+1}, \ldots, \delta_n\}, \delta_i \le \delta_{i+1}
@@ -406,7 +402,7 @@ Similar ao caminho geodésico duas outras variações para redes ponderadas são
 
 \todo[inline]{Explicar coeficiente de agrupamento (figuras ajudam)}
 
-\textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortatividade} é o conceito contrário, onde nós com características diferentes tentem a ser conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
+\textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortatividade} é o conceito contrário, onde nós com características diferentes tendem a se conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
 
 %====================================
 \subsection{Redes Aleatórias e Redes Reais} \label{sec:redes-aleatorias}
@@ -417,7 +413,7 @@ O modelo nulo funciona de forma análoga à hipótese nula em estatística e é 
 
 De maneira mais precisa, essa abordagem pode ser declarada da seguinte forma: seja $G^\textit{rand}$ um \textit{modelo} de rede aleatória, $M \defn S \to \R$ uma medida global definida para todos os grafos de um conjunto $S$, e $G \in S$ uma rede sob análise. O valor esperado $E(M|G^\textit{rand})$ é comparado a $M(G)$ quanto a sua relevância estatística. Uma \enquote{medida global}, nesse caso, é uma medição sobre toda a rede como, por exemplo, a distância média dos menores caminhos entre todos os seus nós.
 
-É possível comparar as medidas globais obtidas com seus valores esperados dividindo-se ou subtraindo-se o valor esperado do valor obtido~\cite{Zweig2016-rb}. Definindo $M^d$ como a proporção entre o valor obtido da medida na rede sendo estudada $M(G)$ e o valor esperado em uma rede aleatória equivalente $E(M|G^\textit{rand})$, proporção $M^d \defn M(G) / E(M|G^\textit{rand})$ representa o quão divergente é a rede $G$ em relação ao esperado em uma rede aleatória, valores próximos a 1 significam que a $M^d$ não diverge do encontrado em uma rede gerada ao acaso. Valores acima e abaixo de 1 significam características acima do esperado ou suprimidas.
+É possível comparar as medidas globais obtidas com seus valores esperados dividindo-se ou subtraindo-se o valor esperado do valor obtido~\cite{Zweig2016-rb}. Definindo $M^d$ como a proporção entre o valor obtido da medida na rede sendo estudada $M(G)$ e o valor esperado em uma rede aleatória equivalente $E(M|G^\textit{rand})$, a proporção $M^d \defn M(G) / E(M|G^\textit{rand})$ representa o quão divergente é a rede $G$ em relação ao esperado em uma rede aleatória, valores próximos a 1 significam que a $M^d$ não diverge do encontrado em uma rede gerada ao acaso. Valores acima e abaixo de 1 significam características acima do esperado ou suprimidas.
 
 De maneira equivalente, pode-se definir $M^\Delta$ como a diferença absoluta entre o valor da medida na rede em estudo $M(G)$ e o valor esperado em uma rede aleatória equivalente $E(M|G^\textit{rand})$. Na diferença absoluta $M^\Delta \defn M(G) - E(M|G^\textit{rand})$, os números acima e abaixo de 0 contribuem para a rejeição do modelo nulo. O uso das duas medidas permite traçar correlações entre diversas redes em estudo.
 %%NÃO ENTENDI ESSA ÚLTIMA FRASE. ESSA RELAÇÃO ENTRE TAMANHO E ERRO NÃO É CLARA 
@@ -425,7 +421,7 @@ De maneira equivalente, pode-se definir $M^\Delta$ como a diferença absoluta en
 %% É PRECISO DEFINIR Md E MDelta ANTES DE APRESENTAR OS CONCEITOS. VOCÊ EXPLICA, MAS NÃO CONCEITUA.
 % Ronie (2017-06-17) Não sei se entendi bem, tentei de novo, é mais ou menos por aí? 
 
-Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicar as mesmas medidas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente proporcional ao tamanho da rede e aumentará para redes maiores pela própria definição de medida. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala. 
+Por exemplo, em uma rede em que $M(\cdot)$ é a \textit{média da distância geodésica} entre todos os nós, um hipotético $M^d = 1/2$ significaria que o caminho na rede sob estudo é metade do que se esperaria em uma rede aleatória de mesma topologia, ou seja, alguma característica não presente no modelo nulo causa essa diferença. No mesmo estudo hipotético, $M^\Delta = -2$ significa que a rede possui a média do caminho geodésico cerca de 2 unidades menores do que o esperado. Ao se aplicarem as mesmas medidas em outras redes reais, mas de tamanhos diferentes, $M^d$ permite verificar se a característica varia de acordo com o tamanho, já $M^\Delta$, nesse caso, é diretamente proporcional ao tamanho da rede e aumentará para redes maiores pela própria definição de medida. Entretanto, traçar a correlação de ambas em diversos estudos possibilita a inferência de novos modelos com propriedades que expliquem como as redes reais funcionam. Essa foi a abordagem de \cite{Barabasi1999-sn}, na descoberta das redes livres de escala, explicadas em detalhes na Seção~\ref{sec:scale-free}. 
 
 Dependendo das medidas utilizadas, as equações acima sofrem variações para adequação ao uso, como, por exemplo, a \textit{reciprocidade}, proposta por~\citeonline{Garlaschelli2004-db}, explicada na Seção~\ref{sec:reciprocidade}.
 
@@ -439,19 +435,19 @@ No caso das redes de mundo pequeno, observou-se que as redes reais em estudo pos
 
 De forma similar, as redes reais com a propriedade de serem livres de escala divergem das redes aleatórias no número de conexões em seus nós. Enquanto as redes aleatórias possuem uma quantidade de conexões por nó distribuída de maneira similar a uma curva normal, nas redes livres de escala essa distribuição é logarítmica, em que poucos nós acumulam uma grande quantidade de conexões, formando \enquote{hubs}, enquanto a maior parte dos nós possuem poucas conexões. Redes livres de escala são detalhadas na Seção~\ref{sec:scale-free}.
 
-A comparação com modelos nulos é uma forma de \textit{análise exploratória de dados}~\cite{Zweig2016-rb}, em que a descoberta de uma divergência é na verdade a descoberta de uma questão. Nos casos exemplificados acima, as pesquisas levaram à seguinte questão: \enquote{Quais princípios ou restrições existem para que essas redes assumam tais características?}. No caso das redes livres de escala, \citeonline{Barabasi2016-rn} argumentam que os dois princípios  \textit{suficientes} e \textit{necessários} que levam a redes com essa topologia são o \enquote{crescimento} e a \enquote{conexão preferencial} (mais sobre ambos na Seção~\ref{sec:modelo-barabasi-albert}), oferecendo respostas à questão levantada pela análise contra o modelo nulo.
+A comparação com modelos nulos é uma forma de \textit{análise exploratória de dados}~\cite{Zweig2016-rb}, em que a descoberta de uma divergência é na verdade a descoberta de uma questão. Nos casos exemplificados acima, as pesquisas levaram à seguinte questão: \enquote{Quais princípios ou restrições existem para que essas redes assumam tais características?}. No caso das redes livres de escala, \citeonline{Barabasi2016-rn} argumentam que os dois princípios  \textit{suficientes} e \textit{necessários} que levam a redes com essa topologia são o \enquote{crescimento} e a \enquote{conexão preferencial} (mais sobre ambos na Seção~\ref{sec:scale-free}), oferecendo respostas à questão levantada pela análise contra o modelo nulo.
 
 A proposta de princípios organizacionais leva a novos modelos de redes aleatórias que incorporam esses princípios. Se esses modelos forem capazes de gerar redes com as características observadas nas redes reais que motivaram sua proposição, eles são plausíveis, ou seja, são \textit{suficientes} para explicá-las. No entanto, somente a análise matemática é capaz de dizer se os princípios são \textit{necessários}, ou seja, que não é possível o surgimento de uma rede com essa topologia sem os princípios propostos.
 
-Esse processo leva à criação do modelo de rede aleatória de Watts-Strogatz~\cite{Watts1998-wt}, que possui restrições adicionais à criação de redes aleatórias que tornam o modelo capaz de gerar redes em que a distância média dos menores caminhos e o coeficiente de agrupamento são compatíveis aos observados em redes reais. Da mesma maneira, o modelo Barabási-Albert é capaz de gerar redes que obedecem à distribuição de grau das redes reais em estudo~\cite{Barabasi1999-sn}.
+Esse processo levou à criação do modelo de rede aleatória de Watts-Strogatz~\cite{Watts1998-wt}, que possui restrições adicionais à criação de redes aleatórias que tornam o modelo capaz de gerar redes em que a distância média dos menores caminhos e o coeficiente de agrupamento são compatíveis aos observados em redes reais. Da mesma maneira, o modelo Barabási-Albert é capaz de gerar redes que obedecem à distribuição de grau similares às das redes reais em estudo~\cite{Barabasi1999-sn}.
 
-Esses novos modelos servem como modelo nulo para futuros trabalhos. Se uma rede real possui medidas compatíveis com redes geradas pelo modelo Barabási-Albert, então é possível caracterizar essa rede como uma rede livre de escala. Métricas divergentes significam que o modelo não captura princípios suficientes para explicá-la, gerando novas questões a serem respondidas.
+Esses novos modelos servem como modelo nulo para futuros trabalhos. Se uma rede real possui medidas compatíveis com redes geradas pelo modelo Barabási-Albert, então é possível caracterizar essa rede como uma rede livre de escala. Medidas divergentes significam que o modelo não captura princípios suficientes para explicá-la, gerando novas questões a serem respondidas.
 
-Para se chegar ao valor esperado de uma medida em um modelo nulo (ou seja, o valor de $E(M|G^\textit{rand})$) é possível gerar um conjunto de redes a partir do modelo, computar o a medida de cada uma e chegar a um valor médio entre todas elas.
+Para se chegar ao valor esperado de uma medida em um modelo nulo (ou seja, o valor de $E(M|G^\textit{rand})$) é possível gerar um conjunto de redes a partir do modelo, computar a medida de cada uma e chegar a um valor médio entre todas elas.
 
-Em modelos nulos mais simples (ou mais profundamente estudados), é possível chegar ao valor esperado por equações matemáticas derivadas de análise combinatória.
+Em modelos nulos mais simples (ou mais profundamente estudados), é possível chegar ao valor esperado por equações matemáticas derivadas da análise combinatória.
 
-Por exemplo, para obter a distância geodésica média esperada em uma rede de 1000 nós e 2000 conexões, é possível gerar algumas centenas de redes com essa configuração usando o modelo de Erdős-Rényi, medir a distância de todas e tirar sua média. Esse é o valor esperado da distância geodésica média para essa configuração de rede.
+Por exemplo, para obter a distância geodésica média esperada em uma rede de 1000 nós e 2000 conexões, é possível gerar algumas centenas de redes com essa configuração usando o modelo de Erdős-Rényi (detalhado na Seção~\ref{sec:modelo-erdos-renyi}), medir a distância de todas e tirar sua média. Esse é o valor esperado da distância geodésica para essa configuração de rede.
 
 Entretanto, o modelo de Erdős-Rényi é um dos mais estudados na literatura e o valor esperado da medida acima pode ser obtido por $ln N / ln (2L / N)$, onde $N$ é o número de nós e $L$ é o número de conexões.
 
@@ -465,15 +461,15 @@ A abordagem matemática, por exemplo, é usada por \citeonline{Barabasi1999-sn} 
 
 A obtenção do valor esperado através de amostragem, por outro lado, é usada pelos autores citados acima, mas pode ser mais claramente observada em \citeonline{Squartini2013-ni}, onde os modelos utilizados não possuem ainda uma solução matemática para o cálculo do valor esperado da medida (no caso, a reciprocidade).
 
-Os modelos a serem escolhidos como modelos nulos para um estudo devem levar em consideração quais características eles preservam, pois a escolha inadequada dos modelos leva a conclusões errôneas. Sempre é possível substituir um modelo nulo por outro mais adequado, invalidando ou reforçando as conclusões prévias.
+Os modelos a serem escolhidos como modelos nulos para um estudo devem levar em consideração quais características eles preservam, pois a escolha inadequada dos modelos leva a conclusões errôneas. Sempre é possível substituir um modelo nulo por outro mais adequado, invalidando ou reforçando as conclusões prévias~\cite{Zweig2016-rb}.
 
-A rede presente nesse trabalho possui claros requisitos quanto aos modelos de redes aleatórias aplicáveis ao seu estudo. Por ser uma rede ponderada e direcionada, modelos que desconsideram esses atributos perdem informação durante a comparação em busca de relevância estatística. Modelos de redes aleatórias onde ambos os atributos estão presentes são consideravelmente mais complexos e não tão abundantes, mas são mais adequados.
+A rede presente nesse trabalho possui claros requisitos quanto aos modelos de redes aleatórias aplicáveis ao seu estudo. Por ser uma rede ponderada e direcionada, modelos que desconsideram esses atributos perdem informação durante a comparação em busca de relevância estatística. Modelos de redes aleatórias onde ambos os atributos estão presentes são consideravelmente mais complexos e não tão abundantes, porém são mais adequados.
 
 Redes possuem um vasto repertório de medições, quase todas emprestadas da Teoria de Grafos. Algumas medições estruturais, como a \textit{distribuição de grau}, são quase ubíquas e relevantes em grande parte dos estudos de redes, pois várias propriedades são derivadas dessa característica. Outras medidas, no entanto, fazem sentido apenas em determinados tipos de redes. Por exemplo, pode não haver sentido em medir a reciprocidade (Seção ~\ref{sec:reciprocidade}) em uma rede de transporte, mas é uma medida importante em uma rede social. Por outro lado, mesmo no estudo de redes sociais a reciprocidade pode ser irrelevante, como no caso do estudo de redes de mundo pequeno onde o foco está na distância média da rede.
 
 Independentemente da comparação com modelos nulos, as medições também são usadas para comparação direta com outras redes ou para comparações dentro dela própria. Por exemplo, as medidas de similaridade podem revelar ocupações que possuem um conjunto de requisitos semelhantes para exercê-las, as medidas de reciprocidade e não-reciprocidade podem ser usadas para se estabelecer uma progressão em uma sequência de ocupações.
 
-Para o trabalho presente, as medidas mais relevantes são apresentadas a seguir, bem como suas variações para redes ponderadas e direcionadas.
+Para o trabalho presente, as medidas mais relevantes são apresentadas na Seção~\ref{sec:medidas-de-rede}, bem como suas variações para redes ponderadas e direcionadas.
 
 %====================================
 \subsection{Modelos de Redes Aleatórias}
@@ -493,11 +489,11 @@ Finalmente, dois modelos são propostos nesse trabalho, adaptando-se modelos con
 \todo[inline]{Aqui eu fiz uma besteira sem tamanho. Propus dois modelos de rede aleatória para lidar com o peso das conexões, achando que seria uma mera questão de transformar o grafo (me deixei levar pelo artigo do \cite{Newman2004-by} que transforma grafos ponderados em multigrafos e pelo confuso artigo de \cite{Serrano2005-ms} em que ela faz a análise de um modelo aleatório para redes ponderadas, mas deixa o algoritmo implícito). Daí, durante a escrita (e analisando como a topologia ficaria) percebi que as propostas descaracterizam as conexões da rede (narf!). De qualquer maneira, deixei elas escritas, quem sabe deixando a ideia cozinhar um pouco não vem algo. O problema agora é que está BEM difícil achar um modelo nulo para rede ponderada e os modelos para redes simples não me parecem satisfatórios, pois uma das características mais fortes do MCar é justamente o fluxo de pessoas. Por conta disso, incluí mais um modelo, o de parâmetro oculto, talvez seja mais fácil adaptá-lo.}
 
 %====================================
-\subsubsection{Modelos de Erdős-Rényi e Gilbert}
+\subsubsection{Modelos de Erdős-Rényi e Gilbert} \label{sec:modelo-erdos-renyi}
 
 O Modelo de Erdős-Rényi e o Modelo de Gilbert são bastante estudados e também os mais antigos, os artigos de Gilbert e Erdős-Rényi datam de 1959. Muitos dos valores esperados para suas medidas já estão disponíveis como modelos puramente matemáticos, ou seja, é possível calculá-los sem que seja necessário criar a rede de fato. Esses modelos criam redes simples com probabilidade de conexão aleatória entre nós.
 
-O modelo de Erdős-Rényi, conhecido como $G(N,L)$, é criado a partir de um número fixo de nós $N$ e conexões $L$. Entretanto, o modelo mais usado é conhecido como $G(N,p)$ proposto por Gilbert, criado a partir de $N$ nós e com probabilidade fixa $p$ de conexão entre dois nós quaisquer. Os modelos são equivalentes em suas propriedades, porém o segundo simplifica o cálculo de algumas características \cite{Barabasi2016-rn}.
+O modelo de Erdős-Rényi, conhecido como $G(N,L)$, é criado a partir de um número fixo de nós $N$ e conexões $L$. Entretanto, o modelo mais usado é conhecido como $G(N,p)$ proposto por Gilbert, criado a partir de $N$ nós e com probabilidade fixa $p$ de conexão entre dois nós quaisquer. Os modelos são equivalentes em suas propriedades, porém o segundo simplifica o cálculo de algumas medidas \cite{Barabasi2016-rn}.
 
 Ambos os modelos criam redes simples. O algoritmo para geração de redes $G(N, p)$ pode ser descrito da seguinte forma:
 
@@ -509,7 +505,7 @@ Ambos os modelos criam redes simples. O algoritmo para geração de redes $G(N, 
 \item Se o número for menor ou igual a probabilidade $p$, crie uma conexão entre $i$ e $j$.
 \end{enumerate}
 
-A algoritmo para geração de uma rede $G(N, L)$, por sua vez,  pode ser descrito como:
+O algoritmo para geração de uma rede $G(N, L)$, por sua vez,  pode ser descrito como:
 
 \begin{enumerate}
 \item Inicie com $N$ nós isolados.
@@ -522,7 +518,7 @@ Uma das propriedades mais notáveis desse modelo é o surgimento de um grande co
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
     \begin{equation} \label{eq:componente-gigante-1}
-        p_c = \frac{1}{N(N - 1)} \approx \frac{1}{N}
+        p_c = \frac{1}{N - 1} \approx \frac{1}{N}
     \end{equation} &
     \begin{equation} \label{eq:componente-gigante-2}
         \avg{k} = 1
@@ -562,7 +558,7 @@ O algoritmo para geração de uma rede aleatória Watts-Strogatz pode ser defini
 \item Com probabilidade $p$, reconecte um dos nós de cada conexão a outro aleatoriamente escolhido.
 \end{enumerate}
 
-Quando $p = 0$ o modelo é um reticulado, ele apresenta grande distância entre dois nós aleatórios e alto coeficiente de agrupamento. Quando $p = 1$ o modelo se torna um equivalente ao de Erdős-Rényi, com pequena distância entre nós aleatórios e baixo coeficiente de agrupamento. Pequenas distâncias e alto coeficiente de agrupamento surgiram com $0.001 < p < 0.1$ nos experimentos de Watts e Strogatz para redes de 1.000 nós e média de 10 conexões por nó~\cite{Watts1998-wt}.
+Quando $p = 0$ o modelo é um reticulado, ele apresenta grande distância entre dois nós aleatórios e alto coeficiente de agrupamento. Quando $p = 1$ o modelo se torna um equivalente ao de Erdős-Rényi, com pequena distância entre nós aleatórios e baixo coeficiente de agrupamento. Pequenas distâncias e alto coeficiente de agrupamento surgiram com $0,001 < p < 0,1$ nos experimentos de Watts e Strogatz para redes de 1.000 nós e média de 10 conexões por nó~\cite{Watts1998-wt}.
 
 
 \begin{comment}
@@ -648,7 +644,7 @@ A Figura~\ref{fig:modelo-configuracao} ilustra o processo em uma rede de seis n�
 
 \subsubsection{Modelo de Configuração Ponderada} \label{sec:modelo-configuracao-ponderada}
 
-O Modelo de Configuração descrito na Seção \ref{sec:modelo-configuracao} é aplicável a redes direcionadas ou não. Porém, para aplicação em redes ponderadas, são necessárias adaptações. Uma adaptação possível é proposta por \citeonline{Serrano2005-ms}, embora sua proposta limite-se a análise probabilística, sem apresentar explicitamente o algoritmo equivalente. Em seu artigo, \citeonline{Newman2004-by}, propõe que diversas redes ponderadas podem ser analisadas projetando seu equivalente em \textit{multigrafos}, ou seja, transformando uma rede ponderada em uma rede sem pesos, mas que permita que nós tenham múltiplas conexões entre si. Em particular, os argumentos de Newman se baseiam em redes que representam fluxos, de forma que uma conexão de peso 10, representando um fluxo de 10 unidades passando entre dois nós, pode ser transformada em 10 conexões entre os mesmos nós, cada uma representando uma unidade.
+O Modelo de Configuração descrito na Seção \ref{sec:modelo-configuracao} é aplicável a redes direcionadas ou não, porém são necessárias adaptações para sua aplicação em redes ponderadas. Uma adaptação possível é proposta por \citeonline{Serrano2005-ms}, embora sua proposta limite-se à análise probabilística, sem apresentar explicitamente o algoritmo equivalente. Em seu artigo, \citeonline{Newman2004-by}, propõe que diversas redes ponderadas podem ser analisadas projetando seu equivalente em \textit{multigrafos}, ou seja, transformando uma rede ponderada em uma rede sem pesos, mas que permita que nós tenham múltiplas conexões entre si. Em particular, os argumentos de Newman se baseiam em redes que representam fluxos, de forma que uma conexão de peso 10, representando um fluxo de 10 unidades passando entre dois nós, pode ser transformada em 10 conexões entre os mesmos nós, cada uma representando uma unidade.
 
 A proposta de Newman é perfeitamente aplicável para esse trabalho, onde a rede modela exatamente o \textit{fluxo de pessoas} entre duas ocupações e o peso da conexão significa o fluxo de pessoas entre elas.
 
@@ -669,9 +665,9 @@ Com base nos trabalhos mencionados acima, propõe-se o seguinte algoritmo adapta
 % Ronie (2017-06-17) *cara de tacho* ¬¬ ... é... pq não? =/ Coloquei agora :P 
 
 %% ILUSTRE COM UM EXEMPLO
-Finalmente, a maior dificuldade em relação ao algoritmo proposto é que, apesar da distribuição de força entre os nós ser preservada, a distribuição de graus da rede é descaracterizada, pois, apesar da força de cada nó ser preservada individualmente, as conexões são decompostas e podem se conectar a nós diferentes. Um nó de força 10 e grau 1 terminará como um nó de força 10 e grau 10, já que a probabilidade de 10 conexões aleatoriamente selecionadas resultarem nos mesmos pares de nós é muito pequena.\todo{Calcular a probabilidade}
+Finalmente, a maior dificuldade em relação ao algoritmo proposto é que, apesar da distribuição de força entre os nós ser preservada, a distribuição de graus da rede é descaracterizada, pois, apesar da força de cada nó ser preservada individualmente, as conexões são decompostas e podem se conectar a nós diferentes. Um nó de força 10 e grau 1 terminará como um nó de força 10 e grau 10, já que a probabilidade de 10 conexões aleatoriamente selecionadas resultarem nos mesmos pares de nós é muito pequena.
 
-\todo[inline]{Traçar o equivalente de probabilidade de conexão entre dois nós, mas agora considerando a força e justificar a observação sobre assortatividade}.
+\todo[inline]{Calcular a probabilidade e traçar o equivalente de probabilidade de conexão entre dois nós, mas agora considerando a força e justificar a observação sobre assortatividade}
 
 Abaixo é descrito a algoritmo equivalente de Modelo de Configuração Ponderada para redes direcionadas:
 
@@ -709,9 +705,9 @@ Esse algoritmo permanece idêntico para redes direcionadas, pois preserva també
 %====================================
 \subsubsection{Modelo Aleatório de Preservação de Força}
 
-O modelo proposto aqui segue a mesma justificativa apresentada na Seção~\ref{sec:modelo-configuracao-ponderada}, seguindo a proposta de \cite{Newman2004-by} de transformar uma rede ponderada em um multigrafo.
+O modelo proposto aqui segue a mesma justificativa apresentada na Seção~\ref{sec:modelo-configuracao-ponderada}, seguindo a proposta de \citeonline{Newman2004-by} em transformar uma rede ponderada em um multigrafo.
 %% SE ESTÁ SENDO PROPOSTO AQUI, DEVE SER DESTACADO NOS OBJETIVOS/CONTRIBUIÇÕES
-O algoritmo é similar ao Modelo Aleatório de Preservação de Grau, mas sem a necessidade de se verificar se uma conexão já existe.
+O algoritmo é similar ao Modelo Aleatório de Preservação de Grau, mas sem a necessidade de se verificar a existência de uma conexão prévia.
 
 \begin{enumerate}
 \item Transforme a rede ponderada em um multigrafo. Uma conexão se transforma em $n$ conexões com mesma origem e destino, onde $n$ é o peso da conexão original.
@@ -768,13 +764,9 @@ O artigo original não detalha um ponto de parada específico, porém a aplicaç
 %% PRECISAMOS APRESENTAR EXEMPLOS DE CADA MODELO
 
 %====================================
-\subsection{Medidas de Rede}
+\subsection{Medidas de Rede} \label{sec:medidas-de-rede}
 
 As medidas descritas nessa seção são usadas para comparação com os modelos nulos selecionados para o trabalho, bem como para encontrar características relevantes dentro da própria rede.
-%% PARA MIM MÉTRICA E PROPRIEDADE SÃO COISAS DISTINTAS
-% Ronie: De acordo, ajustei o testo e vou usar medida/medições para esse cálculos que caracterizam a topologia da rede.
-%% EU ENTENDO QUE VOCÊ USA MÉTRICA, POIS A LITERATURA USA MÉTRICA, CERTO? SE A LITERATURA NÃO CHAMAR DE MÉTRICA EU CHAMARIA DE MEDIDA, POIS MATEMATICAMENTE UMA MÉTRICA TEM QUE ATENDER AS PROPRIEDADES DE SER DEFINIDAMENTE POSITIVA, SIMÉTRICA, RESPEITAR A DESIGULDADE TRIANGULAR E SER NULA APENAS PARA PONTOS COINCIDENTES. COMO NÓS NÃO VAMOS PROVAR QUE CADA ITEM APRESENTADO AQUI É UMA MÉTRICA, USAR A EXPRESSÃO MEDIDA PODE NOS POUPAR DE IMPRECISÕES MATEMÁTICAS.
-% Ronie: Ok! Vou trocar :)
 
 Para comparação com os modelos nulos, são considerados estimadores de centralidade (média e mediana), dispersão (desvio padrão e intervalo interquartil), distribuição e correlação entre as várias medidas.
 
@@ -785,10 +777,10 @@ O menor caminho entre dois nós é chamado \textit{caminho geodésico} e o núme
 %% SUGIRO QUE TODO CONCEITO SEJA COLOCADO EM ITÁLICO E NÃO ENTRE ASPAS.
 % Ronie: De acordo, alterando...
 
-Seja o caminho $P$ entre os nós $i_0$ e $i_n$ uma lista ordenada de $n$ conexões:
+Seja o caminho $P$ entre os nós $i_1$ e $i_n$ uma lista ordenada de $n$ conexões:
 
 \begin{equation} \label{eq:caminho}
-P(i_0,i_n) \defn \{(i_0,i_1), (i_1,i_2), \ldots, (i_{n-1},i_n)\}
+P(i_1,i_n) \defn \{(i_1,i_2), (i_2,i_3), \ldots, (i_{n-1},i_n)\}
 \end{equation}
 
 A distância geodésica entre $i$ e $j$ pode ser definida como a menor distância entre todos os caminhos entre esses nós:
@@ -805,7 +797,7 @@ Como o MCar é um grafo direcionado e ponderado, a distância geodésica conside
 
 Onde $w_{ih}$ é o peso da conexão entre os nós $i$ e $h$ ou indefinido se a conexão é inexistente.
 
-Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa O peso em um arco e $\wout_{ij}$ é indefinido se não há uma conexão entre $i$ e $j$:
+Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa o peso em um arco e $\wout_{ij}$ é indefinido se não há uma conexão entre $i$ e $j$:
 
 \begin{equation} \label{eq:distancia-ponderada-direcionada}
 \weighteddir{d}_{ij} \defn min\left(\frac{1}{\wout_{ih}} + \ldots + \frac{1}{\wout_{hj}}\right)
@@ -817,8 +809,6 @@ Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa 
 A \textit{centralidade de grau} ou \textit{degree centrality} mede o quão conectado é um nó, quanto maior o número de conexões, maior a centralidade de grau.
 
 A centralidade de grau é simplesmente o grau de um nó e pode ser calculada segundo a Equação~\ref{eq:centralidade-grau}.
-%% SEMPRE QUE VOCÊ REFERENCIAR UMA SEÇÃO OU EQUAÇÃO ESPECÍFICA, COLOQUE A PRIMEIRA LETRA EM MAIÚSCULO
-% Ronie: Ooops! Vou precisar trocar em um bocado de lugares :D :D. Trocando...
 
 \begin{equation} \label{eq:centralidade-grau}
 c_k(i) \defn \sum_{j} a_{ij}
@@ -890,7 +880,7 @@ Em redes ponderadas é possível traçar correlações entre força e grau. Se h
 
 A correlação entre grau e força pode indicar modelos nulos adequados para redes reais, correlações perfeitas podem significar que a força pode ser descartada no modelo nulo (por não agregar informação) ou que pode ser derivada posteriormente a partir da sequência de graus resultante.\todo{Aqui tem coisa!}
 
-Em grafos direcionados, é possível separar cada uma das distribuições em distribuições de entrada e saída. A \textit{probabilidade de distribuição de saída de grau} (Eq. \ref{eq:probabilidade-grau-saida}), \textit{probabilidade de distribuição de entrada de grau} (Eq. \ref{eq:probabilidade-grau-entrada}), \textit{probabilidade de distribuição de saída de força} (Eq. \ref{eq:probabilidade-forca-saida}) e \textit{probabilidade de distribuição de entrada de força} (Eq. \ref{eq:probabilidade-forca-entrada}) são similares às Equações \ref{eq:probabilidade-grau} e \ref{eq:probabilidade-forca} e são listadas abaixo de maneira resumida:
+Em grafos direcionados é possível separar cada uma das distribuições em distribuições de entrada e saída. A \textit{probabilidade de distribuição de grau de saída} (Eq. \ref{eq:probabilidade-grau-saida}), \textit{probabilidade de distribuição de grau de entrada} (Eq. \ref{eq:probabilidade-grau-entrada}), \textit{probabilidade de distribuição de força de saída} (Eq. \ref{eq:probabilidade-forca-saida}) e \textit{probabilidade de distribuição de força de entrada} (Eq. \ref{eq:probabilidade-forca-entrada}) são similares às Equações \ref{eq:probabilidade-grau} e \ref{eq:probabilidade-forca} e são listadas abaixo de maneira resumida:
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -965,7 +955,7 @@ Onde $\linkboth{m}_i$ é o número de arcos entre os vizinhos de $i$.
 Em um grafo ponderado, \citeonline{Barrat2004-xf} oferecem a seguinte versão do coeficiente de agrupamento:
 
 \begin{equation}
-\weighted{c}_c(i) \defn \frac{1}{s_i(k_i - 1)} \sum_{j,k \in N(i)} \frac{w_{ij} + w_{jh}}{2}
+\weighted{c}_c(i) \defn \frac{1}{s_i(k_i - 1)} \sum_{j,k \in N(i)} \frac{w_{ij} + w_{jk}}{2}
 \end{equation}
 
 Onde $N(i)$ é o conjunto de vizinhos de $i$, $w_{ij}$ é o peso da conexão entre os nós $i$ e $j$ e $s(i)$ é a força do nó (Equação~\ref{eq:forca}).
@@ -995,7 +985,7 @@ Nos extremos, uma rede direcionada que não possua conexões mútuas tem $R = 0$
 
 Segundo ~\citeonline{Garlaschelli2004-db}, $R$ não permite uma comparação efetiva entre redes, pois é preciso levar em conta se o valor é maior ou menor que o esperado em uma rede aleatória de tamanho equivalente em número de nós e conexões. Valores maiores do que o esperado em redes aleatórias caracterizam redes \enquote{recíprocas}, valores menores caracterizam redes \enquote{anti-recíprocas} e valores similares aos encontrados em redes aleatórias são características de redes \enquote{irrecíprocas}\todo{\enquote{irrecíproca} ou \enquote{arrecíproca}?}.
 
-A equação para reciprocidade, $\rho$, proposta por ~\citeonline{Garlaschelli2004-db} se resume a:
+A equação para reciprocidade $\rho$ proposta por ~\citeonline{Garlaschelli2004-db} se resume a:
 
 \begin{equation} \label{eq:reciprocidade-rand}
 \rho \defn \frac{R - R^\textit{rand}}{1 - R^\textit{rand}}
@@ -1041,7 +1031,7 @@ A conexão não-recíproca $\recout{w}_{ij}$ é dada por:
 \recout{w}_{ij} \defn w_{ij} - \recboth{w}_{ij}
 \end{equation}
 
-Sendo que, por definição, $\recout{w}_{ij} > 0 \Rightarrow \recboth{w}_{ji} = 0$ e vice-versa. Para fins de notação, define-se $\recin{w}_{ij} \defn \recout{w}_{ji}$.
+Sendo que, por definição, $\recout{w}_{ij} > 0 \Rightarrow \recout{w}_{ji} = 0$ e vice-versa. Para fins de notação, define-se $\recin{w}_{ij} \defn \recout{w}_{ji}$.
 
 Definidos os pesos recíprocos e não-recíprocos, é possível usar a força definida nas Equações~\ref{eq:forca-entrada} e~\ref{eq:forca-saida} para definir a \textit{força recíproca} (Equação~\ref{eq:forca-reciproca}), \textit{força não-recíproca de saída}  (Equação~\ref{eq:forca-reciproca-saida}) e \textit{força não-recíproca de entrada}  (Equação~\ref{eq:forca-reciproca-entrada}):
 
@@ -1085,7 +1075,7 @@ Para o equivalente de $\rho$, em que se leva em consideração as conexões espe
 É possível medir a assortatividade usando \textit{correlação de graus}, ou seja, a média dos graus dos vizinhos de um nó.
 
 \begin{equation}
-k_\textit{nn}(k_i) \defn \frac{1}{k_i} \sum_{j \in N(i)} k_j
+k_\textit{nn}(i) \defn \frac{1}{k_i} \sum_{j \in N(i)} k_j
 \end{equation}
 
 Onde $N(i)$ é o conjunto de vizinhos de $i$, e $k_i$ é o grau do nó $i$.
@@ -1093,12 +1083,12 @@ Onde $N(i)$ é o conjunto de vizinhos de $i$, e $k_i$ é o grau do nó $i$.
 A correlação de grau de todos os nós com grau $k$ pode ser calculada como:
 
 \begin{equation}
-K_\textit{nn}(k) \defn \frac{1}{|K(k)|} \sum_{i \in K(k)} k_\textit{nn}(k_i)
+K_\textit{nn}(k) \defn \frac{1}{|K(k)|} \sum_{i \in K(k)} k_\textit{nn}(i)
 \end{equation}
 
 Onde $K(k)$ é o conjunto de nós formado pelos nós de grau $k$ da rede. Ou seja, A \textit{função de correlação de grau} $K_\textit{nn}(k)$ é o grau médio dos vizinhos dos nós de grau $k$.
 
-É importante observar que há uma assortatividade natural causada pela própria estrutura da rede: nós com mais conexões têm mais chance de se conectar a outros nós com muitas conexões. A probabilidade de uma conexão se formar entre dois nós pode ser determinada como na Equação~\ref{eq:probabilidade-conexao} (aqui repetida por conveniência):
+É importante observar que há uma assortatividade natural causada pela própria estrutura da rede: nós com mais conexões têm mais chance de se conectar a outros nós com muitas conexões. A probabilidade de uma conexão se formar entre dois nós pode ser determinada como na Equação~\ref{eq:probabilidade-conexao} (aqui repetida na Equação~\ref{eq:probabilidade-assortativa} por conveniência):
 
 \begin{equation} \label{eq:probabilidade-assortativa}
 P_{ij} \defn \frac{k_i k_j}{K}
@@ -1118,7 +1108,7 @@ Em uma rede de assortatividade neutra, a correlação de grau $K_\textit{nn}$ es
 K_\textit{nn}(k) \defn \frac{\avg{k^2}}{\avg{k}}
 \end{equation}
 
-Ou seja, a variância dos graus dividida pela média dos graus. Sendo o a variância (segundo momento) de $k$ definida como $\avg{k^2} \defn 1/N \sum_i k_i^2$.
+Ou seja, a variância dos graus $\avg{k^2}$ dividida pela média dos graus $\avg{k}$. Sendo a variância (segundo momento) de $k$ definida como $\avg{k^2} \defn 1/N \sum_i k_i^2$.
 
 Comparando-se o valor de correlação de grau da rede real com o valor esperado para uma rede de assortatividade neutra é possível entender se a assortatividade da rede sob estudo é devida apenas à aleatoriedade ou se há outros fatores de influência.
 
@@ -1161,7 +1151,7 @@ Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída. A s
 
 Onde $\linkin{N}_i$ é o número vizinhos de $i$ em que as conexões chegam a ele e $\linkout{N}_i$ é o número de vizinhos onde a conexão parte de $i$.
 
-No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Ahn2010-uh}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{iN})$ como sendo o vetor de pesos das conexões do nó $i$, onde $N$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
+No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Ahn2010-uh}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{in})$ como sendo o vetor de pesos das conexões do nó $i$, onde $n$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
 
 \begin{equation}
 \weighteddir{S}_{ij} \defn \frac{\vec{w_i} \cdot \vec{w_j}}{|\vec{w_i}|^2 + |\vec{w_j}|^2 - \vec{w_i} \cdot \vec{w_j}}
@@ -1179,7 +1169,7 @@ Onde $\delta_{ij} = 1$ se $i = j$ e zero caso contrário. A similaridade entre c
 R_{(i,h),(j,h)} \defn \frac{\vec{r_i} \cdot \vec{r_j}}{|\vec{r_i}|^2 + |\vec{r_j}|^2 -  \vec{r_i} \cdot \vec{r_j}}
 \end{equation}
 
-Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é usada principalmente na detecção de comunidades.
+Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$ e $i \neq h \neq j$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é usada principalmente na detecção de comunidades.
 
 %====================================
 \subsubsection{Modularidade} \label{sec:modularidade}
@@ -1191,10 +1181,10 @@ Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. E
 A modularidade $m_c$ de um grupo $c$ de nós pode ser definida como:
 
 \begin{equation} \label{eq:modularidade-local}
-m_c \defn \frac{L_c}{L} - \left( \frac{k_c}{K} \right)^2
+m_c \defn \frac{L_c}{L} - \left( \frac{K_c}{K} \right)^2
 \end{equation}
 
-Onde $L$ é o número de conexões total da rede, $K = 2L$ é a soma de todos os seus graus, $L_c$ é o número de conexões do grupo e $k_c$ é a soma de seus graus.
+Onde $L$ é o número total de conexões da rede, $K = 2L$ é a soma de todos os seus graus, $L_c$ é o número de conexões do grupo e $K_c$ é a soma de seus graus.
 
 Assumindo que uma rede foi particionada em $N_c$ grupos, a modularidade total $M_c$ pode ser calculada somando-se a modularidade de cada grupo:
 
@@ -1202,7 +1192,7 @@ Assumindo que uma rede foi particionada em $N_c$ grupos, a modularidade total $M
 M_c \defn \sum_{c \in N_c} m_c
 \end{equation}
 
-O uso da modularidade para detecção de comunidades possui suas limitações. A primeira delas é que grupos com poucas conexões internas em relação ao tamanho da rede são agrupados indevidamente, mesmo que exista apenas uma conexão entre eles. A segunda limitação diz respeito ao maior valor possível da modularidade $M_\textit{max}$, que possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
+O uso da modularidade para detecção de comunidades possui limitações. A primeira delas é que grupos com poucas conexões internas em relação ao tamanho da rede são agrupados indevidamente, mesmo que exista apenas uma conexão entre eles. A segunda limitação diz respeito ao maior valor possível da modularidade $M_\textit{max}$, que possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
 
 Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-global}, quando dois grupos $A$ e $B$ são unidos, a diferença esperada em $M_c$ é:
 
@@ -1210,13 +1200,15 @@ Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-gl
 \Delta M_{AB} \defn \frac{l_{AB}}{L} - \frac{k_A k_B}{2L^2}
 \end{equation}
 
-Onde $l_{AB}$ é o número de links que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L < 1$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{resolução da modularidade}.
+Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L^2 < 1$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{resolução da modularidade}.
 
 É possível observar que a resolução da modularidade é diretamente proporcional ao número total de conexões da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
 
 \todo[inline]{Demonstrar separando a carreira de TI aqui}
 
+\begin{comment}
 O significado de comunidades sob a perspectiva desse trabalho é detalhado na Seção~\ref{sec:deteccao-comunidade}.
+\end{comment}
 
 \begin{comment}
 %====================================
@@ -1289,15 +1281,15 @@ Também conhecido como \enquote{seis graus de separação}, o imaginário popula
 
 A propriedade de \textit{mundo pequeno} foi descrita pela primeira vez por Frigyes Karinthy em 1929, escritor e jornalista húngaro, em uma estória chamada \enquote{Correntes}. Nela, Karinthy conecta um trabalhador da indústria automobilística a si mesmo:
 
-\blockcquote{Karinthy1929-jg}{O trabalhador conhece o gerente da fábrica, que conhece Ford; Ford está em bons termos com o diretor geral da Publicações Hearst, que no último ano se tornou um bom amigo de Árpád Pásztor, alguém que não apenas conheço, mas é um grande amigo.~\footnote{em tradução livre do autor}}
+\blockcquote{Karinthy1929-jg}{O trabalhador conhece o gerente da fábrica, que conhece Ford; Ford está em bons termos com o diretor geral da Publicações Hearst, que no último ano se tornou um bom amigo de Árpád Pásztor, alguém que não apenas conheço, mas é um grande amigo.}~\footnote{em tradução livre do autor}
 
-Durante o Século XX, a propriedade de mundo pequeno aparece esparsamente mais algumas vezes e volta a ganhar atenção com o jogo \enquote{Seis Graus de Kevin Bacon} criado por três estudantes do \textit{Albright College} na década de 90 e finalmente com o trabalho de Duncan Watts e Steven Strogatz em 1998 \cite{Barabasi2016-rn}.
+Durante o Século XX, a propriedade de mundo pequeno aparece esparsamente e volta a ganhar atenção com o jogo \enquote{Seis Graus de Kevin Bacon} criado por três estudantes do \textit{Albright College} na década de 90 e finalmente com o trabalho de Duncan Watts e Steven Strogatz em 1998 \cite{Barabasi2016-rn}.
 
 O fenômeno alcançou um nível de popularidade tão grande que até hoje alguns de seus efeitos podem ser observados, por exemplo, até o momento da escrita dessa pesquisa, o site de busca \textit{Google} ainda fornece a distância entre Kevin Bacon e outros atores ao se digitar no buscador o nome do ator precedido pelo texto \enquote{\textit{bacon number}}.
 
 A propriedade de mundo pequeno se refere ao tamanho do caminho entre dois nós aleatoriamente selecionados na rede. De maneira simplificada, enquanto o número de conexões cresce exponencialmente com a adição de novos nós em uma rede, a menor distância entre dois nós quaisquer cresce em ritmo logarítmico. 
 
-Em uma rede aleatória, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e segue a Equação\ref{eq:distancia-erdos} \cite{Barabasi2016-rn}.
+Em uma rede aleatória Erdős-Rényi, a menor distância esperada entre dois nós corresponde à distância geodésica média $\avg{d}^\textit{erdos}$ e segue a Equação~\ref{eq:distancia-erdos} \cite{Barabasi2016-rn}. Já o coeficiente de agrupamento esperado da rede $\avg{C}^\textit{erdos}$ é dado pela Equação~\ref{eq:coef-agrupamento-erdos}.
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -1311,7 +1303,7 @@ Em uma rede aleatória, a menor distância esperada entre dois nós corresponde 
 
 Onde $\avg{k}$ é o grau médio da rede e $N$ o número de nós da rede.
 
-\citeonline{Barabasi2016-rn} especulam que o fato da propriedade de mundo pequeno causar surpresa é por causa da noção de proximidade ser frequentemente associada à distância física, que pode ser modelada como uma rede reticulada e não possui a propriedade de mundo pequeno.
+\citeonline{Barabasi2016-rn} especulam que o fato da propriedade de mundo pequeno causar surpresa é causada pela noção de proximidade ser frequentemente associada à distância física, que pode ser modelada como uma rede reticulada e não possui a propriedade de mundo pequeno.
 
 Em um reticulado circular, como é o caso da rede em estado inicial do modelo de Watts-Strogatz, a distância geodésica média $\avg{d}^ \textit{retic}$ é dada pela Equação~\ref{eq:distancia-reticulado} e seu coeficiente de agrupamento pela Equação~\ref{eq:coef-agrupamento-reticulado}.
 
@@ -1327,15 +1319,13 @@ Em um reticulado circular, como é o caso da rede em estado inicial do modelo de
 
 Redes aleatórias, por sua vez, apresentam a propriedade de mundo pequeno, mas possuem um coeficiente de agrupamento baixo. Em diversas redes reais é possível observar a propriedade de mundo pequeno, como em uma rede aleatória, simultaneamente com um alto coeficiente de agrupamento, como em redes reticuladas.
 
-Em uma rede aleatória Erdős-Rényi, o coeficiente de agrupamento esperado da rede $\avg{C}^\textit{erdos}$ é dado pela Equação~\ref{eq:coef-agrupamento-erdos}.
-
-É possível observar que quando o número de nós cresce, $\avg{d}^\textit{retic} \sim N$, enquanto $\avg{d}^\textit{erdos} \sim ln N$. Ou seja, a distância em uma rede reticulada cresce linearmente com o número de nós, enquanto que essa distância cresce em proporção logarítmica numa rede aleatória. Já os coeficientes de agrupamento tendem a constantes ao se aumentar o número de nós, $\avg{C}^\textit{retic} \sim 3 / 4$, enquanto $\avg{C}^\textit{erdos} \sim 0$.\todo{Espero ter entendido direito essa coisa do \enquote{assintoticamente equivalente} =/}. Isso levou \citeonline{Watts1998-wt} a proporem um modelo de rede aleatória que combinasse ambas as características (Seção~\ref{sec:small-world}).
+É possível observar que quando o número de nós cresce, $\avg{d}^\textit{retic} \sim N$, enquanto $\avg{d}^\textit{erdos} \sim ln N$. Ou seja, a distância em uma rede reticulada cresce linearmente com o número de nós, enquanto que essa distância cresce em proporção logarítmica numa rede aleatória. Já os coeficientes de agrupamento tendem a constantes ao se aumentar o número de nós, $\avg{C}^\textit{retic} \sim 3 / 4$, enquanto $\avg{C}^\textit{erdos} \sim 0$. Isso levou \citeonline{Watts1998-wt} a proporem um modelo de rede aleatória que combinasse ambas as características (Seção~\ref{sec:small-world}).
 
 Posteriormente, \citeonline{Barabasi1999-sn} observam que redes reais possuem \textit{hubs}, nós que agregam uma grande quantidade de conexões, e propuseram um modelo aleatório capaz de produzir redes de mundo pequeno, com conectividade similar às redes reais, porém sem o mesmo coeficiente de agrupamento.
 
 \subsubsection{Livre de Escala} \label{sec:scale-free}
 
-As \textit{redes livres de escala} são redes em que a distribuição das conexões entre os nós segue uma \textit{lei de potência}. A lei de potência é uma relação entre as variáveis $x$ e $y$ expressa da seguinte forma $y = ax^{k}$, onde $a$ e $k$ são constantes. Isso significa que $y$ varia exponencialmente em relação a $x$; grosseiramente, se $x$ dobra de tamanho, $y$ quadruplica. No caso das redes livres de escala, a relação é negativa, em que muitos nós possuem poucas conexões e poucos nós possuem muitas conexões. Esse comportamento da lei de potência é exemplificado graficamente na Figura~\ref{fig:exemplo-lei-potencia}, com $k = -2$.
+As \textit{redes livres de escala} são redes em que a distribuição das conexões entre os nós segue uma \textit{lei de potência}. A lei de potência é uma relação entre as variáveis $x$ e $y$ expressa como $y = ax^{k}$, onde $a$ e $k$ são constantes. Isso significa que $y$ varia exponencialmente em relação a $x$; grosseiramente, se $x$ dobra de tamanho, $y$ quadruplica. No caso das redes livres de escala, a relação é negativa, em que muitos nós possuem poucas conexões e poucos nós possuem muitas conexões. Esse comportamento da lei de potência é exemplificado graficamente na Figura~\ref{fig:exemplo-lei-potencia}, com $k = -2$.
 
 \begin{figure}[ht]
     \centering
@@ -1383,7 +1373,7 @@ Em redes reais, no entanto, novos nós surgem e desaparecem, e alguns nós têm 
 
 \citeonline{Barabasi2016-rn} também propõem modelos para os efeitos de remoção de nós, envelhecimento, criação de conexões entre nós já existentes e crescimento acelerado.\todo{Fiquei meio na dúvida aqui, não quero explicar todos eles (pois não vou usá-los), mas gostaria de dizer que eles existem. Expando isso um pouco ou removo?}
 
-Quanto à distância geodésica média $\avg{d}^\textit{ba}$ e o coeficiente de agrupamento $\avg{C}\textit{ba}$, o modelo de Barabási-Albert prevê:
+Quanto à distância geodésica média $\avg{d}^\textit{ba}$ e o coeficiente de agrupamento $\avg{C}^\textit{ba}$, o modelo de Barabási-Albert prevê:
 
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
@@ -1432,7 +1422,7 @@ As arestas que conectam as ocupações representam \textit{movimentações} entr
 
 % TODOS OS EXMPLOS DEVERIAM SER DA ÁREA QUE VAMOS ABORDAR, OU SEJA, TI. ISSO TRAZ MAIS DIDÁTICA E FOCO AO DOCUMENTO.
 
-É importante esclarecer que a visualização observada no site do Mapa da Carreiras foi construída para permitir uma navegação simplificada para o usuário (ref). Para essa pesquisa, os dados utilizados são os mesmos, mas em formatos mais adequados ao projeto. Por exemplo, o equivalente da Figura~\ref{fig:exemplo-medico-do-trabalho} utilizada para análise exploratória pode ser vista na Figura~\ref{fig:grafo-medico-do-trabalho}. Nela, é possível observar ocupações que não estão diretamente relacionadas a \enquote{Médico do Trabalho}, mas que estão no mesmo agrupamento, como \enquote{Médico Plantonista}.
+É importante esclarecer que a visualização observada no site do Mapa da Carreiras foi construída para permitir uma navegação simplificada para o usuário. Para essa pesquisa, os dados utilizados são os mesmos, mas em formatos mais adequados ao projeto. Por exemplo, o equivalente da Figura~\ref{fig:exemplo-medico-do-trabalho} utilizada para análise exploratória pode ser vista na Figura~\ref{fig:grafo-medico-do-trabalho}. Nela, é possível observar ocupações que não estão diretamente relacionadas a \enquote{Médico do Trabalho}, mas que estão no mesmo agrupamento, como \enquote{Médico Plantonista}.
 
 \begin{figure}[ht]
   \centering
@@ -1442,10 +1432,9 @@ As arestas que conectam as ocupações representam \textit{movimentações} entr
   \label{fig:grafo-medico-do-trabalho}
 \end{figure}
 
-O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado, ponderado e com ciclos, porém os vértices não são autorreferentes.
+O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado, ponderado e com ciclos, porém sem laços.
 
-Por conta dos ciclos, não é possível criar uma ordenação topológica que represente uma clara progressão de carreira para o grafo como um todo. Entretanto, é possível extrair grupos de ocupações que possuem movimentações mais frequentes entre si. Esses agrupamentos são comumente acíclicos, o que possibilita traçar essa progressão entre as ocupações que o compõem. Nos experimentos do Capítulo XX é possível observar que essa característica é mais frequentemente observada em grupos formados por ocupações que requerem maior qualificação técnica, como \enquote{Comércio Exterior} ou \enquote{Médico do Trabalho}, como visto na figura~\ref{fig:grafo-medico-do-trabalho}. Já nas ocupações ditas \enquote{operacionais}, o fluxo de movimentação entre ocupações acentua a característica cíclica do grafo. Particularmente, é possível observar um forte ciclo entre as ocupações \enquote{Recepcionista}, \enquote{Vendedor} e \enquote{Auxiliar Administrativo}, como mostrado pela F
-igura~\ref{fig:grafo-ciclo-operacional}.
+Por conta dos ciclos, não é possível criar uma ordenação topológica que represente uma clara progressão de carreira para o grafo como um todo. Entretanto, é possível extrair grupos de ocupações que possuem movimentações mais frequentes entre si. Esses agrupamentos são comumente acíclicos, o que possibilita traçar essa progressão entre as ocupações que o compõem. Analisando-se os dados, é possível observar que essa característica é mais frequente em grupos formados por ocupações que requerem maior qualificação técnica, como \enquote{Comércio Exterior} ou \enquote{Médico do Trabalho}, como exibido na Figura~\ref{fig:grafo-medico-do-trabalho}. Já nas ocupações ditas \enquote{operacionais}, o fluxo de movimentação entre ocupações acentua a característica cíclica do grafo. Particularmente, é possível observar um forte ciclo entre as ocupações \enquote{Recepcionista}, \enquote{Vendedor} e \enquote{Auxiliar Administrativo}, como mostrado na Figura~\ref{fig:grafo-ciclo-operacional}.
 
 \begin{figure}[ht]
   \centering
@@ -1459,7 +1448,7 @@ Para a construção dos vértices, os textos presentes nos títulos dos históri
 
 Após a normalização são criados pares de ocupações cronologicamente ordenados. Isso significa que o término de uma ocupação precisa coincidir com o início da seguinte. Uma margem de dois meses de tolerância na sobreposição corrige pequenas imprecisões na anotação dos históricos profissionais. Currículos com apenas uma ocupação são descartados, bem como ocupações que se sobreponham cronologicamente ou que estejam separadas por um intervalo de tempo maior que um ano.
 
-Os pares de ocupações são unificados produzindo as arestas e os vértices, e as arestas menos relevantes do grafo, ou seja, aquelas com menos de dez movimentações, são podadas. Esse critério de poda foi definido empiricamente através de análise por amostragem. Números muito maiores removem vértices de ocupações mais especializadas como \enquote{Comandante} ou \enquote{Engenheiro de Minas}, enquanto números muito menores acrescentavam vértices espúrios causados por erros de grafia que a fase de correção ortográfica foi incapaz de detectar.
+Os pares de ocupações são unificados produzindo as arestas e os vértices, e as arestas menos relevantes do grafo, ou seja, aquelas com menos de dez movimentações, são podadas. Esse critério de poda foi definido empiricamente através de análise por amostragem. Números muito maiores removem vértices de ocupações mais especializadas como \enquote{Comandante} ou \enquote{Engenheiro de Minas}, enquanto números muito menores acrescentam vértices espúrios causados por erros de grafia que a fase de correção ortográfica foi incapaz de detectar.
 
 Um dos efeitos indesejados desse processo é que algumas ocupações legítimas são removidas do grafo. É o caso de ocupações muito recentes, muito especializadas, ou que ainda não possuem uma concordância da nomenclatura entre os profissionais da área. Como exemplo podemos citar \enquote{Especialista em Experiência do Usuário}, uma profissão recente, que também é chamada \enquote{Analista de UX} ou apenas \enquote{UX}.
 
@@ -1485,7 +1474,7 @@ O Mapa de Carreiras é construído a partir dos currículos de um banco relacion
 
 \subsubsection{Os Dados}
 
-Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com.br. Esses currículos são armazenados em um banco de dados \textit{Microsoft SQL Server}. No total há cerca de 10 milhões de currículos~\todo{Colocar número exato} armazenados entre 1999 e 2016, mas para esse trabalho apenas os currículos atualizados entre 2011 e 2016 são utilizados~\todo{Colocar número exato}.
+Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com.br. Esses currículos são armazenados em um banco de dados \textit{Microsoft SQL Server}. No total há cerca de 10 milhões de currículos~\todo{Colocar número exato} armazenados entre 1999 e 2017, mas para esse trabalho apenas os currículos atualizados entre Fevereiro de 2012 e Fevereiro de 2017 são utilizados~\todo{Colocar número exato}.
 
 % FALE AGORA DOS CVS DA ÁREA DE TECNOLOGIA. QUANTOS SÃO? QUANTAS E QUAIS SÃO AS CARREIRAS (A LISTAGEM DAS CARREIRAS PODE VIR COMO UM APÊNDICE)
 % Ronie: Focamos ainda na área de tecnologia? Acredito que poderíamos focá-la nos exemplos de carreiras maiores (como análise das redes livre de escala e mundo pequeno) que não são boas com carreiras muito pequenas como as que usei acima para exemplificar alguns grafos. Que acha?
@@ -1493,8 +1482,10 @@ Os dados fonte para essa pesquisa são currículos anonimizados de usuários do 
 
 Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos usados nesse trabalho. O primeiro formato é descrito por \citeonline{Van_Dongen2008-kx} como \enquote{formato ABC}. Cada linha representa uma aresta, e cada aresta possui três campos separados por um ou mais espaços. Em um grafo direcionado, o primeiro campo é a aresta de partida, o segundo é a aresta de chegada e o campo final representa o peso da aresta. No caso do MCar, o peso representa o número de pessoas que se movimentou de uma ocupação à outra. Esse formato é usado na separação de carreiras através da \textit{clusterização} do grafo usando o \textit{Markov Clustering Algorithm} (MCL)~\cite{Van_Dongen2000-qm} e na montagem de visualizações exploratórias usando o programa \enquote{Graphviz}~\cite{Gansner2000-oo}.
 
+\vspace{\abovedisplayskip}
+
 \noindent
-REVER ASSIM\begin{minipage}{\linewidth}
+\begin{minipage}{\linewidth}
 \begin{lstlisting}[frame=single,caption=Arquivo em Formato ABC,label=lst:formato-abc,captionpos=b]
 medico-examinador medico-do-trabalho 23
 medico-do-trabalho coordenador-medico 10
@@ -1576,7 +1567,7 @@ As ocupações são agrupadas por currículo, formando uma sequência cronológi
 
 \subsubsection{Remoção de Experiências sem Conexão ou Sobrepostas}
 
-Como o objetivo final é criar um grafo que sumarize o \textit{movimento} de pessoas entre ocupações, as experiências profissionais que não se conectam cronologicamente com nenhuma outra são removidas. Serão consideradas desconexas quaisquer experiências em sequência cujo início da posterior esteja a mais do dois meses de distância do fim da anterior.
+Como o objetivo final é criar um grafo que sumarize o \textit{movimento} de pessoas entre ocupações, as experiências profissionais que não se conectam cronologicamente com nenhuma outra são removidas. São consideradas desconexas quaisquer experiências em sequência cujo início da posterior esteja a mais do dois meses de distância do fim da anterior.
 
 % Inserir um gráfico explicativo. Ronie 2017-02-30
 
@@ -1600,7 +1591,7 @@ As etapas posteriores podam o grafo em suas arestas menos relevantes e transform
 
 \subsubsection{Remoção de Pares Pouco Frequentes} \label{sec:grafo-final}
 
-A maioria dos pares de ocupações ocorrem pouquíssimas vezes. Em um conjunto com XX pares, cerca de XX ocorrem apenas uma vez. Esse pequeno número de repetições é causado tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional. Com alguma frequência, os pares realmente representam trajetórias em carreiras extremamente específicas.
+A maioria dos pares de ocupações ocorrem pouquíssimas vezes. \todo{Em um conjunto com XX pares, cerca de XX ocorrem apenas uma vez.} Esse pequeno número de repetições é causado tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional. Com alguma frequência, os pares realmente representam trajetórias em carreiras extremamente específicas.
 
 Para encontrar um número de corte foi feita uma avaliação manual por amostragem. Amostras com algumas centenas de pares com números de corte entre 1 e 30 foram analisadas por especialistas da empresa junto com o pesquisador. O objetivo foi encontrar um número que não fosse conservador demais, removendo trajetórias válidas, nem liberal demais, permitindo trajetórias com erro.
 
@@ -1612,7 +1603,7 @@ A partir desse ponto, os dados para a montagem do grafo estão prontos em format
 
 Para que o grafo possa ser exibido bidimensionalmente, é preciso que seus vértices sejam posicionados de modo a evitar a sobreposição e que os vértices relacionados por arestas de maior peso estejam mais próximos.
 
-O algoritmo de \textit{Force-Directed} (ref) é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz. A saída do Graphviz é um arquivo texto com a posição X e Y do vértice em um plano cartesiano.
+O algoritmo de \textit{Force-Directed} é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz. A saída do Graphviz é um arquivo texto com a posição X e Y do vértice em um plano cartesiano.
 
 \subsubsection{Identificação de Carreiras}
 
@@ -1629,7 +1620,7 @@ Quando o fluxo de pessoas de uma ocupação para outra é relevante, é possíve
 
 A grosso modo, o agrupamento e o fluxo de migração das ocupações revela o que se pode considerar um \enquote{protótipo de carreira}. Ou seja, um esboço onde um indivíduo em uma ocupação dentro desse grupo tem uma probabilidade maior de se manter nele e de se movimentar para ocupações no topo do grupo.
 
-Existe, no entanto, um grupo que não obedece às características descritas acima. Ao se tentar ordená-lo topologicamente, não há uma ordem de preferência clara entre as ocupações, o que indica que não há uma noção de sucessão como em outros grupos, como exemplificado anteriormente na Figura~\ref{fig:grafo-ciclo-operacional}. Ele também possui algumas ocupações que conectam uma grande quantidade de outras ocupações, como \enquote{Auxiliar Administrativo}, que possui movimentações com XX ocupações, cerca de XX\% das ocupações do MCar.
+Existe, no entanto, um grupo que não obedece às características descritas acima. Ao se tentar ordená-lo topologicamente, não há uma ordem de preferência clara entre as ocupações, o que indica que não há uma noção de sucessão como em outros grupos, como exemplificado anteriormente na Figura~\ref{fig:grafo-ciclo-operacional}. Ele também possui algumas ocupações que conectam uma grande quantidade de outras ocupações, como \enquote{Auxiliar Administrativo}.\todo{, que possui movimentações com XX ocupações, cerca de XX\% das ocupações do MCar.}
 
 Ao analisar o grupo, nota-se que a escolaridade mais frequente nessas ocupações é a de \enquote{segundo grau completo}, significando que essas ocupações não necessitam de treinamento especializado para serem desempenhadas, o que é um indício que esse grupo reflete a própria definição de \enquote{operacional}.
 
@@ -1658,7 +1649,7 @@ Os textos resultantes do processo de normalização descrito na Seção~\ref{sec
 
 A limitação desse processo é que algumas ocupações são descritas no masculino ou no feminino dependendo do número de profissionais do gênero exercendo essa ocupação. Por exemplo, uma das ocupações de Direito é descrita como \enquote{Advogado} (no masculino) pois existem um pouco mais profissionais do gênero masculino exercendo a profissão, por outro lado, outra ocupação correlacionada é descrita como \enquote{Advogada Coordenadora} pelo motivo contrário.
 
-Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de gênero misto (ref), optou-se por não se modificar o gênero artificialmente, preservando a grafia da predominância do gênero na ocupação.
+Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de gênero misto\todo{ref}, optou-se por não se modificar o gênero artificialmente, preservando a grafia da predominância do gênero na ocupação.
 
 \subsubsection{Extração de Palavras-Chave}
 
@@ -1667,10 +1658,11 @@ As palavras-chave são extraídas a partir das descrições digitadas pelos usu�
 Para formar expressões, são gerados unigramas, bigramas e trigramas para as descrições de cada experiência profissional. A seguir, elas são ordenadas por TF-IDF e as palavras que aparecem repetidas em um n-grama de menor TF-IDF são removidas. Por exemplo, se a palavra \enquote{fiscal} aparece com maior TF-IDF que o bigrama \enquote{nota fiscal}, a palavra \enquote{fiscal} é removida da lista.
 
 % Ronie: na prática, o resultado é muito bom, mas o algoritmo foi baseado no meu nariz =/ Então, talvez eu devesse refazer o processo com uma técnica de sumarização melhor.
-
+\begin{comment}
 \subsubsection{Gravação do Arquivo Final}
 
 A definir\ldots
+\end{comment}
 
 \subsection{Atributos das Ocupações}
 
@@ -1690,7 +1682,24 @@ A idade, o salário e o tempo de permanência são sumarizados usando o \textit{
 
 O \textit{resumo de cinco números} consiste no valor mínimo, 1º quartil, mediana, 3º quartil e valor máximo. Esse resumo é proposto por \citeonline{Hoaglin1983-aq} como estatística descritiva de uma amostra.
 
-O intervalo de confiança 95\% para todos os valores do resumo de cinco números é obtido por \textit{bootstrap} com 10.000 iterações. A técnica permite identificar os valores mais confiáveis independentemente do tamanho da amostra e das distribuições. A Tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos de confiança para a ocupação de \enquote{Programador}.
+O intervalo de confiança 95\% para todos os valores do resumo de cinco números é obtido por \textit{bootstrap} com 10.000 iterações. A técnica permite identificar os valores mais confiáveis independentemente do tamanho da amostra e das distribuições.
+
+A Tabela~\ref{tab:resumo-salario-programador} mostra os quartis e seus intervalos de confiança para a ocupação de \enquote{Programador}.
+
+\begin{table}[htb]
+    \centering
+    \begin{tabular}{r|c|c|c}
+        & \textbf{2,5\%} & \textbf{Estimativa} & \textbf{97,5\%} \\ \hline
+        \textbf{1º Quartil} & 1672           & 1709                & 1751 \\ \hline
+        \textbf{Mediana}    & 2354           & 2403                & 2476 \\ \hline
+        \textbf{3º Quartil} & 3225           & 3294                & 3354 \\
+    \end{tabular}
+    \caption{Quartis para o salário de \enquote{Programador}}
+    \label{tab:resumo-salario-programador}
+\end{table}
+
+\begin{comment}
+A Tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos de confiança para a ocupação de \enquote{Programador}.
 
 \begin{table}[htb]
 \centering
@@ -1705,6 +1714,7 @@ O intervalo de confiança 95\% para todos os valores do resumo de cinco números
 \caption{Resumo de 5 números para salário de \enquote{Programador}}
 \label{tab:resumo-salario-programador}
 \end{table}
+\end{comment}
 
 A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador de Densidade de Kernel usando um distribuição gaussiana como função kernel. A largura de banda escolhida para cada estimativa é o menor valor limite para que a distribuição se mantenha unimodal.
 
@@ -1716,16 +1726,17 @@ Ao se correlacionar as medidas usadas em Ciência de Redes cria-se mais um conju
 
 %% O QUE VOCÊ QUER DIZER COM "AO SE CORRELACIONAR...CRIA-SE MAIS UM CJTO DE QUESTÕES SOBRE O SIGNIFICADO DA CORRELAÇÃO"?
 
-Um estudo confirmatório não é possível apenas com os dados desse trabalho, pois eles requerem um aprofundamento em ciências sociais que foge do âmbito proposto. Entretanto, o volume de dados e o rigor da análise estatística fornecem indícios sólidos que servem como motivadores para pesquisas mais ambiciosas, ou podem ser usados como complemento em estudos sociais. Ainda assim, os achados nesse capítulo são plausíveis por construção, já que são propostos baseados em medições sobre dados reais.
+Um estudo confirmatório não é possível apenas com os dados apresentados aqui, pois eles requerem um aprofundamento em ciências sociais que foge da proposta dessa pesquisa. Entretanto, a análise estatística de um grande volume de dados fornece indícios que podem servir como motivadores para pesquisas mais ambiciosas ou podem ser usados como complemento em estudos sociais. Ainda assim, os achados nesse capítulo são plausíveis por construção já que são propostos baseados em medições sobre dados reais.
 
 %% ESSE PARÁGRAFO ACIMA FICOU UM POUCO "ROLANDO LERO"
+%% Ronie (2017-08-13) Acho que foi só diminuir o número de adjetivos :D Veja se ficou melhor :)
 
 %% POR QUE NÃO TEMOS DADOS SUFICIENTES PARA VALIDAR, PELO MENOS NO CONTEXTO EM ESTUDO, AS HIPÓTESES COLOCADAS ACIMA.
 %% ALÉM DISSO, SE SÃO HIPÓTESES EU SUGIRO QUE AS DESTAQUEMOS COMO TAL E NA PARTE EXPERIMENTAL A GENTE VÁ TENTANDO VALIDÁ-LAS. FIZ O EXERCÍCIO DE CRIAR AS HIPÓTESES ACIMA, VEJA O QUE ACHA. COMO ESSAS HIPÓTESES SE REFEREM AO MCAR, SUGIRO COLOCÁ-LAS EM UMA SEÇÃO SEPARADA E DEIXARMOS AQUI COMO UMA REVISÃO CONCEITUAL. ISSO AJUDA A COMPOR A PROPOSTA DE SUA DISSERTAÇÃO. MUITO INTERESSANTE!!! NA REALIDADE, SUA DISSERTAÇÃO É UMA ANÁLISE EXPLORATÓRIA SOBRE O MCAR E, PORTANTO, A MOVIMENTAÇÃO DE CARREIRA. NESSE SENTIDO, TODOS OS INSIGHTS DEVEM SER DESTACADOS COMO CONTRIBUIÇÃO AO INVÉS DE APARECEREM DILUÍDOS NUM CAPÍTULO DE REVISAO CONCEITUAL
 % Ronie: Gostei MUITO! Acho que ficou muito mais claro e a separação faz bastante sentido. Fazemos um capítulo para isso ou colocamos junto com o desenvolvimento, tentando validá-la? 
 
 
-As hipótese propostas são pontos de partida para diversas aplicações. Por exemplo, a criação de uma classificação de ocupações baseada em agrupamento. É esperado que ela retrate com mais precisão um conjunto de funções em que seus membros compartilham habilidades compartilhadas. Também é possível inferir capacitações através do histórico profissional e compreender com mais clareza a movimentação profissional.
+As hipótese propostas são pontos de partida para diversas aplicações. Por exemplo, a criação de uma classificação de ocupações baseada em agrupamento. É esperado que ela retrate com mais precisão um conjunto de funções em que seus membros compartilham habilidades. Também é possível inferir capacitações através do histórico profissional e compreender com mais clareza a movimentação profissional.
 
 Abaixo, as propostas são enumeradas e justificadas.
 
@@ -1754,7 +1765,7 @@ Outra interpretação plausível é que essas ocupações possuem requisitos de 
 \end{comment}
 
 \begin{hypothesis}[Pontos de Saída do Mercado de Trabalho]
-    Se $\linkin{s}_i \gg \linkout{s}_i$ (Equações~\ref{eq:forca-entrada} e ~\ref{eq:forca-saida}), a movimentação não mapeada é insuficiente para explicar a diferença entre as forças, o que possivelmente indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
+    Se $\linkin{s}_i \gg \linkout{s}_i$ (Equações~\ref{eq:forca-entrada} e ~\ref{eq:forca-saida}), a movimentação não mapeada é insuficiente para explicar a diferença entre as forças, o que indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
 \end{hypothesis}
 
 Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas, mas esse número não é suficiente para explicar $\linkin{s}_i \gg \linkout{s}_i$.
@@ -1774,7 +1785,7 @@ A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topogra
 \begin{figure}[ht]
   \centering
   \includegraphics[scale=0.6]{cluster_25.pdf}
-  \caption{Ilustração da centralidade de intermediação na carreira de topografia. O nó mais central é o "topógrafo".}
+  \caption{Ilustração da centralidade de intermediação na carreira de topografia. O nó mais central é \enquote{topógrafo}.}
   \label{fig:carreira-topografia}
 \end{figure}
 %% NESSA FIGURA VOCÊ PRECISA MOSTRAR O VALOR DA CENTRALIDADE DE INTERMEDIAÇÃO DE CADA NÓ, ASSIM VOCÊ MOSTRA QUANTITATIVAMENTE A DIFERENÇA.
@@ -1790,7 +1801,7 @@ Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar e
     Se dois nós possuem similaridade máxima $\linkboth{S}(i,j) = 1$, ou seja, possuem exatamente os mesmos vizinhos, mas não há conexão entre eles, então esses nós são potencialmente nomenclaturas diferentes para a mesma ocupação.
 \end{hypothesis}
 
-Se duas ocupações possuem as mesmas entradas e saídas, mas não se conectam entre si, é um indício que elas na verdade são nomes diferentes para a mesma função. Entretanto, outros casos são possíveis, como ocupações que são paralelos em termos de progressão de carreira, mas não executam o mesmo trabalho. Por outro lado, se outros dados além da estrutura também forem similares, como a nuvem de palavras, essas ocupações são potencialmente nomenclaturas diferentes para a mesma função.
+Se duas ocupações possuem as mesmas entradas e saídas, mas não se conectam entre si, é um indício que elas na verdade são nomes diferentes para a mesma função. Entretanto, outros casos são possíveis, como ocupações que são paralelas em termos de progressão de carreira, mas não executam o mesmo trabalho. Por outro lado, se outros dados além da estrutura também forem similares, como a nuvem de palavras, essas ocupações são potencialmente nomenclaturas diferentes para a mesma função.
 %% NESTE MOMENTO ME OCORRERAM DUAS POSSIBILIDADES DE APRESENTAÇÃO DESTE CAPÍTULO: 1) APRESENTAR INICIALMENTE PARTES DO MCar NAS QUAIS APARECEM OS CASOS DISCUTIDOS NAS HIPÓTESES; OU 2) APÓS CADA HIPÓTESE APRESENTAR EXEMPLOS NO MCar QUE ILUSTRAM (VALIDAM) AS HIPÓTESES.
 
 \begin{hypothesis}[Capacitação Parcial] \label{hip:capacitacao-suficiente}
