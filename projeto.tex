@@ -1774,6 +1774,79 @@ Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo
     De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
 \end{hypothesis}
 
+Ocupações somente com força de saída significam que os profissionais iniciam nessa ocupação ou é a primeira que consideram em seus currículos. Por outro lado, as que somente possuem força de entrada, são ocupações em que os profissionais não dão “sequência” a elas em seus currículos, possivelmente significando que será a ocupação atual ou onde ele pára de procurar outro trabalho.
+
+Analisando como a força é distribuída entre entrada e saída, é possível observar que há um pico em algumas ocupações em que predomina a saída de profissionais, são provavelmente ocupações de ingressão no mercado de trabalho. Por outro lado, as ocupações que predominam a força de entrada são pontos de evasão ou “estagnação” do profissional.
+
+A Distribuição de Probabilidade de Kernel da Figura~\ref{fig:ditribuicao-de-forca} mostra a concentração de ocupações de acordo com a força, o eixo $x$ possui a força relativa entre entrada e saída da ocupação. Zero significa que as forças são iguais, ou seja, saem tanto profissionais quanto entram; números negativos significam que saem mais profissionais do que entram, o número -1 significa que só existe força de saída; de maneira contrária, quanto mais positivo o valor, maior o número de profissionais entrando na ocupação em relação a profissionais saindo até que 1 significa que existe apenas força de entrada.
+
+Em termos mais precisos, zero significa que a ocupação é perfeitamente recíproca, -1 ou 1 significam que são perfeitamente antirrecíprocas em um sentido ou outro.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[scale=0.8]{distribuicao-de-forca.png}
+    \caption{Distribuição de Força entre Ocupações}
+    \label{fig:ditribuicao-de-forca}
+\end{figure}
+
+Na Figura~\ref{fig:ditribuicao-de-forca} é possível observar três picos (modas), dois deles nos extremos de antirreciprocidade e um próximo ao ponto mais recíproco. Os dois vales os separam claramente e podem ser usados como divisores, pois é onde a distribuição muda sua forma.
+
+A porção mais negativa soma 712 nós e forma uma lista de ocupações mais comuns para ingressão no mercado de trabalho.
+
+A porção mais positiva soma 1.437 nós e forma uma lista das ocupações mais comuns para evasão ou estagnação.
+
+Analisando a lista de ocupações por amostragem, a explicação acima parece plausível. Por outro lado, as ocupações com pouca força de saída não parecem corresponder à hipótese.
+
+A Tabela~\ref{tab:ocupacoes-de-ingresso} possui uma amostra de ocupações próximas ao ponto de separação entre pico de saída e o segundo pico.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l|r|r|r|r}
+        \hline
+        Ocupação & Força & Entrada & Saída & Fluxo\\
+        \hline
+        administrativo aprendiz jovem tecnico & 123 & 10 & 113 & -0.84\\
+        \hline
+        atendimento cliente profissional & 163 & 14 & 149 & -0.83\\
+        \hline
+        maquina moco & 138 & 12 & 126 & -0.83\\
+        \hline
+        embalador repositor & 143 & 13 & 130 & -0.82\\
+        \hline
+        equipe treinador & 185 & 17 & 168 & -0.82\\
+        \hline
+        aprendiz jovem mecanico & 135 & 13 & 122 & -0.81\\
+        \hline
+    \end{tabular}
+    \caption{Ocupações de Ingresso}
+    \label{tab:ocupacoes-de-ingresso}
+\end{table}
+
+Uma amostra de ocupações próximas ao ponto de separação entre o segundo pico e o pico de entrada é exibida na Tabela~\ref{tab:ocupacoes-de-evasao}.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l|r|r|r|r}
+        \hline
+        Ocupação & Força & Entrada & Saída & Fluxo\\
+        \hline
+        analista desenvolvimento pesquisa & 111 & 101 & 10 & 0.82\\
+        \hline
+        analista gestao & 113 & 103 & 10 & 0.82\\
+        \hline
+        analista commerce & 126 & 115 & 11 & 0.83\\
+        \hline
+        coordenador unidade & 121 & 111 & 10 & 0.83\\
+        \hline
+        consultor investimento & 152 & 142 & 10 & 0.87\\
+        \hline
+        fonoaudiologo & 181 & 170 & 11 & 0.88\\
+        \hline
+    \end{tabular}
+    \caption{Ocupações de Evasão ou Estagnação}
+    \label{tab:ocupacoes-de-evasao}
+\end{table}
+
 %% PARA CADA UMA DAS HIPÓTESES VOCÊ DEVE ILUSTRAR COM UMA FIGURA
 
 \begin{hypothesis}[Trabalho de Passagem]
