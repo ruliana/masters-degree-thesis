@@ -43,6 +43,9 @@
 
 \usepackage{wrapfig}
 
+% Este cria uma linha divisória que só desaparece
+% se for a primeira ou última coisa da página.
+% Extremamente útil!
 \newcommand\disappearingrule{%
   \par % make sure we end a paragraph
   \vskip10pt % space above the rule
@@ -51,6 +54,11 @@
   \vskip10pt % space below the rule
 }
 
+% Para inserir gráficos e imagens
+\usepackage{graphicx}
+% Diretório padrão para figuras
+\graphicspath{ {images/} }
+
 % Notações matemáticas usadas na dissertação.
 % Usando elas é possível trocar toda a notação
 % apenas mexendo nesse arquivo. Lembre sempre
@@ -58,9 +66,26 @@
 \input{define-math-symbols}
 
 \begin{document}
-  \begin{center}
-    Handout
-  \end{center}
+
+\pagestyle{empty}
+\begin{center}
+  \vspace*{\fill}
+  
+  {\Huge Um Estudo do Mapa de Carreiras \\
+    da Empresa Vagas.com \\
+    usando Ciência de Redes}
+  
+  \vspace{3\baselineskip}
+  
+  {\Large Handout para a \\
+    Qualificação de Mestrado}
+  
+  \vspace{3\baselineskip}
+    
+  Ronie Uliana
+  
+  \vspace{\fill}
+\end{center}
 
 \newpage
 
@@ -273,8 +298,70 @@
 
 \begin{minipage}[t]{\linewidth}
   \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-atracao}
+  \end{wrapfigure}
+  
+  \textbf{Hipótese:} \textit{A força de entrada do nó (Seção~\ref{sec:forca}) indica o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou seja por sua atratividade.}
+  
+  Como a correlação entre força de entrada e saída é muito alta, isso significa que essa hipótese acabe identificando os nós com grande movimentação. Uma alternativa foi procura por nós que são preferência de movimentação entre seus pares.
+
+  Para isso, ordena-se as conexões de saída do nós pela força, da maior para a menor. Atribui-se à cada conexão a sua posição nessa sequência, criando uma \textit{ordem de preferência de saída}.
+  
+  Após esse processo, calcula-se a mediana da \textit{preferência de saída} nas conexões de entrada dos nós. Isso significa que aquela é a posição preferida por metade dos nós por onde chegam profissionais.
+  
+  O grau do nó também é relevante. Uma ocupação que é a segunda para mais de 200 ocupações é mais relevante que uma que é segunda pra uma única ocupação. Como incluir esse fator em uma única medida que faça sentido ainda é uma questão aberta.
+  
+  Esse métrica também seria possível com \textit{random walk}, usando a probabilidade de saída da ocupação ao invés da ordem. Essa abordagem ainda não foi experimentada pelo pesquisador.
+  
+  Finalmente, é possível responder \enquote{qual a atração} para um grupo de ocupações selecionados por qualquer critério, por exemplo, ocupações com formação em Direito ou Administração de Empresas.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-salario}
+  \end{wrapfigure}
+  
+  \textbf{Hipótese 2:} \textit{Existe uma correlação negativa entre a força de entrada e a mediana salarial, ou seja, quanto maior a força de entrada, menor a mediana do salário.}
+  
+  Todas as medidas de grau e força tem alta correlação (acima de 0,95), então não é possível afirmar que a força de entrada está correlacionada ao salário.
+  
+  Entretanto, existe uma correlação entre grau/força e salário. Apesar de não ser direta, salários maiores só existem para ocupações de pouco grau/força.
+  
+  Testou-se, no entanto, a relação entre salário e outros atributos.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-salario-graduacao}
+  \end{wrapfigure}
+
+  Procurando uma correlação para salário, observou-se que a graduação é um dos fatores dominantes, como esperado pelo conhecimento popular.
+  
+  No entanto, não se observou um correlação linear. Os experimentos até agora indicam que uma graduação é condição \textbf{necessária} para um salário mais alto, mas não é uma condição \textbf{suficiente}.
+  
+  Apesar de simplesmente confirmar um conhecimento tácito sobre a relação entre salário e educação, nesse estudo é possível dar números à ele.
+  
+  A tabela mostra as ocupações com mediana salarial acima de R\$ 4.000,00 e com a graduação mais frequente sendo o ensino médio. Um destaque é dado para o \textit{Mestre de Cabotagem}, que possui o salário bem acima do segundo colocado. A coluna \enquote{Prof} se refere a quantidade de profissionais registrados atualmente essa função no VAGAS.com no momento da coleta dos dados.
+  
+  O intervalo de confiança 95\% para o salário do \textit{Mestre de Cabotagem} está entre R\$ 7.432,00 e  R\$ 9.379,00.
+\end{minipage}
+
+\disappearingrule
+  
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
     \includeslide[width=0.48\textwidth]{hipotese-pontos-entrada-e-saida}
   \end{wrapfigure}
+  
+  \textbf{Hipótese 3:} \textit{Se $\linkin{s}_i \gg \linkout{s}_i$ (Equações~\ref{eq:forca-entrada} e ~\ref{eq:forca-saida}), a movimentação não mapeada é insuficiente para explicar a diferença entre as forças, o que indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.}
+  
+  \textbf{Hipótese 4:} \textit{ De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.}
+  
+  Essas hipóteses são bastante promissora, a maior dificuldade está em estabelecer um ponto de corte rígido para \enquote{ocupações de entrada no mercado de trabalho} e \enquote{ocupações de saída}.
   
   Ao se colocar a densidade da distribuição de reciprocidade em forma gráfica é possível notar 3 modas. À esquerda existe um grupo de nós que possui apenas força de saída, com pouca ou nenhuma força de entrada. À direita é possível observar o reverso.
   
@@ -307,8 +394,7 @@
   \begin{wrapfigure}{l}{0.5\textwidth}
     \includeslide[width=0.48\textwidth]{hipotese-ponto-de-entrada-tabela}
   \end{wrapfigure}
-  
-    
+
   Essas são as ocupações que estão mais próximas do segundo  \enquote{vale} no gráfico.
   
   Intuitivamente, é possível observar que são profissões de aprendiz ou que não necessitam de treinamento especializado, reforçando a hipótese que são trabalhos de entrada.
@@ -318,11 +404,105 @@
 
 \disappearingrule
 
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-carreira}
+  \end{wrapfigure}
+  
+  \textbf{Hipótese 8:} \textit{ O fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.}
+  
+  \textbf{Hipótese 9:} \textit{Uma comunidade dentro do MCar significa que o fluxo de profissionais dentro desse grupo é maior do que com outros nós, indicando que é um conjunto de ocupações que pode ser exercido por profissionais com capacitações em comum (Hipótese~\ref{hip:capacitacao-suficiente}). Se a comunidade possui uma direção de fluxo óbvio entre as ocupações, isso indica progressão (Hipótese~\ref{hip:equivalencia}). Ambas as propriedades presentes caracterizam uma carreira.}
+  
+  Testes com o algoritmo de detecção de comunidade \textit{Markov Clustering Algorithm} de ~\citeonline{Van_Dongen2000-qm} mostraram resultados que foram validados por especialistas da VAGAS.com e pelo pesquisado empiricamente.
+  
+  No slide é possível observar a carreira de \enquote{Mídia} que segue uma progressão clássica em empresas: estagiário, assistente, coordenador, supervisor, gerente.
+  
+  À esquerda do slide estão as ocupações relacionadas a técnico de comunicações extraídas da mesma forma. É possível notar uma ocupação \enquote{genérica} na penúltima posição da lista: técnico especialista. Esse é um provável sinônimo para \enquote{técnico especialista em comunicações}, que poderia ser usado como exemplo na Hipótese 7.
+  
+  O apêndice na página~\pageref{apx:exemplo-de-carreiras} contém o grafo com a carreira de Técnico de Comunicações entre outros exemplos.
+  
+  Uma das dificuldades é que o algoritmo usado cria comunidades que seguem a lei de potência em seu tamanho. Para resolver essa dificuldade, técnicas adicionais devem ser testadas, como a detecção de sub-comunidades dentro das comunidades maiores. 
+  
+  Outros algoritmos também devem ser experimentados, em especial a detecção de comunidades por links, como proposto por \citeonline{Ahn2010-uh, Evans2009-lq}. Esse tipo de detecção permite que vértices sejam compartilhados entre comunidades, aplicado ao MCar ele pode revelar ocupações que são ponte entre carreiras. Métodos de detecção de comunidade hierárquicos também podem revelar \enquote{sub-carreiras} dentro das carreiras maiores e podem ser mais adequadas para se lidar com uma rede livre de escala.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipoteses-pendentes}
+  \end{wrapfigure}
+  
+  Essas três hipóteses ainda não foram submetidas à experimentação.
+  
+  \textbf{Hipótese 6:} \textit{Uma ocupação com alta centralidade de intermediação (Seção~\ref{sec:intermediacao}) significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.}
+  
+  \textbf{Hipótese 7:} \textit{Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, então não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.}
+  
+  \textbf{Hipótese 8:} \textit{Se dois nós possuem similaridade máxima $\linkboth{S}(i,j) = 1$, ou seja, possuem exatamente os mesmos vizinhos, mas não há conexão entre eles, então esses nós são potencialmente nomenclaturas diferentes para a mesma ocupação.}
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipoteses-novas}
+  \end{wrapfigure}
+  
+  A busca pelo confirmação das hipóteses anteriores abre novas hipóteses a serem testadas.
+  
+  Elas ainda estão me formulação, mas a grosso modo poderiam ser formuladas da seguinte maneira:
+  
+  \textbf{Hipótese 11:} \textit{Determinadas ocupações atraem profissionais com uma certa graduação, enquanto que outras graduações não possuem ocupações para as quais são obviamente atraídas.}
+  
+  É possível observar esse tipo de relação com as graduações de Medicina e Administração. Enquanto a primeira possui um nicho específico e suas ocupações não podem ser exercidas por profissionais de outra áreas, a segunda é uma \enquote{graduação coringa} que permite o profissional atuar em uma ampla gama de ocupações.
+  
+  Por outro lado, essa versatilidade pode se traduzir em salários menores, o que seria comprovado com a hipótese seguinte.
+  
+  \textbf{Hipótese 12:} \textit{A área da graduação está diretamente correlacionada ao salário esperado.}
+  
+  Algumas graduações dão acesso à salários mais altos. Essa hipótese é uma verificação do senso comum, mas espera-se que possa quantificar o quanto cada graduação espera como salário.
+  
+  \textbf{Hipótese 13:} \textit{Existem ocupações em que os profissionais chegam a ela, mas poucos saem.}
+  
+  Essa hipótese é um complemento da Hipótese 6 (Trabalho de Passagem) e é um aprofundamento sobre as ocupações da Hipótese 3 (Pontos de Saída do Mercado de Trabalho).
+  
+  \textbf{Hipótese 14:} \textit{O salário está correlacionado com a estabilidade dos profissionais no trabalho.}
+  
+  Nesse hipótese, espera-se que trabalhos mais estáveis proporcionem salários melhores.
+\end{minipage}
+
 \newpage
 
 \def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
 \bibliography{main}
 \addcontentsline{toc}{section}{REFERÊNCIAS BIBLIOGRÁFICAS}
 \bibliographystyle{abnt-alf}
+
+\newpage
+
+\appendix
+
+\section{Exemplos de Carreiras extraídas por Detecção de Comunidade} \label{apx:exemplo-de-carreiras}
+
+\vspace{2\baselineskip}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textheight, angle=90]{cluster_11}
+  \caption{Carreira de Desenhista Técnico}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textheight, angle=90]{cluster_13}
+  \caption{Carreira de Designer Gráfico}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textheight, angle=90]{cluster_14}
+  \caption{Carreira de Técnico em Telecomunicações}
+\end{figure}
 
 \end{document}
