@@ -1,3 +1,4 @@
+% !TeX program = pdflatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = pt_BR
 \documentclass[12pt,a4paper,final]{article}
@@ -21,6 +22,12 @@
 % pequenos ajustes em fontes e alinhamentos. 
 \usepackage[T1]{fontenc}
 \usepackage{microtype}
+
+% Faz com que linhas orfãs sejam fortemente
+% penalizadas. Mas é impossível evitá-las
+% completamente.
+\clubpenalty=9996
+\widowpenalty=9999
 
 % Para fórmulas matemáticas
 \usepackage{amsmath}
@@ -142,6 +149,18 @@
 % Usado para comentar grandes porções do texto
 % com \begin{comment} \end{comment}
 \usepackage{comment}
+
+% Para quebrar células de tabelas e melhorar
+% a formatação.
+% Meio complicado para fazer apenas isso,
+% mas funciona.
+\usepackage{array}
+\usepackage{makecell}
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
 
 % Texto colorido e afins. Bom para TODO notes
 \usepackage{xargs}
@@ -271,7 +290,7 @@ O \citeonline{National_Research_Council2006-lv} define a Ciência de Redes como 
 
 Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se diferencia de uma abordagem tradicional pelos seguintes pontos:
 
-\begin{description}
+\begin{description} \label{desc:ciencia-de-redes}
 	\item[\textit{Interdisciplinar}.] A Ciência de Redes é terreno comum para diversas disciplinas, como Biologia (com redes de proteínas), Sociologia (com redes sociais), Computação (com redes de comunicações e algoritmos), entre outras. Apesar de divergirem em essência e propósito, as redes que são seu objeto de estudo compartilham características e propriedades.
     
     \item[\textit{Empírica}.] A Ciência de Redes foca em dados reais e no propósito de uso das redes. Modelos teóricos são confrontados com dados reais para avaliação de sua utilidade na descoberta de propriedades relevantes das redes.
@@ -1123,7 +1142,7 @@ Em redes direcionadas é possível correlacionar os graus de entrada e saída de
 Já em redes ponderadas, as mesmas correlações podem ser feitas levando-se em consideração a \textit{força} ao invés do grau.
 
 %====================================
-\subsubsection{Similaridade}
+\subsubsection{Similaridade} \label{sec:similaridade}
 
 A \textit{similaridade} é usada para medir se dois nós ou conexões são similares estruturalmente, ou seja, independente do seu conteúdo. De maneira simplificada, dois nós são tão mais similares quanto houverem vizinhos comuns. Já a \textit{similaridade de conexão}, como definida por \citeonline{Ahn2010-uh}, parte de conexões que compartilham um nó e verifica se os nós não compartilhados são similares.
 
@@ -1294,7 +1313,7 @@ Em uma rede aleatória Erdős-Rényi, a menor distância esperada entre dois nó
 \noindent
 \begin{tabularx}{\linewidth}{@{}XX@{}}
     \begin{equation} \label{eq:distancia-erdos}
-        \avg{d}^\textit{erdos} \sim ln N
+        \avg{d}^\textit{erdos} \sim \frac{ln N}{ln\avg{k}}
     \end{equation} &
     \begin{equation} \label{eq:coef-agrupamento-erdos}
         \avg{C}^\textit{erdos} = \frac{\avg{k}}{N}
@@ -1463,7 +1482,7 @@ Duas outras limitações no grafo ocorrem por conta da experiência profissional
 Por outro lado, o campo de texto livre permite a captura de ocupações que pouco provavelmente apareceriam em uma lista curada, como \enquote{IRLA} (Instalador Reparador de Linhas Aéreas) ou \enquote{Rigger} (pessoa no solo que orienta o posicionamento de carga para o operador de guindaste).
 
 Ao final do processo o grafo possui cerca de 8.348 ocupações distintas e 14.031 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em Fevereiro de 2017.
-%% COLOQUE O DIA EXATO DE CAPTURA DOS DADOS, OK?
+% COLOQUE O DIA EXATO DE CAPTURA DOS DADOS, OK?
 
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
@@ -1718,7 +1737,7 @@ A Tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos 
 
 A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador de Densidade de Kernel usando um distribuição gaussiana como função kernel. A largura de banda escolhida para cada estimativa é o menor valor limite para que a distribuição se mantenha unimodal.
 
-\section{UM ESTUDO ANALÍTICO DO MCar USANDO CIÊNCIA DE REDES: RESULTADOS PRELIMINARES}
+\section{UM ESTUDO ANALÍTICO DO MCar USANDO CIÊNCIA DE REDES: RESULTADOS PRELIMINARES} \label{sec:resultados-preliminares}
 
 A comparação de uma rede real com modelos nulos indica fenômenos que não acontecem por aleatoriedade. Essa aplicação é uma análise exploratória que levanta a questão de por que eles acontecem se o acaso não é uma explicação aceitável.
 
@@ -1746,6 +1765,71 @@ Abaixo, as propostas são enumeradas e justificadas.
 
 Algumas ocupações, como \enquote{Auxiliar Administrativo}, possuem um grande número de profissionais em seu fluxo de entrada comparativamente com outras ocupações próximas. Independentemente da motivação, um grande número de profissionais converge para elas.
 
+A Tabela~\ref{tab:ocupacoes-preferenciais} mostra as ocupações preferenciais entre seus vizinhos. Ordenando as conexões de entrada pela peso de saída, do maior peso para o menor, obtêm-se um número de \enquote{preferência de saída}, ou seja, para qual ocupação os profissionais usualmente migram. Do outro lado, se a ocupação que recebe os profissionais está usualmente entre as primeiras opções, ela pode ser considerada uma ocupação atrativa entre seus vizinhos.
+
+A coluna \enquote{Posição} na Tabela~\ref{tab:ocupacoes-preferenciais} possui a mediana da dessa ordem entre os vizinhos. Por exemplo, no topo da tabela, Auxiliar Administrativo é primeira ou segunda opção preferencial para metade dos seus 2.591 vizinhos. Vendedor, na terceira linha, está entre as quatro primeiras opções entre metade dos seus 1.553 vizinhos.
+
+A coluna final \enquote{Mediana/Ocupações} faz uma ponderação para destacar um bom posicionamento em ocupações com mais vizinhos. De outra forma, ocupações que são preferenciais para um único vizinho assumem o topo.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l|r|r|r}
+        \hline
+        & \thead{Posição\\(Mediana)} & \thead{entre\\Ocupações} & \thead{Mediana / Ocupações}\\
+        \hline
+        administrativo auxiliar & 2.0 & 2591 & 1295.5\\
+        \hline
+        administrativo assistente & 4.0 & 1694 & 423.5\\
+        \hline
+        vendedor & 4.0 & 1553 & 388.2\\
+        \hline
+        recepcionista & 4.0 & 1176 & 294.0\\
+        \hline
+        auxiliar producao & 5.0 & 885 & 177.0\\
+        \hline
+        atendimento & 7.0 & 904 & 129.1\\
+        \hline
+        enfermeiro & 1.0 & 121 & 121.0\\
+        \hline
+        caixa operador & 7.0 & 745 & 106.4\\
+        \hline
+        analista sistema & 3.0 & 300 & 100.0\\
+        \hline
+        motorista & 7.0 & 547 & 78.1\\
+        \hline
+        analista suporte & 5.0 & 369 & 73.8\\
+        \hline
+        advogado & 4.0 & 257 & 64.2\\
+        \hline
+        maquina operador & 8.0 & 459 & 57.4\\
+        \hline
+        civil engenheiro & 3.0 & 169 & 56.3\\
+        \hline
+        analista humanos recursos & 6.0 & 328 & 54.7\\
+        \hline
+        comercial gerente & 9.0 & 488 & 54.2\\
+        \hline
+        operador telemarketing & 11.0 & 540 & 49.1\\
+        \hline
+        consultor venda & 12.0 & 563 & 46.9\\
+        \hline
+        eletricista manutencao & 3.0 & 138 & 46.0\\
+        \hline
+        manutencao mecanico & 4.0 & 182 & 45.5\\
+        \hline
+        fisioterapeuta & 1.0 & 40 & 40.0\\
+        \hline
+        promotor venda & 15.0 & 518 & 34.5\\
+        \hline
+        assistente financeiro & 13.0 & 434 & 33.4\\
+        \hline
+        gerente projeto & 7.0 & 229 & 32.7\\
+        \hline
+    \end{tabular}
+    \caption{Ocupações Preferenciais}
+    \label{tab:ocupacoes-preferenciais}
+\end{table}
+
 \begin{hypothesis}[Correlação Negativa entre a Força de Entrada e a Mediana Salarial]
     Existe uma correlação negativa entre a força de entrada (Seção~\ref{sec:forca}) e a mediana salarial, ou seja, quanto maior a força de entrada, menor a mediana do salário.
 \end{hypothesis}
@@ -1759,6 +1843,10 @@ Outra interpretação plausível é que essas ocupações possuem requisitos de 
 %% MINHA LEITURA É UM POUCO DIFERENTE. COMO O GRAFO É CONSTRUÍDO A PARTIR DE DADOS REAIS, QUANTO MAIOR A FORÇA DE ENTRADA, MAIS PROFISSIONAIS CONVERGEM PARA ESSA PROFISSÃO E, NORMALMENTE, AS PROFISSÕES QUE POSSUEM MAIORES SALÁRIOS SÃO AQUELAS QUE TÊM MENOS PESSOAS, POIS ESTÃO MAIS NO TOPO DA PIRÂMIDE. PORTANTO, EU ENTENDO QUE A OFERTA DE MÃO DE OBRA É UM ELEMENTO IMPORTANTE, MAS TAMBÉM DEVEMOS CONSIDERAR AS HABILIDADES REQUERIDAS PARA A POSIÇÃO.
 % Ronie: Sim, essa é uma discussão muito boa! Eu gostaria de me aprofundar mais nela se houver tempo hábil.
 % Ronie (2017-06-18) Tentei passar sua interpretação para o texto, veja se é mais ou menos isso :)
+
+NOTA: Totalmente não correlacionado.
+
+
 
 \begin{comment}
 É possível observar na lista XX que essas ocupações coincidem intuitivamente com as noções de \enquote{início de carreira} e \enquote{ocupação operacional}.
@@ -1861,6 +1949,49 @@ A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topogra
   \caption{Ilustração da centralidade de intermediação na carreira de topografia. O nó mais central é \enquote{topógrafo}.}
   \label{fig:carreira-topografia}
 \end{figure}
+
+NOTA: Aparentemente, essa hipótese não é válida para o grafo como um todo. Talvez para comunidades.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{l|r|r}
+        \hline
+        & Intermediação & Normalizada\\
+        \hline
+        administrativo auxiliar & 9570434.6 & 0.2\\
+        \hline
+        vendedor & 3674933.3 & 0.1\\
+        \hline
+        administrativo assistente & 3541082.1 & 0.1\\
+        \hline
+        auxiliar producao & 2200145.0 & 0.0\\
+        \hline
+        recepcionista & 2158463.5 & 0.0\\
+        \hline
+        atendimento & 1628197.2 & 0.0\\
+        \hline
+        motorista & 1195781.9 & 0.0\\
+        \hline
+        analista suporte & 1095105.7 & 0.0\\
+        \hline
+        caixa operador & 1052277.6 & 0.0\\
+        \hline
+        analista sistema & 991204.4 & 0.0\\
+        \hline
+        maquina operador & 911173.1 & 0.0\\
+        \hline
+        professor & 901804.6 & 0.0\\
+        \hline
+        seguranca tecnico trabalho & 838408.0 & 0.0\\
+        \hline
+        analista humanos recursos & 799837.4 & 0.0\\
+        \hline
+        consultor venda & 780830.7 & 0.0\\
+        \hline
+    \end{tabular}
+\end{table}
+
+
 %% NESSA FIGURA VOCÊ PRECISA MOSTRAR O VALOR DA CENTRALIDADE DE INTERMEDIAÇÃO DE CADA NÓ, ASSIM VOCÊ MOSTRA QUANTITATIVAMENTE A DIFERENÇA.
 \begin{hypothesis}[Equivalência Profissional] \label{hip:equivalencia}
     Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, então não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
