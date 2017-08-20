@@ -1,0 +1,35 @@
+% Para fórmulas matemáticas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% Para setas usadas em fórmulas dos grafos
+\usepackage{MnSymbol}
+
+% Notações matemáticas usadas com frequência no texto.
+% Isso possui três vantagens:
+% 1 - Dá menos trabalho digitar as fórmulas
+% 2 - Dá mais consistência à notação no trabalho
+% 3 - Se mudar de ideia qto à notação, é só trocar aqui
+%     e o trabalho todo fica certo.
+% Notação matemática
+\newcommand{\R}{\mathbb{R}} % Reais
+\renewcommand\vec{\mathbf} % vetor como negrito
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle} % ... média
+\newcommand{\defn}{\coloneqq} % Usamos "=", ":=" ou "\equiv?"
+\newcommand{\noloop}[1]{#1^\nlcirclearrowleft} % ... sem loops
+% Redes direcionadas
+\newcommand{\linkin}[1]{#1^\leftarrow} % ... entrada
+\newcommand{\linkout}[1]{#1^\rightarrow} % ... saída
+\newcommand{\linkboth}[1]{#1^\leftrightarrow} % ... direcionada
+% Redes ponderadas e direcionadas
+\newcommand{\win}{w^\leftarrow} % peso e direção de entrada
+\newcommand{\wout}{w^\rightarrow} % peso e direção de saída
+\newcommand{\weighted}[1]{#1^w} % ... com pesos
+\newcommand{\weighteddir}[1]{#1^{w\rightarrow}} % ... com peso e direção
+% Reciprocidade
+\newcommand{\recin}[1]{#1^\leftlsquigarrow} % ... entrada não-recíproca
+\newcommand{\recout}[1]{#1^\leadsto} % ... saída não-recíproca
+\newcommand{\recboth}[1]{#1^\leftrightsquigarrow} % ... recíproca
+% Capacidades
+\newcommand{\capac}{\textit{cap}}

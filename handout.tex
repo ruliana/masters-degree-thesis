@@ -19,14 +19,6 @@
   urlcolor={blue!80!black}
 }
 
-% Para fórmulas matemáticas
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{mathtools}
-
-% Para setas usadas em fórmulas dos grafos
-\usepackage{MnSymbol}
-
 \usepackage{beamerarticle}
 \usepackage{pgf}
 \setjobnamebeamerversion{slides}
@@ -59,8 +51,11 @@
   \vskip10pt % space below the rule
 }
 
-% Simplificação da notação matemática
-\newcommand{\avg}[1]{\left\langle #1 \right\rangle} % ... média
+% Notações matemáticas usadas na dissertação.
+% Usando elas é possível trocar toda a notação
+% apenas mexendo nesse arquivo. Lembre sempre
+% de olhá-lo antes de fazer equações.
+\input{define-math-symbols}
 
 \begin{document}
   \begin{center}
