@@ -91,72 +91,81 @@
 
 \small
 
-\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
-  \vspace{0pt}
-  \includeslide[height=.32\textwidth]{pesquisa}
-  &
-  \vspace{2pt}
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{pesquisa}
+  \end{wrapfigure}
+  
   Isso significa uma atenção com modelos nulos (Slide sobre \textit{modelos nulos} na página~\pageref{sde:modelos-nulos}). Mas também envolve visualização de dados para investigação e muitas tentativas que não resultam em nada significativo.
-\end{tabular}
+\end{minipage}
 
-\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
-  \vspace{0pt}
-  \includeslide[height=.32\textwidth]{objetivo}
-  &
-  \vspace{2pt}
-  O Slide~\ref{sde:hipoteses} na pág.\pageref{sde:hipoteses} detalha as hipóteses.
-\end{tabular}
+\disappearingrule
 
-\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
-  \vspace{0pt}
-  \includeslide[height=.32\textwidth]{dados}
-  &
-  \vspace{2pt}
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{objetivo}
+  \end{wrapfigure}
+
+  O Slide na página~\pageref{sde:hipoteses} detalha as hipóteses.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{dados}
+  \end{wrapfigure}
+
   Os dados são atualizados a cada 3 meses, os dados de Fevereiro são relativos ao período entre Janeiro e Março. Antes da versão final, é esperado que as análises sejam executadas sobre dados mais atualizados, como as mudanças nesse cenário são lentas, não se espera divergência das conclusões ao se executar os mesmos experimentos com dados mais recentes.
-\end{tabular}
+\end{minipage}
 
-\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
-  \vspace{0pt}
-  \includeslide[height=.32\textwidth]{conceitos-basicos}
-  &
-  \vspace{2pt}
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{conceitos-basicos}
+  \end{wrapfigure}
+
   De esquerda para a direita:
+
   \begin{enumerate}
     \item Rede simples - sem laços, direção, peso ou múltiplas arestas;
     \item Rede direcionada - cada arestas possui uma \textbf{direção}, pode indicar um fluxo, sentido, dependência ou o que for considerado relevante para o grafo. Arestas com direção também são chamadas \enquote{arcos};
     \item Rede ponderada - as arestas possuem \textbf{peso}, que podem representar uma quantidade, distância, preferência, etc\ldots;
     \item Multigrafo - as arestas podem conectar nós idênticos.
     \item Laços - quando uma aresta conecta o mesmo nó, formando uma autorreferência.
-  \end{enumerate}
-  
-\end{tabular}
+  \end{enumerate}  
+\end{minipage}
 
-\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
-  \vspace{0pt}
-  \includeslide[height=.32\textwidth]{historia}
-  &
-  \vspace{2pt}
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{historia}
+  \end{wrapfigure}
+
   USNRC = \textit{United States National Research Council}.
   
   Existiram muitas outras contribuições, esse slide destaca apenas os mais significativos no entendimento do autor.
   
   Apesar do reconhecimento como área acontecer em 2005, os livros~\cite{Barabasi2016-rn} e periódicos~\cite{Facebookcomspringeropn2016-wf} que levam o nome \enquote{Network Science} começaram a aparecer mais recentemente. Os primeiro workshop internacional data de 2011~\cite{Ieee2011-ti}.
-\end{tabular}
+\end{minipage}
 
 \disappearingrule
 
-\begin{tabular}{p{.5\linewidth} P{.48\linewidth}}
-  \vspace{0pt}
-  \includeslide[width=0.48\textwidth]{definicao}
-  &
-  \vspace{2pt}
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{definicao}
+  \end{wrapfigure}
+
   No original~\cite{National_Research_Council2006-lv} (o slide contém uma tradução livre do autor):
+  
   \begin{quote}
     The study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.
   \end{quote}
 
   Os tópicos de Barabási nos slides estão detalhados na página~\pageref{desc:ciencia-de-redes} da Dissertação.
-\end{tabular}
+\end{minipage}
 
 \disappearingrule
 
@@ -285,6 +294,7 @@
 \begin{minipage}[t][18\baselineskip]{\linewidth}
   \begin{wrapfigure}{l}{0.5\textwidth}
     \includeslide[width=0.48\textwidth]{hipoteses}
+    \label{sde:hipoteses}
   \end{wrapfigure}
   
   Essas são as hipóteses iniciais da pesquisa (página~\pageref{sec:resultados-preliminares} da dissertação). As de número 1, 3, 4, 8 e 9 são plausíveis até o momento.
