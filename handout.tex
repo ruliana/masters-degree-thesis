@@ -1,0 +1,333 @@
+% !TeX program = lualatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = pt_BR
+\documentclass[10pt,a4paper,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{csquotes}
+\usepackage{url}
+
+% Links nas referência cruzada no documento.
+% Ajuda a navegação (principalmente no índice).
+\usepackage[unicode]{hyperref}
+\hypersetup{
+  hidelinks,   % Comente aqui para exibir os links
+  %colorlinks, % Descomente esse se comentar o de cima
+  linkcolor={red!50!black},
+  citecolor={blue!50!black},
+  urlcolor={blue!80!black}
+}
+
+% Para fórmulas matemáticas
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% Para setas usadas em fórmulas dos grafos
+\usepackage{MnSymbol}
+
+\usepackage{beamerarticle}
+\usepackage{pgf}
+\setjobnamebeamerversion{slides}
+
+\usepackage{xr}
+\externaldocument{dissertacao}
+
+\usepackage{abnt-alf}
+\usepackage[top=2.5cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+
+% Espaçamento antes de cada parágrafo.
+\setlength{\parskip}{0.5\baselineskip}
+% Sem identação nesse documento
+\setlength{\parindent}{0pt}
+
+% Espaçamento DENTRO das explicações dos slides
+\usepackage{tabularx}
+\newcolumntype{P}[1]{>{%
+    \parskip=0.5\baselineskip%
+    \advance\parskip by 0pt plus 2pt
+    \setlength{\parfillskip}{30pt plus 1fil}}p{#1}}
+
+\usepackage{wrapfig}
+
+\newcommand\disappearingrule{%
+  \par % make sure we end a paragraph
+  \vskip10pt % space above the rule
+  \leaders\vrule width \textwidth\vskip0.4pt % rule thickness is 0.4pt
+  \nointerlineskip % disable interline glue here
+  \vskip10pt % space below the rule
+}
+
+% Simplificação da notação matemática
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle} % ... média
+
+\begin{document}
+  \begin{center}
+    Handout
+  \end{center}
+
+\newpage
+
+\small
+
+\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
+  \vspace{0pt}
+  \includeslide[height=.32\textwidth]{pesquisa}
+  &
+  \vspace{2pt}
+  Isso significa uma atenção com modelos nulos (Slide sobre \textit{modelos nulos} na página~\pageref{sde:modelos-nulos}). Mas também envolve visualização de dados para investigação e muitas tentativas que não resultam em nada significativo.
+\end{tabular}
+
+\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
+  \vspace{0pt}
+  \includeslide[height=.32\textwidth]{objetivo}
+  &
+  \vspace{2pt}
+  O Slide~\ref{sde:hipoteses} na pág.\pageref{sde:hipoteses} detalha as hipóteses.
+\end{tabular}
+
+\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
+  \vspace{0pt}
+  \includeslide[height=.32\textwidth]{dados}
+  &
+  \vspace{2pt}
+  Os dados são atualizados a cada 3 meses, os dados de Fevereiro são relativos ao período entre Janeiro e Março. Antes da versão final, é esperado que as análises sejam executadas sobre dados mais atualizados, como as mudanças nesse cenário são lentas, não se espera divergência das conclusões ao se executar os mesmos experimentos com dados mais recentes.
+\end{tabular}
+
+\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
+  \vspace{0pt}
+  \includeslide[height=.32\textwidth]{conceitos-basicos}
+  &
+  \vspace{2pt}
+  De esquerda para a direita:
+  \begin{enumerate}
+    \item Rede simples - sem laços, direção, peso ou múltiplas arestas;
+    \item Rede direcionada - cada arestas possui uma \textbf{direção}, pode indicar um fluxo, sentido, dependência ou o que for considerado relevante para o grafo. Arestas com direção também são chamadas \enquote{arcos};
+    \item Rede ponderada - as arestas possuem \textbf{peso}, que podem representar uma quantidade, distância, preferência, etc\ldots;
+    \item Multigrafo - as arestas podem conectar nós idênticos.
+    \item Laços - quando uma aresta conecta o mesmo nó, formando uma autorreferência.
+  \end{enumerate}
+  
+\end{tabular}
+
+\begin{tabular}{p{.45\linewidth} P{.45\linewidth}}
+  \vspace{0pt}
+  \includeslide[height=.32\textwidth]{historia}
+  &
+  \vspace{2pt}
+  USNRC = \textit{United States National Research Council}.
+  
+  Existiram muitas outras contribuições, esse slide destaca apenas os mais significativos no entendimento do autor.
+  
+  Apesar do reconhecimento como área acontecer em 2005, os livros~\cite{Barabasi2016-rn} e periódicos~\cite{Facebookcomspringeropn2016-wf} que levam o nome \enquote{Network Science} começaram a aparecer mais recentemente. Os primeiro workshop internacional data de 2011~\cite{Ieee2011-ti}.
+\end{tabular}
+
+\disappearingrule
+
+\begin{tabular}{p{.5\linewidth} P{.48\linewidth}}
+  \vspace{0pt}
+  \includeslide[width=0.48\textwidth]{definicao}
+  &
+  \vspace{2pt}
+  No original~\cite{National_Research_Council2006-lv} (o slide contém uma tradução livre do autor):
+  \begin{quote}
+    The study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.
+  \end{quote}
+
+  Os tópicos de Barabási nos slides estão detalhados na página~\pageref{desc:ciencia-de-redes} da Dissertação.
+\end{tabular}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{redes}
+  \end{wrapfigure}
+  
+  A hipótese nula é a de que os resultados observados são causados por aleatoriedade.
+  
+  As redes aleatórias mais estudadas possuem modelos matemáticos para se deduzir uma certa medida, como grau, distância mínima, tamanho do maior componente esperado, etc\ldots Redes aleatórias mais complexas precisam ser geradas \textit{de fato} para calcular sua medida \enquote{normal}.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{medidas}
+  \end{wrapfigure}
+  
+  Medidas são números que caracterizam uma rede. Existem inúmeras medidas possíveis. No slide destacamos as mais relevantes para o trabalho.
+  
+  Grau é o número de conexões de um nó;
+  
+  Força é a soma dos pesos dessas conexões;
+  
+  Distância geodésica é o menor número de conexões entre dois nós. O menor caminho entre dois nós é chamado \textit{caminho geodésico};
+  
+  Existem várias medidas de centralidade. O propósito do cálculo da centralidade é encontrar quais são os nós mais importantes em um grafo. As medidas de centralidade relevantes dependem do que é considerado importante no grafo em questão.
+  
+  A centralidade de intermediação de um nó é definida como a quantidade de caminhos geodésicos entre todos os nós que passam por ele.
+  
+  Coeficiente de agrupamento é a quantidade de vizinhos que compartilham conexões entre si.
+  
+  Reciprocidade é a quantidade de nós com arcos em ambas as direções em um grafo direcionado. É possível estender o conceito de reciprocidade para grafos ponderados considerando-se a diferença entre o peso nos arcos que saem e chegam ao nó. A reciprocidade está na página~\pageref{sec:reciprocidade} da dissertação.
+  
+  Assortatividade mede o quanto nós se conectam a nós similares em alguns aspecto. Usualmente, a assortatividade se refere ao grau. Nós mais assortativos tendem a se conectar com nós de grau parecido (alto ou baixo grau). A assortatividade é explicada na página~\pageref{sec:assortatividade}
+  
+  Similaridade se refere à quanto um nó é estruturalmente similar a outro, isso significa que um nó é tão similar a outro quanto mais vizinhos compartilham. A similaridade é detalhada na página~\pageref{sec:similaridade} da dissertação.
+  
+  Modularidade é uma medida de agrupamento ou detecção de comunidade. A modularidade reflete o conceito intuitivo que uma comunidade possui seus membros mais conectados entre si do que com membros de outra comunidade. A modularidade é detalhada na página~\pageref{sec:modularidade} da dissertação.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{propriedades}
+  \end{wrapfigure}
+
+  \citeonline{Watts1998-wt} definem \enquote{muito pequena} como um crescimento logarítmico da distância geodésica média $\avg{d}$ em relação ao número de nós $N$ e o grau médio $\avg{k}$, na forma $\avg{d} \sim \frac{ln N}{ln \avg{k}}$.
+  
+  \citeonline{Barabasi2016-rn} definem que uma rede livre de escala é aquela em que a probabilidade de se encontrar um vértice com $k$ conexões é $P(k) \sim k^{-\gamma}$ onde $\gamma$ está usualmente entre 2 e 3 em redes reais. Ao seja, a distribuição de grau de uma rede livre de escala segue uma distribuição de lei de potência com expoente negativo.
+  
+  Redes livre de escala possuem características muito particulares, é possível encontrar nelas distância geodésicas médias ainda menores do que as encontradas em mundo pequeno (mundo ultra-pequeno), são resistentes a falhas aleatórias, mas suscetíveis à ataques direcionados (no caso de redes com fluxo), também são pontos de dispersão de doenças contagiosas (devido ao efeito \enquote{mundo ultra-pequeno})~\cite{Barabasi2016-rn}. 
+  
+  Redes livres de escala possuem esse nome derivado da \textit{Teoria da Transição de Fases} da Física Estatística. A grosso modo, o desvio padrão em uma lei de potência é pouco relevante, pois a variância tende ao infinito com o aumento do número de nós \cite[pág. 122]{Barabasi2016-rn}, ou seja, não há uma \enquote{escala} para o grau esperado em um nó.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth} \label{sde:modelos-nulos}
+    \includeslide[width=0.48\textwidth]{modelos-nulos}
+  \end{wrapfigure}
+  
+  Existe uma grande quantidade de algoritmos para criação de redes aleatórias. Aqui estão apenas os mais relevantes para o trabalho.
+  
+  Os modelo de Erdős-Rényi/Gilbert apresenta a rede aleatória de sua maneira mais pura, os nós são conectados entre si segundo uma certa probabilidade, nenhuma característica específica é imposta a ela. Ainda assim, ela apresenta a propriedade de apresentar um componente gigante quando a probabilidade é suficientemente alta para que cada nó tenha uma única conexão.
+  
+  O modelo de Preservação de Grau randomiza as conexões, mas preserva o grau dos nós. Dessa maneira, se um propriedade aparece apenas devido à distribuição de grau, independente da conexão, esse modelo é capaz de apresentá-la.
+  
+  O modelo de Preservação de Força é proposto pelo autor, segundo os conceitos apresentados por \citeonline{Newman2004-by}. Ele preserva a força de cada nó, enquanto randomiza as distribuições e o grau dos nós.
+  
+  O modelo de Xulvi-Brunet e Sokolov reconecta redes mudando sua assortatividade. Propriedades que dependam unicamente dessa característica podem ser descobertas usando esse modelo.
+  
+  O modelo de Randomização de Força está sendo desenvolvida pelo autor para descobrir se determinadas observações mantém-se quando a distribuição de força entre as conexões é randomizada, mas sem executar reconexões.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{mapa-visao-geral}
+  \end{wrapfigure}
+  
+  O Mapa de Carreiras (MCar) é um site gratuito e pode ser consultado em http://www.vagas.com.br/mapa-de-carreiras.
+  
+  Os dados são de acesso restrito, mas a empresa gentilmente os cedeu ao pesquisador para esse trabalho.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{mapa-construcao}
+  \end{wrapfigure}
+  
+  O MCar é construído usando um processo de \textit{dataflow}, descrito em detalhes a partir da página~\pageref{sec:construcao} na dissertação. Basicamente, os dados são passados sequencialmente por diversos processos de limpeza, agrupamento de dados e por filtros de relevância (em sua maioria empíricos).
+  
+  Como o nome da ocupação e o texto que a descreve são campos que o usuário pode digitar livremente, algumas técnicas simples de processamento de texto são usadas para extrair as partes relevantes.
+  
+  Boa parte do processo consiste em agrupar os diversos dados por ocupação, tais como o salário e o tempo de permanência na ocupação.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{mapa-dados}
+  \end{wrapfigure}
+  
+  Os dados disponíveis no MCar são:
+
+  \begin{itemize}
+    \item O grafo direcionado e ponderado com o fluxo de profissionais de uma ocupação para outra;
+    \item Os quartis salariais em cada ocupação, junto com os intervalos de confiança 95\% de cada quartil são calculados numericamente com a técnica de \textit{Bootstrapping};
+    \item O tempo de permanência se refere ao tempo em que o profissional permanece naquela ocupação. Da mesma forma que o salário, são calculados os quartis e seu intervalos de confiança;
+    \item As graduações mais frequentes dos profissionais também são extraídas formando uma sequência. Em especial, a graduação mais frequente é usada em algumas análise, mas a quantidade de graduações diferentes também é um dado relevante (mais graduações revelam ocupações que podem ser exercidas sem educação específica na área).
+    \item As palavras-chave são extraídas do texto que o profissional escreve para descrever a ocupação. As palavras-chave (em bigramas e trigramas) são posteriormente combinadas na tentativa de forma pequenas descrições da ocupação. Profissões semelhantes tendem a ter palavras-chave em comum.
+  \end{itemize}
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipoteses}
+  \end{wrapfigure}
+  
+  Essas são as hipóteses iniciais da pesquisa (página~\pageref{sec:resultados-preliminares} da dissertação). As de número 1, 3, 4, 8 e 9 são plausíveis até o momento.
+  
+  As de número 6, 7 e 8 ainda não foram atacadas pelo pesquisador até o momento.
+  
+  A de número 2 não se confirmou, mas gerou desdobramentos interessantes (detalhados abaixo) durante sua experimentação.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-pontos-entrada-e-saida}
+  \end{wrapfigure}
+  
+  Ao se colocar a densidade da distribuição de reciprocidade em forma gráfica é possível notar 3 modas. À esquerda existe um grupo de nós que possui apenas força de saída, com pouca ou nenhuma força de entrada. À direita é possível observar o reverso.
+  
+  Esses dois extremos são puxados por ocupações que possuem pouca força de entrada e saída (10 é o mínimo), mas mesmo removendo-os os picos ainda se apresentam, embora com menor intensidade.
+  
+  Essas regiões são provavelmente as ocupações de entrada e saída e os pontos mais baixos do vale podem ser usados como \enquote{corte} para se definir uma ocupação tipicamente de entrada ou saída.
+  
+  No slide seguinte, são exibidos algumas das profissões no limite desses valores.
+  
+  É possível observar no gráfico que existem ligeiramente mais ocupações com força de entrada maior do que força de saída. Ainda resta aprofundar a questão de qual é exatamente o significado desse comportamento.
+  
+  No momento da escrita dessa \textit{handout}, ainda é preciso confrontar esse gráfico com modelos nulos para verificar se algum se comporta como apresentado.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-ponto-de-saida-tabela}
+  \end{wrapfigure}
+  
+  Essas são as ocupações que estão mais próximas ao primeiro \enquote{vale} no gráfico.
+  
+  As profissões aqui listadas não se parecem com ocupações que possam ser exercidas por iniciantes, no entanto, também não é claro por que tantos profissionais entram na ocupação e poucos saem.
+\end{minipage}
+
+\disappearingrule
+
+\begin{minipage}[t][18\baselineskip]{\linewidth}
+  \begin{wrapfigure}{l}{0.5\textwidth}
+    \includeslide[width=0.48\textwidth]{hipotese-ponto-de-entrada-tabela}
+  \end{wrapfigure}
+  
+    
+  Essas são as ocupações que estão mais próximas do segundo  \enquote{vale} no gráfico.
+  
+  Intuitivamente, é possível observar que são profissões de aprendiz ou que não necessitam de treinamento especializado, reforçando a hipótese que são trabalhos de entrada.
+  
+  Talvez outros indícios sejam necessário para reforçar a hipótese, como a idade média das pessoas nesses cargos.
+\end{minipage}
+
+\disappearingrule
+
+\newpage
+
+\def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
+\bibliography{main}
+\addcontentsline{toc}{section}{REFERÊNCIAS BIBLIOGRÁFICAS}
+\bibliographystyle{abnt-alf}
+
+\end{document}
