@@ -32,6 +32,8 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
+\usepackage{setspace}
+
 % Notações matemáticas usadas na dissertação.
 % Usando elas é possível trocar toda a notação
 % apenas mexendo nesse arquivo. Lembre sempre
@@ -65,13 +67,14 @@
     Mestrando, Mackenzista, ex-UNAERP, ex-VAGAS.com, 99ner, Arquiteto de Software, \textit{Aluno}.
   \end{alertblock}
   
-  \begin{alertblock}{Prof. Doutor Leandro de Castro}
+  \begin{alertblock}{Prof. Dr. Leandro de Castro}
     Doutor, Mackenzista, Pai, referência em Computação Natural, Empreendedor, \textit{Orientador}.
   \end{alertblock}
 \end{frame}
 
 \begin{frame}[fragile, label=pesquisa]{A Pesquisa}
   \begin{center}
+    \large
     Uma \alert{análise de dados exploratória}\\
     sobre movimentação de profissionais entre ocupações\\
     utilizando técnicas de \alert{Ciência de Redes}\\
@@ -79,47 +82,60 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[fragile, label=objetivo]{Objetivo}
+{
+\setbeamercolor{background canvas}{bg=white}
+\begin{frame}[c, label=mapa-de-carreiras]{Mapa de Carreiras}
   \begin{center}
+    Grafo resumindo a trajetória profissional\\dos usuários do site VAGAS.com.br
+    
+    \begin{columns}[onlytextwidth]
+      \begin{column}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{mapa-enfermeira-assistencial}
+      \end{column}
+      
+      \begin{column}{0.6\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{cluster_32}
+      \end{column}
+    \end{columns}
+
+    Cerca de \alert{10 milhões} de usuários\\resultando em \alert{8.348 ocupações} conectadas
+  \end{center}
+\end{frame}
+}
+
+{
+\setbeamercolor{background canvas}{bg=white}
+\begin{frame}[c, label=objetivo]{Objetivo}
+  \begin{center}
+    \Large
     Encontrar e propor \alert{hipóteses} plausíveis\\
     sobre movimentação profissional
+    
+    \includegraphics[width=0.7\textwidth]{subcluster_01_11}
   \end{center}
 \end{frame}
 
-\begin{frame}[fragile, label=dados]{Dados}
-  Currículos anonimizados da empresas VAGAS.com (Fevereiro/2017).
-  
-  \begin{itemize}
-    \item 10 milhões de currículos;\\
-    \item 23 milhões de experiências profissionais;\\
-    \item 8.348 ocupações distintas.
-  \end{itemize}
+\begin{frame}[fragile, label=justificativa]{Justificativa}
+  \begin{center}
+    \Large
+    Importante para \alert{pessoas}, \alert{empresas} e \alert{governo}
+    
+    \vspace{\baselineskip}
+    
+    Ciência de Redes é \alert{nova} e \alert{promissora}
+    
+    \vspace{\baselineskip}
+    
+    Movimentação Profissional ⇒ Redes
+  \end{center}
 \end{frame}
+}
 
 %=========================
 \section{Ciência de Redes}
 %=========================
-
-{
-\setbeamercolor{background canvas}{bg=white}
-\begin{frame}[label=conceitos-basicos]{Conceitos de Redes}
-  \includegraphics[width=0.2\textwidth]{simple.pdf}
-  \includegraphics[width=0.2\textwidth]{directed.pdf}
-  \includegraphics[width=0.2\textwidth]{weighted.pdf}
-  \includegraphics[width=0.2\textwidth]{multiple.pdf}
-  \includegraphics[width=0.2\textwidth]{loop.pdf}
-\end{frame}
-}
-
-\begin{frame}[label=historia]{Breve História}
-  \begin{itemize}
-    \item Teoria de Grafos (Euler, século 18) - Matemática;
-%    \item Redes Aleatórias (Erdős-Rényi/Gilbert, 1958) - Análise Combinatória e Estatística;
-    \item Mundo Pequeno (Watts-Strogatz, 1998) - Popularização;
-    \item Livre de Escala (Barabási-Albert, 1999) - Redes Complexas;
-    \item Reconhecimento (USNRC, 2005) - \alert{Ciência de Redes}.
-  \end{itemize}
-\end{frame}
 
 \begin{frame}[label=definicao]{Definição}
   National Research Council (2006)~\cite{National_Research_Council2006-lv}:
@@ -135,13 +151,50 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[c, label=redes-vs-grafos]{Redes \textit{vs} Grafos}
+  \begin{center}
+    \Large
+    Ciência de Redes \alert{usa} Teoria de Grafos
+    
+    \vspace{\baselineskip}
+    
+    \begin{columns}[T,onlytextwidth]
+      \begin{column}{0.5\textwidth}
+        \centering
+        \alert{Ciência de Redes}
+
+        \large
+        Rede ou Grafo
+        
+        Nó ou Vértice
+        
+        Conexão ou Aresta
+      \end{column}
+
+      \begin{column}{0.5\textwidth}
+        \centering
+        \alert{Teoria de Grafos}
+
+        \large
+        Grafo
+
+        Vértice
+
+        Aresta
+      \end{column}
+    \end{columns}
+  \end{center}
+\end{frame}
+
 \begin{frame}[label=redes]{Redes Aleatórias e Redes Reais}
+\large
 Redes aleatórias são \alert{Modelos Nulos}, similares à hipótese nula em estatística.
 
 Se uma característica observada em uma \alert{Rede Real} não aparece em uma \alert{Rede Aleatória} equivalente, deve existir um \alert{princípio organizacional} ausente no Modelo Nulo.
 \end{frame}
 
 \begin{frame}[label=medidas]{Medidas}
+  \large
   O que caracteriza uma rede:
   \begin{itemize}
     \item Grau e Força;
@@ -158,10 +211,11 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 \end{frame}
 
 \begin{frame}[label=propriedades]{Propriedades Topológicas}
-  \begin{alertblock}{Mundo Pequeno}
+  \large
+  \begin{alertblock}{\Large Mundo Pequeno}
     A distância geodésica esperada entre dois nós quaisquer é muito pequena.
   \end{alertblock}
-  \begin{alertblock}{Livre de Escala}
+  \begin{alertblock}{\Large Livre de Escala}
     A rede possui poucos nós muito conectados (\textit{hubs}) e muitos nós pouco conectados.
   \end{alertblock}
 \end{frame}
@@ -172,28 +226,17 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
     \item[Erdős-Rényi/Gilbert] Base do modelo aleatório;
     \item[Preservação de Grau] Preserva o grau de cada nó;
     \item[Preservação de Força] Preserva a força de cada nó\footnote{Contribuição do autor};
-    \item[Xulvi-Brunet e Sokolov] Assortatividade artificial.
     \item[Randomização de Força] Desassociação de força e grau\footnote{Contribuição do autor (em desenvolvimento)}.
   \end{description}
 \end{frame}
 
+%==========================
 \section{Mapa de Carreiras}
-
-{
-\setbeamercolor{background canvas}{bg=white}
-\begin{frame}[label=mapa-visao-geral]{Visão Geral}
-  \begin{center}
-    Um grafo resumindo a trajetória profissional\\dos usuários do site VAGAS.com.br
-
-    \includegraphics[width=0.4\textwidth]{mapa-enfermeira-assistencial}
-
-  Cerca de \alert{10 milhões} de usuários\\resultando em \alert{8.348 ocupações} conectadas
-  \end{center}
-\end{frame}
-}
+%==========================
 
 \begin{frame}[label=mapa-construcao]{A Construção}
   \begin{center}
+    \Large
     Pipeline
     
     Processamento de texto
@@ -202,30 +245,46 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
   \end{center}
 \end{frame}
 
-{
-\setbeamercolor{background canvas}{bg=white}
 \begin{frame}[label=mapa-dados]{Os Dados}
-  Os dados disponíveis:
-
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.5\textwidth}
-      \begin{itemize}
-        \item Fluxo de profissionais
-        \item Salários
-        \item Tempo de Permanência
-        \item Graduações
-        \item Palavras-chave
-      \end{itemize}
-    \end{column}
+  \begin{center}
+    \Large
+    Vetores de características
     
-    \begin{column}{0.5\textwidth}
-      \includegraphics[width=\textwidth]{cluster_25}
-    \end{column}
-  \end{columns}
-\end{frame}
-}
+    \vspace{\baselineskip}
+    
+    \begin{columns}[T,onlytextwidth]
+      \begin{column}{0.5\textwidth}
+        \centering
+        \alert{Nós}
 
+        \large
+        Ocupação
+        
+        Salários
+        
+        Tempo de Permanência
+        
+        Graduações
+        
+        Palavras-chave
+      \end{column}
+      
+      \begin{column}{0.5\textwidth}
+        \centering
+        \alert{Conexões}
+
+        \large
+        Fluxo de Profissionais
+          
+        Tempo até Movimento
+      \end{column}
+    \end{columns}
+  \end{center}
+\end{frame}
+
+%============================
 \section{Resultados Parciais}
+%============================
 
 \begin{frame}[label=hipoteses]{As Hipóteses}
   \begin{enumerate}
@@ -243,15 +302,18 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 
 \begin{frame}[c, label=hipotese-atracao]{Hipótese 1: Atração Profissional}
   \begin{center}
-    \begin{columns}[T,onlytextwidth]
+    \begin{columns}[onlytextwidth]
       \begin{column}{0.4\textwidth}
-        Ordem por força de \alert{saída} da ocupação.
+        \centering
+        Ordem por força\\
+        de \alert{saída}
         
         \begin{center}
         \includegraphics[height=0.4\textheight]{preferencia-de-atracao}
         \end{center}
          
-        Mediana da ordem na ocupação de \alert{entrada}.
+        Mediana da ordem\\
+        na \alert{entrada}.
         
       \end{column}
       \begin{column}{0.6\textwidth}
@@ -263,13 +325,13 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
             \hline
             Ocupação & Pos & Entre\\
             \hline
-            administrativo auxiliar & 2 & 2591\\
+            administrativo auxiliar & 2 & 2.591\\
             \hline
-            administrativo assistente & 4 & 1694\\
+            administrativo assistente & 4 & 1.694\\
             \hline
-            vendedor & 4 & 1553\\
+            vendedor & 4 & 1.553\\
             \hline
-            recepcionista & 4 & 1176\\
+            recepcionista & 4 & 1.176\\
             \hline
             auxiliar producao & 5 & 885\\
             \hline
@@ -292,8 +354,10 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 
 \begin{frame}[c, label=hipotese-salario]{Hipótese 2: Correlação entre Salário e Força de Entrada}
   \begin{center}
+    \Large
     Hipótese \alert{refutada}
     
+    \large
     Correlação $\approx 0,98$ entre força de entrada e saída
     
     Correlação $> 0,95$ entre todos os graus e forças
@@ -357,8 +421,10 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
   \begin{center}
     \begin{columns}[onlytextwidth]
       \begin{column}{0.5\textwidth}
-        Variação da equação de reciprocidade:
+        \large
+        Baseado em \alert{reciprocidade}:
         
+        \normalsize
         \begin{equation*}
           \recboth{s_i} \defn \frac{\linkin{s_i} - \linkout{s_i}}{s_i}
         \end{equation*}
@@ -382,10 +448,12 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 \end{frame}
 }
 
-\begin{frame}[label=hipotese-ponto-de-saida-tabela]{Pontos de Saída}
+\begin{frame}[label=hipotese-ponto-de-saida-tabela]{Ocupações de Saída}
   \begin{center}
+    \large
     Ocupações com $\recboth{s_i}$ no \textit{limiar de saída}
     
+    \normalsize
     \vspace{\baselineskip}
     
     \begin{tabular}{l|c|c|c|c}
@@ -409,10 +477,12 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 \end{frame}
 
 
-\begin{frame}[label=hipotese-ponto-de-entrada-tabela]{Pontos de Entrada}
+\begin{frame}[label=hipotese-ponto-de-entrada-tabela]{Ocupações de Entrada}
   \begin{center}
+    \large
     Ocupações com $\recboth{s_i}$ no \textit{limiar de entrada}
     
+    \normalsize
     \vspace{\baselineskip}
     
     \begin{tabular}{l|r|r|r|r}
@@ -439,7 +509,9 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 \setbeamercolor{background canvas}{bg=white}
 \begin{frame}[c, label=hipotese-carreira]{Hipóteses 9 e 8: Identificação de Carreiras}
   \begin{center}
-    Se a hipótese 8 está correta,\\detecção de comunidade identifica \alert{carreiras}.
+    \large
+    Se a hipótese 8 está correta,\\
+    \alert{detecção de comunidade} identifica carreiras.
   
     \begin{columns}[T,onlytextwidth]
       \begin{column}{0.5\textwidth}
@@ -492,7 +564,16 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
 {
 \setbeamercolor{palette primary}{fg=black, bg=yellow}
 \begin{frame}[standout]
+  \Large
   Perguntas?
+  
+  \normalsize
+  \vspace{2\baselineskip}
+  Agradecimentos:
+  
+  \vspace{0.5\baselineskip}
+  Capes, CNPq, MackPesquisa,\\
+   Fapesp, PPGEEC e Intel.
 \end{frame}
 }
 
