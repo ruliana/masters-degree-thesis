@@ -1,16 +1,12 @@
 % !TeX program = lualatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = pt_BR
-\documentclass[10pt, hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[10pt, hyperref={pdfpagelabels=false, unicode=true}, aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{lmodern}
 \usepackage{url}
 \usepackage{csquotes}
-
-% Permite colocar figuras lado a lado ou
-% fazer posicionamentos arbitrários
-%\usepackage[lofdepth,lotdepth]{subfig}
 
 % Para inserir gráficos e imagens
 \usepackage{graphicx}
@@ -31,8 +27,6 @@
 
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
-
-\usepackage{setspace}
 
 % Notações matemáticas usadas na dissertação.
 % Usando elas é possível trocar toda a notação
@@ -96,7 +90,7 @@
       
       \begin{column}{0.6\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{cluster_32}
+        \includegraphics[width=0.8\textwidth]{cluster_32}
       \end{column}
     \end{columns}
 
@@ -120,15 +114,15 @@
 \begin{frame}[fragile, label=justificativa]{Justificativa}
   \begin{center}
     \Large
-    Importante para \alert{pessoas}, \alert{empresas} e \alert{governo}
+    \alert{Pessoas}, \alert{Empresas} e \alert{Governo}
     
     \vspace{\baselineskip}
     
-    Ciência de Redes é \alert{nova} e \alert{promissora}
+    \alert{Nova} e \alert{Promissora}
     
     \vspace{\baselineskip}
     
-    Movimentação Profissional ⇒ Redes
+    Movimentação => Redes
   \end{center}
 \end{frame}
 }
@@ -220,7 +214,7 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
   \end{alertblock}
 \end{frame}
 
-\begin{frame}[label=modelos-nulos]{Modelos Nulos}
+\begin{frame}[c,label=modelos-nulos]{Modelos Nulos}
   Algoritmos para geração de redes aleatórias com características específicas para serem \alert{Modelos Nulos}.
   \begin{description}
     \item[Erdős-Rényi/Gilbert] Base do modelo aleatório;
@@ -408,7 +402,7 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
       \end{column}
       
       \begin{column}{0.5\textwidth}
-        \includegraphics[width=0.9\textwidth]{salario-por-graduacao}
+        \includegraphics[width=0.8\textwidth]{salario-por-graduacao}
       \end{column}
     \end{columns}
   \end{center}
@@ -535,7 +529,7 @@ Se uma característica observada em uma \alert{Rede Real} não aparece em uma \a
       \end{column}
       
       \begin{column}{0.5\textwidth}
-        \includegraphics[width=\textwidth]{cluster_23}
+        \includegraphics[width=0.8\textwidth]{cluster_23}
       \end{column}
     \end{columns}
   \end{center}
