@@ -1,0 +1,229 @@
+% !TeX program = pdflatex
+% !TeX encoding = UTF-8
+% !TeX spellcheck = pt_BR
+\documentclass[12pt,a4paper,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage{csquotes}
+
+% Links nas referência cruzada no documento.
+% Ajuda a navegação (principalmente no índice).
+\usepackage[unicode]{hyperref}
+\hypersetup{
+    hidelinks,   % Comente aqui para exibir os links
+    %colorlinks, % Descomente esse se comentar o de cima
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+\usepackage[pdftex,dvipsnames,table,xcdraw]{xcolor}
+
+% Melhorias na justificação do texto e
+% pequenos ajustes em fontes e alinhamentos. 
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+% Faz com que linhas orfãs sejam fortemente
+% penalizadas. Mas é impossível evitá-las
+% completamente.
+\clubpenalty=9996
+\widowpenalty=9999
+
+% Permite o alinhamento horizontal de várias
+% equações, assim elas não tomam muito espaço
+% quando são muito pequenas.
+\usepackage{tabularx}
+
+% Símbolos diferentes para o texto, como setas →,
+% símbolos de copyright e trademark, euro, etc.
+% Não é muito útil, mas de vez em quando ajuda.
+% Ao invés do comando do latex, dá pra usar o
+% caractere em UTF-8 diretamente.
+\usepackage{textcomp}
+
+% Pequenos símbolos que são úteis (às vezes)
+% como checkmark.
+\usepackage{bbding}
+
+% For command patching
+\usepackage{etoolbox}
+
+% Permite criar formatações específicas, controla
+% numerações e produz índices para teoremas e hipóteses.
+\usepackage{amsthm}
+\usepackage{thmtools}
+
+\declaretheoremstyle[spaceabove=1.5ex,
+                     spacebelow=0ex,
+                     headindent=\parindent,
+                     headformat=\MakeUppercase{\NAME} \NUMBER:\MakeUppercase{\NOTE},
+                     notebraces={}{},
+                     headpunct=:,
+                     bodyfont=\itshape,
+                     name=Hipótese]
+                     {hypostyle}
+\declaretheorem[style=hypostyle]{hypothesis}
+
+% Para listagens de programação ou 
+% textos onde a formatação importa
+\usepackage{listings}
+\lstset{
+	inputencoding=utf8,
+    extendedchars=true,
+	framextopmargin=2pt,
+    framexbottommargin=2pt,    
+    literate={á}{{\'a}}1
+             {ã}{{\~a}}1
+             {é}{{\'e}}1
+             {í}{{\'i}}1
+             {ç}{{\c{c}}}1
+             {Ç}{{\c{C}}}1,
+}
+\renewcommand{\lstlistingname}{Listagem}% Listing -> Listagem
+\renewcommand{\lstlistlistingname}{Lista de \lstlistingname s}% List of Listings -> Lista de Listagens
+
+% Permite colocar figuras lado a lado ou
+% fazer posicionamentos arbitrários
+\usepackage[lofdepth,lotdepth]{subfig}
+
+% Permite o uso da opção "frame" em "includegraphics"
+% para fazer uma borda na imagem
+\usepackage[export]{adjustbox}
+
+% Para inserir gráficos e imagens
+\usepackage{graphicx}
+% Diretório padrão para figuras
+\graphicspath{ {images/} }
+
+\usepackage{abnt-alf}
+\usepackage[top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}
+\usepackage{indentfirst}
+
+% Adiciona o comando \source para citar fontes abaixo
+% de figuras. Muito útil!
+\usepackage{caption}
+\newcommand{\source}[1]{\vspace{-10pt} \caption*{Fonte: {#1}} }
+
+% Facilita o copy 'n paste no PDF
+% Remove ligaturas na cópia
+%\input{glyphtounicode}
+%\pdfgentounicode=1
+
+% Usado para comentar grandes porções do texto
+% com \begin{comment} \end{comment}
+\usepackage{comment}
+
+% Para quebrar células de tabelas e melhorar
+% a formatação.
+% Meio complicado para fazer apenas isso,
+% mas funciona.
+\usepackage{array}
+\usepackage{makecell}
+
+\renewcommand\theadalign{cb}
+\renewcommand\theadfont{\bfseries}
+\renewcommand\theadgape{\Gape[4pt]}
+\renewcommand\cellgape{\Gape[4pt]}
+
+% Texto colorido e afins. Bom para TODO notes
+\usepackage{xargs}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+
+% Todo notes.
+% Muito útil para deixar anotações enquanto se está
+% construindo o texto, depois dá para remover e onde
+% quebrar são comentário que devem ser removidos.
+% Para remover os comentários do PDF final, basta
+% colocar 'disable' na lista de argumentos do pacote:
+% \usepackage[disable]{todonotes}
+\usepackage[obeyFinal,colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\question}[2][1=]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red,#1]{#2}}
+
+\newcommandx{\change}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+
+\newcommandx{\info}[2][1=]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,#1]{#2}}
+
+\newcommandx{\draft}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+
+\newcommandx{\thiswillnotshow}[2][1=]{\todo[disable,#1]{#2}}
+\reversemarginpar
+% END Todo notes.
+
+% Notações matemáticas usadas na dissertação.
+% Usando elas é possível trocar toda a notação
+% apenas mexendo nesse arquivo. Lembre sempre
+% de olhá-lo antes de fazer equações.
+\input{define-math-symbols}
+
+\begin{document}
+
+% CAPA
+\pagestyle{empty}
+\begin{center}
+\large  \textbf{UNIVERSIDADE PRESBITERIANA MACKENZIE}
+\large  \textbf{PROGRAMA DE PÓS-GRADUAÇÃO EM}\\
+\large  \textbf{ENGENHARIA ELÉTRICA E COMPUTAÇÃO}\\
+\vskip 2.0cm
+\textbf{\large Ronie Miguel Uliana}\\
+\vskip 3.4cm
+\setlength{\baselineskip}{1.5\baselineskip}
+\textbf{\MakeUppercase{\large Um Estudo do Mapa de Carreiras da Empresa Vagas.com Usando Ciência de Redes}}\\
+\vskip 4.0cm
+\end{center}
+\hfill{\vbox{\hsize=8.5cm\noindent\strut
+Documento de Qualificação apresentado ao \break
+Programa de Pós-Graduação em Engenharia \break
+Elétrica e Computação da Universidade \break
+Presbiteriana Mackenzie como parte dos \break
+requisitos para a obtenção do título de \break
+mestre em Engenharia Elétrica e Computação.}\\
+\strut}
+\vskip 3.0cm
+\textbf{\normalsize Orientador: Prof. Dr. Leandro Nunes de Castro}\\
+\vskip 2.0cm
+\begin{center}
+São Paulo\\
+2017\\
+\end{center}
+
+% RESUMO
+\newpage
+\thispagestyle{plain}
+\pagenumbering{roman}
+\begin{center}
+\large
+\textbf{RESUMO}
+\end{center}
+\renewcommand{\baselinestretch}{0.6666666}
+A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, sendo impactada diretamente pela cultura, formação e interesses pessoais. As movimentações de carreira representam passagens entre diferentes trabalhos (por exemplo, empresas ou cargos) e invariavelmente geram expectativas e angústias nos profissionais. A Vagas.com é uma das principais empresas de recrutamento on-line do Brasil, possuindo o histórico de movimentação de carreira de mais de 10 milhões de brasileiros em mais de 8 mil cargos diferentes. A Vagas.com criou um serviço gratuito, denominado Mapa de Carreiras (MCar), que exibe as principais trajetórias profissionais do mercado obtidas a partir de dados informados nos currículos cadastrados na Vagas.com. Esse projeto de pesquisa utiliza uma área do conhecimento que vem se desenvolvendo muito ao longo das duas últimas décadas, denominada Ciência de Redes, para realizar um estudo analítico sobre o MCar. O MCar é uma rede complexa direcionada e ponderada, na qual os nós representam as ocupações profissionais e os arcos indicam a quantidade de profissionais que percorreram o caminho entre cada par de ocupações. Nesse contexto essa dissertação propõe contribuições em duas frentes: 1) proposição de adaptações e derivações de modelos de redes aleatórias existentes para que comportem as características do MCar; e 2) estudos analíticos que permitam compreender ou inferir movimentações profissionais a partir dos dados reais do Mapa de Carreiras.
+
+%%\\[0.5cm]
+\begin{flushleft}
+{\bf Palavras-chave:} \it{redes, grafos, carreira, ocupações}
+\end{flushleft}
+
+% SUMÁRIO
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+
+% DESENVOLVIMENTO
+\newpage
+\pagestyle{plain}
+\pagenumbering{arabic}
+\renewcommand{\baselinestretch}{1.5}
+\normalsize
+
+\listoftodos[Notas]
+
+\include{ciencia-de-redes-sub}
+
+\def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
+\bibliography{main}
+\addcontentsline{toc}{section}{REFERÊNCIAS BIBLIOGRÁFICAS}
+\bibliographystyle{abnt-alf}
+
+\end{document}
