@@ -11,8 +11,8 @@
 % Ajuda a navegação (principalmente no índice).
 \usepackage[unicode]{hyperref}
 \hypersetup{
-    hidelinks,   % Comente aqui para exibir os links
-    %colorlinks, % Descomente esse se comentar o de cima
+    %hidelinks,   % Comente aqui para exibir os links
+    colorlinks, % Descomente esse se comentar o de cima
     linkcolor={red!50!black},
     citecolor={blue!50!black},
     urlcolor={blue!80!black}
@@ -47,7 +47,7 @@
 % como checkmark.
 \usepackage{bbding}
 
-% For command patching
+% Ajustes finos em comandos do Latex
 \usepackage{etoolbox}
 
 % Permite criar formatações específicas, controla
@@ -108,8 +108,8 @@
 
 % Facilita o copy 'n paste no PDF
 % Remove ligaturas na cópia
-%\input{glyphtounicode}
-%\pdfgentounicode=1
+\input{glyphtounicode}
+\pdfgentounicode=1
 
 % Usado para comentar grandes porções do texto
 % com \begin{comment} \end{comment}
@@ -170,7 +170,7 @@
 \textbf{\large Ronie Miguel Uliana}\\
 \vskip 3.4cm
 \setlength{\baselineskip}{1.5\baselineskip}
-\textbf{\MakeUppercase{\large Um Estudo do Mapa de Carreiras da Empresa Vagas.com Usando Ciência de Redes}}\\
+\textbf{\MakeUppercase{\large Compressão de Fluxo para Identificação de Fronteiras de Carreiras}}\\
 \vskip 4.0cm
 \end{center}
 \hfill{\vbox{\hsize=8.5cm\noindent\strut
@@ -198,7 +198,7 @@ São Paulo\\
 \textbf{RESUMO}
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
-A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, sendo impactada diretamente pela cultura, formação e interesses pessoais. As movimentações de carreira representam passagens entre diferentes trabalhos (por exemplo, empresas ou cargos) e invariavelmente geram expectativas e angústias nos profissionais. A Vagas.com é uma das principais empresas de recrutamento on-line do Brasil, possuindo o histórico de movimentação de carreira de mais de 10 milhões de brasileiros em mais de 8 mil cargos diferentes. A Vagas.com criou um serviço gratuito, denominado Mapa de Carreiras (MCar), que exibe as principais trajetórias profissionais do mercado obtidas a partir de dados informados nos currículos cadastrados na Vagas.com. Esse projeto de pesquisa utiliza uma área do conhecimento que vem se desenvolvendo muito ao longo das duas últimas décadas, denominada Ciência de Redes, para realizar um estudo analítico sobre o MCar. O MCar é uma rede complexa direcionada e ponderada, na qual os nós representam as ocupações profissionais e os arcos indicam a quantidade de profissionais que percorreram o caminho entre cada par de ocupações. Nesse contexto essa dissertação propõe contribuições em duas frentes: 1) proposição de adaptações e derivações de modelos de redes aleatórias existentes para que comportem as características do MCar; e 2) estudos analíticos que permitam compreender ou inferir movimentações profissionais a partir dos dados reais do Mapa de Carreiras.
+A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, sendo impactada diretamente pela cultura, formação e interesses pessoais. As movimentações de carreira representam passagens entre diferentes trabalhos (por exemplo, empresas ou cargos) e invariavelmente geram expectativas e angústias nos profissionais. A VAGAS.com é uma das principais empresas de recrutamento on-line do Brasil, possuindo o histórico de movimentação de carreira de mais de 10 milhões de brasileiros em mais de 8 mil cargos diferentes. A empresa criou um serviço gratuito, denominado Mapa de Carreiras (MCar), que exibe as principais trajetórias profissionais do mercado obtidas a partir de dados informados nos currículos cadastrados. Esse projeto de pesquisa utiliza uma área do conhecimento que vem se desenvolvendo muito ao longo das duas últimas décadas, denominada Ciência de Redes, para realizar um estudo analítico sobre o MCar. O MCar é uma rede complexa direcionada e ponderada, na qual os nós representam as ocupações profissionais e os arcos indicam a quantidade de profissionais que percorreram o caminho entre cada par de ocupações. Nesse contexto essa dissertação propõe contribuições em duas frentes: 1) proposição de adaptações e derivações de modelos de redes aleatórias existentes para que comportem as características do MCar; e 2) estudos analíticos que permitam compreender ou inferir movimentações profissionais a partir dos dados reais do Mapa de Carreiras.
 
 %%\\[0.5cm]
 \begin{flushleft}
@@ -223,36 +223,42 @@ A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, s
 \section{INTRODUÇÃO}
 %====================================
 
-Ao longo da vida profissional é comum para o indivíduo passar por diversas movimentações na carreira. Um estudante de engenharia pode iniciar como Trainee em uma empresa e progredir para Engenheiro, Supervisor de Obras e Diretor de Engenharia. Na área de computação é possível ver um Programador se tornar Analista-Programador, Coordenador de Desenvolvimento, Gerente de Projetos, chegando a Diretor de Operações. Esses são casos em que a movimentação de carreira segue um padrão mais tradicional de progressão, mas também há situações extremas de transições de carreira na qual um Analista-Programador resolve se tornar um Chef de Cozinha. Em qualquer um dos casos, as movimentações de carreira são sempre uma etapa de grande relevância profissional e que, ao mesmo tempo, podem causar estresse, insegurança e alguns desconfortos pelos novos desafios que surgirão.
+Ao longo da vida profissional é comum para o indivíduo passar por diversas movimentações na carreira. Um estudante de engenharia pode iniciar como Trainee em uma empresa e progredir para Engenheiro, Supervisor de Obras e Diretor de Engenharia. Na área de computação é possível ver um Programador se tornar Analista-Programador, Coordenador de Desenvolvimento, Gerente de Projetos, chegando a Diretor. Esses são casos em que a movimentação de carreira segue um padrão mais tradicional de progressão baseado no plano de carreira de uma organização. Por outro lado, há situações extremas de transições de carreira na qual um Analista-Programador resolve se tornar um Chef de Cozinha ou um Eletricista Industrial passa a atuar como Web Designer. Em qualquer um dos casos, as movimentações de carreira são sempre uma etapa de grande relevância profissional e que, ao mesmo tempo, podem causar estresse, insegurança e alguns desconfortos pelos novos desafios que surgirão.
 
-Este projeto de pesquisa usa uma base de dados de mercado com 10 milhões de currículos e 23 milhões de experiências profissionais da empresa Vagas Tecnologia com o objetivo de fazer um estudo analítico sobre a movimentação de profissionais entre ocupações durante o curso de suas carreiras. O problema é modelado com uma estrutura em grafos e é analisado com conceitos e técnicas de Ciência de Redes.
+A movimentação profissional é discutida por modelos como os da \textit{Carreira Proteana} e \textit{Carreira sem Fronteiras}. Esses modelos advogam um distanciamento das carreiras ditadas pelo organograma das empresas em favor de trajetórias com foco maior no indivíduo~\cite{Bendassolli2009-bg}. A carreira proteana coloca o indivíduo, e não as organizações, como protagonista da trajetória profissional, onde seus valores são usados na decisão dos próximos passos e o sucesso é subjetivo e medido pela satisfação pessoal~\cite{Hall2004-ke}. A carreira sem fronteiras, por sua vez, acontece quando a trajetória se faz independente das organizações ou hierarquias. Essas carreiras são caracterizadas por passagens por múltiplas empresas ou mudanças na especialidade do indivíduo~\cite{Arthur1994-qq}.
 
-Para concluir o objetivo, propõe-se levantar hipóteses sobre os o comportamento da movimentação de profissionais traduzindo estruturas observadas na rede para o domínio da dinâmica de carreira.
+No entanto, o movimento de uma pessoa entre ocupações profissionais não é simples. A capacitação do indivíduo, a atratividade da nova ocupação e o próprio conhecimento de que uma transição é possível a tornam mais fácil ou difícil para os profissionais. Quando essa transição é percebida como uma barreira por um número suficiente de pessoas, surge uma \textit{fronteira de carreira}~\cite{Gunz2007-hr}.
 
-Propõe-se, então, validar as hipóteses encontradas. Isso é feito comparando-se a estrutura da rede com modelos nulos, ou seja, com redes de estrutura similar, porém geradas aleatoriamente.
+Este projeto de pesquisa utiliza o conceito de fronteira de carreira~\cite{Gunz2007-hr}, um banco de dados real com 23 milhões de experiências profissionais~\cite{VAGAS_Tecnologia2014-yv} e técnicas de detecção de comunidades em redes~\cite{Rosvall2009-sd,Edler2017-kt} para encontrar as fronteiras de carreira no mercado de trabalho brasileiro, discutir e entender sua estrutura.
 
-Como esse trabalho é baseado somente nos dados de currículos não é possível responder o que motiva os profissionais nos comportamentos observados, mas é possível afirmar que ele ocorre. Nesse ponto, futuros trabalhos podem se apoiar nos resultados aqui obtidos para expandir a compreensão desses comportamentos.
+Modelando o problema como um grafo e usando as técnicas de Ciência de Redes, o estudo revela onde estão as fronteiras de carreira e propõe o conceito de \textit{Ilha Ocupacional} para caracterizá-lo. O termo sugere que esses grupos não são formados por alguma característica intrínseca comum entre seus membros, mas sim pelo distanciamento dos outros membros, como proposto por \citeonline{Abbott1995-ft}. Isso significa que as ilhas são uma função da dificuldade da movimentação profissional inter-ilhas e da facilidade de movimentação intra-ilha, independente de atributos derivados de seu conteúdo ou significado.
 
-Existem diversas pesquisas sobre movimentação profissional, principalmente sobre os fatores que motivam a mudança, como os expostos por~\citeonline{Ng2007-zp}. Porém, nenhum trabalho pôde ser encontrado analisando redes profissionais sob a ótica da Ciência de Redes, ponto onde esse trabalho tem sua principal contribuição.
+O estudo prossegue analisando a composição a composições das ilhas e apresenta \textit{insights} sobre sua estrutura. O resultado obtido pode ser usado para o refinamento de teorias sobre carreira, como uma classificação natural para as ocupações baseada na movimentação profissional ou como subsídio para o planejamento de carreiras.
 
-A movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre.
+A principal contribuição desse trabalho está em tornar concreto o conceito de \textit{fronteiras de carreira}, revelando a estrutura da movimentação profissional no Brasil. Explorando esse conceito, o trabalho caracteriza a topologia das ilhas ocupacionais e propõe o conceito de \textit{Polos Ocupacionais} como ocupações que possuem papel crucial na estrutura. A topologia encontrada na maior parte das ilhas tende a um formato estrelado, sugerindo que a atuação nos polos afeta a ilha como um todo.
 
-Como esse trabalho é baseado em uma rede com conexões que possuem peso e direção, outra contribuição relevante está na proposta de adaptações e derivações de modelos de redes aleatórias existentes para que comportem essas características.
+A presença de uma ilha gigante nos resultados fornece indícios que suportam o modelo de \textit{Carreira sem Fronteiras}, ao mesmo tempo em que indica que ela não abrange todos os segmentos profissionais.
 
-\begin{comment}
-\subsection{Considerações sobre Carreira}
+Como essa pesquisa é baseada somente nos dados encontrados nos currículos, não é possível responder o que motiva os profissionais nos comportamentos observados, mas é possível afirmar que eles ocorrem. Um estudo dos porquês e das motivações necessita de um aprofundamento psicológico e sociológico que essa pesquisa é incapaz de atingir. Por outro lado, futuros trabalhos nesse sentido podem se apoiar nos resultados aqui obtidos para expandir a compreensão desses comportamentos.
 
-A definir\ldots
-\end{comment}
+(EXPANDIR) Outras pesquisas\ldots
 
+% Ronie: Não é bem verdade. Acabei achando outro trabalhos que utilizam redes profissionais, principalmente do LinkedIn. Melhor expandir depois para mencioná-los.
+Existem diversas pesquisas sobre movimentação profissional, principalmente sobre os fatores que motivam a mudança, como os expostos por~\citeonline{Ng2007-zp}. Porém, nenhum trabalho pôde ser encontrado analisando redes profissionais sob a ótica da Ciência de Redes, tornado-se outro ponto onde esse trabalho possui contribuições.
+
+Como contribuição final, a movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre e quais sua limitações.
+
+Na seção X \ldots (EXPANDIR)
 
 %====================================
 \section{CIÊNCIA DE REDES}
 %====================================
 
-A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse no começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert~\cite{Watts1998-wt,Barabasi1999-sn}.
+A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse no começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert~\cite{Watts1998-wt,Barabasi1999-sn} sobre redes complexas.
 
-Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército~\cite{Maxwell2009-kq}.
+Redes complexas são grafos com características topológicas que não ocorrem em redes simples ou aleatoriamente geradas, mas que aparecem quando sistemas reais são modelados como grafos, como a conectividade da Internet ou a rede de amigos nas redes sociais~\cite{Barabasi2016-rn}. Uma dessas características é, por exemplo, a presença de \textit{hubs}. Nós com um número anormalmente alto de conexões comparativamente com outros nós da rede.
+
+Um marco para a consolidação da disciplina ocorreu em 2005 com o aval de órgãos governamentais quanto a sua utilidade como ciência. Nesse ano, o exército Norte-Americano solicitou ao \textit{United States National Research Council} um estudo sobre a aplicabilidade da emergente \enquote{Ciência de Redes}. O relatório~\cite{National_Research_Council2006-lv} destaca a relevância do campo em diversas áreas e levanta seus desafios. Nos anos seguintes foram fundados centros de estudos de Ciência de Redes nas universidades norte-americanas com investimentos dos laboratórios de pesquisa do exército~\cite{Maxwell2009-kq}.
 
 O \citeonline{National_Research_Council2006-lv} define a Ciência de Redes como \enquote{o estudo da representação em rede de fenômenos físicos, biológicos e sociais levando a modelos preditivos desses fenômenos}~\footnote{Em tradução livre, \enquote{the study of network representations of physical, biological, and social phenomena leading to predictive models of these phenomena.}}.
 
@@ -273,9 +279,7 @@ Segundo \citeonline{Barabasi2016-rn}, como disciplina, a Ciência de Redes se di
 
 É preciso descrever os conceitos utilizados em redes para compreensão desse trabalho. Apesar de serem básicos em Teoria de Grafos, uma breve descrição é oferecida nas seções seguintes para completude dessa obra.
 
-Um \textit{grafo} ou \textit{rede} é uma abstração usada quando o foco do estudo está no relacionamentos entre entidades. Nessa abstração, outras características das entidades que não o relacionamento são descartadas.
-
-Redes são representadas graficamente por formas geométricas, em geral pequenos círculos para representar as entidades, conectados por linhas representando os relacionamentos (Figura~\ref{fig:exemplo-tipos-grafo}).
+Um \textit{grafo} ou \textit{rede} é uma abstração usada quando o foco do estudo está no relacionamentos entre entidades. Nessa abstração, outras características das entidades que não o relacionamento são descartadas. Redes são representadas graficamente por formas geométricas, em geral pequenos círculos para representar as entidades, conectados por linhas representando os relacionamentos (Figura~\ref{fig:exemplo-tipos-grafo}).
 
 \begin{figure}[ht]
     \centering
@@ -296,11 +300,13 @@ Redes são representadas graficamente por formas geométricas, em geral pequenos
     \source{Elaboração do autor}
 \end{figure}
 
-Quando os relacionamentos possuem uma certa direção eles formam \textit{redes direcionadas} (Figura~\ref{fig:exemplo-grafo-direcionado}). Por exemplo, uma rede que representa as trocas de presentes natalinos é uma rede em que há \textit{direção}, o presente é dado de uma pessoa \textit{para} outra. Em outros casos, quando não há uma direção no relacionamento, a rede é chamada \textit{não-direcionada}. Por exemplo, em uma rede de relacionamentos os indivíduos se conhecem mutuamente. 
+As entidades da rede são chamadas \textit{nós} ou \textit{vértices}, enquanto os relacionamentos são chamados \textit{conexões} ou \textit{arestas}. Os artigos científicos sobre Ciência de Redes dão preferência aos termos \textit{rede}, \textit{nó} e \textit{conexão}, enquanto no campo da Teoria de Grafos os termos são \textit{grafo}, \textit{vértice} e \textit{aresta}~\cite[p.~45]{Barabasi2016-rn}. Nesse trabalho deu-se preferência pelos termos usados em Ciência de Redes, no entanto, os termos de Teoria de Redes, quando usados, são considerados sinônimos.
+
+Quando os relacionamentos possuem uma certa direção eles formam \textit{redes direcionadas} (Figura~\ref{fig:exemplo-grafo-direcionado}). Por exemplo, uma rede que representa as trocas de presentes natalinos é uma rede em que há \textit{direção}, o presente é dado de uma pessoa \textit{para} outra. Em outros casos, quando não há uma direção no relacionamento, a rede é chamada \textit{não-direcionada}. Por exemplo, em uma rede de relacionamentos os indivíduos se conhecem mutuamente. Uma conexão direcionada é por vezes chamada \textit{arco}.
 
 Se a intensidade do relacionamento é relevante as conexões ganham um \textit{peso} (Figura~\ref{fig:exemplo-grafo-ponderado}). Seu significado depende da rede em questão. Por exemplo, em uma rede de transportes o peso pode significar a distância entre locais de entrega, em uma rede de dados pode significar o volume do tráfego entre os pontos, e em uma rede social pode significar o número de mensagens trocadas entre duas pessoas. Redes onde existe a presença de conexões com peso são chamadas \textit{redes ponderadas}.
 
-Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exemplo-grafo-multiplo}). Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. \citeonline{Newman2004-by} propõe que algumas redes ponderadas podem ser representadas como multigrafos, principalmente onde a conexão representa um fluxo. Nessa representação alternativa cada unidade de peso é representada por uma conexão independente de peso um, isso possibilita o emprego de técnicas que desconsideram o peso das conexões em alguns cenários.
+Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exemplo-grafo-multiplo}). Por exemplo, em uma rede de ligações telefônicas é possível representar cada ligação por uma conexão diferente, duas pessoas que troquem ligações seriam representadas por dois nós com diversas conexões entre si, uma para cada ligação feita. Redes que permitem múltiplas conexões são chamadas \textit{multigrafos}. Dependendo do fenômeno sendo modelado, multigrafos podem ser representados por redes ponderadas, em especial redes onde o relacionamento significa fluxo~\cite{Newman2004-by}.
 
 \begin{figure}[ht]
     \centering
@@ -316,50 +322,14 @@ Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exe
     \source{Elaboração do autor}
 \end{figure}
 
-Em algumas redes, não há sentido em nós que conectam a si mesmos, por exemplo, em uma rede social onde as conexões representam quem conhece quem, uma conexão de alguém consigo mesmo não é relevante para o estudo da rede (desconsiderando-se questões filosóficas). Já em outras redes, é natural considerar esse tipo de conexão\todo{Encontrar um exemplo}. Conexões de um nó com ele mesmo são chamados \textit{laços} ou \textit{loops} (Figura~\ref{fig:exemplo-grafo-laco}).
+Em algumas redes, não há sentido em nós que conectam a si mesmos, por exemplo, em uma rede social onde as conexões representam quem conhece quem, uma conexão de alguém consigo mesmo não é relevante para o estudo da rede (desconsiderando-se questões filosóficas). Já em outras redes é natural considerar esse tipo de conexão, como uma que modele a transição de estados de uma máquina em que uma ação pode resultar na permanência no mesmo estado. Conexões de um nó com ele mesmo são chamados \textit{laços} ou \textit{loops} (Figura~\ref{fig:exemplo-grafo-laco}).
 
-Redes que não permitem laços, pesos ou múltiplas conexões entre dois nós são chamadas \textit{redes simples} (Figura~\ref{fig:exemplo-grafo-simples}). Nessa pesquisa, a rede em questão é direcionada, ponderada e sem laços.
+Redes que não permitem laços, pesos ou múltiplas conexões entre dois nós são chamadas \textit{redes simples} (Figura~\ref{fig:exemplo-grafo-simples}).
 
-Quando uma rede simples possui todas as conexões possíveis entre seus nós ela é chamada \textit{rede completa}. O número de conexões $L$ nessa rede é dado pela Equação~\ref{eq:rede-completa}, onde $N$ é o número de nós da rede. A Equação~\ref{eq:rede-completa-direcionada} fornece o número de conexões $\linkboth{L}$ em uma rede direcionada.
+% Ronie: Mover o parágrafo abaixo para a seção do Mapa de Carreiras?
+Nessa pesquisa, o problema foi modelado como uma rede direcionada, ponderada e com laços. Cada ocupação é um nó, a movimentação de profissionais entre as ocupações são conexões direcionadas e ponderadas e os profissionais que permanecem na mesma ocupação mas mudam de empresa são modelados como laços.
 
-\noindent
-\begin{tabularx}{\linewidth}{@{}XX@{}}
-    \begin{equation} \label{eq:rede-completa}
-    L = \frac{N(N - 1)}{2}
-    \end{equation} &
-    \begin{equation} \label{eq:rede-completa-direcionada}
-    \linkboth{L} = N(N - 1)
-    \end{equation}
-\end{tabularx}
-
-É possível perceber que o número de conexões possíveis cresce exponencialmente com a quantidade de nós.
-
-Se uma parte da rede forma um grafo completo, esse grafo é chamado \textit{clique}. O clique é um conceito importante quando se trata de detecção de comunidades.
-
-Uma \textit{rede reticulada} ou simplesmente \textit{reticulado} (\textit{lattice}) é uma rede onde os nós estão colocados em um plano (n-dimensional, mas é comum planos bidimensionais) e são conectados entre si, formando um padrão regular. Os reticulados são usados como modelos simples em diversas áreas de pesquisa, por exemplo, uma cidade pode ser representada grosseiramente como um reticulado bidimensional e a porosidade de materiais pode ser estudada com reticulados tridimensionais (percolação).
-
-\begin{figure}[ht]
-    \centering
-    \subfloat[][bidimensionais] {
-        \includegraphics[scale=0.4]{lattice.jpg}
-    }
-    \subfloat[][circular ou anel] {
-        \includegraphics[scale=0.6]{ring-lattice.png}
-    }    
-    \caption{Exemplos de redes reticuladas}
-\end{figure}
-
-%% DE TEMPOS EM TEMPOS COLOQUE UMA FIGURA ILUSTRANDO OS CONCEITOS APRESENTADOS. NUMA ÚNICA FIGURA VOCÊ PODE ILUSTRAR A REDE PONDERADA, CLIQUES, ETC.
-% Ronie (2017-06-17) Boa! Vou procurar algumas figuras open-source que eu possa utilizar provisoriamente, depois substituo por figura minhas, que acha?
-
-%% PARA A QUALIFICAÇÃO ESTÁ OK SIM
-
-Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó da rede, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho 1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede. Uma exemplo de rede com três componentes pode ser observado na Figura~\ref{fig:exemplo-componente}.
-
-%% ENTÃO UM COMPONENTE É O MESMO QUE UM SUBGRAFO?
-% Ronie (2017-06-17) É um subgrafo desconectado do supergrafo. Mexi no texto para tentar tornar mais claro, pode ver se melhorou? :) (definitivamente aqui vai bem uma figura =/)
-% CADA NOVO CONCEITO PRECISA SER EXPLICADO. SE VOCÊ FALA DE SUPERGRAFO, ENTÃO EXPLIQUE O QUE É UM.
-% Ronie (2017-06-18) Vou tentar alterar a explicação para excluir o termo. Esse é o tipo da coisa que puxa a outra :D
+O conceito de \textit{componente} é importante para esse trabalho e está relacionado a partes da rede que estão desconectadas entre si. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho~1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede. Uma exemplo de rede com três componentes pode ser observado na Figura~\ref{fig:exemplo-componente}.
 
 \begin{figure}[ht]
     \centering
@@ -369,164 +339,99 @@ Outro conceito relacionado é chamado \textit{componente}. Se existirem nós em 
     \label{fig:exemplo-componente}
 \end{figure}
 
-Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau. Esse é um conceito central no estudo de redes complexas.
+Em algumas topologias de rede surgem nós com um número de conexões muito acima do esperado, chamados \textit{hubs}. O número de conexões de um nó é chamado de \textit{grau} do nó, portanto, \textit{hubs} são nós de alto grau. Esse é um conceito central no estudo de redes complexas por não aparecerem em redes aleatórias, mas figurarem em diversas redes reais.
 
-Medidas de centralidade de grau são, por exemplo, a média ou mediana dos graus da rede. Entretanto, algumas topologias possuem um dispersão muito grande de graus, ou seja, o desvio padrão ou distância interquartil varia consideravelmente. Nesses casos, é útil calcular-se a \textit{distribuição de grau} utilizando histogramas ou calculando-se a probabilidade da presença de graus na rede. Esses conceitos são detalhados na Seção~\ref{sec:distribuicao-grau-forca}.
+No estudo de redes, os nós de maior importância são considerados nós centrais da rede. Como é responsabilidade de cada estudo definir o que é \textit{importante}, existem várias medidas de centralidade, indo desde a simples contagem de nós com mais conexões (centralidade de grau) até a medição de nós que participam de fluxos de maior volume.
 
-A \textit{sequência de grau} é o nome que se dá a sequência ordenada com $n$ posições, onde $n$ é o número de nós e cada posição possui o grau de um nó. A sequência é ordenada do menor para o maior grau. Sendo $\delta_i$ o grau do nó $i$, onde $G$ é uma rede com $n$ nós e $i \in G$, a sequência de grau pode ser definida como:
 
-\begin{equation} \label{eq:sequencia-grau}
-\textit{Seq}_G \defn \{\delta_i, \delta_{i+1}, \ldots, \delta_n\}, \delta_i \le \delta_{i+1}
-\end{equation}
+(EXPANDIR) Centralidade e Centralidade de Fluxo.
 
-A sequência de grau é utilizada tanto no cálculo da \textit{distribuição de grau}, quanto em algoritmos que criam redes aleatórias em que a distribuição exata de graus é preservada.
+A medida de \textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Desassortatividade} é o conceito contrário, onde nós com características diferentes tendem a se conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}. A grosso modo, uma assortatividade de grau negativa significa que a topologia da rede se assemelha à estrutura de \enquote{centro e raios\footnote{Em inglês: \enquote{Hub and Spokes}}}. Esse medida é importante na caracterização das ilhas ocupacionais.
 
-Outro conceito importante no estudo de redes é o de menor caminho entre dois nós, explicado em mais detalhes na Seção~\ref{sec:distancia-geodesica}. O menor caminho é também chamado \textit{caminho geodésico} e a distância entre dois nós através do menor caminho é chamada \textit{distância geodésica}.
+(EXPANDIR) Bigramas e Trigramas
 
-\todo[inline]{Incluir figura com caminho geodésico, caminho mais provável e caminho de menor gargalo}
+(EXPANDIR) Source e Sink
 
-Similar ao caminho geodésico duas outras variações para redes ponderadas são importantes nesse estudo. A primeira é o \textit{caminho mais provável}, ou seja, partindo-se de um nó e caminhando-se aleatoriamente pela rede, onde a probabilidade de se tomar um caminho é definida pelo peso da conexão, o caminho mais provável é formado pelas conexões percorridas até se encontrar um determinado nó. A segunda variação é o \textit{caminho de menor gargalo}, definida como o caminho entre dois nós que maximiza o menor peso em qualquer uma das conexões que o forma \cite{Goldbarg2012-uc}.
+%====================================
+\subsubsection{Redes Multicamadas} \label{sec:multicamadas}
 
-\todo[inline]{Explicar coeficiente de agrupamento (figuras ajudam)}
+Redes reais nem sempre podem ser modeladas como redes simples. Múltiplos tipos de relacionamentos como comunicação por email, telefone e pessoalmente; diferentes tipos de nós, como humanos e máquinas ou ainda diferentes momentos de interação, como conversas em um evento, bar ou no trabalho são características importantes que não são facilmente modeladas por redes tradicionais~\cite{Kivela2014-pb}.
 
-\textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Dissortatividade} é o conceito contrário, onde nós com características diferentes tendem a se conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}.
+Ao longo das últimas décadas, variações de modelos de rede foram utilizadas para modelar esses fenômenos, como redes multiplexadas, redes multirrelacionais e \enquote{redes de redes}. Em seu trabalho, \citeonline{Kivela2014-pb} propõem uma padronização dessas definições ao redor do termo Redes Multicamadas.
+
+Uma rede multicamada representa a diversidade de nós e conexões acima exemplificados como uma rede em os nós possuem múltiplas representações, cada uma em uma \textit{camada} diferente. Um exemplo de rede multicamada pode ser visto na Figura~\ref{fig:ex-multicamada}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{random_walks_on_multilayer_networks}
+    \caption{Exemplo do caminhar de um \textit{random walker} em uma rede multicamada.}
+    \source{Wikimedia - Manlio De Domenico}
+    \label{fig:ex-multicamada}
+\end{figure}
+
+Nessa trabalho, a rede multicamada é usada para simplificar uma rede modelada como um processo de Markov de segundo nível. Essa simplificação permite traduzir a Equação de Mapa (apresentada mais à frente, na Seção~\ref{sec:infomap}) para detectar sobreposições entre comunidades, ou seja, comunidades que compartilham nós.
 
 %====================================
 \subsection{Medidas de Rede} \label{sec:medidas-de-rede}
 
-As medidas descritas nessa seção são usadas para comparação com os modelos nulos selecionados para o trabalho, bem como para encontrar características relevantes dentro da própria rede.
+As medidas descritas nessa seção são usadas para caracterização da rede do MCar bem como das ilhas ocupacionais encontradas.
 
-Para comparação com os modelos nulos, são considerados estimadores de centralidade (média e mediana), dispersão (desvio padrão e intervalo interquartil), distribuição e correlação entre as várias medidas.
+Entenda-se por \textit{caracterização} a descrição da rede utilizando medidas numéricas que permita a interpretação dos macro-atributos da rede. Por exemplo, a medida de assortatividade é usada para identificar que a topologia predominante nas ilhas ocupacionais se assemelha a de \textit{centro e raios}, enquanto a medida de centralidade de fluxo e de grau é usada para identificar as ocupações mais importantes nas ilhas.
 
-%====================================
-\subsubsection{Distância Geodésica} \label{sec:distancia-geodesica}
+%===================================
+\subsubsection{Assortatividade} \label{sec:assortatividade}
 
-O menor caminho entre dois nós é chamado \textit{caminho geodésico} e o número de conexões em um caminho geodésico é chamado \textit{distância geodésica}.
-%% SUGIRO QUE TODO CONCEITO SEJA COLOCADO EM ITÁLICO E NÃO ENTRE ASPAS.
-% Ronie: De acordo, alterando...
+A assortatividade é uma medida de quão nós similares estão conectados entre si~\cite{Newman2003-jn}. Quaisquer atributos dos nós podem ser usados como medida de assortatividade, por exemplo, se nós representarem pessoas e as conexões representarem amizades, medir a assortatividade de idade diria se as pessoas preferem amizades com outras de idade similar (assortatividade positiva) ou preferem amizades com pessoas muito mais velhas ou novas (assortatividade negativa ou desassortatividade).
 
-Seja o caminho $P$ entre os nós $i_1$ e $i_n$ uma lista ordenada de $n$ conexões:
+A assortatividade de grau é de especial interesse na análise de redes, pois permite caracterizar sua topologia. Redes com assortatividade negativa (desassortativas), remetem à topologia de \textit{eixo e raios} ou \textit{estrela}, onde nós de grau muito alto (\textit{hubs}) se conectam a muitos nós de grau mais baixo~\cite{Barabasi2016-rn}. A Figura~\ref{fig:assortatividade-topologia} mostra um exemplo de uma rede em que predomina essa topologia.
 
-\begin{equation} \label{eq:caminho}
-P(i_1,i_n) \defn \{(i_1,i_2), (i_2,i_3), \ldots, (i_{n-1},i_n)\}
-\end{equation}
+Quanto menor a assortatividade, mais a rede se aproxima da topologia de estrela, em que todos os nós de alto grau conectam-se somente a nós de grau muito baixo. Como exemplos, a ilha ocupacional relacionada a \enquote{Fonoaudiologia} na Figura~\ref{fig:ex-assortatividade-negativa}, com assortatividade $-0,99$, possui todos os nós conectados a um \textit{hub} central, com nenhuma conexão entre as ocupações periféricas. Já a ilha relacionada a \enquote{Coordenador de Mídia} na Figura~\ref{fig:ex-assortatividade-positiva}, com assortatividade $0,18$, possui uma estrutura um pouco mais distribuída e o grau dos nós é similar, com exceção do próprio \enquote{Coordenador de Mídia}.
 
-A distância geodésica entre $i$ e $j$ pode ser definida como a menor distância entre todos os caminhos entre esses nós:
+\begin{figure}[ht]
+    \centering
+    \subfloat[][Assortatividade $-0,99$] {
+        \includegraphics[width=0.4\linewidth]{ex-assortatividade-negativa.pdf}
+        \label{fig:ex-assortatividade-negativa}
+    }
+    \subfloat[][Assortatividade $0,18$] {
+        \includegraphics[width=0.4\linewidth]{ex-assortatividade-positiva.pdf}
+        \label{fig:ex-assortatividade-positiva}
+    }    
+    \caption{Assortatividade e Topologia}
+    \label{fig:assortatividade-topologia}
+\end{figure}
 
-\begin{equation} \label{eq:distancia-geodesica}
-d_{ij} \defn min|P(i, j)| 
-\end{equation}
+A assortatividade de grau em uma rede direcionada pode ser caracterizada pelo coeficiente de correlação de Pearson dos graus~\cite{Barabasi2016-rn}. Seja $k_i^\leftarrow$ e $k_i^\rightarrow$,  respectivamente, os graus de entrada e saída do nó $i$, seja $E$ o conjunto de conexões da rede, $e = (m, n) \mid e \in E$ as conexões de $E$, $m$ o vértice de onde $e$ sai e $n$ o vértice para onde $e$ aponta, definem-se os \textit{graus remanescentes} de entrada e saída, respectivamente, $\delta_e^\leftarrow$ e $\delta_e^\rightarrow$ da conexão $e$ como
+\begin{align*}
+\delta_e^\leftarrow &= k_n^\leftarrow - 1
+\\
+\delta_e^\rightarrow &= k_m^\rightarrow - 1\,.
+\end{align*}
 
-Como o MCar é um grafo direcionado e ponderado, a distância geodésica considera o peso das conexões. Como o peso das conexões representa um atributo desejável, ou seja, quanto maior o peso, maior o fluxo de pessoas entre duas conexões (um atributo de afinidade, não de custo),  a distância geodésica para grafos ponderados~\cite{Newman2001-sl} é definida por:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{remaining-degree.pdf}
+    \caption{Graus remanescentes de entrada e saída da conexão $e$}
+    \label{fig:remaining-degree}
+\end{figure}
 
-\begin{equation} \label{eq:distancia-ponderada}
-\weighted{d}_{ij} \defn min\left(\frac{1}{w_{ih}} + \ldots + \frac{1}{w_{hj}}\right)
-\end{equation}
+O \textit{grau remanescente} é o grau do nó, excetuando-se a conexão atual (Figura~\ref{fig:remaining-degree}). A correlação de Pearson $r$ dos graus é então definida por
 
-Onde $w_{ih}$ é o peso da conexão entre os nós $i$ e $h$ ou indefinido se a conexão é inexistente.
-
-Adaptando-se a fórmula para um grafo direcionado, onde $\wout_{ij}$ representa o peso em um arco e $\wout_{ij}$ é indefinido se não há uma conexão entre $i$ e $j$:
-
-\begin{equation} \label{eq:distancia-ponderada-direcionada}
-\weighteddir{d}_{ij} \defn min\left(\frac{1}{\wout_{ih}} + \ldots + \frac{1}{\wout_{hj}}\right)
-\end{equation}
-
-%====================================
-\subsubsection{Centralidade de Grau e Força} \label{sec:forca}
-
-A \textit{centralidade de grau} ou \textit{degree centrality} mede o quão conectado é um nó, quanto maior o número de conexões, maior a centralidade de grau.
-
-A centralidade de grau é simplesmente o grau de um nó e pode ser calculada segundo a Equação~\ref{eq:centralidade-grau}.
-
-\begin{equation} \label{eq:centralidade-grau}
-c_k(i) \defn \sum_{j} a_{ij}
-\end{equation}
-
-Em que $a_{ij}$ é 1 se existe uma conexão não direcionada $i, j$ e 0 caso contrário, e $i,j \in N$. 
-
-Para redes direcionadas, a centralidade pode ser separada de acordo com a direção das conexões. A \textit{centralidade de grau de entrada} corresponde ao número de conexões que termina em um nó, já a \textit{centralidade de grau de saída} corresponde ao número de conexões que partem de um nó.
-
-No caso de um grafo ponderado não direcionado, a centralidade de grau deve considerar não somente o número de conexões, mas também seus pesos. \citeonline{Barrat2004-xf} propõem o equivalente da centralidade de grau para grafos ponderados, a \textit{força} (\textit{strength}) do nó, como a soma do peso das conexões adjacentes ao nó.
-
-\begin{equation} \label{eq:forca}
-s_i \defn \sum_{j} w_{ij}
-\end{equation}
-
-Onde $w_{ij}$ possui o valor do peso entre os nós $i$ e $j$, ou 0 se não há conexão entre eles.
-
-O presente trabalho trata de uma rede ponderada e direcionada, portanto são apresentadas variações de \textit{força} considerando a direção e peso das conexões.
-
-O equivalente a centralidade de grau de entrada, nesse caso, é a força de entrada, análoga a Equação~\ref{eq:forca}, considerando apenas as conexões de entrada no nó.
-
-\begin{equation} \label{eq:forca-entrada}
-\linkin{s}_i \defn \sum_{j} \win_{ij}
-\end{equation}
-
-Onde $\win_{ij}$ é o peso da conexão direcionada de $j$ com destino a $i$.
-
-Analogamente à força de entrada, a força de saída pode ser calculada como:
-
-\begin{equation} \label{eq:forca-saida}
-\linkout{s}_i \defn \sum_{j} \wout_{ij}
-\end{equation}
-
-Onde $\wout_{ij}$ é o peso da conexão direcionada de $i$ para $j$.
-
-%====================================
-\subsubsection{Distribuição de Graus e Forças} \label{sec:distribuicao-grau-forca}
-
-A distribuição de graus reflete a probabilidade de se encontrar um nó de grau $k$ em uma rede. Nesse trabalho, essa probabilidade é representada por $P_k$.
-
-Muitas características importantes das redes dependem dessa distribuição, desde o comportamento na transmissão de doenças até o quão uma rede de comunicações é vulnerável a ataques ou falhas. Um dos fatores que contribuíram para a distinção de redes complexas das demais iniciou-se com a descoberta de \cite{Barabasi1999-sn} que redes reais frequentemente possuíam distribuição logarítmica de grau, com poucos nós detendo a maior parte das conexões (alto grau) e a maior parte dos nós com apenas poucas conexões (baixo grau). Em outras palavras, é possível observar na distribuição de grau das redes reais a existência de \textit{hubs}, ausentes em redes puramente aleatórias.
-
-É possível ter um vislumbre da distribuição de graus de uma rede específica através de um simples histograma, onde o eixo $x$ possui o grau e o eixo $y$ o número de nós encontrados na rede com aquele grau. Entretanto, para se obter uma distribuição apropriada, é preciso normalizar as colunas do histograma para que elas somem 1, para isto, basta dividir o valor de cada coluna pela soma de todos os graus da rede.
-%% ILUSTRAR COM UMA REDE E SEU HISTOGRAMA
-
-Assumindo $N$ como o número de nós da rede e $N_k$ como o número de nós de grau $k$, a probabilidade $P_k$ de se encontrar um nó com grau $k$ é definida como:
-
-\begin{equation} \label{eq:probabilidade-grau}
-P_k \defn \frac{N_k}{N}
-\end{equation}
-
-Essa distribuição, da maneira como foi descrita, é uma distribuição discreta e responde a pergunta \enquote{qual a probabilidade de se encontrar um nó \textit{exatamente}~\todo{Existe a contraparte contínua dessa equação, a intenção é descrevê-la logo abaixo} com o grau $k$?}. A partir daí, é possível responder quantos nós são esperados com um determinado grau $k$ usando:
-
-\begin{equation}
-N_k = NP_k
-\end{equation} 
-
-De maneira análoga, a \textit{distribuição de forças} de uma rede é feita substituindo-se o grau $k$ pela força $s$ do nó. Força é definida como a soma dos pesos das conexões que incidem sobre um nó (mais na Seção~\ref{sec:forca}). A probabilidade $P_s$ de se encontrar um nó de força $s$ em uma rede com $N$ nós é:
-
-\begin{equation} \label{eq:probabilidade-forca}
-P_s \defn \frac{N_s}{N}
-\end{equation}
-
-Onde $N_s$ é a quantidade de nós com força $s$.
-
-Em redes ponderadas é possível traçar correlações entre força e grau. Se há uma \textit{correlação positiva}, isso significa que nós mais conectados possuem também peso maior, ou seja, em uma rede com \textit{hubs}, não somente eles conectam uma quantidade maior de nós, como a conexão entre eles também é mais forte. É possível ilustrar esse caso com a rede de computadores que forma a internet. Os \textit{backbones} (\textit{hubs}) dessa rede não apenas conectam mais computadores, como o tráfego de suas conexões é muito mais intenso do que o tráfego entre dois computadores no extremo da rede. Por outro lado, uma \textit{correlação negativa} entre grau e força significa que nós menos conectados possuem conexões mais fortes entre si do que com nós de alta conexão. Um caso ilustrativo para esse cenário é uma rede de relacionamentos entre as pessoas: as conexões locais, como família, tendem a possuir muito mais interação entre si do que interações com celebridades.
-%% É POSSÍVEL AFIRMAR QUE MENOS CONEXÕES IMPLICAM EM MAIOR FORÇA? ISSO NÃO ME PARECE PRECISO.
-% Ronie: Não, não implica mesmo. Na verdade a correlação entre número de conexões e força é uma medida bastante interessante. Às vezes o número de conexões é grande e a força tb. (Mas deu pra ver que meu texto ficou confuso, alterei ele, veja como ficou?).
-
-A correlação entre grau e força pode indicar modelos nulos adequados para redes reais, correlações perfeitas podem significar que a força pode ser descartada no modelo nulo (por não agregar informação) ou que pode ser derivada posteriormente a partir da sequência de graus resultante.\todo{Aqui tem coisa!}
-
-Em grafos direcionados é possível separar cada uma das distribuições em distribuições de entrada e saída. A \textit{probabilidade de distribuição de grau de saída} (Eq. \ref{eq:probabilidade-grau-saida}), \textit{probabilidade de distribuição de grau de entrada} (Eq. \ref{eq:probabilidade-grau-entrada}), \textit{probabilidade de distribuição de força de saída} (Eq. \ref{eq:probabilidade-forca-saida}) e \textit{probabilidade de distribuição de força de entrada} (Eq. \ref{eq:probabilidade-forca-entrada}) são similares às Equações \ref{eq:probabilidade-grau} e \ref{eq:probabilidade-forca} e são listadas abaixo de maneira resumida:
-
-\noindent
-\begin{tabularx}{\linewidth}{@{}XX@{}}
-  \begin{equation} \label{eq:probabilidade-grau-saida}
-  	\linkout{P}_k \defn \frac{\linkout{N}_k}{N}
-  \end{equation} &
-  \begin{equation} \label{eq:probabilidade-grau-entrada}
-  	\linkin{P}_k \defn \frac{\linkin{N}_k}{N}
-  \end{equation} \\
-  \begin{equation} \label{eq:probabilidade-forca-saida}
-  	\linkout{P}_s \defn \frac{\linkout{N}_s}{N}
-  \end{equation} &
-  \begin{equation} \label{eq:probabilidade-forca-entrada}
-  	\linkin{P}_s \defn \frac{\linkin{N}_s}{N}
-  \end{equation}
-\end{tabularx}
-
-\todo[inline]{Pensei em explorar as correlações entre elas aqui, mas vou deixar isso para quando tirar os dados da MCar, se existir alguma coisa, menciono lá.}
+\begin{align*}
+p &= \sum_{e \in E} \delta_e^\leftarrow \delta_e^\rightarrow
+\\
+q &= \frac{1}{|E|} \sum_{e \in E} \delta_e^\leftarrow
+\sum_{e \in E }\delta_e^\rightarrow
+\\
+\sigma^2_\leftarrow &= \sum_{e \in E} \left( \delta_e^\leftarrow \right)^2
+- \frac{1}{|E|} \left( \sum_{e \in E} \delta_e^\leftarrow \right)^2
+\\
+\sigma^2_\rightarrow &= \sum_{e \in E} \left( \delta_e^\rightarrow \right)^2
+- \frac{1}{|E|} \left( \sum_{e \in E} \delta_e^\rightarrow \right)^2
+\\
+r &= \frac{p - q}
+{\sqrt{ \sigma^2_\leftarrow } \sqrt{ \sigma^2_\rightarrow }}\,.
+\end{align*}
 
 %====================================
 \subsubsection{Coeficiente de Agrupamento} \label{sec:coeficiente-agrupamento}
@@ -551,7 +456,7 @@ O coeficiente de agrupamento local pode ser estendido para grafos direcionados d
   \end{cases}
 \end{equation}
 
-Onde $\linkboth{m}_i$ é o número de arcos entre os vizinhos de $i$.
+Onde $\linkboth{m}_i$ é o número de conexões entre os vizinhos de $i$.
 
 Em um grafo ponderado, \citeonline{Barrat2004-xf} oferecem a seguinte versão do coeficiente de agrupamento:
 
@@ -559,7 +464,7 @@ Em um grafo ponderado, \citeonline{Barrat2004-xf} oferecem a seguinte versão do
 \weighted{c}_c(i) \defn \frac{1}{s_i(k_i - 1)} \sum_{j,k \in N(i)} \frac{w_{ij} + w_{jk}}{2}
 \end{equation}
 
-Onde $N(i)$ é o conjunto de vizinhos de $i$, $w_{ij}$ é o peso da conexão entre os nós $i$ e $j$ e $s(i)$ é a força do nó (Equação~\ref{eq:forca}).
+Onde $N(i)$ é o conjunto de vizinhos de $i$, $w_{ij}$ é o peso da conexão entre os nós $i$ e $j$ e $s(i)$ é a força do nó.
 
 O \textit{coeficiente de agrupamento global} de um grafo é dado pela média dos coeficientes locais:
 
@@ -569,6 +474,7 @@ C_c \defn \frac{1}{|N'|} \sum_{i \in N'} c_c(i)
 
 Onde $N'$ é o conjunto de nós com grau maior que 1, ou seja, $N' = \left\lbrace i \in N \mid k_i > 1 \right\rbrace$. O coeficiente de agrupamento para um grafo ponderado é calculado da mesma forma, apenas substituindo-se o coeficiente local por sua versão ponderada.
 
+\begin{comment}
 %====================================
 \subsubsection{Similaridade} \label{sec:similaridade}
 
@@ -617,11 +523,12 @@ R_{(i,h),(j,h)} \defn \frac{\vec{r_i} \cdot \vec{r_j}}{|\vec{r_i}|^2 + |\vec{r_j
 \end{equation}
 
 Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$ e $i \neq h \neq j$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é usada principalmente na detecção de comunidades.
+\end{comment}
 
 %====================================
 \subsubsection{Modularidade} \label{sec:modularidade}
 
-A \textit{modularidade} é uma medida voltada para a detecção de comunidades. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
+A \textit{modularidade} é uma medida de qualidade para a detecção de comunidades. O algoritmo de Louvain, por exemplo, usa a modularidade como função objetivo~\cite{Barabasi2016-rn}. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
 
 Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela fornece um indício se um grupo de nós é mais densamente conectado que o esperado em um modelo nulo, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
 
@@ -653,11 +560,7 @@ Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $
 
 \todo[inline]{Demonstrar separando a carreira de TI aqui}
 
-\begin{comment}
-O significado de comunidades sob a perspectiva desse trabalho é detalhado na Seção~\ref{sec:deteccao-comunidade}.
-\end{comment}
 
-\begin{comment}
 %====================================
 \subsection{Detecção de Comunidade} \label{sec:deteccao-comunidade}
 
@@ -688,12 +591,220 @@ Essa hipótese se baseia na anterior, justificando que quanto mais longe a estru
 
 \end{description}
 
-O clube de caratê de Zachary.
+%===================================
+\subsection{Equação de Mapa} \label{sec:infomap}
+%===================================
 
-Agrupamento hierárquico (áreas dentro de áreas)
+Segundo \citeonline{Grunwald2007-bt}, quaisquer regularidades em um conjunto de dados podem ser usadas para comprimi-lo, ou seja, descrevê-lo usando uma quantidade menor de símbolos. Quanto maior a regularidade, maior a compressão, dessa forma, dentre várias representações possíveis dos dados, a que apresentar maior compressão é também aquela que melhor identifica padrões nos dados. A Descrição de Comprimento Mínimo (\textit{Minimum Description Length}) é a disciplina que estuda essa relação~\cite{Grunwald2007-bt}.
 
-Comunidade com sobreposição (ocupações de migração?)
-\end{comment}
+O algoritmo Infomap aproveita essa dualidade entre detecção de padrões e compressão de dados para identificar padrões de fluxo em redes~\cite{Rosvall2009-sd}.
+
+Para compreender o algoritmo, é preciso entender como um trajeto aleatório em uma rede é representado e como a Descrição de Comprimento Mínimo usa essa representação na detecção de comunidades.
+
+Para isso, descreve-se o caminho que um \textit{random walker} faz em uma rede através da sequência de nós pela qual ele passa. Por exemplo, assumindo uma rede com os nós $A$, $B$ e $C$, um caminho possível poderia ser descrito por $ABACBA$.
+
+A Figura~\ref{fig:graph01} mostra um grafo regular, onde todos os nós possuem três vizinhos. Nesse tipo de rede, um \textit{random walker} ergódico (de caminho infinito) percorre todas as conexões o mesmo número de vezes. A Figura~\ref{fig:walk01} mostra um caminho aleatório passando por 800 nós.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][Rede regular] {
+        \includegraphics[scale=0.4]{graph01.pdf}
+        \label{fig:graph01}
+    }
+    \subfloat[][Caminho na rede] {
+        \includegraphics[scale=0.4]{graph01_path.pdf}
+        \label{fig:walk01}
+    }    
+    \caption{Caminho de um \textit{random walker}}
+\end{figure}
+
+Apesar de ser uma rede regular, onde cada nó possui três conexões, sua topologia faz com que o \textit{random walker} fique \enquote{preso} nos grupos formados pelos nós $ABCD$, $EFGH$ e $IJKL$; escapando esporadicamente de um para outro, onde circula até escapar novamente. Esses grupos são destacados na Figura~\ref{fig:graph02}. O caminho percorrido pelo \textit{walker} é exibido na Figura~\ref{fig:walk02}, dessa vez destacando os grupos por onde ele passa. As cores em ambas as figuras tornam fácil perceber seu comportamento.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][Rede regular] {
+        \includegraphics[width=0.4\linewidth]{graph02.pdf}
+        \label{fig:graph02}
+    }
+    \subfloat[][Caminho na rede] {
+        \includegraphics[width=0.4\linewidth]{graph02_path.pdf}
+        \label{fig:walk02}
+    }    
+    \caption{Rede e caminho destacados}
+\end{figure}
+
+Se cada nó for representado por uma sequência de bits, podemos medir quanta informação é necessária para representar o caminho feito pelo \textit{random walker}. Usando a codificação de tamanho variável de  \citeonline{Huffman1952-ak} os nós mais frequentes são representados por códigos menores, o que leva a uma codificação menor para representar um caminho do que uma que use códigos de tamanho fixo.
+
+Os códigos usados por cada grupo são chamados \textit{codebooks}, os códigos que indicam qual \textit{codebook} será usado também são \textit{codebooks}, funcionando como um índice. Na Figura~\ref{fig:graph04}, existem três deles, um para cada grupo, contendo os nós \enquote{00}, \enquote{01}, \enquote{10}, \enquote{110} e o código de saída \enquote{111}. O \textit{codebook} índice possui os códigos: \enquote{0}, \enquote{10} e \enquote{11}.
+
+Dessa forma, sem o uso de \textit{codebooks}, o caminho que começa no nó mais abaixo do grafo da Figura~\ref{fig:graph03} e termina no nó do canto superior esquerdo é descrito pela sequência binária \enquote{000 1110 1011 1111 1101}, usando 19 bits. O mesmo caminho, usando a codificação com \textit{codebooks} da Figura~\ref{fig:graph04} é \enquote{\textbf{0} 01 110 \textit{111} \textbf{11} 00 01 10} e possui 17 bits (os números em negrito indicam entrada em um grupo e o número em itálico indica saída do grupo).
+
+Nesse caminho curto, ambas as codificações têm tamanhos similares, porém, em um caminho infinitamente longo (ergódico), o uso de múltiplos \textit{codebooks} pode produzir um código mais compacto do que o uso de um único \textit{codebook}. Como exemplo, o caminho da Figura~\ref{fig:walk01} usando a codificação com um único \textit{codebook} da Figura~\ref{fig:graph03} possui 2880 bits contra 1776 bits usando a codificação com três \textit{codebooks} da Figura~\ref{fig:graph04}.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][Nós usando codificação de Huffman] {
+        \includegraphics[width=0.4\linewidth]{graph03.pdf}
+        \label{fig:graph03}
+    }
+    \subfloat[][Reaproveitamento de códigos] {
+        \includegraphics[width=0.4\linewidth]{graph04.pdf}
+        \label{fig:graph04}
+    }    
+    \caption{Codificação dos nós}
+\end{figure}
+
+O particionamento da rede em grupos onde os caminhos aleatórios podem ser representados da maneira mais compacta possível deve representar o melhor particionamento em relação ao fluxo.
+
+A \enquote{Equação de Mapa}\footnote{No original: \textit{Map Equation}}~\cite{Rosvall2009-sd} permite que se identifiquem as menores codificações possíveis para um determinado particionamento da rede sem a necessidade de se empregar \textit{random walkers} de fato. Com ela, a detecção de comunidades usando o fluxo como critério de coesão se reduz a um problema de otimização.
+
+A Equação de Mapa é
+\begin{equation} \label{eq:map-equation}
+L(\mathsf{M}) = q_\curvearrowright H(\mathcal{Q}) + \sum_{i \in \mathsf{M}} p^i_\circlearrowright H(\mathcal{P}^i)\,,
+\end{equation}
+onde $L(\cdot)$ é o menor tamanho de codificação possível para representar um certo particionamento; $\mathsf{M}$ é o particionamento dos nós em comunidades $i \in \mathsf{M}$; $q_\curvearrowright$ é a probabilidade de um \textit{random walker} sair de qualquer comunidade e passar para o \textit{codebook} índice; $H(\mathcal{Q})$ (\textit{eta} em maiúsculo) é o número médio de bits usado para representar o \textit{codebook} índice segundo a distribuição de probabilidade $\mathcal{Q}$; e $H(\mathcal{P}^i)$ também é o número médio de bits, mas dessa vez daqueles usados na comunidade $i$ segundo a distribuição $\mathcal{P}^i$; finalmente $p^i_\circlearrowright$ é a probabilidade do \textit{walker} estar na comunidade $i$.
+
+$H(\textbf{p})$ é a equação que descreve a entropia da informação segundo uma certa distribuição de probabilidade $\textbf{p}$~\cite{Shannon1948-ic}. Ela se refere a média de bits necessária, por símbolo, para se representar a informação gerada por um processo estocástico e é expressa como:
+\begin{equation*}
+H(\textbf{p}) = - \sum_\alpha p_\alpha \log_2 p_\alpha\,.
+\end{equation*}
+
+Nessa equação, $p_\alpha$ é a probabilidade estacionária da rede, ou seja, em um caminho infinito, qual fração de tempo o \textit{walker} estaria em $\alpha$~\cite{Rosvall2009-sd}.
+
+Para calcular $p_\alpha$ inicia-se com a matriz estocástica linear $W$, gerada a partir da matriz de adjacência $A$ direcionada e ponderada. Em uma matriz estocástica linear, a soma dos pesos de entrada do nó (linha) é normalizada para que resulte em 1. Cada elemento $w_{\alpha \beta}$ dessa matriz representa a probabilidade de um \textit{random walker}  em $\alpha$ chegar ao nó $\beta$. Transportada para a realidade do MCar, essa é a probabilidade de alguém na ocupação $\alpha$ fazer a transição para a ocupação $\beta$.
+
+Sendo $n$ o número de nós da rede, define-se $w_{\alpha \beta}$ como:
+\begin{align} \label{eq:matriz-estocastica}
+w_{\alpha \beta} = 
+\begin{cases*}
+\frac{1}{n}, & \text{se $\alpha$ não possui conexões de saída, ou seja, $\sum_\beta A_{\alpha \beta} = 0$,} \\
+0, & \text{se não há conexão entre $\alpha$ e $\beta$,} \\
+\frac{A_{\alpha \beta}}{\sum_\beta A_{\alpha \beta}}, & \text{caso contrário.}
+\end{cases*}
+\end{align}
+
+A primeira cláusula da Equação~\ref{eq:matriz-estocastica} garante que a matriz estocástica possua linhas totalizando 1 quando o nó não possui conexões de saída. Para efeitos do \textit{random walker}, isso significa que ele se teleporta para um nó qualquer da rede quando se encontra em um nó sem saída. Caso contrário, os nós sem conexões de saída acumulariam a probabilidade total da rede~\cite{Page1999-ag}.
+
+A probabilidade estacionária $p_\alpha$ é calculada pelo sistema de equações
+\begin{equation} \label{eq:page-rank}
+p_\alpha = \frac{1}{n} \tau + \sum_\beta (1 - \tau) p_\beta w_{\beta \alpha}\,,
+\end{equation}
+onde $\tau$ é a probabilidade do \textit{walker} ser teleportado para um nó aleatório. A primeira cláusula da Equação~\ref{eq:matriz-estocastica} e a presença de $\tau$ transformam o \textit{random walker} em um \textit{random surfer}. Esse artifício foi usado por~\citeonline{Page1999-ag} na criação do algoritmo de PageRank e fornece a base para a Equação de Mapa.
+
+O recurso de teleporte garante a ergodicidade do caminho e, segundo o teorema de Perron-Frobenius, faz com que a probabilidade estacionária seja definida~\cite{Rosvall2009-sd}.
+
+A partir de $p_\alpha$, é possível expandir a Equação de Mapa. Seja $q_{i \curvearrowright}$ a probabilidade de saída da comunidade $i$ e $q_{\curvearrowright}$ a probabilidade de saída de qualquer comunidade, o valor de $q_{\curvearrowright}$ equivale à taxa de uso do \textit{codebook} índice, uma vez que a saída de uma comunidade implica  em seu uso para indicar qual a próxima comunidade. Finalmente, seja $n$ o número de nós da rede e $n_i$ o número de nós pertencente à comunidade $i$, expande-se a Equação~\ref{eq:map-equation} em
+\begin{align}
+q_{i \curvearrowright} &= \frac{n - n_i}{n} \tau \sum_{\alpha \in i} p_\alpha + (1 - \tau) \sum_{\alpha \in i} \sum_{\beta \nin i} p_\alpha w_{\alpha \beta} \nonumber \\
+q_\curvearrowright       &= \sum_{i \in M} q_{i\curvearrowright} \nonumber \\
+p^i_\circlearrowright    &= q_{i \curvearrowright} + \sum_{\alpha \in i} p_\alpha \nonumber \\
+H(\mathcal{Q})            &= - \sum_{i \in M} \frac{q_{i \curvearrowright}}{q_\curvearrowright} \log_2 \frac{q_{i \curvearrowright}}{q_\curvearrowright} \nonumber \\
+H(\mathcal{P}^i)         &= - \frac{q_{i \curvearrowright}}{p^i_\circlearrowright} \log_2 \frac{q_{i \curvearrowright}}{p^i_\circlearrowright} 
+-  \sum_{\alpha \in i} \frac{p_\alpha}{p^i_\circlearrowright} \log_2  \frac{p_\alpha}{p^i_\circlearrowright} \label{eq:eta-p} \\
+L(\mathsf{M})              &= q_\curvearrowright \log_2 q_\curvearrowright - 2 \sum_{i = 1}^m q_{i \curvearrowright} \log_2 q_{i \curvearrowright} - \sum_{\alpha = 1}^n p_\alpha \log_2 p_\alpha + \sum_{i = 1}^m p^i_\circlearrowright \log_2 p^i_\circlearrowright\,. \nonumber
+\end{align}
+
+\subsection{Redes com Memória}  \label{sec:redes-com-memoria}
+
+Na modelagem do MCar, um \enquote{Analista de Sistemas} e um \enquote{Arquiteto} têm chances similares de se tornarem \enquote{Coordenador de Projetos}. Entretanto, apesar de receber o mesmo nome, as competências de um coordenador de projetos da área de software e de arquitetura são bastante diferentes. Na realidade, essa é uma ocupação que pode figurar em duas ilhas ocupacionais bastante distintas, pois a movimentação entre essas duas áreas é relativamente rara em comparação com a movimentação dentro de si mesmas.
+
+O padrão esperado nesse caso, é que profissionais de cada ilha vão para essa \enquote{Gerente de Projetos} e voltem para outras de sua própria ilha ao invés de cruzar a fronteira de carreira. Para poder identificar esse padrão, é preciso considerar não apenas o trabalho imediatamente anterior, mas também o subsequente.
+
+No MCar as ocupações prévias do profissional não influenciam seu próximo passo, apenas sua ocupação atual. No entanto, como exemplificado no caso acima, a \enquote{perda de memória} da ocupação anterior compromete a identificação das comunidades.
+
+Efetivamente, o MCar modela o fluxo de profissionais como um cadeia de Markov de primeira ordem. Considerar ocupações anteriores transforma o fluxo da rede em uma cadeia de Markov de ordem superior ou \enquote{Redes com Memória}\footnote{no original: \textit{Memory Networks}} \cite{Edler2017-kt}.
+
+\begin{figure}[htb]
+    \centering
+    \subfloat[][Simples] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-04.pdf}
+        \label{fig:ex-multilayer-simples}
+    }
+    \subfloat[][Direcionada]{
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-05.pdf}
+        \label{fig:ex-multilayer-direcionada}
+    }
+    \subfloat[][Trigramas] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-01.pdf}
+        \label{fig:ex-multilayer-trigrama}
+    }
+    \caption{Exemplo de uma rede com 4 nós e representações com sucessivos aumentos de informação. Os nós são GP - \textit{Gerente de Projetos}, AS - \textit{Analista de Sistemas}, AQ - \textit{Arquiteto} e CP - \textit{Coordenador de Projetos}. A rede simples da Figura~\ref{fig:ex-multilayer-simples} faz as conexões entre AS e CP agirem como bidirecionais; a rede direcionada da Figura~\ref{fig:ex-multilayer-direcionada} unifica as probabilidades de um \textit{random-walker} caminhar entre CP e GP, ignorando onde estava anteriormente. Os fluxos com dois níveis de memória (processo markoviano de segunda ordem) podem ser observados na Figura~\ref{fig:ex-multilayer-trigrama}}
+\end{figure}
+
+\citeonline{Edler2017-kt} adaptam a Equação de Mapa  para trabalhar com  Redes com Memória transformando-as em uma rede multi-camadas em uma representação chamada \enquote{Rede com Memória em Multi-Camadas}\footnote{no original: \textit{Multilayer Memory Network}}. Um rede multi-camadas é usada para representar redes em sistemas complexos onde existem contextos diferentes de relacionamento~\cite{Kivela2014-pb}. Por exemplo, em uma rede social onde pessoas participam de vários eventos, cada camada pode representar um evento, enquanto os relacionamentos podem representar a interação entre elas em cada evento. 
+
+\begin{figure}[htb]
+    \centering
+    \subfloat[][Trigramas] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-01.pdf}
+        \label{fig:ex-multilayer1}
+    }
+    \subfloat[][Como camadas] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-02.pdf}
+        \label{fig:ex-multilayer2}
+    }
+    \subfloat[][Projeção] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-03.pdf}
+        \label{fig:ex-multilayer3}
+    }
+    \caption{Exemplo de uma rede com 4 nós e 4 trigramas (8 conexões). Os nós são GP - \textit{Gerente de Projetos}, AS - \textit{Analista de Sistemas}, AQ - \textit{Arquiteto} e CP - \textit{Coordenador de Projetos}. A mesma rede usando camadas para representar dois níveis de memória é exibida na Figura~\ref{fig:ex-multilayer2}, cada camada representa o nó anterior da conexão e cada imagem do nó na camada é chamado de \textit{nó-estado}. A projeção das camadas de volta para uma rede de camada única está na Figura~\ref{fig:ex-multilayer3}, as anotações em cada nó indicam a camada daquele nó-estado.}
+    \label{fig:ex-multilayer-camadas}
+\end{figure}
+
+O exemplo da Figura~\ref{fig:ex-multilayer-camadas} mostra a rede formada pelas ocupações \enquote{Arquiteto}, \enquote{Analista de Sistemas}, \enquote{Coordenador de Projetos} e \enquote{Gerente de Projetos} e suas representações em camadas. A partir dessa representação é possível projetar uma rede de uma única camada (uma rede \enquote{comum}), criando-se um \textit{nó-estado} para cada nó em cada camada. Ignorando-se nós-estado que não possuem conexões, essa projeção cria um nó-estado para cada conexão de entrada, como pode ser observado na Figura~\ref{fig:ex-multilayer3}.
+
+Uma vez que a probabilidade estacionária é calculada através das conexões de saída, os nós-estado que possuem saída para os mesmos nós podem ser unificados sem perda de informação para identificação de comunidades. No exemplo da Figura~\ref{fig:ex-multilayer3}, os nós $\text{CP}_\text{AS}$ e $\text{CP}_\text{AQ}$ podem ser unidos em um único nó. \citeonline{Edler2017-kt} chamam essa simplificação de Rede com Memória Esparsa\footnote{no original: \textit{Sparse Memory Network}}.
+
+\begin{figure}[htb]
+    \centering
+    \subfloat[][Projeção] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-03.pdf}
+        \label{fig:ex-multilayer-projecao}
+    }
+    \subfloat[][Rede com Memória Esparsa] {
+        \includegraphics[width=0.3\linewidth]{ex-multilayer-06.pdf}
+        \label{fig:ex-multilayer-esparsa}
+    }
+    \caption{A rede pode ser simplificada unificando nós que possuem saída para os mesmos nós-estados, criando uma Rede com Memória Esparsa~\cite{Edler2017-kt}}
+    \label{fig:ex-multilayer-memoria}
+\end{figure}
+
+Dessa forma, a aplicação da Equação de Mapa (Equação \ref{eq:map-equation}) permanece a mesma, bastando que os nós-estado que permanecem na mesma comunidade compartilhem o mesmo código. Para isso, a probabilidade estacionária $p_{\alpha_i}$ do nó $\alpha$ na comunidade $i$ passa a ser a soma das probabilidades dos nós-estado $\alpha^s$ de $\alpha$ que estão na mesma comunidade $i$ em qualquer camada $S$,
+
+\begin{equation*} \label{eq:page-rank-multilayer}
+\pi_{\alpha_i} = \sum_{s \in S} p_{\alpha_i^s}\,.
+\end{equation*}
+
+Substituindo a probabilidade estacionária na Equação~\ref{eq:eta-p}, $H(\mathcal{P}^i)$ passa a ser
+
+\begin{equation*}
+H(\mathcal{P}^i) = - \frac{q_{i \curvearrowright}}{p^i_\circlearrowright} \log_2 \frac{q_{i \curvearrowright}}{p^i_\circlearrowright} 
+-  \sum_{\alpha \in i} \frac{\pi_{\alpha_i}}{p^i_\circlearrowright} \log_2  \frac{\pi_{\alpha_i}}{p^i_\circlearrowright}\,.
+\end{equation*}
+
+
+(EXPANDIR) Comunidade com sobreposição (ocupações de migração?)
+
+%=============================
+\section{CONCEITOS SOBRE CARREIRA}
+
+Segundo~\citeonline{Arthur1989-rn}, carreira é \foreignquote{english}{uma sequência evolutiva da experiência profissional de uma pessoa no tempo}\footnote{No original: \enquote{an evolving sequence of person's work experience over time}.}. Apesar das discussões sobre as mudanças nos modelos de carreira, passando de um modelo linear e centrado na organização para um modelo centrado no indivíduo, as definições de carreira são frequentemente associadas à progressão profissional do indivíduo~\cite{Baruch2004-oy,Sullivan2009-xb,Bendassolli2009-bg}.
+
+Para os fins desse trabalho, define-se carreira como \textit{a sequência de \textbf{ocupações} pela qual um indivíduo passa em sua vida profissional}. Essa definição é similar à de \citeonline{Arthur1989-rn}, porém, limita sua abrangência e a torna mais concreta. Isso permite uma análise menos subjetiva, uma vez que ocupações profissionais podem ser extraídas de currículos e analisadas quantitativamente. No entanto, ela se torna mais limitada, já que essa definição exclui aspectos psicológicos ou sociais.
+
+Essa pesquisa empresta o conceito de \textit{fronteiras de carreira} (\textit{career boundaries}) descrito por \citeonline{Gunz2007-hr} para dar significado ao trabalho. A fronteira de carreira significa que uma mudança entre ocupações nem sempre pode ser realizada livremente. Por exemplo, um profissional precisa de graduação especializada antes de poder se mover da ocupação de \enquote{Auxiliar de Jardinagem} para \enquote{Médico}, por outro lado, a barreira para o mesmo profissional exercer a ocupação de \enquote{Jardineiro} se limita à experiência. É possível perceber que as barreiras não são simétricas, em tempos de crise econômica é mais simples para um \enquote{Engenheiro} tornar-se um \enquote{Corretor de Imóveis} do que o contrário.
+
+As barreiras não se limitam ao conhecimento, quaisquer dificuldades na movimentação podem criar fronteiras. Por exemplo, alguém morando em um grande centro urbano dificilmente exerceria a ocupação de \enquote{Agricultor} sem mover-se para o campo. Um \enquote{Diretor Financeiro} precisaria adequar seu padrão de vida antes de uma transição para uma ocupação com ganhos mais modestos. Uma profissão que está desaparecendo, como \enquote{Contínuo}, possui barreiras mais altas do que uma nascendo, como \enquote{Analista de Experiência do Usuário}.
+
+Um dos pontos principais desse trabalho está na argumentação de \citeonline{Gunz2007-hr} sobre como uma fronteira subjetiva se torna objetiva. Em sua argumentação as fronteiras de carreira são subjetivas e pessoais, onde cada um tem para si quais transições podem ser feitas em sua própria carreira. No entanto, elas se tornam objetivas quando um número suficientemente grande de pessoas possui a mesma compreensão sobre essas transições, a ponto dela ser perceptível em um nível macroscópico. Dessa maneira, as fronteiras de carreira são definidas objetivamente quando uma quantidade suficiente de pessoas entra em \textit{consenso} sobre quais são as transições incomuns.
+
+Partindo desse pressuposto, a identificação de trajetórias comuns e incomuns é condição suficiente e necessária para a detecção de fronteiras entre carreiras. Suficiente, pois a própria definição de fronteira é dependente da identificação do que são transições \enquote{incomuns}. Necessária, pois não existem fronteiras objetivamente definidas sem o consenso.
+
+Essas fronteiras isolam algumas ocupações das outras, criando um grupo coeso pelo distanciamento dos outros grupos e não por alguma característica intrínseca.  Ou seja, a fronteira define o grupo, e não o contrário~\cite{Gunz2007-hr,Abbott1995-ft}. 
+
+No presente trabalho esses aglomerados de ocupações são chamados \textit{ilhas de ocupações} ou \textit{ilhas ocupacionais}, refletindo a facilidade de movimentação dentro de suas fronteiras e o distanciamento de outros grupos.
+
+Como será visto a seguir, as ocupações serão representadas por nós em um grafo, enquanto as conexões trarão informações sobre as transições entre ocupações. Neste tipo de representação, outro conceito central introduzido para o desenvolvimento da pesquisa é o de \textit{polos ocupacionais}, ou seja, ocupações dentro de uma ilha por onde passa o maior fluxo de profissionais. Dada a topologia em formato de estrela encontrada nas ilhas, é esperado que perturbações nesses nós, como aumento ou diminuição no fluxo de profissionais, afetem a rede como um todo e suas eliminações causem o esfacelamento da ilha. Ou seja, os polos ocupacionais são os principais responsáveis por manter a ilha coesa.
 
 %=============================
 \section{O MAPA DE CARREIRAS}

@@ -1,0 +1,21 @@
+graph G {
+  node [fontcolor="white",style="filled", shape="circle"];
+  edge [penwidth=2];
+
+  node [color="/dark23/1"];
+  A -- B -- D -- C -- A;
+  B -- C;
+
+  node [color="/dark23/2"];
+  E -- F -- H -- G -- E;
+  F -- G;
+
+  node [color="/dark23/3"];
+  I -- J -- L -- K -- I;
+  J -- K;
+
+  # Link between groups
+  D -- E;
+  H -- I;
+  L -- A;
+}

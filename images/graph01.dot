@@ -1,0 +1,18 @@
+graph G {
+  node [shape="circle"];
+  edge [penwidth=2];
+
+  A -- B -- D -- C -- A;
+  B -- C;
+
+  E -- F -- H -- G -- E;
+  F -- G;
+
+  I -- J -- L -- K -- I;
+  J -- K;
+
+  # Link between groups
+  D -- E;
+  H -- I;
+  L -- A;
+}
