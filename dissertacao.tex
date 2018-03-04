@@ -1,7 +1,7 @@
 % !TeX program = pdflatex
 % !TeX encoding = UTF-8
 % !TeX spellcheck = pt_BR
-\documentclass[12pt,a4paper,final]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
 \usepackage{lmodern}
@@ -528,9 +528,11 @@ Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$ e $i \neq h 
 %====================================
 \subsubsection{Modularidade} \label{sec:modularidade}
 
-A \textit{modularidade} é uma medida de qualidade para a detecção de comunidades. O algoritmo de Louvain, por exemplo, usa a modularidade como função objetivo~\cite{Barabasi2016-rn}. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
+\question[inline]{Passar essa seção para dentro de detecção de comunidade?}
 
-Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela fornece um indício se um grupo de nós é mais densamente conectado que o esperado em um modelo nulo, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
+A \textit{modularidade} é uma medida de qualidade para a detecção de comunidades. O algoritmo de Louvain~\cite{Blondel2008-qh}, por exemplo, usa a modularidade como função objetivo. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
+
+Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela fornece um indício se um grupo de nós é mais densamente conectado que o esperado em uma rede aleatória com o mesmo número de nós e conexões, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
 
 A modularidade $m_c$ de um grupo $c$ de nós pode ser definida como:
 
@@ -546,7 +548,7 @@ Assumindo que uma rede foi particionada em $N_c$ grupos, a modularidade total $M
 M_c \defn \sum_{c \in N_c} m_c
 \end{equation}
 
-O uso da modularidade para detecção de comunidades possui limitações. A primeira delas é que grupos com poucas conexões internas em relação ao tamanho da rede são agrupados indevidamente, mesmo que exista apenas uma conexão entre eles. A segunda limitação diz respeito ao maior valor possível da modularidade $M_\textit{max}$, que possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
+O uso da modularidade para detecção de comunidades possui limitações. A primeira delas é que grupos com poucas conexões internas em relação ao tamanho da rede são agrupados entre si, mesmo que exista apenas uma conexão entre eles. A segunda limitação diz respeito ao maior valor possível da modularidade $M_\textit{max}$, que possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
 
 Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-global}, quando dois grupos $A$ e $B$ são unidos, a diferença esperada em $M_c$ é:
 
@@ -554,7 +556,7 @@ Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-gl
 \Delta M_{AB} \defn \frac{l_{AB}}{L} - \frac{k_A k_B}{2L^2}
 \end{equation}
 
-Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L^2 < 1$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{resolução da modularidade}.
+Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L^2 < 1$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{limite de resolução}.
 
 É possível observar que a resolução da modularidade é diretamente proporcional ao número total de conexões da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
 
@@ -564,9 +566,15 @@ Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $
 %====================================
 \subsection{Detecção de Comunidade} \label{sec:deteccao-comunidade}
 
-Detecção de Comunidade, Particionamento de Grafo, Agrupamento (\textit{Clustering}) ou Modelagem de Bloco (\textit{Block Modelling}) são nomes equivalentes para a atividade de se encontrar conjuntos de nós que possuem ligações mais fortes entre si do que com o resto da rede.
+Detecção de Comunidade, Particionamento de Grafo ou Agrupamento (\textit{Clustering}) são nomes equivalentes para a atividade de se encontrar conjuntos de nós que possuem ligações mais fortes entre si do que com o resto da rede.
 
-\citeonline{Barabasi2016-rn} propõem quatro hipótese sobre detecção de comunidade.
+Uma \textit{comunidade} é um subgrafo com conexões mais \textit{coesas} entre seus nós do que com nós do restante do grafo. A palavra \enquote{coesão} aqui pode ser interpretada de várias maneiras. Para \citeonline{Ahn2010-uh,Evans2009-lq}, uma comunidade é definida quando o número de conexões internas do subgrafo é maior que o número de conexões que o conecta ao resto do grafo. Para \citeonline{Barabasi2016-rn,Newman2004-jg} a comunidade deve possuir uma densidade de conexões mais alta do que o esperado em uma rede aleatória equivalente. Para esses autores, o número de conexões é o fator determinante para a identificação da comunidade.
+
+\citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}, por sua vez, trabalham a detecção de comunidades como a identificação de fluxos mais frequentes na rede. Assumindo que uma conexão representa um fluxo, \textit{coesão} significa que comunidades possuem fluxo maior entre seus nós do que com outros fora da comunidade.
+
+Essas abordagens distintas são aplicáveis a cenários diferentes. A densidade de conexões é mais adequada em redes onde a estrutura é importante, como, por exemplo, em uma rede social. Já em redes que representam fluxos, como circuitos ou redes de transporte, a segunda abordagem é mais atraente~\cite{Rosvall2009-sd}.
+
+Na visão de \citeonline{Barabasi2016-rn} a detecção de comunidade se apoia em quatro hipótese. Contrastar essas hipóteses com os conceitos de \citeonline{Rosvall2009-sd} destaca claramente a diferença entre as abordagens e torna óbvias as situações onde são mais adequadamente aplicadas.
 
 \begin{description}
 %--------------------------------
@@ -574,22 +582,40 @@ Detecção de Comunidade, Particionamento de Grafo, Agrupamento (\textit{Cluster
 
 Isso significa que não é possível identificar comunidades somente pelos seus graus, nós ou quaisquer medidas que não envolvam a estrutura de conexão da rede. A detecção de comunidades só é possível analisando-se a conectividade entre os nós, seja através de uma matriz de adjacência ou outro artefato que permita a investigação das conexões.
 
+Essa hipótese é válida em qualquer uma nas definições detecção de comunidades mencionadas no início dessa Seção.
+
 %--------------------------------
 \item [Hipótese da Conectividade e Densidade] \textit{Uma comunidade é um subgrafo densamente conectado em uma rede.}
 
 \textit{Conectividade} significa que uma comunidade não ultrapassa as bordas de um único componente, já \textit{Densidade} significa que os membros de uma comunidade têm maior probabilidade de se conectarem entre si do que com membros fora dela.
 
+A Hipótese da Conectividade é bastante intuitiva e também é compartilhada pelas definições do início da Seção. Entretanto a Hipótese da Densidade é válida para a definição de comunidade de \citeonline{Ahn2010-uh} e \citeonline{Newman2004-jg}, mas não é uma condição necessária na concepção de \citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}. Para esses autores, a Hipótese da Densidade poderia ser adaptada como a \textit{Hipótese do Fluxo}: a movimentação do fluxo dentro de uma comunidade têm maior probabilidade de acontecer do que a movimentação para fora dela.
+
+O contraste entre as hipóteses mostra como elas se diferenciam quanto ao propósito, enquanto a Hipótese da Densidade é formulada em termos de novas conexões, prevendo uma evolução estrutural, a Hipótese do Fluxo é formulada em termos da dinâmica existente da rede.
+
+Outro ponto importante a se destacar é que, enquanto a Hipótese da Densidade trata de uma rede não-ponderada, a Hipótese do Fluxo pressupõe uma rede direcionada e ponderada.
+
 %--------------------------------
 \item [Hipótese de Aleatoriedade] \textit{Redes aleatoriamente conectadas não possuem estrutura de comunidade}
 
-Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em um modelo nulo equivalente. Essa definição está de acordo com a premissa de um modelo nulo que, se uma estrutura pode emergir por pura aleatoriedade, então não pode ser atribuída a ela um princípio de organização vindo de outra fonte.
+Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em um modelo nulo equivalente. Essa definição está de acordo com a premissa de uma rede aleatória que, se uma estrutura pode emergir por pura aleatoriedade, então não pode ser atribuída a ela um princípio de organização vindo de outra fonte.
+
+Novamente, essa hipótese tem um forte foco na evolução estrutural da rede (gerada por mecanismo não-aleatório), enquanto a detecção de comunidades por fluxo se atenta a dinâmica já modelada pela rede.
 
 %--------------------------------
 \item [Hipótese de Modularidade Máxima] \textit{Para uma dada rede, a partição com modularidade máxima corresponde à estrutura ótima da comunidade.}
 
 Essa hipótese se baseia na anterior, justificando que quanto mais longe a estrutura de uma comunidade estiver de uma estrutura aleatória, mais relevante ela é como comunidade. Entretanto, como discutido na Seção~\ref{sec:modularidade}, essa definição possui limitações quanto ao seu uso prático por conta dos problemas de \textit{resolução} e \textit{platô}.
 
+Essa hipótese pode ser compreendida como o corolário das três hipóteses anteriores. 
+
 \end{description}
+
+Com exceção da Hipótese Fundamental, as outras três hipóteses direcionam forçosamente à conclusão de que a modularidade é a única medida aceitável para detecção de comunidade. O contraste das hipóteses com a definição de comunidade baseada em fluxo pontua uma questão importante: a medida de particionamento ótimo para uma rede é dependente da premissas sobre \enquote{o que é uma comunidade}. Isso significa que premissas diferentes e modelagens diferentes levam a diferentes medições.
+
+A natureza estrutural da modularidade empurra seu uso para problemas em que a criação e remoção das relações são os objetos do estudo, como nas redes sociais em que pessoas se conhecendo (e criando novas conexões) são a própria razão de ser da rede.
+
+Já a natureza dinâmica da equação de mapa empurra seu uso para modelagens em que o componente dinâmico (fluxo) já está codificado nas relações, como em redes de transporte, por exemplo, onde o fluxo pode mudar, mas novas rotas não são tipicamente o objeto direto de estudo.
 
 %===================================
 \subsection{Equação de Mapa} \label{sec:infomap}
