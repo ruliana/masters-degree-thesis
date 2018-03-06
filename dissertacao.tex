@@ -4,8 +4,10 @@
 \documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[brazil]{babel}
-\usepackage{lmodern}
-\usepackage{csquotes}
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage{csquotes}			% Aspas e citações mais simples
+\usepackage{booktabs}			% Tabelas mais profissionais
+\usepackage{placeins}           % Habilita \FloatBarrier, de onde floats não passam!
 
 % Links nas referência cruzada no documento.
 % Ajuda a navegação (principalmente no índice).
@@ -574,7 +576,7 @@ Uma \textit{comunidade} é um subgrafo com conexões mais \textit{coesas} entre 
 
 Essas abordagens distintas são aplicáveis a cenários diferentes. A densidade de conexões é mais adequada em redes onde a estrutura é importante, como, por exemplo, em uma rede social. Já em redes que representam fluxos, como circuitos ou redes de transporte, a segunda abordagem é mais atraente~\cite{Rosvall2009-sd}.
 
-Na visão de \citeonline{Barabasi2016-rn} a detecção de comunidade se apoia em quatro hipótese. Contrastar essas hipóteses com os conceitos de \citeonline{Rosvall2009-sd} destaca claramente a diferença entre as abordagens e torna óbvias as situações onde são mais adequadamente aplicadas.
+Na visão de \citeonline{Barabasi2016-rn} a detecção de comunidade se apoia em quatro hipóteses. Contrastar essas hipóteses com os conceitos de \citeonline{Rosvall2009-sd} destaca a diferença entre as abordagens e torna mais claras as situações onde são mais adequadamente aplicadas.
 
 \begin{description}
 %--------------------------------
@@ -589,18 +591,18 @@ Essa hipótese é válida em qualquer uma nas definições detecção de comunid
 
 \textit{Conectividade} significa que uma comunidade não ultrapassa as bordas de um único componente, já \textit{Densidade} significa que os membros de uma comunidade têm maior probabilidade de se conectarem entre si do que com membros fora dela.
 
-A Hipótese da Conectividade é bastante intuitiva e também é compartilhada pelas definições do início da Seção. Entretanto a Hipótese da Densidade é válida para a definição de comunidade de \citeonline{Ahn2010-uh} e \citeonline{Newman2004-jg}, mas não é uma condição necessária na concepção de \citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}. Para esses autores, a Hipótese da Densidade poderia ser adaptada como a \textit{Hipótese do Fluxo}: a movimentação do fluxo dentro de uma comunidade têm maior probabilidade de acontecer do que a movimentação para fora dela.
+A Hipótese da Conectividade é bastante intuitiva e também é compartilhada pelas definições dos outros autores. Entretanto a Hipótese da Densidade é válida para a definição de comunidade de \citeonline{Ahn2010-uh} e \citeonline{Newman2004-jg}, mas não é uma condição necessária na concepção de \citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}. Para esses autores, a Hipótese da Densidade poderia ser adaptada como a \textit{Hipótese do Fluxo}: a movimentação do fluxo dentro de uma comunidade têm maior probabilidade de acontecer do que a movimentação para fora dela.
 
 O contraste entre as hipóteses mostra como elas se diferenciam quanto ao propósito, enquanto a Hipótese da Densidade é formulada em termos de novas conexões, prevendo uma evolução estrutural, a Hipótese do Fluxo é formulada em termos da dinâmica existente da rede.
 
-Outro ponto importante a se destacar é que, enquanto a Hipótese da Densidade trata de uma rede não-ponderada, a Hipótese do Fluxo pressupõe uma rede direcionada e ponderada.
+Outro ponto a ser destacado é que, enquanto a Hipótese da Densidade trata de uma rede não-ponderada, a Hipótese do Fluxo pressupõe uma rede direcionada e ponderada.
 
 %--------------------------------
 \item [Hipótese de Aleatoriedade] \textit{Redes aleatoriamente conectadas não possuem estrutura de comunidade}
 
-Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em um modelo nulo equivalente. Essa definição está de acordo com a premissa de uma rede aleatória que, se uma estrutura pode emergir por pura aleatoriedade, então não pode ser atribuída a ela um princípio de organização vindo de outra fonte.
+Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em uma rede aleatória com número equivalente de conexões e nós. Essa definição está de acordo com a premissa de que se uma estrutura pode emergir por pura aleatoriedade, então não pode ser atribuída a ela um princípio de organização vindo de outra fonte.
 
-Novamente, essa hipótese tem um forte foco na evolução estrutural da rede (gerada por mecanismo não-aleatório), enquanto a detecção de comunidades por fluxo se atenta a dinâmica já modelada pela rede.
+Novamente, essa hipótese tem um forte foco na evolução estrutural da rede (gerada por mecanismo não-aleatório), enquanto a detecção de comunidades por fluxo se atenta a dinâmica já modelada por ela.
 
 %--------------------------------
 \item [Hipótese de Modularidade Máxima] \textit{Para uma dada rede, a partição com modularidade máxima corresponde à estrutura ótima da comunidade.}
@@ -611,11 +613,11 @@ Essa hipótese pode ser compreendida como o corolário das três hipóteses ante
 
 \end{description}
 
-Com exceção da Hipótese Fundamental, as outras três hipóteses direcionam forçosamente à conclusão de que a modularidade é a única medida aceitável para detecção de comunidade. O contraste das hipóteses com a definição de comunidade baseada em fluxo pontua uma questão importante: a medida de particionamento ótimo para uma rede é dependente da premissas sobre \enquote{o que é uma comunidade}. Isso significa que premissas diferentes e modelagens diferentes levam a diferentes medições.
+Com exceção da Hipótese Fundamental, as outras três hipóteses direcionam forçosamente à conclusão de que a modularidade é a única medida aceitável para detecção de comunidade. O contraste das hipóteses com a definição de comunidade baseada em fluxo pontua uma questão importante: a medida de particionamento ótimo para uma rede é dependente da premissas sobre \enquote{o que é uma comunidade}. Isso significa que premissas diferentes e modelagens diferentes levam a medições adequadas diferentes.
 
 A natureza estrutural da modularidade empurra seu uso para problemas em que a criação e remoção das relações são os objetos do estudo, como nas redes sociais em que pessoas se conhecendo (e criando novas conexões) são a própria razão de ser da rede.
 
-Já a natureza dinâmica da equação de mapa empurra seu uso para modelagens em que o componente dinâmico (fluxo) já está codificado nas relações, como em redes de transporte, por exemplo, onde o fluxo pode mudar, mas novas rotas não são tipicamente o objeto direto de estudo.
+Já a natureza dinâmica da equação de mapa empurra seu uso para modelagens em que o componente dinâmico (fluxo) já está codificado nas relações. Por exemplo, em redes de transporte o fluxo pode se intensificar ou diminuir mas novas rotas não são tipicamente o objeto direto de estudo.
 
 %===================================
 \subsection{Equação de Mapa} \label{sec:infomap}
@@ -828,16 +830,16 @@ Partindo desse pressuposto, a identificação de trajetórias comuns e incomuns 
 
 Essas fronteiras isolam algumas ocupações das outras, criando um grupo coeso pelo distanciamento dos outros grupos e não por alguma característica intrínseca.  Ou seja, a fronteira define o grupo, e não o contrário~\cite{Gunz2007-hr,Abbott1995-ft}. 
 
-No presente trabalho esses aglomerados de ocupações são chamados \textit{ilhas de ocupações} ou \textit{ilhas ocupacionais}, refletindo a facilidade de movimentação dentro de suas fronteiras e o distanciamento de outros grupos.
+No presente trabalho esses aglomerados de ocupações são chamados \textit{ilhas de ocupações} ou \textit{ilhas ocupacionais}, refletindo a facilidade de movimentação dentro de suas fronteiras e o distanciamento dos outros grupos.
 
-Como será visto a seguir, as ocupações serão representadas por nós em um grafo, enquanto as conexões trarão informações sobre as transições entre ocupações. Neste tipo de representação, outro conceito central introduzido para o desenvolvimento da pesquisa é o de \textit{polos ocupacionais}, ou seja, ocupações dentro de uma ilha por onde passa o maior fluxo de profissionais. Dada a topologia em formato de estrela encontrada nas ilhas, é esperado que perturbações nesses nós, como aumento ou diminuição no fluxo de profissionais, afetem a rede como um todo e suas eliminações causem o esfacelamento da ilha. Ou seja, os polos ocupacionais são os principais responsáveis por manter a ilha coesa.
+Como será visto a seguir, as ocupações serão representadas por nós em um grafo, enquanto as conexões trarão informações sobre as transições entre ocupações. Neste tipo de representação, outro conceito central introduzido para o desenvolvimento da pesquisa é o de \textit{polos ocupacionais}, ou seja, ocupações dentro de uma ilha por onde passa o maior fluxo de profissionais. Dada a topologia em formato de estrela encontrada nas ilhas, é esperado que perturbações nesses nós, como aumento ou diminuição no fluxo de profissionais, afetem a rede como um todo e que sua eliminação cause o esfacelamento da ilha. Ou seja, os polos ocupacionais são os principais responsáveis por manter a ilha coesa.
 
 %=============================
 \section{O MAPA DE CARREIRAS}
 
 \subsection{Introdução}
 
-O Mapa de Carreiras (MCar) traz o resumo da trajetória profissional de cerca de 10 milhões de pessoas e uma de suas manifestações pode ser vista no site \url{http://www.vagas.com.br/mapa-de-carreiras} (Figura~\ref{fig:exemplo-grafo}). Internamente, essas informações estão armazenadas em um grafo e são periodicamente atualizadas. Nesse grafo, os vértices representam \textit{ocupações} e as arestas representam as \textit{movimentações} dos profissionais entre ocupações.
+O Mapa de Carreiras (MCar) traz o resumo da trajetória profissional de cerca de 10 milhões de pessoas e uma de suas manifestações pode ser vista no site \url{http://www.vagas.com.br/mapa-de-carreiras} (Figura~\ref{fig:exemplo-grafo}). Internamente, essas informações estão armazenadas em um grafo e são periodicamente atualizadas. Nele, os vértices representam \textit{ocupações} e as arestas representam as \textit{movimentações} dos profissionais entre ocupações.
 
 \begin{figure}[ht]
   \centering
@@ -847,12 +849,7 @@ O Mapa de Carreiras (MCar) traz o resumo da trajetória profissional de cerca de
   \label{fig:exemplo-grafo}
 \end{figure}
 
-% TODOS OS EXMPLOS DEVERIAM SER DA ÁREA QUE VAMOS ABORDAR, OU SEJA, TI. ISSO TRAZ MAIS DIDÁTICA E FOCO AO DOCUMENTO.
-
-No contexto do Mapa de Carreiras, uma \textit{ocupação} significa uma atividade profissional, remunerada ou não. A maior parte dessas ocupações são profissões remuneradas, tais como \enquote{Babá} ou \enquote{Arquiteto}. Entretanto, algumas delas aparecem como atividade principal de uma pessoa, mas não são necessariamente uma profissão, tais como \enquote{Mestrando}, \enquote{Enfermeiranda} ou \enquote{Voluntário}. Os vértices possuem diversos atributos que são resumos estatísticos daquela ocupação, tais como a distribuição salarial, a distribuição do tempo de permanência em uma ocupação, entre outras.
-
-% ENTÃO UM VÉRTICE NA VERDADE SERÁ UM VETOR DE CARACTERÍSTICAS COM ESSAS INFORMAÇÕES. PRECISAMOS DEFINIR EXATAMENTE QUAIS CARACTERÍSTICAS COMPORÃO O VETOR DE CARACTERÍSTICAS DOS VÉRTICES. Ronie: Coloco isso dentro da Metodologia?
-% COLOQUE A DESCRIÇÃO (VETOR DE CARACTERÍSTICAS) DO VÉRTICE AQUI MESMO.
+No contexto do Mapa de Carreiras, uma \textit{ocupação} significa uma atividade profissional. A maior parte dessas ocupações são profissões remuneradas, tais como \enquote{Babá} ou \enquote{Arquiteto}. Entretanto, algumas delas aparecem como atividade principal de uma pessoa, mas não são necessariamente uma profissão, tais como \enquote{Mestrando}, \enquote{Enfermeiranda} ou \enquote{Voluntário}. Os vértices possuem diversos atributos que são resumos estatísticos daquela ocupação, tais como a distribuição salarial, a distribuição do tempo de permanência em uma ocupação, entre outras detalhadas mais a frente.
 
 As arestas que conectam as ocupações representam \textit{movimentações} entre elas, ou seja, o fluxo de pessoas que exercia uma certa ocupação e passou a exercer outra. Acompanhar as arestas permite observar o movimento dos profissionais em suas carreiras. O peso das arestas é o número de profissionais que fizeram a trajetória de uma ocupação para outra. A Figura~\ref{fig:exemplo-medico-do-trabalho} exibe as arestas a partir da ocupação \enquote{Médico do Trabalho}, como exibidas pelo site do Mapa da Carreiras.
 
@@ -876,7 +873,11 @@ As arestas que conectam as ocupações representam \textit{movimentações} entr
   \label{fig:grafo-medico-do-trabalho}
 \end{figure}
 
-O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado, ponderado e com ciclos, porém sem laços.
+O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado, ponderado, com ciclos e laços.
+
+% Ronie: faz sentido verificar quantas comunidades possuem ciclos? Provavelmente não agora >_<
+
+\begin{comment}
 
 Por conta dos ciclos, não é possível criar uma ordenação topológica que represente uma clara progressão de carreira para o grafo como um todo. Entretanto, é possível extrair grupos de ocupações que possuem movimentações mais frequentes entre si. Esses agrupamentos são comumente acíclicos, o que possibilita traçar essa progressão entre as ocupações que o compõem. Analisando-se os dados, é possível observar que essa característica é mais frequente em grupos formados por ocupações que requerem maior qualificação técnica, como \enquote{Comércio Exterior} ou \enquote{Médico do Trabalho}, como exibido na Figura~\ref{fig:grafo-medico-do-trabalho}. Já nas ocupações ditas \enquote{operacionais}, o fluxo de movimentação entre ocupações acentua a característica cíclica do grafo. Particularmente, é possível observar um forte ciclo entre as ocupações \enquote{Recepcionista}, \enquote{Vendedor} e \enquote{Auxiliar Administrativo}, como mostrado na Figura~\ref{fig:grafo-ciclo-operacional}.
 
@@ -888,13 +889,19 @@ Por conta dos ciclos, não é possível criar uma ordenação topológica que re
   \label{fig:grafo-ciclo-operacional}
 \end{figure}
 
-Para a construção dos vértices, os textos presentes nos títulos dos históricos profissionais dos currículos foram \enquote{normalizados}. Nesse contexto, \enquote{normalização} significa transformar os títulos com o mesmo significado na mesma representação textual. Por exemplo, a mesma ocupação pode ter sido registrada por pessoas diferentes como \enquote{Moto Boy}, \enquote{moto boy}, \enquote{Motoboy}, \enquote{Moto Girl} entre outras variações. O que chamamos de \enquote{normalização} é o trabalho de transformar essas diferentes grafias em uma única classe que possa ser usada para identificação da ocupação. No caso, todas as anteriores são normalizadas para \enquote{motoboy}. Esse trabalho também inclui a correção ortográfica e a remoção de abreviação das ocupações.
+\end{comment}
 
-Após a normalização são criados pares de ocupações cronologicamente ordenados. Isso significa que o término de uma ocupação precisa coincidir com o início da seguinte. Uma margem de dois meses de tolerância na sobreposição corrige pequenas imprecisões na anotação dos históricos profissionais. Currículos com apenas uma ocupação são descartados, bem como ocupações que se sobreponham cronologicamente ou que estejam separadas por um intervalo de tempo maior que um ano.
+Para a construção dos vértices, os textos presentes nos títulos dos históricos profissionais dos currículos foram \textit{normalizados}. Nesse contexto, \enquote{normalização} significa transformar os títulos com o mesmo significado na mesma representação textual. Por exemplo, a mesma ocupação pode ter sido registrada por pessoas diferentes como \enquote{Moto Boy}, \enquote{moto boy}, \enquote{Motoboy}, \enquote{Moto Girl} entre outras variações. O que é aqui chamado \enquote{normalização} é o trabalho de transformar essas diferentes grafias em uma única classe que possa ser usada para identificação da ocupação. No caso, todas as anteriores são normalizadas para \enquote{motoboy}. Esse trabalho também inclui a correção ortográfica e a remoção de abreviação das ocupações.
 
-Os pares de ocupações são unificados produzindo as arestas e os vértices, e as arestas menos relevantes do grafo, ou seja, aquelas com menos de dez movimentações, são podadas. Esse critério de poda foi definido empiricamente através de análise por amostragem. Números muito maiores removem vértices de ocupações mais especializadas como \enquote{Comandante} ou \enquote{Engenheiro de Minas}, enquanto números muito menores acrescentam vértices espúrios causados por erros de grafia que a fase de correção ortográfica foi incapaz de detectar.
+Após o processo de normalização, ocupações que não possuem ao menos 30 experiências profissionais de currículos diferentes com a mesma ocupação são descartados.
 
-Um dos efeitos indesejados desse processo é que algumas ocupações legítimas são removidas do grafo. É o caso de ocupações muito recentes, muito especializadas, ou que ainda não possuem uma concordância da nomenclatura entre os profissionais da área. Como exemplo podemos citar \enquote{Especialista em Experiência do Usuário}, uma profissão recente, que também é chamada \enquote{Analista de UX} ou apenas \enquote{UX}.
+Após a normalização são criados pares e trios de ocupações cronologicamente ordenadas, chamados \textit{bigramas} e \textit{trigramas}. Isso significa que o término de uma ocupação precisa coincidir com o início da seguinte. Uma margem de dois meses de tolerância na sobreposição corrige pequenas imprecisões na anotação dos históricos profissionais. 
+
+O processo dá preferência pela criação de trigramas quando ao menos três ocupações em sequência são observadas. Bigramas são criados apenas nos casos em que existem somente duas ocupações. Currículos com uma única ocupação são descartados, uma vez que não é possível identificar uma movimentação profissional.
+
+Os trigramas menos relevantes do grafo, ou seja, aquelas com menos de cinco movimentações, são removidos. Esse critério de poda foi definido empiricamente através de análise por amostragem. Números muito maiores removem vértices de ocupações mais especializadas como \enquote{Comandante} ou \enquote{Engenheiro de Minas}, enquanto números muito menores acrescentam vértices espúrios causados por erros de grafia que a fase de correção ortográfica foi incapaz de detectar.
+
+Um dos efeitos indesejados de ambos os processos de poda é que algumas ocupações legítimas são removidas do grafo. É o caso de ocupações muito recentes, muito especializadas, ou que ainda não possuem uma concordância da nomenclatura entre os profissionais da área. Como exemplo podemos citar \enquote{Especialista em Experiência do Usuário}, uma profissão recente, que também é chamada \enquote{Analista de UX} ou apenas \enquote{UX}.
 
 % NÃO DEVERÍAMOS CRIAR UM DICIONÁRIO DE EQUIVALÊNCIA DE NOMENCLATURA E SUBTITUIR AS MÚLTIPLAS NOMENCLATURAS POR UMA PADRÃO?
 % Ronie: Dá até para fazer manualmente, mas resisto a isso. O motivo pode ser exemplificado pelas ocupações "Analista de Inteligência de Negócios"  e "Analista de BI (Business Intelligence)", apenas o termo traduzido ou um estrangeirismo, entretanto analisando a nuvem de palavras é possível ver que são funções bem diferentes. E olha que é da nossa área e deveríamos saber disso >_<
@@ -902,29 +909,32 @@ Um dos efeitos indesejados desse processo é que algumas ocupações legítimas 
 % http://www.vagas.com.br/mapa-de-carreiras/cargos/analista-de-bi/0
 % http://www.vagas.com.br/mapa-de-carreiras/cargos/analista-de-inteligencia-de-negocios/0
 
-Duas outras limitações no grafo ocorrem por conta da experiência profissional ser um campo de texto livre, ou seja, o usuário digita livremente sua ocupação sem estar restrito a uma lista de opções. A primeira se refere a ocupações que foram digitadas para representar uma ocupação dupla, como \enquote{Caixa e Balconista} ou \enquote{Atendente/Estoquista}. A segunda ocorre por ambiguidade no nome da ocupação, como \enquote{Coordenador de Projetos}, que ocorre na carreira de Desenvolvimento de Software e na de Engenharia Civil.
+Duas outras limitações no grafo ocorrem por conta da experiência profissional ser um campo de texto livre, ou seja, o usuário digita livremente sua ocupação sem estar restrito a uma lista de opções. A primeira se refere a ocupações que foram digitadas para representar uma ocupação dupla, como \enquote{Caixa e Balconista} ou \enquote{Atendente/Estoquista}. A segunda ocorre por ambiguidade no nome da ocupação, como \enquote{Coordenador de Projetos}, que ocorre na carreira de Desenvolvimento de Software e na de Engenharia Civil. Essa limitação é tratada na fase de detecção de comunidades usando uma técnica que permite que uma ocupação figure em múltiplas partições.
 
-Por outro lado, o campo de texto livre permite a captura de ocupações que pouco provavelmente apareceriam em uma lista curada, como \enquote{IRLA} (Instalador Reparador de Linhas Aéreas) ou \enquote{Rigger} (pessoa no solo que orienta o posicionamento de carga para o operador de guindaste).
+Se um campo de texto livre cria algumas limitações ao processo, ele também abre possibilidades, por exemplo, o texto livre permite a captura de ocupações que pouco provavelmente apareceriam em uma lista curada, como \enquote{IRLA} (Instalador Reparador de Linhas Aéreas) ou \enquote{Rigger} (pessoa no solo que orienta o posicionamento de carga para o operador de guindaste).
 
-Ao final do processo o grafo possui cerca de 8.348 ocupações distintas e 14.031 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em Fevereiro de 2017.
-% COLOQUE O DIA EXATO DE CAPTURA DOS DADOS, OK?
+Finalmente, uma segunda versão da rede é criada, projetando os trigramas em bigramas e usando-os para se criar uma rede mais simples. Após a simplificação, a rede passa por um processo de análise de componentes e aqueles muito pequenos, com apenas um uma ou duas ocupações, também são removidos dos estudo. A Seção~\ref{sec:eliminacao-de-microcomponentes} explica o processo em detalhes.
+
+\todo[inline]{Atualizar esses números!}
+
+Ao final do processo o grafo possui cerca de 8.348 ocupações distintas e 14.031 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em 10 de Fevereiro de 2017.
 
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
 O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações. A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo. Nessa seção, cada um deles é explicado em detalhes.
-%% AQUI NA INTRODUÇÃO SUGIRO COLOCAR UM FLUXOGRAMA COM OS BLOCOS DE CONSTRUÇÃO DO MCAR. NA LINHA ABAIXO MENCIONE QUE CADA SEÇÃO VAI DESCREVER UM BLOCO DO PROCESSO.
-% Ronie (2017-06-18) A imagem está um pouco mais abaixo, nesse momento me limitei a colocar apenas uma referência para ela :) Acho que depois podemos ajustar o texto.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[scale=0.4]{pipeline1.pdf}
+    \caption{Montagem do Grafo}
+    \label{fig:montagem-do-grafo}
+\end{figure}
 
 \subsubsection{Os Dados}
 
-Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com.br. Esses currículos são armazenados em um banco de dados \textit{Microsoft SQL Server}. No total há cerca de 10 milhões de currículos~\todo{Colocar número exato} armazenados entre 1999 e 2017, mas para esse trabalho apenas os currículos atualizados entre Fevereiro de 2012 e Fevereiro de 2017 são utilizados~\todo{Colocar número exato}.
+Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com.br. Esses currículos são armazenados em um banco de dados \textit{Microsoft SQL Server}. No total há cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho apenas os currículos atualizados entre Fevereiro de 2012 e Fevereiro de 2017 são utilizados~\todo{Colocar número exato}.
 
-% FALE AGORA DOS CVS DA ÁREA DE TECNOLOGIA. QUANTOS SÃO? QUANTAS E QUAIS SÃO AS CARREIRAS (A LISTAGEM DAS CARREIRAS PODE VIR COMO UM APÊNDICE)
-% Ronie: Focamos ainda na área de tecnologia? Acredito que poderíamos focá-la nos exemplos de carreiras maiores (como análise das redes livre de escala e mundo pequeno) que não são boas com carreiras muito pequenas como as que usei acima para exemplificar alguns grafos. Que acha?
-% CONTINUO SUGERINDO PELO MENOS COMEÇARMOS COM A ÁREA DE TECNOLOGIA E, SE FOR O CASO, AMPLIAMOS DEPOIS.
-
-Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos usados nesse trabalho. O primeiro formato é descrito por \citeonline{Van_Dongen2008-kx} como \enquote{formato ABC}. Cada linha representa uma aresta, e cada aresta possui três campos separados por um ou mais espaços. Em um grafo direcionado, o primeiro campo é a aresta de partida, o segundo é a aresta de chegada e o campo final representa o peso da aresta. No caso do MCar, o peso representa o número de pessoas que se movimentou de uma ocupação à outra. Esse formato é usado na separação de carreiras através da \textit{clusterização} do grafo usando o \textit{Markov Clustering Algorithm} (MCL)~\cite{Van_Dongen2000-qm} e na montagem de visualizações exploratórias usando o programa \enquote{Graphviz}~\cite{Gansner2000-oo}.
+Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem três formatos usados nesse trabalho. O primeiro formato é descrito por \citeonline{Van_Dongen2008-kx} como \enquote{formato ABC}. Cada linha representa uma aresta, e cada aresta possui três campos separados por um ou mais espaços. Em um grafo direcionado, o primeiro campo é a aresta de partida, o segundo é a aresta de chegada e o campo final representa o peso da aresta. No caso do MCar, o peso representa o número de pessoas que se movimentou de uma ocupação à outra. Esse formato é usado na separação de carreiras através da \textit{clusterização} do grafo usando o \textit{Markov Clustering Algorithm} (MCL)~\cite{Van_Dongen2000-qm} e na montagem de visualizações exploratórias usando o programa \enquote{Graphviz}~\cite{Gansner2000-oo}.
 
 \vspace{\abovedisplayskip}
 
@@ -942,6 +952,8 @@ medico medico-do-trabalho 23
 
 O segundo formato é uma lista de registros onde cada um ocupa uma única linha. Cada registro é codificado como um \textit{array} de atributos no formato JSON (\textit{Javascript Object Notation}). Esse formato é usado em várias etapas da montagem do MCar e seu conteúdo varia de etapa para etapa. Os campos relevantes são descritos nas respectivas seções a seguir.
 
+O terceiro e último formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
+
 \subsubsection{O Processamento da Informação}
 
 O volume de dados e a variedade de análises desse trabalho impõe algumas restrições de ordem prática. O volume de dados é grande o suficiente para exceder a memória de um computador convencional, algumas das ferramentas utilizadas não se comunicam com outras exceto através de arquivos texto e o tempo para processamento facilmente excede alguns dias se os processadores não forem adequadamente utilizados.
@@ -952,7 +964,7 @@ A informação é processada em uma série de etapas consecutivas usando um padr
 
 Em uma estrutura de \textit{pipeline}, com exceção de alguns componentes especiais, cada processo possui apenas uma interface de entrada e uma interface de saída. Desde que mantenha a mesma interface, um processo pode ser substituído por outro, ou por um conjunto deles, sem afetar outras partes do sistema.
 
-Essa arquitetura foi implementada em máquinas \textit{Linux} utilizando \textit{pipes} e \textit{sockets} para comunicação interprocessos. Um \textit{pipe} no \textit{Linux} é uma implementação de FIFO em memória RAM. A interface para \textit{push} na fila é idêntica a gravação de uma linha de texto em um arquivo. Do outro lado um outro processo lê a fila com a mesma interface de leitura de um arquivo linha a linha. Por usar interfaces compatíveis que leituras e gravações em arquivo, qualquer programa capaz de executar essas operações pode ser usado como parte do \textit{pipeline}. Isso resolve o problema do uso de ferramentas díspares, desde que sejam capazes de gravar e ler em arquivos texto, são capazes de se integrar ao processo como um todo.
+Essa arquitetura foi implementada em máquinas \textit{Linux} utilizando \textit{pipes} e \textit{sockets} para comunicação interprocessos. Um \textit{pipe} no \textit{Linux} é uma implementação de FIFO em memória RAM. A interface para \textit{push} na fila é idêntica a gravação de uma linha de texto em um arquivo. Do outro lado um outro processo lê a fila com a mesma interface de leitura de um arquivo linha a linha. Por usar interfaces compatíveis com leitura e gravação em arquivo, qualquer programa capaz de executar essas operações pode ser usado como parte do \textit{pipeline}, resolvendo o problema do uso de ferramentas díspares.
 
 Enquanto \textit{pipes} permitem a comunicação interprocessos na mesma máquina, \textit{sockets} podem ser usados para comunicação entre computadores através de uma interface padronizada. Ao invés dos \textit{sockets} nativos do \textit{Linux}, optou-se pelo \textit{ZeroMQ} que é uma implementação mais robusta, criada para transmitir dados usando diversos modelos de distribuição~\cite{Hintjens2013-tz}.
 
@@ -961,13 +973,6 @@ O \textit{ZeroMQ} possui interfaces para diversas linguagens de programação, m
 A maior parte dos processos foi implementada usando a linguagem Ruby, mas alguns processos foram implementados usando Python ou programas específicos, como o MCL para \textit{clusterização} e o Graphviz para posicionamento do grafo em um plano bidimensional.
 
 O processo de montagem do grafo está resumido no fluxo apresentado na Figura~\ref{fig:montagem-do-grafo}.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[scale=0.4]{pipeline1.pdf}
-  \caption{Montagem do Grafo}
-  \label{fig:montagem-do-grafo}
-\end{figure}
 
 \subsubsection{Extração das Experiências Profissionais} \label{sec:extracao-experiencia}
 
@@ -1162,345 +1167,253 @@ A Tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos 
 
 A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador de Densidade de Kernel usando um distribuição gaussiana como função kernel. A largura de banda escolhida para cada estimativa é o menor valor limite para que a distribuição se mantenha unimodal.
 
-\section{UM ESTUDO ANALÍTICO DO MCar USANDO CIÊNCIA DE REDES: RESULTADOS PRELIMINARES} \label{sec:resultados-preliminares}
 
-A comparação de uma rede real com modelos nulos indica fenômenos que não acontecem por aleatoriedade. Essa aplicação é uma análise exploratória que levanta a questão de por que eles acontecem se o acaso não é uma explicação aceitável.
+\subsection{Descrição dos Dados}  \label{sec:descricao-dos-dados}
 
-Ao se correlacionar as medidas usadas em Ciência de Redes cria-se mais um conjunto de questões sobre o significado da correlação. Algumas dessas correlações se destacam, pois ecoam com fenômenos conhecidos da movimentação de profissionais, fornecendo hipóteses plausíveis de seu funcionamento.
+Os dados usados para esse trabalho são do MCar de fevereiro de 2017. Após o processo de limpeza da informação o grafo resultante possui 7.267 nós e 145.115 conexões, sendo 68.771 bigramas e 76.344 trigramas. A transformação dos bigramas e trigramas em conexões resulta em 73.064 conexões e essa versão é usada para caracterizar a rede quanto ao grau e conectividade.
 
-%% O QUE VOCÊ QUER DIZER COM "AO SE CORRELACIONAR...CRIA-SE MAIS UM CJTO DE QUESTÕES SOBRE O SIGNIFICADO DA CORRELAÇÃO"?
+\subsection{Distribuição de Graus, Ego-Grafos e Modelos de Carreiras}  \label{sec:distribuicao-de-graus}
 
-Um estudo confirmatório não é possível apenas com os dados apresentados aqui, pois eles requerem um aprofundamento em ciências sociais que foge da proposta dessa pesquisa. Entretanto, a análise estatística de um grande volume de dados fornece indícios que podem servir como motivadores para pesquisas mais ambiciosas ou podem ser usados como complemento em estudos sociais. Ainda assim, os achados nesse capítulo são plausíveis por construção já que são propostos baseados em medições sobre dados reais.
+A rede de ocupações possui a distribuição de grau exibida no gráfico de Pareto da Figura~\ref{fig:pareto-grau}. Ela possui uma grande concentração de conexões em poucos nós, formando \textit{hubs}. Os 25\% nós de maior grau são responsáveis por 85,86\% das conexões da rede.
 
-%% ESSE PARÁGRAFO ACIMA FICOU UM POUCO "ROLANDO LERO"
-%% Ronie (2017-08-13) Acho que foi só diminuir o número de adjetivos :D Veja se ficou melhor :)
+Por ser uma rede direcionada, um certo cuidado na análise é necessário, uma vez que o grau dos nós não corresponde diretamente ao número de nós conectados. Imaginando que cada nó pode ter uma ou duas conexões com o mesmo nó vizinho, o grau $k_i$, varia em relação ao número de vizinhos entre $k_i = v_i$ (uma conexão por vizinho) e $k_i = 2v_i$ (cada vizinho possui uma conexão de entrada e saída com $k$), onde $v$ é o número de nós conectados ao nó $i$ por uma conexão de entrada ou saída.
 
-%% POR QUE NÃO TEMOS DADOS SUFICIENTES PARA VALIDAR, PELO MENOS NO CONTEXTO EM ESTUDO, AS HIPÓTESES COLOCADAS ACIMA.
-%% ALÉM DISSO, SE SÃO HIPÓTESES EU SUGIRO QUE AS DESTAQUEMOS COMO TAL E NA PARTE EXPERIMENTAL A GENTE VÁ TENTANDO VALIDÁ-LAS. FIZ O EXERCÍCIO DE CRIAR AS HIPÓTESES ACIMA, VEJA O QUE ACHA. COMO ESSAS HIPÓTESES SE REFEREM AO MCAR, SUGIRO COLOCÁ-LAS EM UMA SEÇÃO SEPARADA E DEIXARMOS AQUI COMO UMA REVISÃO CONCEITUAL. ISSO AJUDA A COMPOR A PROPOSTA DE SUA DISSERTAÇÃO. MUITO INTERESSANTE!!! NA REALIDADE, SUA DISSERTAÇÃO É UMA ANÁLISE EXPLORATÓRIA SOBRE O MCAR E, PORTANTO, A MOVIMENTAÇÃO DE CARREIRA. NESSE SENTIDO, TODOS OS INSIGHTS DEVEM SER DESTACADOS COMO CONTRIBUIÇÃO AO INVÉS DE APARECEREM DILUÍDOS NUM CAPÍTULO DE REVISAO CONCEITUAL
-% Ronie: Gostei MUITO! Acho que ficou muito mais claro e a separação faz bastante sentido. Fazemos um capítulo para isso ou colocamos junto com o desenvolvimento, tentando validá-la? 
+A contribuição de cada nó para a conectividade da rede pode ser observada utilizando-se ego-grafos. Um ego-grafo é um subgrafo formado por um nó, todos os seus vizinhos e as conexões entre eles~\cite{Newman2010-od}. Como o número de conexões em uma rede direcionada não representa necessariamente o número de nós conectados, o uso do ego-grafo permite identificar \textit{hubs} que possuem maior conectividade sem que necessariamente possuam o maior número de conexões. Considerar o nó central junto aos seus vizinhos permite medir o quanto os subgrafos se sobrepõem sem a necessidade de ajustes quanto ao nó central.
 
+No gráfico de Pareto da Figura~\ref{fig:pareto-egografo} as ocupações estão ordenadas pelo tamanho do ego-grafo. Exatamente 25\% dos maiores ego-grafos são suficientes para conectar 98,31\% da rede. O nó de maior grau, \textit{Auxiliar Administrativo}, possui um ego-grafo com 3.369 ocupações das 7.267, ou seja, 46,36\% das ocupações de alguma forma possui fluxo de profissionais saindo ou entrando dessa ocupação.
 
-As hipótese propostas são pontos de partida para diversas aplicações. Por exemplo, a criação de uma classificação de ocupações baseada em agrupamento. É esperado que ela retrate com mais precisão um conjunto de funções em que seus membros compartilham habilidades. Também é possível inferir capacitações através do histórico profissional e compreender com mais clareza a movimentação profissional.
+A Tabela~\ref{tab:top-egografos} contém os 5 maiores ego-grafos do MCar. Devido a presença de \textit{hubs} de grau elevado é esperado que os maiores ego-grafos compartilhem uma grande quantidade de nós.
 
-Abaixo, as propostas são enumeradas e justificadas.
-
-\begin{hypothesis}[Atração Profissional]
-    A força de entrada do nó (Seção~\ref{sec:forca}) indica o quanto uma ocupação atrai profissionais. Nós de grande força de entrada funcionam como polos atratores de mão de obra, seja pela demanda, seja pela facilidade em exercer a ocupação ou seja por sua atratividade.
-\end{hypothesis}
-
-Algumas ocupações, como \enquote{Auxiliar Administrativo}, possuem um grande número de profissionais em seu fluxo de entrada comparativamente com outras ocupações próximas. Independentemente da motivação, um grande número de profissionais converge para elas.
-
-A Tabela~\ref{tab:ocupacoes-preferenciais} mostra as ocupações preferenciais entre seus vizinhos. Ordenando as conexões de entrada pela peso de saída, do maior peso para o menor, obtêm-se um número de \enquote{preferência de saída}, ou seja, para qual ocupação os profissionais usualmente migram. Do outro lado, se a ocupação que recebe os profissionais está usualmente entre as primeiras opções, ela pode ser considerada uma ocupação atrativa entre seus vizinhos.
-
-A coluna \enquote{Posição} na Tabela~\ref{tab:ocupacoes-preferenciais} possui a mediana da dessa ordem entre os vizinhos. Por exemplo, no topo da tabela, Auxiliar Administrativo é primeira ou segunda opção preferencial para metade dos seus 2.591 vizinhos. Vendedor, na terceira linha, está entre as quatro primeiras opções entre metade dos seus 1.553 vizinhos.
-
-A coluna final \enquote{Mediana/Ocupações} faz uma ponderação para destacar um bom posicionamento em ocupações com mais vizinhos. De outra forma, ocupações que são preferenciais para um único vizinho assumem o topo.
-
-\begin{table}[!h]
+\begin{table}[ht]
     \centering
-    \begin{tabular}{l|r|r|r}
-        \hline
-        & \thead{Posição\\(Mediana)} & \thead{entre\\Ocupações} & \thead{Mediana / Ocupações}\\
-        \hline
-        administrativo auxiliar & 2.0 & 2591 & 1295.5\\
-        \hline
-        administrativo assistente & 4.0 & 1694 & 423.5\\
-        \hline
-        vendedor & 4.0 & 1553 & 388.2\\
-        \hline
-        recepcionista & 4.0 & 1176 & 294.0\\
-        \hline
-        auxiliar producao & 5.0 & 885 & 177.0\\
-        \hline
-        atendimento & 7.0 & 904 & 129.1\\
-        \hline
-        enfermeiro & 1.0 & 121 & 121.0\\
-        \hline
-        caixa operador & 7.0 & 745 & 106.4\\
-        \hline
-        analista sistema & 3.0 & 300 & 100.0\\
-        \hline
-        motorista & 7.0 & 547 & 78.1\\
-        \hline
-        analista suporte & 5.0 & 369 & 73.8\\
-        \hline
-        advogado & 4.0 & 257 & 64.2\\
-        \hline
-        maquina operador & 8.0 & 459 & 57.4\\
-        \hline
-        civil engenheiro & 3.0 & 169 & 56.3\\
-        \hline
-        analista humanos recursos & 6.0 & 328 & 54.7\\
-        \hline
-        comercial gerente & 9.0 & 488 & 54.2\\
-        \hline
-        operador telemarketing & 11.0 & 540 & 49.1\\
-        \hline
-        consultor venda & 12.0 & 563 & 46.9\\
-        \hline
-        eletricista manutencao & 3.0 & 138 & 46.0\\
-        \hline
-        manutencao mecanico & 4.0 & 182 & 45.5\\
-        \hline
-        fisioterapeuta & 1.0 & 40 & 40.0\\
-        \hline
-        promotor venda & 15.0 & 518 & 34.5\\
-        \hline
-        assistente financeiro & 13.0 & 434 & 33.4\\
-        \hline
-        gerente projeto & 7.0 & 229 & 32.7\\
-        \hline
+    \begin{tabular}{@{} l r r r @{}}
+        \toprule
+        Ocupação                  & Ego-grafo & Acumulado & Inéditos \\
+        \midrule
+        Auxiliar Administrativo   & 3.369    & 3.369     & 3.369    \\
+        Vendedor                  & 1.790    & 3.566     & 197      \\
+        Assistente Administrativo & 1.704    & 3.655     & 89       \\
+        Recepcionista                & 1.338    & 3.707     & 52       \\
+        Atendente                      & 1.249    & 3.739     & 32       \\
+        Auxiliar de Produção      & 1.061    & 3.954     & 215      \\
+        \bottomrule
     \end{tabular}
-    \caption{Ocupações Preferenciais}
-    \label{tab:ocupacoes-preferenciais}
+    \caption{Tabela com os 5 maiores ego-grafos do MCar. A coluna \textit{Acumulado} contém o número de nós do ego-grafo da linha somado com os anteriores, excluindo-se nós já vistos. A coluna \textit{Inéditos} contém o número de nós que o ego-grafo possui que não estão nos ego-grafos anteriores.}
+    \label{tab:top-egografos}
 \end{table}
 
-\begin{hypothesis}[Correlação Negativa entre a Força de Entrada e a Mediana Salarial]
-    Existe uma correlação negativa entre a força de entrada (Seção~\ref{sec:forca}) e a mediana salarial, ou seja, quanto maior a força de entrada, menor a mediana do salário.
-\end{hypothesis}
+Essa característica reforça conceitos sobre movimentação profissional como a Carreira sem Fronteiras e a Carreira Proteana, indicando que uma grande quantidade de profissionais trilha por carreiras variadas e se adaptam a diferentes ocupações. No entanto, há uma rápida queda no número de conexões e no tamanho do ego-grafo, sugerindo que esses conceitos não se aplicam a todas as ocupações igualmente e que um número pequeno delas funciona como \enquote{coringa} ou \enquote{ponte} para movimentação profissional. Se essa característica está presente por que as ocupações são mais genéricas, por serem típicas do início de carreira ou por algum efeito de mercado é algo a ser investigado em trabalhos futuros.
 
-\todo[inline]{Verificar e checar duplamente a correlação}
+%% Ronie: Aqui em cima tem algo que posso investigar na dissertação, acredito. Se há alguma correlação entre essas ocupações e escolaridade (sei que tem), e alguma correlação com o tempo de trabalho ou a idade.
 
-Essa correlação é consistente com o conceito de \textbf{mercado de trabalho} em que quanto maior a oferta de mão de obra, menor o salário pago. Entretanto, não é possível afirmar que existe um excesso de profissionais para uma certa ocupação, pois nesse trabalho não foi possível medir se a ocupação está \textit{saturada}.
-%% NÃO VEJO COMO DEFINIR A SATURAÇÃO DE UMA OCUPAÇÃO, VOCÊ CONSEGUE DEFINIR ISSO?
-Outra interpretação plausível é que essas ocupações possuem requisitos de entrada menos exigentes, tais como um baixo conhecimento técnico ou experiência. Isso significa um trabalho menos especializado com salários menores, porém, com baixa barreira de entrada.
+O \enquote{Paradoxo da Amizade}~\cite{Barabasi2016-rn} parece valer para pessoas transitando entre ocupações. O paradoxo é dado como \enquote{na média, meus amigos são mais populares que eu}, transportado para o contexto desse trabalho seria enunciado como \enquote{na média, os outros trabalhos que eu poderia executar têm mais opções de movimentação que o meu}. Esse paradoxo tem uma explicação simples, como se observa na Figura~\ref{fig:pareto-egografo}, um nó qualquer tem grandes chances de estar conectado a um ou mais \textit{hubs} o que, na média, faz com que as ocupações vizinhas tenham mais conexões do que as suas próprias.
 
-%% MINHA LEITURA É UM POUCO DIFERENTE. COMO O GRAFO É CONSTRUÍDO A PARTIR DE DADOS REAIS, QUANTO MAIOR A FORÇA DE ENTRADA, MAIS PROFISSIONAIS CONVERGEM PARA ESSA PROFISSÃO E, NORMALMENTE, AS PROFISSÕES QUE POSSUEM MAIORES SALÁRIOS SÃO AQUELAS QUE TÊM MENOS PESSOAS, POIS ESTÃO MAIS NO TOPO DA PIRÂMIDE. PORTANTO, EU ENTENDO QUE A OFERTA DE MÃO DE OBRA É UM ELEMENTO IMPORTANTE, MAS TAMBÉM DEVEMOS CONSIDERAR AS HABILIDADES REQUERIDAS PARA A POSIÇÃO.
-% Ronie: Sim, essa é uma discussão muito boa! Eu gostaria de me aprofundar mais nela se houver tempo hábil.
-% Ronie (2017-06-18) Tentei passar sua interpretação para o texto, veja se é mais ou menos isso :)
+% Ronie: Esses dois parágrafos abaixo estão meio estranhos no texto. Mas os pontos são:
+% 1 - Em uma rede direcionada, o ego-grafo é melhor de se analisar do que o grau. Isso pq, diferente de uma rede não-direcionada, o grau _não_ significa o número de vizinhos.
+% 2 - Eu poderia ter usado um histograma (distribuição de frequência) para fazer uma análise similar. Na literatura de ciência de redes é praticamente o único gráfico que se vê. Mas, apesar das propriedades estatísticas interessantes, o histograma é bem menos informativo (IMHO). O Pareto mostra claramente a contribuição dos hubs para a conectividade da rede, enquanto que o histograma relega eles a uma cauda fina e ruidosa (parece mais uma 'sujeira' do que a característica mais importante da rede). É um ponto que pode ser um pouco controverso (embora seja um detalhe), mas eu gostaria de tentar sustentá-lo eventualmente :)
 
-NOTA: Totalmente não correlacionado.
+A Figura~\ref{fig:pareto-egografo} ilustra a diferença entre o grau e a conectividade da rede que é importante do ponto de vista dessa pesquisa. Enquanto o grau identifica corretamente os \textit{hubs}, o gráfico de Pareto dos ego-grafos mostra que a rede é mais conectada do que seu número de conexões. Comparando os dois gráficos, percebe-se que, enquanto a distribuição de grau e do tamanho do ego-grafo são similares, o acumulado do primeiro cresce mais suavemente que o do segundo, indicando que os \textit{hubs} possuem proporcionalmente mais conexões unidirecionais, ou seja, menos conexões conectam mais nós.
 
-
-
-\begin{comment}
-É possível observar na lista XX que essas ocupações coincidem intuitivamente com as noções de \enquote{início de carreira} e \enquote{ocupação operacional}.
-\end{comment}
-
-\begin{hypothesis}[Pontos de Saída do Mercado de Trabalho]
-    Se $\linkin{s}_i \gg \linkout{s}_i$ (Equações~\ref{eq:forca-entrada} e ~\ref{eq:forca-saida}), a movimentação não mapeada é insuficiente para explicar a diferença entre as forças, o que indica que os profissionais estão de fato se acumulando durante os anos, sugerindo que esse nó é um ponto de saída do mercado de trabalho.
-\end{hypothesis}
-
-Uma ocupação onde $\linkin{s}_i > \linkout{s}_i$ significa que há um acúmulo de profissionais nessa ocupação. Como no MCar as conexões com pouca movimentação foram removidas, se $\linkin{s}_i = \linkout{s}_i \pm \epsilon$, onde $\epsilon$ é próximo a 0, esse acúmulo pode significar que os profissionais se dispersam pelas conexões não mapeadas, mas esse número não é suficiente para explicar $\linkin{s}_i \gg \linkout{s}_i$.
-
-\begin{hypothesis}[Pontos de Entrada do Mercado de Trabalho]
-    De maneira análoga, as ocupações em que $\linkin{s}_i \ll \linkout{s}_i$ indicam ocupações que são entrada para o mercado de trabalho.
-\end{hypothesis}
-
-Ocupações somente com força de saída significam que os profissionais iniciam nessa ocupação ou é a primeira que consideram em seus currículos. Por outro lado, as que somente possuem força de entrada, são ocupações em que os profissionais não dão “sequência” a elas em seus currículos, possivelmente significando que será a ocupação atual ou onde ele pára de procurar outro trabalho.
-
-Analisando como a força é distribuída entre entrada e saída, é possível observar que há um pico em algumas ocupações em que predomina a saída de profissionais, são provavelmente ocupações de ingressão no mercado de trabalho. Por outro lado, as ocupações que predominam a força de entrada são pontos de evasão ou “estagnação” do profissional.
-
-A Distribuição de Probabilidade de Kernel da Figura~\ref{fig:ditribuicao-de-forca} mostra a concentração de ocupações de acordo com a força, o eixo $x$ possui a força relativa entre entrada e saída da ocupação. Zero significa que as forças são iguais, ou seja, saem tanto profissionais quanto entram; números negativos significam que saem mais profissionais do que entram, o número -1 significa que só existe força de saída; de maneira contrária, quanto mais positivo o valor, maior o número de profissionais entrando na ocupação em relação a profissionais saindo até que 1 significa que existe apenas força de entrada.
-
-Em termos mais precisos, zero significa que a ocupação é perfeitamente recíproca, -1 ou 1 significam que são perfeitamente antirrecíprocas em um sentido ou outro.
+Duas coisas devem ser consideradas aqui: essa característica dos \textit{hubs} pode ser um efeito colateral do corte artificial de 5 conexões; e uma análise similar poderia ser obtida projetando uma rede não-direcionada e analisando sua distribuição de grau.
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[scale=0.8]{distribuicao-de-forca.png}
-    \caption{Distribuição de Força entre Ocupações}
-    \label{fig:ditribuicao-de-forca}
+    \subfloat[][Pareto por Grau] {
+        \includegraphics[width=0.49\linewidth]{pareto-grau}
+        \label{fig:pareto-grau}
+    }    
+    \subfloat[][Pareto por Ego Grafo] {
+        \includegraphics[width=0.49\linewidth]{pareto-egografo}
+        \label{fig:pareto-egografo}
+    }  
+    \caption{Gráficos de Pareto com a distribuição de grau  do MCar e com o tamanho dos ego-grafos. Os gráficos estão colocados lado a lado para facilitar a comparação. Os nós estão ordenados de maneira decrescente no eixo horizontal; na Figura~\ref{fig:pareto-grau}  as ocupações de grau maior estão à esquerda e ocupações de menor grau estão à direita. Na Figura~\ref{fig:pareto-egografo} elas estão ordenadas pelo tamanho do ego-grafo. Os eixos direitos, em escala logarítmica, estão associados às linhas cheias e representam, respectivamente, o grau do nó e o tamanho do ego-grafo. Os eixos esquerdos estão associados às linhas tracejadas; na Figura~\ref{fig:pareto-grau} ela representa a somatória de todos os graus em porcentagem e qual a contribuição das ocupações à esquerda para essa totalização; na Figura~\ref{fig:pareto-egografo} ela representa a quantidade de ocupações que os ego-grafos à esquerda conectam.}
+    \label{fig:paretos}
 \end{figure}
 
-Na Figura~\ref{fig:ditribuicao-de-forca} é possível observar três picos (modas), dois deles nos extremos de antirreciprocidade e um próximo ao ponto mais recíproco. Os dois vales os separam claramente e podem ser usados como divisores, pois é onde a distribuição muda sua forma.
+Observando a Figura~\ref{fig:paretos} é possível notar que cerca de $1/5$ das ocupações possui apenas uma conexão (1.547 delas, 21,29\%), mas pouco mais de $1/3$ (2.682 delas, 36,91\%) possui um ego-grafo de tamanho 2. A diferença entre ambos são os ego-grafos que possuem múltiplas conexões, tanto auto-referentes quanto de entrada e saída com seu vizinho.
 
-A porção mais negativa soma 712 nós e forma uma lista de ocupações mais comuns para ingressão no mercado de trabalho.
+Isso indica que grande parte das ocupações ($1/3$) está na \enquote{borda} da rede, conectada a ela por apenas um vizinho. Se os \textit{hubs} reforçam os conceitos de Carreiras Proteanas e Carreiras sem Fronteiras, a quantidade de ocupações na borda da rede indica o contrário. A presença de ambas características sugere novamente que as teorias mencionadas não se aplicam a todas as ocupações. Apesar dessa pesquisa conseguir indicar quais ocupações parecem se encaixar melhor nessas teorias e quais não, ela é incapaz de responder quais são as alternativas e por que elas acontecem.
 
-A porção mais positiva soma 1.437 nós e forma uma lista das ocupações mais comuns para evasão ou estagnação.
+% Ronie: O parágrafo acima me parece um ótimo gancho para alguém que trabalhe com essa parte. Gostaria de deixar isso bem atraente :D (mas não sei se cabe).
 
-Analisando a lista de ocupações por amostragem, a explicação acima parece plausível. Por outro lado, as ocupações com pouca força de saída não parecem corresponder à hipótese.
+\subsection{Identificando Fronteiras de Carreira}  \label{sec:fronteiras-de-carreira}
 
-A Tabela~\ref{tab:ocupacoes-de-ingresso} possui uma amostra de ocupações próximas ao ponto de separação entre pico de saída e o segundo pico.
-
-\begin{table}[!h]
-    \centering
-    \begin{tabular}{l|r|r|r|r}
-        \hline
-        Ocupação & Força & Entrada & Saída & Fluxo\\
-        \hline
-        administrativo aprendiz jovem tecnico & 123 & 10 & 113 & -0.84\\
-        \hline
-        atendimento cliente profissional & 163 & 14 & 149 & -0.83\\
-        \hline
-        maquina moco & 138 & 12 & 126 & -0.83\\
-        \hline
-        embalador repositor & 143 & 13 & 130 & -0.82\\
-        \hline
-        equipe treinador & 185 & 17 & 168 & -0.82\\
-        \hline
-        aprendiz jovem mecanico & 135 & 13 & 122 & -0.81\\
-        \hline
-    \end{tabular}
-    \caption{Ocupações de Ingresso}
-    \label{tab:ocupacoes-de-ingresso}
-\end{table}
-
-Uma amostra de ocupações próximas ao ponto de separação entre o segundo pico e o pico de entrada é exibida na Tabela~\ref{tab:ocupacoes-de-evasao}.
-
-\begin{table}[!h]
-    \centering
-    \begin{tabular}{l|r|r|r|r}
-        \hline
-        Ocupação & Força & Entrada & Saída & Fluxo\\
-        \hline
-        analista desenvolvimento pesquisa & 111 & 101 & 10 & 0.82\\
-        \hline
-        analista gestao & 113 & 103 & 10 & 0.82\\
-        \hline
-        analista commerce & 126 & 115 & 11 & 0.83\\
-        \hline
-        coordenador unidade & 121 & 111 & 10 & 0.83\\
-        \hline
-        consultor investimento & 152 & 142 & 10 & 0.87\\
-        \hline
-        fonoaudiologo & 181 & 170 & 11 & 0.88\\
-        \hline
-    \end{tabular}
-    \caption{Ocupações de Evasão ou Estagnação}
-    \label{tab:ocupacoes-de-evasao}
-\end{table}
-
-%% PARA CADA UMA DAS HIPÓTESES VOCÊ DEVE ILUSTRAR COM UMA FIGURA
-
-\begin{hypothesis}[Trabalho de Passagem]
-    Uma ocupação com alta centralidade de intermediação (Seção~\ref{sec:intermediacao}) significa um \enquote{trabalho de passagem}, em que um grande fluxo de profissionais passa por ela a caminho de outros trabalhos.
-\end{hypothesis}
-
-A Figura~\ref{fig:carreira-topografia} ilustra o conceito na carreira de topografia, onde o nó em destaque representa a ocupação com maior centralidade de intermediação. Essas ocupações merecem atenção especial no planejamento de carreira, pois são um ponto de convergência para ocupações que levam a ela e são pontos de difusão para as que partem dela.
-
-\begin{figure}[ht]
-  \centering
-  \includegraphics[scale=0.6]{cluster_25.pdf}
-  \caption{Ilustração da centralidade de intermediação na carreira de topografia. O nó mais central é \enquote{topógrafo}.}
-  \label{fig:carreira-topografia}
-\end{figure}
-
-NOTA: Aparentemente, essa hipótese não é válida para o grafo como um todo. Talvez para comunidades.
-
-\begin{table}[!h]
-    \centering
-    \begin{tabular}{l|r|r}
-        \hline
-        & Intermediação & Normalizada\\
-        \hline
-        administrativo auxiliar & 9570434.6 & 0.2\\
-        \hline
-        vendedor & 3674933.3 & 0.1\\
-        \hline
-        administrativo assistente & 3541082.1 & 0.1\\
-        \hline
-        auxiliar producao & 2200145.0 & 0.0\\
-        \hline
-        recepcionista & 2158463.5 & 0.0\\
-        \hline
-        atendimento & 1628197.2 & 0.0\\
-        \hline
-        motorista & 1195781.9 & 0.0\\
-        \hline
-        analista suporte & 1095105.7 & 0.0\\
-        \hline
-        caixa operador & 1052277.6 & 0.0\\
-        \hline
-        analista sistema & 991204.4 & 0.0\\
-        \hline
-        maquina operador & 911173.1 & 0.0\\
-        \hline
-        professor & 901804.6 & 0.0\\
-        \hline
-        seguranca tecnico trabalho & 838408.0 & 0.0\\
-        \hline
-        analista humanos recursos & 799837.4 & 0.0\\
-        \hline
-        consultor venda & 780830.7 & 0.0\\
-        \hline
-    \end{tabular}
-\end{table}
-
-
-%% NESSA FIGURA VOCÊ PRECISA MOSTRAR O VALOR DA CENTRALIDADE DE INTERMEDIAÇÃO DE CADA NÓ, ASSIM VOCÊ MOSTRA QUANTITATIVAMENTE A DIFERENÇA.
-\begin{hypothesis}[Equivalência Profissional] \label{hip:equivalencia}
-    Em uma análise local, se $\recout{w}_{ij}$ é próximo de zero, ou se $\recout{w}_{ij} \ll \recboth{w}_{ij}$, então não há um sentido de \enquote{progressão} entre uma ocupação e outra, ou seja, profissionais vão e vêm entre elas sem uma preferência óbvia no fluxo, indicando que são equivalentes em termos profissionais.
-\end{hypothesis}
-
-A reciprocidade (Seção~\ref{sec:reciprocidade}) nessa pesquisa tem relação direta com o movimento entre ocupações. O peso recíproco $\recboth{w}_{ij}$ entre duas ocupações, em comparação com o peso não recíproco $\recout{w}_{ij}$, permite a compreensão do fluxo de pessoas pela rede. Derivando-se um grafo composto apenas por $\recout{w}_{ij}$ é possível observar a tendência de movimentação entre ocupações, ou seja, quais delas estão acumulando ou diminuindo o número de profissionais com o tempo.
-
-Ao se analisar a reciprocidade global $\weighted{\rho}$ em componentes do MCar extraídos por agrupamento, é possível observar características de reciprocidade bastante distintas. Enquanto alguns componentes possuem alta reciprocidade, outros são claramente anti-recíprocos, sugerindo que há um caminho claro para os profissionais que se encontram naquele grupo.
-
-\begin{hypothesis}[Detecção de Nomenclatura Equivalente]
-    Se dois nós possuem similaridade máxima $\linkboth{S}(i,j) = 1$, ou seja, possuem exatamente os mesmos vizinhos, mas não há conexão entre eles, então esses nós são potencialmente nomenclaturas diferentes para a mesma ocupação.
-\end{hypothesis}
-
-Se duas ocupações possuem as mesmas entradas e saídas, mas não se conectam entre si, é um indício que elas na verdade são nomes diferentes para a mesma função. Entretanto, outros casos são possíveis, como ocupações que são paralelas em termos de progressão de carreira, mas não executam o mesmo trabalho. Por outro lado, se outros dados além da estrutura também forem similares, como a nuvem de palavras, essas ocupações são potencialmente nomenclaturas diferentes para a mesma função.
-%% NESTE MOMENTO ME OCORRERAM DUAS POSSIBILIDADES DE APRESENTAÇÃO DESTE CAPÍTULO: 1) APRESENTAR INICIALMENTE PARTES DO MCar NAS QUAIS APARECEM OS CASOS DISCUTIDOS NAS HIPÓTESES; OU 2) APÓS CADA HIPÓTESE APRESENTAR EXEMPLOS NO MCar QUE ILUSTRAM (VALIDAM) AS HIPÓTESES.
-
-\begin{hypothesis}[Capacitação Parcial] \label{hip:capacitacao-suficiente}
-    O fluxo entre duas ocupações significa que parte das habilidades necessárias para se exercer a ocupação posterior está presente, ao menos em parte, nos profissionais da ocupação anterior.\todo{Existe o modelo CHA (Competência, Habilidade, Atitude) que talvez possa ser usado para expandir isso, se for conveniente.}
-\end{hypothesis}
-
-Se há uma movimentação entre profissionais de uma ocupação $a$ para uma ocupação $b$, significa que os profissionais de $a$ possuem capacitação, ao menos parcial, para exercer $b$. Esse conceito pode ser expresso mais precisamente considerando $\capac(x)$ como o conjunto de \textit{capacidades} para se exercer uma ocupação $x$, essa hipótese implica que $\capac(a) \cap \capac(b)  \ne \emptyset$ a menos que $\capac(b) = \emptyset$.
-
-Usando a carreira de topógrafo da Figura~\ref{fig:carreira-topografia} como exemplo, o \textit{Nivelador} possui um subconjunto das capacidades para exercer a função de \textit{Topógrafo}, esse subconjunto não deve ser vazio a menos que a ocupação de \textit{Topógrafo} não exija nenhuma capacitação.
-
-\begin{hypothesis}[Identificação de Carreiras]
-    Uma comunidade dentro do MCar significa que o fluxo de profissionais dentro desse grupo é maior do que com outros nós, indicando que é um conjunto de ocupações que pode ser exercido por profissionais com capacitações em comum (Hipótese~\ref{hip:capacitacao-suficiente}). Se a comunidade possui uma direção de fluxo óbvio entre as ocupações, isso indica progressão (Hipótese~\ref{hip:equivalencia}). Ambas as propriedades presentes caracterizam uma carreira.
-\end{hypothesis}
-
-
-\section{CRONOGRAMA}
-
-Aqui apresentamos um panorama resumido de como o trabalho evoluiu até o momento e como é esperado seu desenvolvimento até sua entrega.
-
-Os dados que são fonte para a pesquisa estão prontos e no formato adequado, nenhum processamento extra é necessário nesse ponto. A descrição de como ele é obtido está concluída, sendo necessário apenas ajustes para uma melhor compreensão do texto e detalhes menores na descrição da estrutura dos dados. Grande parte dos meses de Fevereiro e Março foram usados na elaboração do texto e aparecem no cronograma da Figura~\ref{fig:cronograma} descritos como \textit{Descrição da Fonte de Dados}.
-
-Os conceitos de Ciência de Redes suficientes para esse trabalho já estão absorvidos e o referencial teórico está quase completamente escrito. Ainda falta uma elaboração melhor do texto para facilitar a compreensão dos algoritmos dos modelos nulos, mas é previsto que até o final de Junho esses ajustes estejam concluídos.
-
-A metodologia da pesquisa também está definida e descrita no trabalho. Por outro lado, é provável que durante o início dos experimentos, mais material precise ser estudado e adicionado a ele, bem como ajustes na metodologia, mas espera-se que ao final de Agosto a pesquisa esteja consolidada o suficiente para que nenhuma nova adição seja necessária. São esperadas apenas alterações esporádicas no texto para refletir essa consolidação. No cronograma da Figura~\ref{fig:cronograma}, essas etapas estão descritas como \textit{Referencial Teórico} e \textit{Metodologia}.
-
-A partir do final de Junho iniciam os experimentos. A maior parte dos modelos nulos e medições necessárias já existem em bibliotecas nas linguagens R e Python, o que acelera a experimentação. Entretanto, há trabalho de codificação de algoritmos a ser feito, pois nem todos os modelos estão disponíveis em bibliotecas. Como a fonte de dados do trabalho é um grafo direcionado e ponderado e a literatura é escassa para esse tipo de rede, alguns modelos e medições adaptadas foram propostas, o que significa que seus algoritmos precisam ser implementados computacionalmente. Dada a experiência do pesquisador com desenvolvimento de software, espera-se que essas implementações junto com a própria experimentação não ultrapasse Setembro. No cronograma da Figura~\ref{fig:cronograma} essa etapa é descrita como \textit{Experimentação}. A implementação dos algoritmos e a experimentação não são separadas no cronograma pois espera-se que ocorram concomitantemente.
-
-Uma vez que os primeiros resultados forem obtidos, espera-se começar sua consolidação e transferência para o trabalho escrito. Essa etapa deve acontecer esporadicamente enquanto a atividade principal da experimentação ocorre. É esperado que os experimentos já estejam concluídos até Outubro e que esse mês seja quase totalmente reservado na descrição dos resultados. No cronograma da Figura~\ref{fig:cronograma} a etapa como um todo recebe o nome de \textit{Descrição dos Resultados}.
-
-Finalmente, as revisões finais do trabalho devem começar timidamente em Outubro, quando os resultados forem confrontados com o que foi descrito até o momento. Novembro é reservado para ajustes de texto causados pelo resultado dos experimentos e melhorias na redação. No cronograma da Figura~\ref{fig:cronograma} essa etapa final é chamada \textit{Consolidação do Trabalho}.
-
-\begin{figure*}[htb]
-    \centering
-    \includegraphics[scale=0.4]{dissertacao-cronograma.png}
-    \caption{Cronograma}
-    \label{fig:cronograma}
-\end{figure*}
+Nos experimentos realizados, o algoritmo Infomap foi utilizado para encontrar o particionamento mais coeso do MCar em relação ao fluxo. Como exposto nas Seções~\ref{sec:carreira} e~\ref{sec:infomap}, esse particionamento é a própria definição de fronteiras de carreira.
 
 \begin{comment}
-\section{Geladeira}
+Ronie: Vou tirar isso aqui, levanta mais dúvidas do que esclarece e em (quase) nenhum artigo que li eles explicam quais parâmetros foram utilizados. Entendo que facilita a reprodutibilidade, mas acho melhor eu tentar trabalhar em disponibilizar os dados =)
 
-Aqui fica o texto escrito e que pode ser reaproveitado em outras partes do trabalho, mas que parece que não encaixa de onde foram tirados.
+====
 
-
-\subsection{Análise de classe de ocupações}
-
-Uma coisa que reparei enquanto montava o MCar (olhei para aqueles dados por bastante tempo) é que temos 4 tipos de trabalho que não se misturam muito. Abaixo uma descrição \enquote{no cheiro} do que observei, mas precisa de algo melhor para realmente embasar as observações abaixo.
-
-
-\begin{description}
-\item [Operacional] Escolaridade no 3º grau incompleto (ou menor, 2º grau é o mais comum. Contém \enquote{graduações saturadas} como Direito e Administração de Empresas. Salário é mais baixo. Grande migração entre outros cargos operacionais sem muita correlação (garçom → mascote esportivo → pedreiro → lavador de carro → manobrista → recepcionista). Parece haver uma subdivisão aqui entre operacional de escritório (recepcionista, auxiliar administrativo, \ldots) e operacional \textit{braçal} (manobrista, lavador, garçom, \ldots) Os operacionais de escritório parecem ter níveis de experiência divididos entre \enquote{Assistentes} e \enquote{Auxiliares}.
-\item [Técnico] Com algumas migrações vindas do operacional. Possui 3º grau incompleto ou menor. È bastante similar ao Operacional, mas os salários são um pouco maiores e a movimentação entre cargos não correlacionados diminui. Possui níveis de experiência: \enquote{Meio Oficial} e \enquote{Oficial}. Exemplos: Soldador, Enfermeiro, Mecânico, Cozinheiro, \ldots
-\item [Especialista] Com 3º completo e acima (mestrado e doutorado são mais comuns). Possui pouquíssima movimentação para ocupações não correlacionadas, exceto para área de gestão. Possui níveis de experiência \enquote{Júnior}, \enquote{Pleno} e \enquote{Sênior}. Salários são maiores. Descrição nos currículos normalmente possui habilidades e ferramentas. Exemplos: Desenvolvedores de Software, Médicos, Arquitetos, Engenheiros (todos), \ldots
-\item [Gestores] Com variados graus de formação, mas os de maior salário (ou empresas maiores) possuem formação superior ou acima (especializações e MBA são mais comuns). Pouca movimentação entre cargos não correlacionados. Salários são maiores. Classificação de experiência parece ser \enquote{Supervisor}, \enquote{Coordenador}, \enquote{Gerente}, \enquote{Diretor}. Recentemente aparecem \enquote{CEO}, \enquote{CFO}, entre outros \enquote{C's}.
-\end{description}
-
-Na minha humilde opinião, esse á um trabalho que seria uma contribuição interessante para a área de RH, pois o que descrevo aí embaixo parece ser algo formalizado pela área (provavelmente), mas que poderia ganhar bases sólidas com uma análise com esse volume de dados. Um ponto particularmente interessante é que não existe uma migração muito forte de uma para o outro, ao contrário do que já vi descrito por aí: operacional → técnico → especialista → gestão. O que parece existir é uma migração muito grande dentro de cada grupo. O operacional é mais \enquote{bagunçado}, não existe um ordem, enquanto existe uma clara progressão nos outros. Também existe uma migração de Operacional para Técnico, mas quase zero de Técnico para Especialista.
-
-\subsection{Identificação de \textit{Carreiras}}
-
-Basicamente a clusterização já feita para separar o subgrafo da área de TI.
-
-Existe um desafio ali que são as ocupações \enquote{hubs} que conectam tudo (vendedor, recepcionista, auxiliar administrativo).
-
-O grupo dos cargos operacionais é muito grande e pode ser dividido.
-
-A técnica que usei foi simples. Separar os clusters e passar novamente o algoritmo nos maiores com parametrização mais rígida (dá para automatizar esse processo). Porém sobrou o problema dos \enquote{miniclusters} com duas ou três ocupações que poderiam se juntar à outras.
-
-Seria possível aplicar outras técnicas de agrupamento.
+O Infomap é bastante robusto quanto aos parâmetros utilizados, ou seja, mesmo grandes variações em seus parâmetros devem produzir resultados similares~\cite{Kawamoto2015-ha,Lambiotte2012-fp}. Por essa razão foi usado o parâmetro padrão de probabilidade de teleporte de 0,15.
 \end{comment}
+
+Para esse algoritmo, quanto maior a compressão da informação do caminho do \textit{random walker}, melhor é o particionamento da rede~\cite{Rosvall2009-sd}.
+
+O MCar foi testado em duas variações do algoritmo: 
+\begin{itemize}
+    \item Simples: consiste na detecção de comunidades em que cada nó pertence a apenas uma única comunidade. 
+    \item Com sobreposição: permite-se que nós participem de mais de uma comunidade.
+\end{itemize}
+
+A variação com maior compressão revela a melhor caracterização de particionamento~\cite{Viamontes_Esquivel2011-it,Rosvall2011-yi,Edler2017-kt}. Se a variação com sobreposição possuir maior compressão de informação do que as outras, assume-se que suas comunidades, intrinsecamente, compartilham nós.
+
+Os resultados de compressão para cada variação são apresentados na Tabela~\ref{tab:metodos}. É possível observar que há ganho na compressão de informação quando se permite a sobreposição de comunidades, revelando que a movimentação dos profissionais é melhor caracterizada quando as ilhas compartilham ocupações.
+
+% INTUITIVAMENTE UMA COMPRESSÃO MAIOR IMPLICA EM MENOS COMUNIDADES, PORÉM SUA TABELA MOSTRA O CONTRÁRIO, ASSIM COMO O TEXTO. DE ACORDO COM SUA EXPLICAÇÃO UMA MAIOR COMPRESSÃO IMPLICA EM MELHOR PARTICIONAMENTO E, PORTANTO, MAIS COMUNIDADES.
+% Ronie: Aqui acho que preciso melhorar a explicação. Como tb não expliquei as variações hierárquicas e com sobreposição do Infomap estão também falta uma peça do quebra cabeças. A compressão dessa 'descrição do caminho do random walker' acaba criando um balanço entre quantidade de nós e de comunidades. Se não houverem 'gargalos' de fluxo, o random walker não fica 'preso' em um subgrafo e a melhor compressão acontece simplesmente por códigos mais curtos nos nós mais frequentes, sem divisão em comunidades. Por outro lado, quando existe um gargalo o random walker fica preso por um longo tempo de um lado ou de outro dele, nesse formato a melhor compressão acontece se cada 'prisão' reutilizar os códigos mais curtos e criarmos um outro código para passar de um lado para o outro do gargalo. O que está acontecendo na variação com sobreposição é que existem nós, ao invés de conexãos, que são fronteira entre as comunidades. Uma boa ilustração disso é o grafo 'gravata borboleta' com 5 nós e 6 conexões, nesse formato: ▷◁. Sem permitir sobreposição de comunidades, o nós central força os dois triângulos a pertencer em uma única comunidade. Permitindo a sobreposição, o nó central consegue participar de duas comunidades: ▷ e ◁. Se fosse uma rede com uma conexão entre os triângulos, desse jeito: ▷—◁, então o gargalo seria a conexão (não o nó) e o algoritmo que não permite sobreposição teria a melhor compressão.
+
+\begin{table}
+    \centering
+    \begin{tabular}{@{} l r r r r @{}}
+        \toprule
+        Método           & Compressão & Ilhas Ocupacionais & Ocupações & \% em Ilhas \\ \midrule
+        Simples          & 46,08\%    & 65                 & 5.906     & 81,27\%     \\
+        Com sobreposição & 50,30\%    & 624                & 5.631     & 77,49\%     \\ \bottomrule
+    \end{tabular}
+    \caption{Métodos de detecção de comunidades e seus resultados. O \textit{Método} se refere ao tipo (variação) de particionamento. \textit{Compressão} significa qual a compressão de informação obtida pelo Infomap em relação a uma rede sem particionamento. \textit{Ihas Ocupacionais} é o número de partições não-triviais resultantes (ao menos 3 nós na comunidade). Em \textit{Ocupações} está o número de nós que fazem parte de alguma ilha e \textit{\% em Ilhas} mostra o mesmo número, proporcionalmente às 7.267 ocupações do MCar.}
+    \label{tab:metodos}
+\end{table}
+
+Apesar de usar a expressão \enquote{compartilham ocupações}, a interpretação mais correta é que as ilhas possuem \textit{suas próprias versões} das ocupações. \citeonline{Viamontes_Esquivel2011-it} apresentam um exemplo intuitivo do significado desse \enquote{compartilhamento} usando aeroportos europeus e norte-americanos. Transposto para a realidade do MCar, uma ocupação que pertence a mais de uma comunidade significa que os profissionais que transitam por ela, em sua maioria, voltam aos seus grupos de origem ao invés de migrarem para outros. Não fosse dessa forma, esses grupos conectados seriam considerados como um conjunto único de ocupações pelo algoritmo ou a ocupação estaria apenas na comunidade com fluxo predominante.
+
+Existem duas explicações possíveis. A primeira é que essas ocupações são \textit{homônimas} e, portanto, distintas, o que significa que há uma fronteira entre elas, como exibido no exemplo da Figura~\ref{fig:homonimos}. A segunda é que essas ocupações são similares, mas fatores não especificados dificultam a transição de um grupo para outro, o que também indica uma fronteira de carreira, ainda que mais fraca.
+
+\begin{figure}[htb]
+    \centering
+    \subfloat[][Arquitetura] {
+        \includegraphics[width=0.49\linewidth]{ex-coordenador-de-projetos-arquiteto2.pdf}
+        \label{fig:homonimo-arquiteto}
+    }    
+    \subfloat[][Software] {
+        \includegraphics[width=0.49\linewidth]{ex-coordenador-de-projetos-software2.pdf}
+        \label{fig:homonimo-software}
+        }  
+    \caption{Duas ilhas ocupacionais compartilhando a ocupação \enquote{Coordenador de Projetos} (em destaque). Apesar de possuírem o mesmo nome são ocupações diferentes, a movimentação entre as ilhas é pouco representativa se comparada a movimentação intra-ilha. Apenas uma fração das ocupações de cada ilha está exibida nessa figura. O tamanho do nó indica o fluxo de profissionais que passa pela ocupação enquanto a espessura da conexão indica o volume do fluxo entre elas.}
+    \label{fig:homonimos}
+\end{figure}
+
+Um exemplo da primeira explicação é a ocupação \enquote{Coordenador de Projetos}, que está associada tanto à Arquitetura quanto à Software. Um possível exemplo da segunda é a ocupação de \enquote{Professor} que aparece em diversas ilhas, sugerindo que há especializações nessa ocupação que impedem que um Professor se movimente entre ilhas, o que condiz com o conhecimento tácito sobre a profissão, um Professor de Matemática não se transforma em um Professor de Língua Portuguesa facilmente.
+
+Em qualquer uma dessas interpretações, as ocupações que participam de mais de uma ilha ocupacional revelam uma fronteira e não uma ponte.
+
+\begin{comment}
+Ronie: Lá se vai mais um pedaço do trabalho pro brejo :D Lição aprendida: o trabalho de pesquisa tem muito 'vai e vem', não compensa escrever coisas em detalhes e caprichar no português até a trabalho estar quase concluído. O próximo vai funcionar melhor e ser bem mais rápido :)
+
+====
+
+Os resultados obtidos foram comparados com o trabalho de \citeonline{Viamontes_Esquivel2011-it} para obter uma perspectiva mais ampla sobre o significado da compressão (Tabela~\ref{tab:comparativo}). É possível observar que o MCar é a rede que mais se beneficia de uma estrutura que permite sobreposição de comunidades.
+
+\begin{table}
+\centering
+\begin{tabular}{@{} l r r r r r @{}}
+\toprule
+&      &          & \multicolumn{2}{c}{Compressão} & \\
+\cmidrule(r){4-5}
+Rede                                   & Nós  & Conexões & Simples & $\Delta$ Sobr.       & $N_{\text{sobr}}/N$ \\
+\midrule
+\rowcolor{yellow!25} Mapa de Carreiras & 7450 & 90800    & 14\%    & 30\%                 & 11\% \\
+Estradas Europeias                     & 1018 & 1274     & 46,2\%    & 10,4\%                 & 35,5\% \\
+Grade de Energia Leste dos EUA         & 4941 & 6994     & 53,4\%    & 8,8\%                  & 27,5\% \\
+Doenças Humanas                        & 516  & 1188     & 46,4\%    & 2,9\%                  & 15,3\% \\
+Coautoria de Artigos de Ciência de Redes                   & 552  & 1317     & 48,9\%    & 2,5\%                  & 14,6\% \\
+Rotas Aéreas                           & 3618 & 14142    & 31,1\%    & 1,2\%                  & 13,9\% \\
+Blogs Políticos (EUA)                  & 1222 & 16714    & 4,1\%     & 0,4\%                & 5,8\% \\
+Blogs Políticos (Suécia)               & 855  & 10315    & 0,5\%   & 0,2\%                & 4,8\% \\
+Rede Neural \textit{C. elegans}        & 297  & 2345     & 1,7\%     & 0,1\%                & 2,7\% \\
+\bottomrule
+\end{tabular}
+\caption{Comparativo da estrutura do Mapa de Carreiras (em destaque) com outras redes~\cite{Viamontes_Esquivel2011-it}. \textit{Compressão Simples} se refere à compressão de informação onde o Infomap obteve o melhor particionamento simples da rede (sem sobreposição ou hierarquia de partições). \textit{Compressão $\Delta$ Sobr.} se refere ao ganho na compressão obtido pela sobreposição de partições em relação à compressão simples. $N_{\text{sobr}}/N$ é a proporção de nós que participam em mais de uma comunidade em relação ao total de nós.}
+\label{tab:comparativo}
+\end{table}
+
+A distribuição de tamanho das ilhas resultantes da partição com sobreposição está na Figura~\ref{fig:pareto-comunidades}. Mais de 75\% delas possui uma única ocupação, representando apenas 8\% de todas as ocupações. 
+\end{comment}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{pareto-comunidades.png}
+    \caption{Gráfico de Pareto com a distribuição de tamanho das ilhas ocupacionais. As comunidades estão ordenadas pelo número de ocupações que contêm, ilhas maiores estão à esquerda e menores à direita. O eixo direito, em escala logarítmica, está associado à linha cheia e representa o número de ocupações da ilha. O eixo esquerdo está associado à linha tracejada e representa o total de ocupações e qual a contribuição acumulativa das ilhas à esquerda do ponto para ela.}
+    \label{fig:pareto-comunidades}
+\end{figure}
+
+As comunidades, em sua maioria, possuem uma topologia em que predomina a forma de estrela ou estrelas com múltiplos centros. Isso significa poucos \textit{hubs} conectando quase todos os outros nós. Esse formato é caracterizado por uma assortatividade negativa, ou seja, nós de alto grau conectados a nós de baixo grau~\cite{Barabasi2016-rn}.
+
+A assortatividade das 624 ilhas com ao menos três ocupações é exibida na Figura~\ref{fig:assortatividade}. Quase todas elas possuem assortatividade negativa, reforçando o conceito de polos ocupacionais. Na Figura~\ref{fig:ex-ilhas-ocupacionais} são apresentados três exemplos que ilustram a importância dos polos ocupacionais.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.9\linewidth]{assortatividade.png}
+    \caption{Assortatividade pelo número de ocupações na ilha com o eixo $x$ em escala logarítmica.}
+    \label{fig:assortatividade}
+\end{figure}
+
+A ilha com o polo \enquote{Aluno de Iniciação Científica} é exibida na Figura~\ref{fig:ex-sobreposicao-ciencia}. A topologia estrelada é claramente observável, irradiando-se a partir do \textit{polo ocupacional}. O fluxo predominante parte de \textit{Aluno de Iniciação Científica}, passa por \textit{Aluno de Mestrado}, \textit{Aluno de Doutorado} e termina em \textit{Pos-Doutorando} sem que haja fluxo na direção contrária, reforçando o conhecimento tácito sobre a área.
+
+O polo ocupacional é claramente \textit{Aluno de Iniciação Científica} que recebe um forte fluxo de \textit{Monitor}. O reforço do polo deve distribuir o fluxo de pessoas para as outras ocupações. Outro ponto de especial interesse é que, a partir de \textit{Aluno de Mestrado} o fluxo intensifica até \textit{Pos-Doutorando}, sugerindo que os profissionais que se tornam \textit{Alunos de Mestrado} têm forte tendência de prosseguir na carreira acadêmica.
+
+Por outro lado, o enfraquecimento do polo tende a minar o fluxo de pessoas para outras ocupações, provocando o enfraquecimento da ilha como um todo.
+
+Essa análise pontual dá dimensão à contribuição desse trabalho. Nesse caso, identificada a ilha, o polo e o fluxo predominante,  ações para reforçar uma ocupação, como \textit{Pos-Doutorando}, por exemplo, passam a ser óbvias. Essa análise superficial sugere que aumentar o número de alunos de iniciação científica, desestimular sua movimentação para outras ocupações ou incentivar o fluxo para o mestrado provocaria o efeito desejado. A proporção de pessoas em cada fluxo fornece um \enquote{funil} para se estimar quantas pessoas seriam necessárias em cada ocupação para atingir um certo resultado.
+
+A ilha ocupacional relacionada à \textit{Recursos Humanos}, exibida na Figura~\ref{fig:ex-sobreposicao-recursos-humanos}, possui uma topologia de estrela com polo em \textit{Analista de Recursos Humanos} que se alimenta principalmente de \textit{Assistente de Recursos Humanos} e \textit{Analista de Departamento Pessoal}. Apesar de alguma dispersão, o fluxo prossegue para ocupações mais administrativas \textit{Coordenador}, \textit{Supervisor} e \textit{Gerente}, com uma certa força para \textit{Consultor}.
+
+Nessa ilha, o polo sugere ser a própria razão de ser da área, uma vez que as ocupações anteriores não estão diretamente relacionadas à função ou são juniores e o fluxo prossegue para ocupações administrativas. A outras ocupações \textit{Analistas} que se dispersam a partir do polo sugerem especializações do \textit{Analista de Recursos Humanos}, em especial \textit{Analista de Administração de Pessoal} e \textit{Analista de Recrutamento e Seleção}, que possuem fluxo similares de entrada e saída para ele. Peculiarmente, \textit{Psicólogo} possui fluxo similar, mas as funções esperadas da ocupação não são diretamente relacionadas à \textit{Recursos Humanos}.
+
+No último exemplo na Figura~\ref{fig:ex-sobreposicao-analista-ambiental} gira em torno do polo \textit{Analista Ambiental}, mas não possui o mesmo fluxo claro de progressão como os exemplos anteriores. Junto a ele, outros dois polos menores \textit{Engenheiro Ambiental} a \textit{Técnico em Meio Ambiente} trocam fluxos com o polo, enquanto ocupações administrativas como \textit{Coordenador}, \textit{Gerente} e \textit{Consultor} recebem fluxos dos três polos enquanto \textit{Estagiário} as alimenta.
+
+Ao lado esquerdo da Figura~\ref{fig:ex-sobreposicao-analista-ambiental} é possível observar ocupações de ensino e pesquisa, como \textit{Professora}, \textit{Docente} e \textit{Pesquisador}. Sua presença na ilha sugere que são especializadas na área Ambiental, ainda que os profissionais não tenham deixado explícito em seus currículos.
+
+A presença de ocupações que se relacionam com \textit{Segurança do Trabalho} e \textit{SMS} (Segurança, Meio Ambiente e Saúde) indicam um certo compartilhamento dessa área e Meio Ambiente, ainda que não seja forte o suficiente para juntar as ilhas. São ocupações que, apesar de compartilhar o título, parecem ser executadas em contextos diferentes, de modo que a ocupação \textit{Engenheiro de Segurança do Trabalho} possui pessoas que vão e vêm da área ambiental, sem haver uma troca com outras áreas.
+
+Essa característica condiz com o conhecimento tácito de que é mais fácil permanecer em uma certa área de atuação (Meio Ambiente), ainda que a profissão em si seja mais geral (Segurança do Trabalho).
+
+Os exemplos acima ilustram como essa pesquisa pode ser utilizada. Ela contribui fortemente para as análises feitas, mas precisam de conhecimento externo, como o significado das funções (\enquote{Gerente é uma ocupação administrativa}), para dar significado aos resultados.
+
+A pesquisa consegue delinear características essenciais da movimentação profissional, como ilhas e polos, mas é insuficiente, por si, para explicar o porque elas ocorrem e o que exatamente significam em cada contexto.
+
+\begin{figure}[ht]
+    \centering
+    \subfloat[][Iniciação Científica] {
+        \includegraphics[width=0.5\linewidth]{ex-sobreposicao-aluno-iniciacao2.pdf}
+        \label{fig:ex-sobreposicao-ciencia}
+    }
+    \subfloat[][Recursos Humanos] {
+        \includegraphics[width=0.5\linewidth]{ex-sobreposicao-recursos-humanos.pdf}
+        \label{fig:ex-sobreposicao-recursos-humanos}
+    }
+    \\    
+    \subfloat[][Ambiental] {
+        \includegraphics[width=0.5\linewidth]{ex-sobreposicao-analista-ambiental.pdf}
+        \label{fig:ex-sobreposicao-analista-ambiental}
+    }
+    \caption{Três exemplos de ilhas ocupacionais. O tamanho e a cor do nó estão relacionados ao fluxo de profissionais que passa por ele, quanto maior e mais escuro o nó, maior o fluxo. Da mesma forma, a espessura e a cor das conexões está relacionada ao fluxo de profissionais entre uma ocupação e outra. O polos ocupacionais são identificados pelo volume de pessoas transitando por eles e pela sua alta conectividade (visualmente os nós maiores e mais centrais). Para facilitar a visualização, nas Figuras~\ref{fig:ex-sobreposicao-recursos-humanos} e~\ref{fig:ex-sobreposicao-analista-ambiental}, apenas as conexões e nós de maior fluxo são apresentados. A Figura~\ref{fig:ex-sobreposicao-ciencia}, no entanto, mostra a ilha completa.}
+    \label{fig:ex-ilhas-ocupacionais}
+\end{figure}
+
+%===================================
+\section{Conclusões e Perspectivas Futuras}
+%===================================
+
+Esse trabalho reúne os conceitos fronteiras de carreira de \citeonline{Gunz2007-hr}, os trabalhos de Ciência de Redes sobre detecção de comunidades por fluxo baseados em \cite{Rosvall2009-sd} e os dados de um dos maiores sites brasileiros de carreira~\cite{VAGAS_Tecnologia2014-yv} para contribuir na compreensão da movimentação profissional.
+
+A rede profissional possui \textit{hubs}, o que fornece indícios de que carreiras menos regulares são comuns, como advogam as Carreiras sem Fronteiras e Carreiras Proteanas. Ao mesmo tempo a presença de muitos pequenos ego-grafos e ilhas ocupacionais diminutas sugerem que há alternativas para essas teorias.
+
+A Equação de Mapa~\cite{Rosvall2009-sd} foi aplicada usando o software Infomap~\cite{Edler2012-hh} para identificar as fronteiras de carreiras, gerando \textit{ilhas ocupacionais}, que são conjuntos de ocupações em que a movimentação interna é significativamente mais frequente do que movimentações para outras \textit{ilhas}. O termo foi introduzido para facilitar a discussão e como uma analogia ao conceito sugerido por~\cite{Abbott1995-ft} em que a fronteira define o grupo, ao invés do grupo definir a fronteira. Essa abordagem usa a diferença entre os grupos para defini-los ao invés de alguma característica intrínseca. 
+
+A análise da assortatividade das ilhas mostrou que sua topologia tende ao formato estrelado ou de eixo e raios, o que motivou a introdução do termo \textit{polos ocupacionais} para identificar ocupações que dão coesão à ilha. Alguns exemplos emblemáticos dão dimensão aos dois conceitos introduzidos nesse trabalho.
+
+Conclui-se na expectativa que esse trabalho contribua para a compreensão das transições profissionais, no entanto, é preciso reconhecer as limitações dessa proposta e as questões que permanecem abertas.
+
+Os aspectos sociais e psicológicos das fronteiras de carreira não foram abordados e são eles quem podem responder a perguntas como \enquote{por que as fronteiras estão onde estão?} e \enquote{por que as ilhas possuem essa topologia?}. Espera-se que o conteúdo apresentado contribua de maneira quantitativa em discussões sociais e psicológicas sobre movimentação profissional.
+
+Outros trabalhos podem aprofundar a questão da dinâmica da rede, focando em modelos que possam predizer os efeitos esperados quando uma ocupação ganha ou perde atratividade, ou quando um fluxo é incentivado ou estrangulado. Esse trabalho ensaia um começo tímido nessa direção ao propor o conceito de polos ocupacionais e identificar sua importância nas ilhas de ocupações.
+
+Outra linha de pesquisa atrativa está em comparar o MCar com redes aleatórias geradas a partir de características similares à da rede real, procurando identificar quais delas resultam em observações comparáveis. Essas características indicam possíveis explicações para os comportamentos encontrados a partir de uma abordagem puramente estatística~\cite{Barabasi2016-rn}.
+
+O MCar é uma fonte considerável de informação sobre o mercado de trabalho brasileiro. Outras pesquisas sobre profissões e carreira, em especial utilizando técnicas de Ciência de Redes, como \textit{motifs}, podem contribuir para uma melhor compreensão da movimentação profissional.
+
+\FloatBarrier % 'Floats' (imagens) não devem passar daqui!
 
 \def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
 \bibliography{main}
