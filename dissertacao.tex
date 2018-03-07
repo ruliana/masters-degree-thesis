@@ -915,9 +915,7 @@ Se um campo de texto livre cria algumas limitações ao processo, ele também ab
 
 Finalmente, uma segunda versão da rede é criada, projetando os trigramas em bigramas e usando-os para se criar uma rede mais simples. Após a simplificação, a rede passa por um processo de análise de componentes e aqueles muito pequenos, com apenas um uma ou duas ocupações, também são removidos dos estudo. A Seção~\ref{sec:eliminacao-de-microcomponentes} explica o processo em detalhes.
 
-\todo[inline]{Atualizar esses números!}
-
-Ao final do processo o grafo possui cerca de 8.348 ocupações distintas e 14.031 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em 10 de Fevereiro de 2017.
+Ao final do processo o grafo possui cerca de 7.267 ocupações distintas e 73.064 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em 10 de Fevereiro de 2017.
 
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
@@ -928,31 +926,14 @@ O Mapa de Carreiras é construído a partir dos currículos de um banco relacion
     \includegraphics[scale=0.4]{pipeline1.pdf}
     \caption{Montagem do Grafo}
     \label{fig:montagem-do-grafo}
+    \source{Elaboração do Autor}
 \end{figure}
 
 \subsubsection{Os Dados}
 
-Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com.br. Esses currículos são armazenados em um banco de dados \textit{Microsoft SQL Server}. No total há cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho apenas os currículos atualizados entre Fevereiro de 2012 e Fevereiro de 2017 são utilizados~\todo{Colocar número exato}.
+Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com. Existem cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho foram utilizados apenas os currículos únicos atualizados entre Fevereiro de 2012 e Fevereiro de 2017, totalizando 7.005.639 currículos e 26.568.916 experiências profissionais. Após esse período, o banco de dados do VAGAS.com ultrapassou 14 milhões de currículos, mas os dados mais recentes não foram utilizados nessa pesquisa.
 
-Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem três formatos usados nesse trabalho. O primeiro formato é descrito por \citeonline{Van_Dongen2008-kx} como \enquote{formato ABC}. Cada linha representa uma aresta, e cada aresta possui três campos separados por um ou mais espaços. Em um grafo direcionado, o primeiro campo é a aresta de partida, o segundo é a aresta de chegada e o campo final representa o peso da aresta. No caso do MCar, o peso representa o número de pessoas que se movimentou de uma ocupação à outra. Esse formato é usado na separação de carreiras através da \textit{clusterização} do grafo usando o \textit{Markov Clustering Algorithm} (MCL)~\cite{Van_Dongen2000-qm} e na montagem de visualizações exploratórias usando o programa \enquote{Graphviz}~\cite{Gansner2000-oo}.
-
-\vspace{\abovedisplayskip}
-
-\noindent
-\begin{minipage}{\linewidth}
-\begin{lstlisting}[frame=single,caption=Arquivo em Formato ABC,label=lst:formato-abc,captionpos=b]
-medico-examinador medico-do-trabalho 23
-medico-do-trabalho coordenador-medico 10
-medico-do-trabalho medico-do-trabalho-coordenador 37
-medico medico-plantonista 10
-medico medico-examinador 11
-medico medico-do-trabalho 23
-\end{lstlisting}
-\end{minipage}
-
-O segundo formato é uma lista de registros onde cada um ocupa uma única linha. Cada registro é codificado como um \textit{array} de atributos no formato JSON (\textit{Javascript Object Notation}). Esse formato é usado em várias etapas da montagem do MCar e seu conteúdo varia de etapa para etapa. Os campos relevantes são descritos nas respectivas seções a seguir.
-
-O terceiro e último formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
+Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos principais usados nesse trabalho. O primeiro formato são arquivos em que cada linha é um \textit{array} em JSON (\textit{Javascript Object Notation}). Esse formato é usado como intermediário em quase todas as etapas devidos a velocidade de serialização e desserialização e a interoperabilidade~\cite{Maeda2012-co}. O segundo formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
 
 \subsubsection{O Processamento da Informação}
 
@@ -970,7 +951,7 @@ Enquanto \textit{pipes} permitem a comunicação interprocessos na mesma máquin
 
 O \textit{ZeroMQ} possui interfaces para diversas linguagens de programação, mas para preservar a interface entre processos foram criados componentes que traduzem a entrada em \textit{pipes} para \textit{sockets ZeroMQ} e vice-versa. Em termos práticos, a comunicação entre processos pode ser feita entre processos da mesma máquina ou entre diferentes computadores de maneira transparente.
 
-A maior parte dos processos foi implementada usando a linguagem Ruby, mas alguns processos foram implementados usando Python ou programas específicos, como o MCL para \textit{clusterização} e o Graphviz para posicionamento do grafo em um plano bidimensional.
+A maior parte dos processos foi implementada usando a linguagem Ruby, mas alguns processos foram implementados usando Python ou programas específicos, como o MCL para \textit{clusterização} e o \textit{Graphviz}~\cite{Gansner2000-oo} para posicionamento do grafo em um plano bidimensional.
 
 O processo de montagem do grafo está resumido no fluxo apresentado na Figura~\ref{fig:montagem-do-grafo}.
 
