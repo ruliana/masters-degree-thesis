@@ -562,8 +562,6 @@ Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $
 
 É possível observar que a resolução da modularidade é diretamente proporcional ao número total de conexões da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
 
-\todo[inline]{Demonstrar separando a carreira de TI aqui}
-
 
 %====================================
 \subsection{Detecção de Comunidade} \label{sec:deteccao-comunidade}
@@ -600,7 +598,7 @@ Outro ponto a ser destacado é que, enquanto a Hipótese da Densidade trata de u
 %--------------------------------
 \item [Hipótese de Aleatoriedade] \textit{Redes aleatoriamente conectadas não possuem estrutura de comunidade}
 
-Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em uma rede aleatória com número equivalente de conexões e nós. Essa definição está de acordo com a premissa de que se uma estrutura pode emergir por pura aleatoriedade, então não pode ser atribuída a ela um princípio de organização vindo de outra fonte.
+Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em uma rede aleatória com número equivalente de conexões e nós. Essa definição se baseia na premissa não se pode atribuir um princípio organizacional a uma estrutura gerada por pura aleatoriedade.
 
 Novamente, essa hipótese tem um forte foco na evolução estrutural da rede (gerada por mecanismo não-aleatório), enquanto a detecção de comunidades por fluxo se atenta a dinâmica já modelada por ela.
 
@@ -615,9 +613,11 @@ Essa hipótese pode ser compreendida como o corolário das três hipóteses ante
 
 Com exceção da Hipótese Fundamental, as outras três hipóteses direcionam forçosamente à conclusão de que a modularidade é a única medida aceitável para detecção de comunidade. O contraste das hipóteses com a definição de comunidade baseada em fluxo pontua uma questão importante: a medida de particionamento ótimo para uma rede é dependente da premissas sobre \enquote{o que é uma comunidade}. Isso significa que premissas diferentes e modelagens diferentes levam a medições adequadas diferentes.
 
-A natureza estrutural da modularidade empurra seu uso para problemas em que a criação e remoção das relações são os objetos do estudo, como nas redes sociais em que pessoas se conhecendo (e criando novas conexões) são a própria razão de ser da rede.
+A natureza estrutural da modularidade direciona seu uso para problemas em que a criação e remoção das relações são os objetos do estudo, como nas redes sociais em que conexões são criadas com pessoas se conhecendo e removidas quando se distanciam. Em seu artigo icônico, \citeonline{Zachary1977-te} acompanha a rede de relacionamentos em um clube de caratê onde seus membros se dividem após uma disputa entre o presidente e um dos instrutores. Seu trabalho é frequentemente utilizado na demonstração de algoritmos de particionamento, uma vez que a divisão do clube em dois grupos revela o particionamento natural dessa estrutura.
 
-Já a natureza dinâmica da equação de mapa empurra seu uso para modelagens em que o componente dinâmico (fluxo) já está codificado nas relações. Por exemplo, em redes de transporte o fluxo pode se intensificar ou diminuir mas novas rotas não são tipicamente o objeto direto de estudo.
+Por outro lado, algoritmos de particionamento que não levam em conta a direção e o volume do fluxo em redes descartam a característica principal que levam alguns desses problemas a serem modelados como redes.
+
+A natureza da equação de mapa, descrito na próxima Seção, direciona seu uso para modelagens em que o fluxo está codificado nas relações. Por exemplo, em redes de transporte o fluxo pode se intensificar ou diminuir mas novas rotas não são tipicamente o objeto direto de estudo.
 
 %===================================
 \subsection{Equação de Mapa} \label{sec:infomap}
@@ -917,6 +917,7 @@ Finalmente, uma segunda versão da rede é criada, projetando os trigramas em bi
 
 Ao final do processo o grafo possui cerca de 7.267 ocupações distintas e 73.064 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em 10 de Fevereiro de 2017.
 
+
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
 O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações. A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo. Nessa seção, cada um deles é explicado em detalhes.
@@ -929,11 +930,13 @@ O Mapa de Carreiras é construído a partir dos currículos de um banco relacion
     \source{Elaboração do Autor}
 \end{figure}
 
+
 \subsubsection{Os Dados}
 
 Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com. Existem cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho foram utilizados apenas os currículos únicos atualizados entre Fevereiro de 2012 e Fevereiro de 2017, totalizando 7.005.639 currículos e 26.568.916 experiências profissionais. Após esse período, o banco de dados do VAGAS.com ultrapassou 14 milhões de currículos, mas os dados mais recentes não foram utilizados nessa pesquisa.
 
-Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos principais usados nesse trabalho. O primeiro formato são arquivos em que cada linha é um \textit{array} em JSON (\textit{Javascript Object Notation}). Esse formato é usado como intermediário em quase todas as etapas devidos a velocidade de serialização e desserialização e a interoperabilidade~\cite{Maeda2012-co}. O segundo formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
+Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos principais usados nesse trabalho. O primeiro formato são arquivos em que cada linha é um \textit{array} em JSON (\textit{Javascript Object Notation}). Esse formato é usado como intermediário em quase todas as etapas devidos a velocidade de serialização e desserialização e a interoperabilidade~\cite{Maeda2012-co}. O segundo formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada um enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
+
 
 \subsubsection{O Processamento da Informação}
 
@@ -955,6 +958,7 @@ A maior parte dos processos foi implementada usando a linguagem Ruby, mas alguns
 
 O processo de montagem do grafo está resumido no fluxo apresentado na Figura~\ref{fig:montagem-do-grafo}.
 
+
 \subsubsection{Extração das Experiências Profissionais} \label{sec:extracao-experiencia}
 
 O primeiro processo do \textit{pipeline} extrai os registros do banco de dados relacional e os grava em arquivos texto. O processo não extrai currículos, mas sim experiências profissionais. Cada registro representa uma única experiência.
@@ -973,6 +977,7 @@ Os dados extraídos são:
 
 \end{description}
 
+
 \subsubsection{Normalização de Ocupações} \label{sec:normalizacao}
 
 Nessa etapa, o nome da ocupação é normalizado para uma classe de maneira que todas as grafias significando a mesma ocupação sejam transformadas em uma mesma classe. Nessa pesquisa a classe é chamada \enquote{classe equivalente} ou \enquote{ocupação normalizada}.
@@ -981,53 +986,60 @@ Para transformar o texto digitado em uma ocupação normalizada os erros de digi
 
 Ocupações com múltiplas palavras também são ordenadas alfabeticamente. Dessa forma, ocupações como \enquote{Auxiliar Financeiro-Administrativo} e \enquote{Auxiliar Administrativo-Financeiro} resultam na classe \enquote{administrativo auxiliar financeiro}.
 
-As classes resultantes lembram vagamente o termo original, como no exemplo acima. No processo descrito na Seção~\ref{sec:criar-dicionario}, é criado um dicionário entre a classe equivalente e um nome que tenha significado para o usuário.
+As classes resultantes lembram vagamente o termo original, como no exemplo acima. No processo descrito na Seção~\ref{sec:criar-dicionario}, é criado um dicionário entre a classe equivalente e um nome de exibição para o usuário.
 
-\subsubsection{Remoção de Ocupações Incorretas} \label{sec:remocao-ocupacoes-incorretas}
+
+\subsubsection{Agrupamento de Ocupações}
+
+As ocupações são agrupadas pela sua classe equivalente e os dados são coletados em coleções com todos os seus elementos. Isso significa que todos os salários são colocados em uma única coleção, sem haver ainda uma sumarização, bem como todas as grafias da ocupação e os textos utilizados para descrevê-las.
+
+O resultado é utilizado como base para vários dos processos seguintes até a junção em um arquivo final com todos os dados processados e devidamente sumarizados.
+
+
+\subsubsection{Remoção de Ocupações} \label{sec:remocao-ocupacoes-incorretas}
 
 Mesmo após a remoção de casos únicos, alguns nomes presentes nesse campo podem não ser considerados ocupações. São erros comuns que a etapa de normalização não é capaz de corrigir ou representam um entendimento equivocado por parte do usuário.
 
 Casos emblemáticos são os textos \enquote{sim}, \enquote{não} ou \enquote{o mesmo} encontrados no campo destinado ao nome da ocupação. A remoção desses casos precisou ser feita manualmente, ou seja, especialistas da empresa revisaram a lista de ocupações e criaram um dicionário com os erros mais comuns utilizados nessa etapa do processo. Esse dicionário foi aprimorado com sugestões dos usuários após a publicação do MCar.
 
+
 \subsubsection{Agrupamento de Ocupações por Currículo}
 
 As ocupações são agrupadas por currículo, formando uma sequência cronológica das experiências de um profissional. Até essa etapa, há uma experiência profissional por registro, após ela, cada registro contém uma sequência de experiências profissionais do mesmo indivíduo, ordenadas cronologicamente.
 
-% Inserir um diagrama com os campos. Ronie 2017-04-30
+Como o objetivo final é criar um grafo que sumarize o \textit{movimento} de pessoas entre ocupações, as experiências profissionais que não se conectam cronologicamente com nenhuma outra são removidas.
 
-\subsubsection{Remoção de Experiências sem Conexão ou Sobrepostas}
+Na mesma etapa, removem-se experiências profissionais que se sobreponham. Uma vez sobrepostas, não é possível afirmar que uma é sequência natural da outra ou que sequer tenham relação entre si. É comum encontrar no banco de dados carreiras paralelas em que gestores também são professores ou técnicos que também sejam voluntários. Seguindo um procedimento conservador, currículos que possuam alguma sobreposição são removidos junto com todas as suas experiências profissionais, mesmo aquelas que não se sobrepõem.
+    
+Nesse mesmo processo, são removidos os currículos que possuem apenas uma ou nenhuma experiência profissional.
 
-Como o objetivo final é criar um grafo que sumarize o \textit{movimento} de pessoas entre ocupações, as experiências profissionais que não se conectam cronologicamente com nenhuma outra são removidas. São consideradas desconexas quaisquer experiências em sequência cujo início da posterior esteja a mais do dois meses de distância do fim da anterior.
 
-% Inserir um gráfico explicativo. Ronie 2017-02-30
+\subsubsection{Geração de Bigramas e Trigramas}
 
-Na mesma etapa, removem-se experiências profissionais que se sobreponham. Uma vez sobrepostas, não é possível afirmar que uma é sequência natural da outra ou que sequer tenham relação entre si. É comum encontrar no banco de dados carreiras paralelas em que gestores também são professores ou técnicos que também sejam voluntários. Da mesma maneira que experiências desconexas, as que se sobrepõem por mais de dois meses são removidas.
+As experiências profissionais de cada currículo agrupadas por ordem cronológica para formar bigramas e trigramas. Por exemplo, um currículo que tenha a seguinte sequência de ocupações \enquote{Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro}, produz os trigramas:
+\begin{itemize}
+    \item  Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro,
+    \item Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro;
+\end{itemize}
+e os bigramas:
+\begin{itemize}
+    \item Faxineiro \textrightarrow~Copeiro,
+    \item Copeiro \textrightarrow~Chapeiro,
+    \item Chapeiro \textrightarrow~Cozinheiro.
+\end{itemize} 
 
-\subsubsection{Remoção de Currículos sem Experiência}
+Os bigramas são usados para a montagem da rede, enquanto os trigramas são usados para a detecção de comunidades. No caso dos trigramas, quando um currículo possui apenas duas experiências profissionais, é gerado um bigrama que é usado também na detecção de comunidades.
 
-Após o processo anterior, são removidos os registros que possuam apenas uma ou nenhuma experiência profissional.
+A maioria dos trigramas e bigramas de ocupações ocorrem pouquíssimas vezes. Em um conjunto com 4.878.855 sequências distintas, cerca de 4.253.925 ocorrem apenas uma vez, as que se repetem ao menos duas vezes somam 4.666.428 ou 52,31\% do total. Esse grande número de sequências únicas é causada tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional. Com alguma frequência essas sequências realmente representam trajetórias em carreiras extremamente específicas.
 
-\subsubsection{Geração de Pares de Experiências}
+Essas sequências pouco comuns são removidas. Para encontrar um número de corte foi feita uma avaliação manual por amostragem. Amostras com algumas centenas de pares com números de corte entre 1 e 30 foram analisadas por especialistas da empresa junto com o pesquisador. O objetivo foi encontrar um número que não fosse conservador demais, removendo trajetórias válidas, nem liberal demais, permitindo trajetórias com erro.
 
-As experiências profissionais de cada currículo são pareadas por ordem cronológica. Por exemplo, um currículo que tenha a seguinte sequência de ocupações \enquote{Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro}, produz os pares \enquote{Faxineiro \textrightarrow~Copeiro} e \enquote{Copeiro \textrightarrow~Chapeiro}.
+Após o processo de análise, chegou-se a um número próximo a 5 repetições. Sequências com menos de 5 repetições são removidas.
 
-Antes desse processo, cada registro é uma sequência de experiências profissionais. O processo expande cada registro em múltiplos registros, cada um representando um par de experiências profissionais de um único indivíduo.
-
-\subsubsection{Agrupamento de Pares de Ocupações}
-
-Pares iguais de ocupações são agrupados e contados, gerando um \textit{multiset}, ou seja, um conjunto com o número de repetições de cada elemento. O número de repetições em um par representa o número de pessoas que se movimentaram de uma ocupação para outra.
-
-As etapas posteriores podam o grafo em suas arestas menos relevantes e transformam sua representação textual para que possa ser lido por outros programas.
-
-\subsubsection{Remoção de Pares Pouco Frequentes} \label{sec:grafo-final}
-
-A maioria dos pares de ocupações ocorrem pouquíssimas vezes. \todo{Em um conjunto com XX pares, cerca de XX ocorrem apenas uma vez.} Esse pequeno número de repetições é causado tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional. Com alguma frequência, os pares realmente representam trajetórias em carreiras extremamente específicas.
-
-Para encontrar um número de corte foi feita uma avaliação manual por amostragem. Amostras com algumas centenas de pares com números de corte entre 1 e 30 foram analisadas por especialistas da empresa junto com o pesquisador. O objetivo foi encontrar um número que não fosse conservador demais, removendo trajetórias válidas, nem liberal demais, permitindo trajetórias com erro.
-
-Após o processo de análise, chegou-se a um número próximo a 10 repetições. Pares de ocupações com menos de 10 repetições são removidos.
+Antes desse processo, cada registro é uma sequência de experiências profissionais. O processo expande cada um em múltiplos registros, representando uma sequência de experiências profissionais de um único indivíduo.
 
 A partir desse ponto, os dados para a montagem do grafo estão prontos em formato texto.
+
 
 \subsubsection{Posicionamento dos Vértices do Grafo}
 
@@ -1035,43 +1047,7 @@ Para que o grafo possa ser exibido bidimensionalmente, é preciso que seus vért
 
 O algoritmo de \textit{Force-Directed} é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz. A saída do Graphviz é um arquivo texto com a posição X e Y do vértice em um plano cartesiano.
 
-\subsubsection{Identificação de Carreiras}
 
-%% O QUE É UMA PROTO-CARREIRA?
-
-% Me parece que "proto-carreiras" não é um nome lá muito bom, mas foi o que consegui por enquanto =/ Ronie 2017-04-29
-% Aqui também tem uma dose não saudável de especulação baseado no tempo que fiquei olhando para esse grafo. Pode ser o caso de colocar números em tudo (gosto disso), ou eliminar boa parte do texto. Ronie 2017-04-30
-
-O grafo gerado no Passo~\ref{sec:grafo-final} é usado nesse processo para gerar agrupamentos. Entre duas ocupações o maior fluxo de movimentações indica uma certa preferência por uma das duas. Por exemplo, se o número de movimentações entre \enquote{Analista de Sistemas \textrightarrow~Coordenador de Projeto} for maior que o reverso \enquote{Coordenador de Projeto \textrightarrow~Analista da Sistemas}, considera-se que \enquote{Coordenador de Projeto} é uma ocupação que sucede \enquote{Analista de Sistemas}. Algumas vezes o fluxo entre as ocupações é tão similar que não é possível dizer que há uma ordem de sucessão, como no caso apresentado no ciclo de ocupações operacionais na Figura~\ref{fig:grafo-ciclo-operacional}; em outros, o sentido contrário possui um fluxo várias vezes menor ou não há fluxo contrário, como o caso do grafo sobre \enquote{Médico do Trabalho} na Figura~\ref{fig:grafo-medico-do-trabalho}.
-
-\todo[inline]{Ronie: estou pensando que a seção abaixo pode ser movida para \enquote{conclusões} ou mais para frente, que acha?}
-
-Quando o fluxo de pessoas de uma ocupação para outra é relevante, é possível notar que essa ordem de preferência vai normalmente de ocupações mais operacionais e com salários mais baixos para ocupações mais gerenciais e com salários mais altos. Isso coincide com a senso comum de progressão de carreira.
-
-A grosso modo, o agrupamento e o fluxo de migração das ocupações revela o que se pode considerar um \enquote{protótipo de carreira}. Ou seja, um esboço onde um indivíduo em uma ocupação dentro desse grupo tem uma probabilidade maior de se manter nele e de se movimentar para ocupações no topo do grupo.
-
-Existe, no entanto, um grupo que não obedece às características descritas acima. Ao se tentar ordená-lo topologicamente, não há uma ordem de preferência clara entre as ocupações, o que indica que não há uma noção de sucessão como em outros grupos, como exemplificado anteriormente na Figura~\ref{fig:grafo-ciclo-operacional}. Ele também possui algumas ocupações que conectam uma grande quantidade de outras ocupações, como \enquote{Auxiliar Administrativo}.\todo{, que possui movimentações com XX ocupações, cerca de XX\% das ocupações do MCar.}
-
-Ao analisar o grupo, nota-se que a escolaridade mais frequente nessas ocupações é a de \enquote{segundo grau completo}, significando que essas ocupações não necessitam de treinamento especializado para serem desempenhadas, o que é um indício que esse grupo reflete a própria definição de \enquote{operacional}.
-
-Algumas outras ocupações também possuem \enquote{segundo grau completo} como escolaridade mais frequente, mas se comportam como os grupos com uma direção clara de preferência entre as ocupações. Uma análise manual da descrição das suas ocupações e das palavras-chave relacionadas sugere que essas são ocupações \enquote{técnicas}. Ou seja, uma ocupação que requer um treinamento não-trivial, mas não tão exigente quanto uma graduação. Como exemplo, é possível observar a carreira de cozinheiro na Figura~\ref{fig:exemplo-grafo-cozinheiro}.
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[scale=0.6]{subcluster_01_11.pdf}
-  \caption{Carreira Técnica de Cozinheiro}
-  \label{fig:exemplo-grafo-cozinheiro}
-\end{figure}
-
-%% O QUE DEFINE SEGUIR O CAMINHO "AGRUPAMENTO DE OCUPAÇÕES POR CURRÍCULO" OU "AGRUPAMENTO DE OCUPAÇÕES"?
-
-\subsubsection{Agrupamento de Ocupações}
-
-Esse processo agrupa os dados gerados pelo processo descrito na Seção \ref{sec:remocao-ocupacoes-incorretas} por ocupação. Cada ocupação normalizada agora possui uma lista com suas grafias originais, uma lista com as descrições daquela experiência profissional escrita por cada indivíduo, bem como a quantidade de ocupações agrupadas.
-
-\subsubsection{Remoção de Ocupações com Pouca Frequência}
-
-Mesmo com o processo de correção e normalização, algumas experiências profissionais são escritas de maneira única. Isso pode significar um erro, uma ocupação singular ou o uso de termos pouco convencionais. Como o objetivo da montagem do grafo é extrair as carreiras mais frequentes, os casos únicos podem ser seguramente removidos sem a necessidade de determinar sua causa.
 
 \subsubsection{Criação de Dicionário para Exibição} \label{sec:criar-dicionario}
 
@@ -1079,20 +1055,17 @@ Os textos resultantes do processo de normalização descrito na Seção~\ref{sec
 
 A limitação desse processo é que algumas ocupações são descritas no masculino ou no feminino dependendo do número de profissionais do gênero exercendo essa ocupação. Por exemplo, uma das ocupações de Direito é descrita como \enquote{Advogado} (no masculino) pois existem um pouco mais profissionais do gênero masculino exercendo a profissão, por outro lado, outra ocupação correlacionada é descrita como \enquote{Advogada Coordenadora} pelo motivo contrário.
 
-Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de gênero misto\todo{ref}, optou-se por não se modificar o gênero artificialmente, preservando a grafia da predominância do gênero na ocupação.
+Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de gênero misto, optou-se por não se modificar o gênero artificialmente, preservando a grafia da predominância do gênero na ocupação.
+
+O dicionário resultante mapeia a classe equivalente para um nome de exibição. A partir dele, é gerado um dicionário complementar com nomes sem espaços ou dígrafos (acentos), tornando-os mais significativos e mais fáceis de manipulá-los computacionalmente, por exemplo, como parte de URLs. Nessa pesquisa, essa versão \enquote{computacionalmente amigável} é preferida para exibição.
 
 \subsubsection{Extração de Palavras-Chave}
 
-As palavras-chave são extraídas a partir das descrições digitadas pelos usuários no campo \enquote{Experiência Profissional} dos currículos. O processo descrito abaixo tenta criar expressões significativas, ou seja, pequenas frases, que ajudem a descrever o cargo ao invés de apenas indicar as palavras mais comuns. Um fato notável é que não é possível utilizar \textit{stemming} ou correção ortográfica nesse processo, pois existe uma grande quantidade de jargões e siglas específicos nas descrições.
+As palavras-chave são extraídas a partir das descrições digitadas pelos usuários no campo \enquote{Experiência Profissional} dos currículos. O processo descrito abaixo tenta criar expressões significativas, ou seja, pequenas frases, que ajudem a descrever o cargo ao invés de apenas indicar as palavras mais comuns. Um fato notável é que não é possível utilizar \textit{stemming} ou correção ortográfica nesse processo, pois existe uma grande quantidade de jargões e siglas específicas nas descrições.
 
 Para formar expressões, são gerados unigramas, bigramas e trigramas para as descrições de cada experiência profissional. A seguir, elas são ordenadas por TF-IDF e as palavras que aparecem repetidas em um n-grama de menor TF-IDF são removidas. Por exemplo, se a palavra \enquote{fiscal} aparece com maior TF-IDF que o bigrama \enquote{nota fiscal}, a palavra \enquote{fiscal} é removida da lista.
 
-% Ronie: na prática, o resultado é muito bom, mas o algoritmo foi baseado no meu nariz =/ Então, talvez eu devesse refazer o processo com uma técnica de sumarização melhor.
-\begin{comment}
-\subsubsection{Gravação do Arquivo Final}
-
-A definir\ldots
-\end{comment}
+O TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) é uma medição de relevância usada no processamento de linguagem natural. Ela é baseada na frequência em que um termo aparece em um documento e inversamente a sua frequência entre documentos.
 
 \subsection{Atributos das Ocupações}
 
@@ -1219,15 +1192,7 @@ Isso indica que grande parte das ocupações ($1/3$) está na \enquote{borda} da
 
 \subsection{Identificando Fronteiras de Carreira}  \label{sec:fronteiras-de-carreira}
 
-Nos experimentos realizados, o algoritmo Infomap foi utilizado para encontrar o particionamento mais coeso do MCar em relação ao fluxo. Como exposto nas Seções~\ref{sec:carreira} e~\ref{sec:infomap}, esse particionamento é a própria definição de fronteiras de carreira.
-
-\begin{comment}
-Ronie: Vou tirar isso aqui, levanta mais dúvidas do que esclarece e em (quase) nenhum artigo que li eles explicam quais parâmetros foram utilizados. Entendo que facilita a reprodutibilidade, mas acho melhor eu tentar trabalhar em disponibilizar os dados =)
-
-====
-
-O Infomap é bastante robusto quanto aos parâmetros utilizados, ou seja, mesmo grandes variações em seus parâmetros devem produzir resultados similares~\cite{Kawamoto2015-ha,Lambiotte2012-fp}. Por essa razão foi usado o parâmetro padrão de probabilidade de teleporte de 0,15.
-\end{comment}
+Nos experimentos realizados, o algoritmo Infomap foi utilizado para encontrar o particionamento mais coeso do MCar em relação ao fluxo. Como exposto na Seção~\ref{sec:infomap}, esse particionamento é a própria definição de fronteiras de carreira.
 
 Para esse algoritmo, quanto maior a compressão da informação do caminho do \textit{random walker}, melhor é o particionamento da rede~\cite{Rosvall2009-sd}.
 
@@ -1252,7 +1217,7 @@ Os resultados de compressão para cada variação são apresentados na Tabela~\r
         Simples          & 46,08\%    & 65                 & 5.906     & 81,27\%     \\
         Com sobreposição & 50,30\%    & 624                & 5.631     & 77,49\%     \\ \bottomrule
     \end{tabular}
-    \caption{Métodos de detecção de comunidades e seus resultados. O \textit{Método} se refere ao tipo (variação) de particionamento. \textit{Compressão} significa qual a compressão de informação obtida pelo Infomap em relação a uma rede sem particionamento. \textit{Ihas Ocupacionais} é o número de partições não-triviais resultantes (ao menos 3 nós na comunidade). Em \textit{Ocupações} está o número de nós que fazem parte de alguma ilha e \textit{\% em Ilhas} mostra o mesmo número, proporcionalmente às 7.267 ocupações do MCar.}
+    \caption{Métodos de detecção de comunidades e seus resultados. O \textit{Método} se refere ao tipo (variação) de particionamento. \textit{Compressão} significa qual a compressão de informação obtida pelo Infomap em relação a uma rede sem particionamento. A coluna \textit{Ilhas Ocupacionais} possui o número de partições não-triviais resultantes (ao menos 3 nós na comunidade). Em \textit{Ocupações} está o número de nós que fazem parte de alguma ilha e \textit{\% em Ilhas} mostra o mesmo número, proporcionalmente às 7.267 ocupações do MCar.}
     \label{tab:metodos}
 \end{table}
 
