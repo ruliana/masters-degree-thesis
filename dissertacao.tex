@@ -57,6 +57,9 @@
 \usepackage{amsthm}
 \usepackage{thmtools}
 
+% Notação de permutação mais 'bonitinha'
+\newcommand\Perm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+
 \declaretheoremstyle[spaceabove=1.5ex,
                      spacebelow=0ex,
                      headindent=\parindent,
@@ -227,7 +230,7 @@ A carreira profissional corresponde à jornada de um indivíduo pelo trabalho, s
 
 Ao longo da vida profissional é comum para o indivíduo passar por diversas movimentações na carreira. Um estudante de engenharia pode iniciar como Trainee em uma empresa e progredir para Engenheiro, Supervisor de Obras e Diretor de Engenharia. Na área de computação é possível ver um Programador se tornar Analista-Programador, Coordenador de Desenvolvimento, Gerente de Projetos, chegando a Diretor. Esses são casos em que a movimentação de carreira segue um padrão mais tradicional de progressão baseado no plano de carreira de uma organização. Por outro lado, há situações extremas de transições de carreira na qual um Analista-Programador resolve se tornar um Chef de Cozinha ou um Eletricista Industrial passa a atuar como Web Designer. Em qualquer um dos casos, as movimentações de carreira são sempre uma etapa de grande relevância profissional e que, ao mesmo tempo, podem causar estresse, insegurança e alguns desconfortos pelos novos desafios que surgirão.
 
-A movimentação profissional é discutida por modelos como os da \textit{Carreira Proteana} e \textit{Carreira sem Fronteiras}. Esses modelos advogam um distanciamento das carreiras ditadas pelo organograma das empresas em favor de trajetórias com foco maior no indivíduo~\cite{Bendassolli2009-bg}. A carreira proteana coloca o indivíduo, e não as organizações, como protagonista da trajetória profissional, onde seus valores são usados na decisão dos próximos passos e o sucesso é subjetivo e medido pela satisfação pessoal~\cite{Hall2004-ke}. A carreira sem fronteiras, por sua vez, acontece quando a trajetória se faz independente das organizações ou hierarquias. Essas carreiras são caracterizadas por passagens por múltiplas empresas ou mudanças na especialidade do indivíduo~\cite{Arthur1994-qq}.
+A movimentação profissional é discutida por modelos como os da \textit{Carreira Proteana} e \textit{Carreira sem Fronteiras}. Esses modelos advogam um distanciamento das carreiras ditadas pelo organograma das empresas em favor de trajetórias com foco maior no indivíduo~\cite{Bendassolli2009-bg}. A Carreira Proteana coloca o indivíduo, e não as organizações, como protagonista da trajetória profissional, onde seus valores são usados na decisão dos próximos passos e o sucesso é subjetivo e medido pela satisfação pessoal~\cite{Hall2004-ke}. A Carreira sem Fronteiras, por sua vez, acontece quando a trajetória se faz independente das organizações ou hierarquias. Essas carreiras são caracterizadas por passagens por múltiplas empresas ou mudanças na especialidade do indivíduo~\cite{Arthur1994-qq}.
 
 No entanto, o movimento de uma pessoa entre ocupações profissionais não é simples. A capacitação do indivíduo, a atratividade da nova ocupação e o próprio conhecimento de que uma transição é possível a tornam mais fácil ou difícil para os profissionais. Quando essa transição é percebida como uma barreira por um número suficiente de pessoas, surge uma \textit{fronteira de carreira}~\cite{Gunz2007-hr}.
 
@@ -235,25 +238,22 @@ Este projeto de pesquisa utiliza o conceito de fronteira de carreira~\cite{Gunz2
 
 Modelando o problema como um grafo e usando as técnicas de Ciência de Redes, o estudo revela onde estão as fronteiras de carreira e propõe o conceito de \textit{Ilha Ocupacional} para caracterizá-lo. O termo sugere que esses grupos não são formados por alguma característica intrínseca comum entre seus membros, mas sim pelo distanciamento dos outros membros, como proposto por \citeonline{Abbott1995-ft}. Isso significa que as ilhas são uma função da dificuldade da movimentação profissional inter-ilhas e da facilidade de movimentação intra-ilha, independente de atributos derivados de seu conteúdo ou significado.
 
-O estudo prossegue analisando a composição a composições das ilhas e apresenta \textit{insights} sobre sua estrutura. O resultado obtido pode ser usado para o refinamento de teorias sobre carreira, como uma classificação natural para as ocupações baseada na movimentação profissional ou como subsídio para o planejamento de carreiras.
+O estudo prossegue analisando a composição das ilhas e apresenta \textit{insights} sobre sua estrutura. O resultado obtido pode ser usado para o refinamento de teorias sobre carreira, como uma classificação natural para as ocupações baseada na movimentação profissional ou como subsídio para o planejamento de carreiras.
 
 A principal contribuição desse trabalho está em tornar concreto o conceito de \textit{fronteiras de carreira}, revelando a estrutura da movimentação profissional no Brasil. Explorando esse conceito, o trabalho caracteriza a topologia das ilhas ocupacionais e propõe o conceito de \textit{Polos Ocupacionais} como ocupações que possuem papel crucial na estrutura. A topologia encontrada na maior parte das ilhas tende a um formato estrelado, sugerindo que a atuação nos polos afeta a ilha como um todo.
 
 A presença de uma ilha gigante nos resultados fornece indícios que suportam o modelo de \textit{Carreira sem Fronteiras}, ao mesmo tempo em que indica que ela não abrange todos os segmentos profissionais.
 
-Como essa pesquisa é baseada somente nos dados encontrados nos currículos, não é possível responder o que motiva os profissionais nos comportamentos observados, mas é possível afirmar que eles ocorrem. Um estudo dos porquês e das motivações necessita de um aprofundamento psicológico e sociológico que essa pesquisa é incapaz de atingir. Por outro lado, futuros trabalhos nesse sentido podem se apoiar nos resultados aqui obtidos para expandir a compreensão desses comportamentos.
+Como essa pesquisa é baseada somente nos dados encontrados nos currículos, não é possível responder o que motiva os profissionais nos comportamentos observados, mas independente da motivação, é possível afirmar que o comportamento ocorre. Um estudo dos porquês e das motivações necessita de um aprofundamento psicológico e sociológico que essa pesquisa é incapaz de atingir. Por outro lado, futuros trabalhos nesse sentido podem se apoiar nos resultados aqui obtidos para expandir a compreensão desses comportamentos.
 
-(EXPANDIR) Outras pesquisas\ldots
-
-% Ronie: Não é bem verdade. Acabei achando outro trabalhos que utilizam redes profissionais, principalmente do LinkedIn. Melhor expandir depois para mencioná-los.
 Existem diversas pesquisas sobre movimentação profissional, principalmente sobre os fatores que motivam a mudança, como os expostos por~\citeonline{Ng2007-zp}. Porém, nenhum trabalho pôde ser encontrado analisando redes profissionais sob a ótica da Ciência de Redes, tornado-se outro ponto onde esse trabalho possui contribuições.
 
 Como contribuição final, a movimentação de profissionais é um ponto de interesse para pessoas, empresas e governo. Pessoas desejam saber onde podem chegar, empresas se interessam pela contratação e evolução de seus colaboradores e o setor público traça planos para suprir mão de obra onde ela é insuficiente ou criar oportunidades de trabalho onde ela é abundante. A pesquisa presente traz uma maior compreensão sobre como essa movimentação ocorre e quais sua limitações.
 
-Na seção X \ldots (EXPANDIR)
+A Seção~\ref{sec:ciencia-de-redes} apresenta as bases teóricas da Ciência de Redes necessárias para esse trabalho. A Seção~\ref{sec:conceitos-sobre-carreiras} discorre sobre os conceitos de carreira. A Seção~\ref{sec:mapa-de-carreiras} descreve os dados e sua transformação em um grafo que representa as transições profissionais no Brasil. A Seção~\ref{sec:fronteiras-de-carreira} combina os dados, conceitos e técnicas apresentado nas seções anteriores para caracterizar a rede, identificar as fronteiras de carreira e analisar a topologia das ilhas resultantes. Finalmente, a Seção~\ref{sec:conclusoes} discorre sobre os resultados encontrados na Seção~\ref{sec:fronteiras-de-carreira} e sugere possíveis usos para eles, bem como novas pesquisas utilizando o mesmo material.
 
 %====================================
-\section{CIÊNCIA DE REDES}
+\section{CIÊNCIA DE REDES} \label{sec:ciencia-de-redes}
 %====================================
 
 A Ciência de Redes (\textit{Network Science}) é uma área de estudo recente. Apesar do estudo matemático de grafos remontar ao século 18, com Leonhard Euler, o estudo de redes tem-se intensificado, culminando em um surto de interesse no começo do século 21 com os trabalhos de Watts-Strogatz e Barabási-Albert~\cite{Watts1998-wt,Barabasi1999-sn} sobre redes complexas.
@@ -326,12 +326,12 @@ Algumas redes permitem múltiplas conexões entre dois nós (Figura~\ref{fig:exe
 
 Em algumas redes, não há sentido em nós que conectam a si mesmos, por exemplo, em uma rede social onde as conexões representam quem conhece quem, uma conexão de alguém consigo mesmo não é relevante para o estudo da rede (desconsiderando-se questões filosóficas). Já em outras redes é natural considerar esse tipo de conexão, como uma que modele a transição de estados de uma máquina em que uma ação pode resultar na permanência no mesmo estado. Conexões de um nó com ele mesmo são chamados \textit{laços} ou \textit{loops} (Figura~\ref{fig:exemplo-grafo-laco}).
 
-Redes que não permitem laços, pesos ou múltiplas conexões entre dois nós são chamadas \textit{redes simples} (Figura~\ref{fig:exemplo-grafo-simples}).
+Redes que não permitem laços, pesos ou conexões múltiplas são chamadas \textit{redes simples} (Figura~\ref{fig:exemplo-grafo-simples}).
 
 % Ronie: Mover o parágrafo abaixo para a seção do Mapa de Carreiras?
 Nessa pesquisa, o problema foi modelado como uma rede direcionada, ponderada e com laços. Cada ocupação é um nó, a movimentação de profissionais entre as ocupações são conexões direcionadas e ponderadas e os profissionais que permanecem na mesma ocupação mas mudam de empresa são modelados como laços.
 
-O conceito de \textit{componente} é importante para esse trabalho e está relacionado a partes da rede que estão desconectadas entre si. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó, então essa rede \enquote{isolada} é um componente. Um nó sem conexões pode ser considerado um componente de tamanho~1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede. Uma exemplo de rede com três componentes pode ser observado na Figura~\ref{fig:exemplo-componente}.
+O conceito de \textit{componente} é importante para esse trabalho e está relacionado a partes da rede que estão desconectadas entre si. Se existirem nós em uma rede que estão conectados entre si, mas não se conectam a nenhum outro nó, então essa rede \enquote{isolada} é um \textit{componente}. Um nó sem conexões pode ser considerado um componente de tamanho~1. Uma rede em que todos os nós se conectam de maneira direta ou indireta é chamada de \textit{rede conectada} e possui apenas um componente. Um componente é um subgrafo em que todos os seus nós possuem conexão direta ou indireta entre si, porém nenhum de seus nós se conecta ao resto da rede. Uma exemplo de rede com três componentes pode ser observado na Figura~\ref{fig:exemplo-componente}.
 
 \begin{figure}[ht]
     \centering
@@ -345,8 +345,17 @@ Em algumas topologias de rede surgem nós com um número de conexões muito acim
 
 No estudo de redes, os nós de maior importância são considerados nós centrais da rede. Como é responsabilidade de cada estudo definir o que é \textit{importante}, existem várias medidas de centralidade, indo desde a simples contagem de nós com mais conexões (centralidade de grau) até a medição de nós que participam de fluxos de maior volume.
 
+A \textit{Centralidade de Grau} identifica os nós que mais se relacionam diretamente com o resto da rede. Dada sua conectividade, os nós com maior centralidade de grau encurtam os caminhos na rede, uma vez que conectam uma maior quantidade de nós entre si através de um único \enquote{salto}. Esses mesmos nós criam rapidamente novos caminhos possíveis na rede conforme seu grau aumenta, um nós de grau 2 possui apenas 2 caminhos possíveis passando por ele (ida e volta), enquanto um nó de grau 3 possui 6 caminhos possíveis e um nó de grau 4 possui 12 caminhos possíveis. Mais precisamente, o número de caminhos possíveis $P^*$ passando por um nó é uma permutação do grau $k$ do nó tomados 2 a 2 na forma
 
-(EXPANDIR) Centralidade e Centralidade de Fluxo.
+\begin{equation*}
+P^*(k) = \Perm[k]{2} = \frac{k!}{(k - 2)!}\,.
+\end{equation*}
+
+Em uma rede direcionada, por outro lado, o número de caminhos possíveis que passa por um nó é uma simples multiplicação entre o grau de entrada $k^\leftarrow$ pelo grau de saída $k^\rightarrow$, $P^*(k) = k^\leftarrow k^\rightarrow$.
+
+A \textit{Centralidade de Fluxo}~\cite{Freeman1991-on} existe apenas em redes que as conexões representam a movimentação entre entidades, portanto, apenas para redes ponderadas e direcionadas. Nós com maior centralidade são os nós por onde a maior parte do fluxo passa, uma perturbação nesses nós influencia...
+
+(EXPANDIR...)
 
 A medida de \textit{Assortatividade} significa que nós que compartilham características comuns tendem a se conectar com mais frequência. \textit{Desassortatividade} é o conceito contrário, onde nós com características diferentes tendem a se conectar mais frequentemente. Na Ciência de Redes é comum o termo ser associado a tendência de nós de mesmo grau se conectarem entre si. A assortatividade é detalhada na Seção~\ref{sec:assortatividade}. A grosso modo, uma assortatividade de grau negativa significa que a topologia da rede se assemelha à estrutura de \enquote{centro e raios\footnote{Em inglês: \enquote{Hub and Spokes}}}. Esse medida é importante na caracterização das ilhas ocupacionais.
 
@@ -378,7 +387,7 @@ Nessa trabalho, a rede multicamada é usada para simplificar uma rede modelada c
 
 As medidas descritas nessa seção são usadas para caracterização da rede do MCar bem como das ilhas ocupacionais encontradas.
 
-Entenda-se por \textit{caracterização} a descrição da rede utilizando medidas numéricas que permita a interpretação dos macro-atributos da rede. Por exemplo, a medida de assortatividade é usada para identificar que a topologia predominante nas ilhas ocupacionais se assemelha a de \textit{centro e raios}, enquanto a medida de centralidade de fluxo e de grau é usada para identificar as ocupações mais importantes nas ilhas.
+Entenda-se por \textit{caracterização} a descrição da rede utilizando medidas numéricas que permitam a interpretação dos macro-atributos da rede. Por exemplo, a medida de assortatividade é usada para identificar que a topologia predominante nas ilhas ocupacionais se assemelha a de \textit{centro e raios}, enquanto a medida de centralidade de fluxo e de grau são usadas para identificar as ocupações mais importantes nas ilhas.
 
 %===================================
 \subsubsection{Assortatividade} \label{sec:assortatividade}
@@ -534,7 +543,7 @@ Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$ e $i \neq h 
 
 A \textit{modularidade} é uma medida de qualidade para a detecção de comunidades. O algoritmo de Louvain~\cite{Blondel2008-qh}, por exemplo, usa a modularidade como função objetivo. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
 
-Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela fornece um indício se um grupo de nós é mais densamente conectado que o esperado em uma rede aleatória com o mesmo número de nós e conexões, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
+Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela indica se um grupo de nós é mais densamente conectado que o esperado em uma rede aleatória com o mesmo número de nós e conexões, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
 
 A modularidade $m_c$ de um grupo $c$ de nós pode ser definida como:
 
@@ -550,7 +559,7 @@ Assumindo que uma rede foi particionada em $N_c$ grupos, a modularidade total $M
 M_c \defn \sum_{c \in N_c} m_c
 \end{equation}
 
-O uso da modularidade para detecção de comunidades possui limitações. A primeira delas é que grupos com poucas conexões internas em relação ao tamanho da rede são agrupados entre si, mesmo que exista apenas uma conexão entre eles. A segunda limitação diz respeito ao maior valor possível da modularidade $M_\textit{max}$, que possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
+O uso da modularidade para detecção de comunidades possui a limitação que o maior valor possível da modularidade $M_\textit{max}$ possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
 
 Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-global}, quando dois grupos $A$ e $B$ são unidos, a diferença esperada em $M_c$ é:
 
@@ -558,7 +567,7 @@ Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-gl
 \Delta M_{AB} \defn \frac{l_{AB}}{L} - \frac{k_A k_B}{2L^2}
 \end{equation}
 
-Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $k_A k_B / 2L^2 < 1$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{limite de resolução}.
+Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $\frac{k_A k_B}{2L^2} < \frac{l_{AB}}{L}$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{limite de resolução}.
 
 É possível observar que a resolução da modularidade é diretamente proporcional ao número total de conexões da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
 
@@ -568,7 +577,7 @@ Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $
 
 Detecção de Comunidade, Particionamento de Grafo ou Agrupamento (\textit{Clustering}) são nomes equivalentes para a atividade de se encontrar conjuntos de nós que possuem ligações mais fortes entre si do que com o resto da rede.
 
-Uma \textit{comunidade} é um subgrafo com conexões mais \textit{coesas} entre seus nós do que com nós do restante do grafo. A palavra \enquote{coesão} aqui pode ser interpretada de várias maneiras. Para \citeonline{Ahn2010-uh,Evans2009-lq}, uma comunidade é definida quando o número de conexões internas do subgrafo é maior que o número de conexões que o conecta ao resto do grafo. Para \citeonline{Barabasi2016-rn,Newman2004-jg} a comunidade deve possuir uma densidade de conexões mais alta do que o esperado em uma rede aleatória equivalente. Para esses autores, o número de conexões é o fator determinante para a identificação da comunidade.
+Uma \textit{comunidade} é um subgrafo com conexões mais \textit{coesas} entre seus nós do que com o restante do grafo. A palavra \enquote{coesão} aqui pode ser interpretada de várias maneiras. Para \citeonline{Ahn2010-uh,Evans2009-lq}, uma comunidade é definida quando o número de conexões internas do subgrafo é maior que o número de conexões que o conecta ao resto do grafo. Para \citeonline{Barabasi2016-rn,Newman2004-jg} a comunidade deve possuir uma densidade de conexões mais alta do que o esperado em uma rede aleatória equivalente. Para esses autores, o número de conexões é o fator determinante para a identificação da comunidade.
 
 \citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}, por sua vez, trabalham a detecção de comunidades como a identificação de fluxos mais frequentes na rede. Assumindo que uma conexão representa um fluxo, \textit{coesão} significa que comunidades possuem fluxo maior entre seus nós do que com outros fora da comunidade.
 
@@ -589,7 +598,7 @@ Essa hipótese é válida em qualquer uma nas definições detecção de comunid
 
 \textit{Conectividade} significa que uma comunidade não ultrapassa as bordas de um único componente, já \textit{Densidade} significa que os membros de uma comunidade têm maior probabilidade de se conectarem entre si do que com membros fora dela.
 
-A Hipótese da Conectividade é bastante intuitiva e também é compartilhada pelas definições dos outros autores. Entretanto a Hipótese da Densidade é válida para a definição de comunidade de \citeonline{Ahn2010-uh} e \citeonline{Newman2004-jg}, mas não é uma condição necessária na concepção de \citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}. Para esses autores, a Hipótese da Densidade poderia ser adaptada como a \textit{Hipótese do Fluxo}: a movimentação do fluxo dentro de uma comunidade têm maior probabilidade de acontecer do que a movimentação para fora dela.
+A Hipótese da Conectividade é bastante intuitiva e também é compartilhada pelas definições dos outros autores. Entretanto a Hipótese da Densidade é válida para a definição de comunidade de \citeonline{Ahn2010-uh} e \citeonline{Newman2004-jg}, mas não é uma condição necessária na concepção de \citeonline{Rosvall2009-sd} e \citeonline{Van_Dongen2000-qm}. Para esses autores, a Hipótese da Densidade poderia ser adaptada como a \textit{Hipótese do Fluxo}: a movimentação dentro de uma comunidade têm maior probabilidade de acontecer do que a movimentação para fora dela.
 
 O contraste entre as hipóteses mostra como elas se diferenciam quanto ao propósito, enquanto a Hipótese da Densidade é formulada em termos de novas conexões, prevendo uma evolução estrutural, a Hipótese do Fluxo é formulada em termos da dinâmica existente da rede.
 
@@ -598,7 +607,7 @@ Outro ponto a ser destacado é que, enquanto a Hipótese da Densidade trata de u
 %--------------------------------
 \item [Hipótese de Aleatoriedade] \textit{Redes aleatoriamente conectadas não possuem estrutura de comunidade}
 
-Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em uma rede aleatória com número equivalente de conexões e nós. Essa definição se baseia na premissa não se pode atribuir um princípio organizacional a uma estrutura gerada por pura aleatoriedade.
+Essa hipótese é um dos fundamentos para a medida de Modularidade descrita na Seção~\ref{sec:modularidade}, embora a hipótese tenha sido formalmente postulada após a concepção da medida por \citeonline{Newman2004-by}. De acordo com essa hipótese, uma comunidade é um conjunto de nós mais fortemente conectado do que o esperado em uma rede aleatória com número equivalente de conexões e nós. Essa definição se baseia na premissa de que não se pode atribuir um princípio organizacional a uma estrutura gerada por pura aleatoriedade.
 
 Novamente, essa hipótese tem um forte foco na evolução estrutural da rede (gerada por mecanismo não-aleatório), enquanto a detecção de comunidades por fluxo se atenta a dinâmica já modelada por ela.
 
@@ -617,7 +626,7 @@ A natureza estrutural da modularidade direciona seu uso para problemas em que a 
 
 Por outro lado, algoritmos de particionamento que não levam em conta a direção e o volume do fluxo em redes descartam a característica principal que levam alguns desses problemas a serem modelados como redes.
 
-A natureza da equação de mapa, descrito na próxima Seção, direciona seu uso para modelagens em que o fluxo está codificado nas relações. Por exemplo, em redes de transporte o fluxo pode se intensificar ou diminuir mas novas rotas não são tipicamente o objeto direto de estudo.
+A natureza da \textit{Equação de Mapa}, descrita na próxima Seção, direciona seu uso para modelagens em que o fluxo está codificado nas relações. Por exemplo, em redes de transporte o fluxo pode se intensificar ou diminuir mas novas rotas não são tipicamente o objeto direto de estudo.
 
 %===================================
 \subsection{Equação de Mapa} \label{sec:infomap}
@@ -684,7 +693,7 @@ Nesse caminho curto, ambas as codificações têm tamanhos similares, porém, em
 
 O particionamento da rede em grupos onde os caminhos aleatórios podem ser representados da maneira mais compacta possível deve representar o melhor particionamento em relação ao fluxo.
 
-A \enquote{Equação de Mapa}\footnote{No original: \textit{Map Equation}}~\cite{Rosvall2009-sd} permite que se identifiquem as menores codificações possíveis para um determinado particionamento da rede sem a necessidade de se empregar \textit{random walkers} de fato. Com ela, a detecção de comunidades usando o fluxo como critério de coesão se reduz a um problema de otimização.
+A \textit{Equação de Mapa}\footnote{No original: \textit{Map Equation}}~\cite{Rosvall2009-sd} permite que se identifiquem as menores codificações possíveis para um determinado particionamento da rede sem a necessidade de se empregar \textit{random walkers} de fato. Com ela, a detecção de comunidades usando o fluxo como critério de coesão se reduz a um problema de otimização.
 
 A Equação de Mapa é
 \begin{equation} \label{eq:map-equation}
@@ -736,11 +745,11 @@ L(\mathsf{M})              &= q_\curvearrowright \log_2 q_\curvearrowright - 2 \
 
 Na modelagem do MCar, um \enquote{Analista de Sistemas} e um \enquote{Arquiteto} têm chances similares de se tornarem \enquote{Coordenador de Projetos}. Entretanto, apesar de receber o mesmo nome, as competências de um coordenador de projetos da área de software e de arquitetura são bastante diferentes. Na realidade, essa é uma ocupação que pode figurar em duas ilhas ocupacionais bastante distintas, pois a movimentação entre essas duas áreas é relativamente rara em comparação com a movimentação dentro de si mesmas.
 
-O padrão esperado nesse caso, é que profissionais de cada ilha vão para essa \enquote{Gerente de Projetos} e voltem para outras de sua própria ilha ao invés de cruzar a fronteira de carreira. Para poder identificar esse padrão, é preciso considerar não apenas o trabalho imediatamente anterior, mas também o subsequente.
+O padrão esperado nesse caso, é que profissionais de cada ilha vão para \enquote{Gerente de Projetos} e voltem para sua própria ilha ao invés de cruzar a fronteira de carreira. Para poder identificar esse padrão, é preciso considerar não apenas o trabalho imediatamente anterior, mas também o subsequente.
 
 No MCar as ocupações prévias do profissional não influenciam seu próximo passo, apenas sua ocupação atual. No entanto, como exemplificado no caso acima, a \enquote{perda de memória} da ocupação anterior compromete a identificação das comunidades.
 
-Efetivamente, o MCar modela o fluxo de profissionais como um cadeia de Markov de primeira ordem. Considerar ocupações anteriores transforma o fluxo da rede em uma cadeia de Markov de ordem superior ou \enquote{Redes com Memória}\footnote{no original: \textit{Memory Networks}} \cite{Edler2017-kt}.
+Efetivamente, o MCar modela o fluxo de profissionais como um cadeia de Markov de primeira ordem. Considerar ocupações anteriores transforma o fluxo da rede em uma cadeia de Markov de ordem superior ou em uma \textit{Rede com Memória}\footnote{No original: \textit{Memory Network}} \cite{Edler2017-kt}.
 
 \begin{figure}[htb]
     \centering
@@ -756,10 +765,10 @@ Efetivamente, o MCar modela o fluxo de profissionais como um cadeia de Markov de
         \includegraphics[width=0.3\linewidth]{ex-multilayer-01.pdf}
         \label{fig:ex-multilayer-trigrama}
     }
-    \caption{Exemplo de uma rede com 4 nós e representações com sucessivos aumentos de informação. Os nós são GP - \textit{Gerente de Projetos}, AS - \textit{Analista de Sistemas}, AQ - \textit{Arquiteto} e CP - \textit{Coordenador de Projetos}. A rede simples da Figura~\ref{fig:ex-multilayer-simples} faz as conexões entre AS e CP agirem como bidirecionais; a rede direcionada da Figura~\ref{fig:ex-multilayer-direcionada} unifica as probabilidades de um \textit{random-walker} caminhar entre CP e GP, ignorando onde estava anteriormente. Os fluxos com dois níveis de memória (processo markoviano de segunda ordem) podem ser observados na Figura~\ref{fig:ex-multilayer-trigrama}}
+    \caption{Exemplo de uma rede com 4 nós e representações com sucessivos aumentos de informação. Os nós são GP - \textit{Gerente de Projetos}, AS - \textit{Analista de Sistemas}, AQ - \textit{Arquiteto} e CP - \textit{Coordenador de Projetos}. A rede simples da Figura~\ref{fig:ex-multilayer-simples} faz as conexões entre AS e CP agirem como bidirecionais; a rede direcionada da Figura~\ref{fig:ex-multilayer-direcionada} unifica as probabilidades de um \textit{random-walker} caminhar entre CP e GP, ignorando onde estava anteriormente. Os fluxos com memória (processo markoviano de segunda ordem) podem ser observados na Figura~\ref{fig:ex-multilayer-trigrama}}
 \end{figure}
 
-\citeonline{Edler2017-kt} adaptam a Equação de Mapa  para trabalhar com  Redes com Memória transformando-as em uma rede multi-camadas em uma representação chamada \enquote{Rede com Memória em Multi-Camadas}\footnote{no original: \textit{Multilayer Memory Network}}. Um rede multi-camadas é usada para representar redes em sistemas complexos onde existem contextos diferentes de relacionamento~\cite{Kivela2014-pb}. Por exemplo, em uma rede social onde pessoas participam de vários eventos, cada camada pode representar um evento, enquanto os relacionamentos podem representar a interação entre elas em cada evento. 
+\citeonline{Edler2017-kt} adaptam a Equação de Mapa  para trabalhar com  Redes com Memória transformando-as em uma rede multi-camadas em uma representação chamada \textit{Rede com Memória em Multi-Camadas}\footnote{No original: \textit{Multilayer Memory Network}}. Um rede multi-camadas é usada para representar redes em sistemas complexos onde existem contextos diferentes de relacionamento~\cite{Kivela2014-pb}. Por exemplo, em uma rede social onde pessoas participam de vários eventos, cada camada pode representar um evento, enquanto os relacionamentos podem representar a interação entre elas em cada evento. 
 
 \begin{figure}[htb]
     \centering
@@ -781,7 +790,7 @@ Efetivamente, o MCar modela o fluxo de profissionais como um cadeia de Markov de
 
 O exemplo da Figura~\ref{fig:ex-multilayer-camadas} mostra a rede formada pelas ocupações \enquote{Arquiteto}, \enquote{Analista de Sistemas}, \enquote{Coordenador de Projetos} e \enquote{Gerente de Projetos} e suas representações em camadas. A partir dessa representação é possível projetar uma rede de uma única camada (uma rede \enquote{comum}), criando-se um \textit{nó-estado} para cada nó em cada camada. Ignorando-se nós-estado que não possuem conexões, essa projeção cria um nó-estado para cada conexão de entrada, como pode ser observado na Figura~\ref{fig:ex-multilayer3}.
 
-Uma vez que a probabilidade estacionária é calculada através das conexões de saída, os nós-estado que possuem saída para os mesmos nós podem ser unificados sem perda de informação para identificação de comunidades. No exemplo da Figura~\ref{fig:ex-multilayer3}, os nós $\text{CP}_\text{AS}$ e $\text{CP}_\text{AQ}$ podem ser unidos em um único nó. \citeonline{Edler2017-kt} chamam essa simplificação de Rede com Memória Esparsa\footnote{no original: \textit{Sparse Memory Network}}.
+Uma vez que a probabilidade estacionária é calculada através das conexões de saída, os nós-estado que possuem saída para os mesmos nós podem ser unificados sem perda de informação para identificação de comunidades. No exemplo da Figura~\ref{fig:ex-multilayer3}, os nós $\text{CP}_\text{AS}$ e $\text{CP}_\text{AQ}$ podem ser unidos em um único nó. \citeonline{Edler2017-kt} chamam essa simplificação de \textit{Rede com Memória Esparsa}\footnote{No original: \textit{Sparse Memory Network}}.
 
 \begin{figure}[htb]
     \centering
@@ -814,7 +823,8 @@ H(\mathcal{P}^i) = - \frac{q_{i \curvearrowright}}{p^i_\circlearrowright} \log_2
 (EXPANDIR) Comunidade com sobreposição (ocupações de migração?)
 
 %=============================
-\section{CONCEITOS SOBRE CARREIRA}
+\section{CONCEITOS SOBRE CARREIRA} \label{sec:conceitos-sobre-carreiras}
+%=============================
 
 Segundo~\citeonline{Arthur1989-rn}, carreira é \foreignquote{english}{uma sequência evolutiva da experiência profissional de uma pessoa no tempo}\footnote{No original: \enquote{an evolving sequence of person's work experience over time}.}. Apesar das discussões sobre as mudanças nos modelos de carreira, passando de um modelo linear e centrado na organização para um modelo centrado no indivíduo, as definições de carreira são frequentemente associadas à progressão profissional do indivíduo~\cite{Baruch2004-oy,Sullivan2009-xb,Bendassolli2009-bg}.
 
@@ -822,7 +832,7 @@ Para os fins desse trabalho, define-se carreira como \textit{a sequência de \te
 
 Essa pesquisa empresta o conceito de \textit{fronteiras de carreira} (\textit{career boundaries}) descrito por \citeonline{Gunz2007-hr} para dar significado ao trabalho. A fronteira de carreira significa que uma mudança entre ocupações nem sempre pode ser realizada livremente. Por exemplo, um profissional precisa de graduação especializada antes de poder se mover da ocupação de \enquote{Auxiliar de Jardinagem} para \enquote{Médico}, por outro lado, a barreira para o mesmo profissional exercer a ocupação de \enquote{Jardineiro} se limita à experiência. É possível perceber que as barreiras não são simétricas, em tempos de crise econômica é mais simples para um \enquote{Engenheiro} tornar-se um \enquote{Corretor de Imóveis} do que o contrário.
 
-As barreiras não se limitam ao conhecimento, quaisquer dificuldades na movimentação podem criar fronteiras. Por exemplo, alguém morando em um grande centro urbano dificilmente exerceria a ocupação de \enquote{Agricultor} sem mover-se para o campo. Um \enquote{Diretor Financeiro} precisaria adequar seu padrão de vida antes de uma transição para uma ocupação com ganhos mais modestos. Uma profissão que está desaparecendo, como \enquote{Contínuo}, possui barreiras mais altas do que uma nascendo, como \enquote{Analista de Experiência do Usuário}.
+As barreiras também não se limitam ao conhecimento, quaisquer dificuldades na movimentação podem criar fronteiras. Por exemplo, alguém morando em um grande centro urbano dificilmente exerceria a ocupação de \enquote{Agricultor} sem mover-se para o campo. Um \enquote{Diretor Financeiro} precisaria adequar seu padrão de vida antes de uma transição para uma ocupação com ganhos mais modestos. Uma profissão que está desaparecendo, como \enquote{Contínuo}, possui barreiras mais altas do que uma nascendo, como \enquote{Analista de Experiência do Usuário}.
 
 Um dos pontos principais desse trabalho está na argumentação de \citeonline{Gunz2007-hr} sobre como uma fronteira subjetiva se torna objetiva. Em sua argumentação as fronteiras de carreira são subjetivas e pessoais, onde cada um tem para si quais transições podem ser feitas em sua própria carreira. No entanto, elas se tornam objetivas quando um número suficientemente grande de pessoas possui a mesma compreensão sobre essas transições, a ponto dela ser perceptível em um nível macroscópico. Dessa maneira, as fronteiras de carreira são definidas objetivamente quando uma quantidade suficiente de pessoas entra em \textit{consenso} sobre quais são as transições incomuns.
 
@@ -835,7 +845,8 @@ No presente trabalho esses aglomerados de ocupações são chamados \textit{ilha
 Como será visto a seguir, as ocupações serão representadas por nós em um grafo, enquanto as conexões trarão informações sobre as transições entre ocupações. Neste tipo de representação, outro conceito central introduzido para o desenvolvimento da pesquisa é o de \textit{polos ocupacionais}, ou seja, ocupações dentro de uma ilha por onde passa o maior fluxo de profissionais. Dada a topologia em formato de estrela encontrada nas ilhas, é esperado que perturbações nesses nós, como aumento ou diminuição no fluxo de profissionais, afetem a rede como um todo e que sua eliminação cause o esfacelamento da ilha. Ou seja, os polos ocupacionais são os principais responsáveis por manter a ilha coesa.
 
 %=============================
-\section{O MAPA DE CARREIRAS}
+\section{O MAPA DE CARREIRAS} \label{sec:mapa-de-carreiras}
+%=============================
 
 \subsection{Introdução}
 
@@ -861,8 +872,6 @@ As arestas que conectam as ocupações representam \textit{movimentações} entr
   \label{fig:exemplo-medico-do-trabalho}
 \end{figure}
 
-% TODOS OS EXMPLOS DEVERIAM SER DA ÁREA QUE VAMOS ABORDAR, OU SEJA, TI. ISSO TRAZ MAIS DIDÁTICA E FOCO AO DOCUMENTO.
-
 É importante esclarecer que a visualização observada no site do Mapa da Carreiras foi construída para permitir uma navegação simplificada para o usuário. Para essa pesquisa, os dados utilizados são os mesmos, mas em formatos mais adequados ao projeto. Por exemplo, o equivalente da Figura~\ref{fig:exemplo-medico-do-trabalho} utilizada para análise exploratória pode ser vista na Figura~\ref{fig:grafo-medico-do-trabalho}. Nela, é possível observar ocupações que não estão diretamente relacionadas a \enquote{Médico do Trabalho}, mas que estão no mesmo agrupamento, como \enquote{Médico Plantonista}.
 
 \begin{figure}[ht]
@@ -874,8 +883,6 @@ As arestas que conectam as ocupações representam \textit{movimentações} entr
 \end{figure}
 
 O grafo do MCar é direcionado e, portanto, o fluxo de profissionais entre ocupações possui uma direção específica, mas é comum que existam movimentações em ambos os sentidos entre duas ocupações. Esse movimento é representado por duas arestas diferentes, mesmo que no site ela seja representada por uma única aresta. Em outras palavras, o MCar é um grafo direcionado, ponderado, com ciclos e laços.
-
-% Ronie: faz sentido verificar quantas comunidades possuem ciclos? Provavelmente não agora >_<
 
 \begin{comment}
 
@@ -893,9 +900,7 @@ Por conta dos ciclos, não é possível criar uma ordenação topológica que re
 
 Para a construção dos vértices, os textos presentes nos títulos dos históricos profissionais dos currículos foram \textit{normalizados}. Nesse contexto, \enquote{normalização} significa transformar os títulos com o mesmo significado na mesma representação textual. Por exemplo, a mesma ocupação pode ter sido registrada por pessoas diferentes como \enquote{Moto Boy}, \enquote{moto boy}, \enquote{Motoboy}, \enquote{Moto Girl} entre outras variações. O que é aqui chamado \enquote{normalização} é o trabalho de transformar essas diferentes grafias em uma única classe que possa ser usada para identificação da ocupação. No caso, todas as anteriores são normalizadas para \enquote{motoboy}. Esse trabalho também inclui a correção ortográfica e a remoção de abreviação das ocupações.
 
-Após o processo de normalização, ocupações que não possuem ao menos 30 experiências profissionais de currículos diferentes com a mesma ocupação são descartados.
-
-Após a normalização são criados pares e trios de ocupações cronologicamente ordenadas, chamados \textit{bigramas} e \textit{trigramas}. Isso significa que o término de uma ocupação precisa coincidir com o início da seguinte. Uma margem de dois meses de tolerância na sobreposição corrige pequenas imprecisões na anotação dos históricos profissionais. 
+Após o processo de normalização, ocupações que não possuem ao menos 30 experiências profissionais de currículos diferentes com a mesma ocupação são descartados. Nesse ponto são criados pares e trios de ocupações cronologicamente ordenadas, chamados \textit{bigramas} e \textit{trigramas}. Isso significa que o término de uma ocupação precisa coincidir com o início da seguinte. Uma margem de dois meses de tolerância na sobreposição corrige pequenas imprecisões na anotação dos históricos profissionais. 
 
 O processo dá preferência pela criação de trigramas quando ao menos três ocupações em sequência são observadas. Bigramas são criados apenas nos casos em que existem somente duas ocupações. Currículos com uma única ocupação são descartados, uma vez que não é possível identificar uma movimentação profissional.
 
@@ -917,6 +922,7 @@ Finalmente, uma segunda versão da rede é criada, projetando os trigramas em bi
 
 Ao final do processo o grafo possui cerca de 7.267 ocupações distintas e 73.064 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em 10 de Fevereiro de 2017.
 
+Como regra geral, os processos para a montagem do MCar são bastante conservadores, o que significa que optam sempre por eliminar dados procurando reduzir erros causados por anomalias ou consensos fracos ao invés de trabalhar com um volume maior de dados, porém com maior probabilidade de incorreções. O efeito final é que grande parte dos dados são sumariamente descartados. Os números reportados são proporcionalmente relevantes, mas não representam os volumes encontrados no banco de dados original.
 
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
@@ -933,9 +939,9 @@ O Mapa de Carreiras é construído a partir dos currículos de um banco relacion
 
 \subsubsection{Os Dados}
 
-Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com. Existem cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho foram utilizados apenas os currículos únicos atualizados entre Fevereiro de 2012 e Fevereiro de 2017, totalizando 7.005.639 currículos e 26.568.916 experiências profissionais. Após esse período, o banco de dados do VAGAS.com ultrapassou 14 milhões de currículos, mas os dados mais recentes não foram utilizados nessa pesquisa.
+Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com. Existem cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho foram utilizados apenas os currículos únicos atualizados entre Fevereiro de 2012 e Fevereiro de 2017, totalizando 7.005.639 currículos e 26.568.916 experiências profissionais. No início de 2018 o banco de dados do VAGAS.com já ultrapassa 12 milhões de currículos, mas os dados mais recentes não foram utilizados nessa pesquisa.
 
-Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos principais usados nesse trabalho. O primeiro formato são arquivos em que cada linha é um \textit{array} em JSON (\textit{Javascript Object Notation}). Esse formato é usado como intermediário em quase todas as etapas devidos a velocidade de serialização e desserialização e a interoperabilidade~\cite{Maeda2012-co}. O segundo formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada um enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
+Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos principais usados nesse trabalho. O primeiro formato são arquivos em que cada linha é um \textit{array} em JSON (\textit{Javascript Object Notation}). Esse formato é usado como intermediário em quase todas as etapas devidos a velocidade de serialização, desserialização e sua interoperabilidade~\cite{Maeda2012-co}. O segundo formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada um enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
 
 
 \subsubsection{O Processamento da Informação}
@@ -988,6 +994,7 @@ Ocupações com múltiplas palavras também são ordenadas alfabeticamente. Dess
 
 As classes resultantes lembram vagamente o termo original, como no exemplo acima. No processo descrito na Seção~\ref{sec:criar-dicionario}, é criado um dicionário entre a classe equivalente e um nome de exibição para o usuário.
 
+A correção de erros de digitação necessitou de um corretor ortográfico especialmente criado para o MCar, pois os corretores disponíveis eram incapazes de reconhecer abreviações como \enquote{IRLA} ou jargões como \enquote{Enfermeiranda}. O corretor foi criado com base nos simples conceitos apresentados por \citeonline{Norvig2007-cz}, e passou por uma revisão manual para reduzir erros causados pelo algoritmo puro.
 
 \subsubsection{Agrupamento de Ocupações}
 
@@ -1028,18 +1035,23 @@ e os bigramas:
     \item Chapeiro \textrightarrow~Cozinheiro.
 \end{itemize} 
 
-Os bigramas são usados para a montagem da rede, enquanto os trigramas são usados para a detecção de comunidades. No caso dos trigramas, quando um currículo possui apenas duas experiências profissionais, é gerado um bigrama que é usado também na detecção de comunidades.
+Os bigramas são usados para a montagem da rede, enquanto os trigramas são usados para a detecção de comunidades. No caso da detecção de comunidades, quando um currículo possui apenas duas experiências profissionais o um bigrama resultante é utilizado.
 
-A maioria dos trigramas e bigramas de ocupações ocorrem pouquíssimas vezes. Em um conjunto com 4.878.855 sequências distintas, cerca de 4.253.925 ocorrem apenas uma vez, as que se repetem ao menos duas vezes somam 4.666.428 ou 52,31\% do total. Esse grande número de sequências únicas é causada tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional. Com alguma frequência essas sequências realmente representam trajetórias em carreiras extremamente específicas.
+A maioria dos trigramas e bigramas de ocupações ocorrem pouquíssimas vezes. No conjunto com 8.920.353 sequências utilizadas para a detecção de comunidades (entre trigramas e bigramas), cerca de 4.253.925 (47,69\%) ocorrem apenas uma vez. Esse grande número de sequências únicas é causada tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional.
 
 Essas sequências pouco comuns são removidas. Para encontrar um número de corte foi feita uma avaliação manual por amostragem. Amostras com algumas centenas de pares com números de corte entre 1 e 30 foram analisadas por especialistas da empresa junto com o pesquisador. O objetivo foi encontrar um número que não fosse conservador demais, removendo trajetórias válidas, nem liberal demais, permitindo trajetórias com erro.
 
-Após o processo de análise, chegou-se a um número próximo a 5 repetições. Sequências com menos de 5 repetições são removidas.
+Após o processo de análise, chegou-se a um número próximo a 5 repetições. Sequências com menos de 5 repetições foram então removidas, resultando em 3.498.249 sequências efetivamente utilizadas. As repetições foram unificadas resultando em 146.548 sequências distintas.
 
-Antes desse processo, cada registro é uma sequência de experiências profissionais. O processo expande cada um em múltiplos registros, representando uma sequência de experiências profissionais de um único indivíduo.
+Após esse processo, cada registro passa a ser uma sequência de experiências profissionais e um número que representa sua quantidade de repetições. A partir desse ponto, os dados para a montagem do grafo estão prontos em formato texto.
 
-A partir desse ponto, os dados para a montagem do grafo estão prontos em formato texto.
+\subsubsection{Remoção de Componentes} \label{sec:eliminacao-de-microcomponentes}
 
+(EXPANDIR...)
+
+\subsubsection{Desnormalização de Ocupações} 
+
+(EXPANDIR...)
 
 \subsubsection{Posicionamento dos Vértices do Grafo}
 
@@ -1059,6 +1071,10 @@ Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de
 
 O dicionário resultante mapeia a classe equivalente para um nome de exibição. A partir dele, é gerado um dicionário complementar com nomes sem espaços ou dígrafos (acentos), tornando-os mais significativos e mais fáceis de manipulá-los computacionalmente, por exemplo, como parte de URLs. Nessa pesquisa, essa versão \enquote{computacionalmente amigável} é preferida para exibição.
 
+\subsubsection{Extração de Faixas Salariais}
+
+(EXPANDIR...)
+
 \subsubsection{Extração de Palavras-Chave}
 
 As palavras-chave são extraídas a partir das descrições digitadas pelos usuários no campo \enquote{Experiência Profissional} dos currículos. O processo descrito abaixo tenta criar expressões significativas, ou seja, pequenas frases, que ajudem a descrever o cargo ao invés de apenas indicar as palavras mais comuns. Um fato notável é que não é possível utilizar \textit{stemming} ou correção ortográfica nesse processo, pois existe uma grande quantidade de jargões e siglas específicas nas descrições.
@@ -1066,6 +1082,10 @@ As palavras-chave são extraídas a partir das descrições digitadas pelos usu�
 Para formar expressões, são gerados unigramas, bigramas e trigramas para as descrições de cada experiência profissional. A seguir, elas são ordenadas por TF-IDF e as palavras que aparecem repetidas em um n-grama de menor TF-IDF são removidas. Por exemplo, se a palavra \enquote{fiscal} aparece com maior TF-IDF que o bigrama \enquote{nota fiscal}, a palavra \enquote{fiscal} é removida da lista.
 
 O TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) é uma medição de relevância usada no processamento de linguagem natural. Ela é baseada na frequência em que um termo aparece em um documento e inversamente a sua frequência entre documentos.
+
+\subsubsection{Geração do Arquivo Final}
+
+(EXPANDIR...)
 
 \subsection{Atributos das Ocupações}
 
@@ -1190,7 +1210,7 @@ Isso indica que grande parte das ocupações ($1/3$) está na \enquote{borda} da
 
 % Ronie: O parágrafo acima me parece um ótimo gancho para alguém que trabalhe com essa parte. Gostaria de deixar isso bem atraente :D (mas não sei se cabe).
 
-\subsection{Identificando Fronteiras de Carreira}  \label{sec:fronteiras-de-carreira}
+\section{IDENTIFICANDO FRONTEIRAS DE CARREIRAS}  \label{sec:fronteiras-de-carreira}
 
 Nos experimentos realizados, o algoritmo Infomap foi utilizado para encontrar o particionamento mais coeso do MCar em relação ao fluxo. Como exposto na Seção~\ref{sec:infomap}, esse particionamento é a própria definição de fronteiras de carreira.
 
@@ -1338,7 +1358,7 @@ A pesquisa consegue delinear características essenciais da movimentação profi
 \end{figure}
 
 %===================================
-\section{Conclusões e Perspectivas Futuras}
+\section{CONCLUSÕES E PERSPECTIVAS FUTURAS} \label{sec:conclusoes}
 %===================================
 
 Esse trabalho reúne os conceitos fronteiras de carreira de \citeonline{Gunz2007-hr}, os trabalhos de Ciência de Redes sobre detecção de comunidades por fluxo baseados em \cite{Rosvall2009-sd} e os dados de um dos maiores sites brasileiros de carreira~\cite{VAGAS_Tecnologia2014-yv} para contribuir na compreensão da movimentação profissional.
