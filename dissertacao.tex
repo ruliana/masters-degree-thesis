@@ -918,7 +918,7 @@ Duas outras limitações no grafo ocorrem por conta da experiência profissional
 
 Se um campo de texto livre cria algumas limitações ao processo, ele também abre possibilidades, por exemplo, o texto livre permite a captura de ocupações que pouco provavelmente apareceriam em uma lista curada, como \enquote{IRLA} (Instalador Reparador de Linhas Aéreas) ou \enquote{Rigger} (pessoa no solo que orienta o posicionamento de carga para o operador de guindaste).
 
-Finalmente, uma segunda versão da rede é criada, projetando os trigramas em bigramas e usando-os para se criar uma rede mais simples. Após a simplificação, a rede passa por um processo de análise de componentes e aqueles muito pequenos, com apenas um uma ou duas ocupações, também são removidos dos estudo. A Seção~\ref{sec:eliminacao-de-microcomponentes} explica o processo em detalhes.
+Finalmente, uma segunda versão da rede é criada, projetando os trigramas em bigramas e usando-os para se criar uma rede mais simples. Após a simplificação, a rede passa por um processo de análise de componentes e aqueles muito pequenos, com apenas um uma ou duas ocupações, também são removidos dos estudo. A Seção~\ref{sec:remocao-de-componentes} explica o processo em detalhes.
 
 Ao final do processo o grafo possui cerca de 7.267 ocupações distintas e 73.064 arestas. Esses números flutuam dependendo das atualizações dos currículos em que são baseados e no crescimento natural do banco de dados. Os dados utilizados nesse trabalho refletem a base atualizada em 10 de Fevereiro de 2017.
 
@@ -926,7 +926,7 @@ Como regra geral, os processos para a montagem do MCar são bastante conservador
 
 \subsection{O Processo de Construção do Mapa de Carreiras} \label{sec:construcao}
 
-O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações. A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo. Nessa seção, cada um deles é explicado em detalhes.
+O Mapa de Carreiras é construído a partir dos currículos de um banco relacional condensando seus dados para formar um grafo de movimentação de pessoas entre as ocupações. A construção do MCar é feita em uma estrutura de \textit{pipeline} em que cada componente trabalha os dados e passa o resultado para o componente seguinte, a Figura~\ref{fig:montagem-do-grafo} mostra esquematicamente o processo.
 
 \begin{figure}[ht]
     \centering
@@ -935,6 +935,10 @@ O Mapa de Carreiras é construído a partir dos currículos de um banco relacion
     \label{fig:montagem-do-grafo}
     \source{Elaboração do Autor}
 \end{figure}
+
+O processo de montagem do MCar precisou ser estendido para essa pesquisa. Enquanto processo original gera uma rede a partir de arestas conectando duas ocupações (bigramas), essa pesquisa necessita também de sequências de três ocupações (trigramas) para identificar comunidades com sobreposição. Os processos adicionados exclusivamente para esse trabalho estão destacado em cinza na Figura~\ref{fig:montagem-do-grafo}.
+
+Nessa seção, as etapas diretamente relacionadas à pesquisa são detalhadas, pois a preparação de dados tem forte influência no resultado final. As partes relevantes apenas para o MCar são resumidas ao final da Seção para completude do trabalho.
 
 
 \subsubsection{Os Dados}
@@ -979,10 +983,12 @@ Os dados extraídos são:
 
   \item[Data de Início] e \textbf{Data de Término} marcam quando o profissional iniciou naquela ocupação e até quando a exerceu. Se é a ocupação atual, não existe uma data de término. Esses campos são usados para determinar a sequência de experiências profissionais que formarão as arestas do grafo.
 
-  \item[Texto Descritivo] é o texto digitado livremente pelo usuário no campo com o nome \enquote{Descrição} no currículo. Esse campo é usado para criar uma nuvem de palavras-chave sobre a ocupação.
+  \item[Salário Atual] é o salário da última ocupação exercida pelo profissional. Esse valor é utilizado para se estabelecerem faixas salariais de cada ocupação.
 
+  \item[Texto Descritivo] é o texto digitado livremente pelo usuário no campo com o nome \enquote{Descrição} no currículo. Esse campo é usado para criar uma nuvem de palavras-chave sobre a ocupação.
 \end{description}
 
+Dos campos extraídos, o \textit{Nome da Ocupação}, \textit{Data de Início} e \textit{Data de Término} são utilizados para a identificação de Ilhas Ocupacionais, enquanto os outros campos são utilizados apenas dentro do MCar.
 
 \subsubsection{Normalização de Ocupações} \label{sec:normalizacao}
 
@@ -994,13 +1000,14 @@ Ocupações com múltiplas palavras também são ordenadas alfabeticamente. Dess
 
 As classes resultantes lembram vagamente o termo original, como no exemplo acima. No processo descrito na Seção~\ref{sec:criar-dicionario}, é criado um dicionário entre a classe equivalente e um nome de exibição para o usuário.
 
-A correção de erros de digitação necessitou de um corretor ortográfico especialmente criado para o MCar, pois os corretores disponíveis eram incapazes de reconhecer abreviações como \enquote{IRLA} ou jargões como \enquote{Enfermeiranda}. O corretor foi criado com base nos simples conceitos apresentados por \citeonline{Norvig2007-cz}, e passou por uma revisão manual para reduzir erros causados pelo algoritmo puro.
+A correção de erros de digitação necessitou de um corretor ortográfico especialmente criado para o MCar, pois os corretores disponíveis foram incapazes de reconhecer abreviações como \enquote{IRLA} ou jargões como \enquote{Enfermeiranda}. O corretor foi criado com base nos simples conceitos apresentados por \citeonline{Norvig2007-cz} e passou por uma revisão manual para reduzir erros. Por exemplo, o algoritmo inicialmente detectou \enquote{soldado} como um erro em \enquote{soldador}, bem como \enquote{contador} como erro em \enquote{montador}. Casos como esse justificaram sucessivas revisões do corretor até que nenhum outro caso fosse detectado.
+
 
 \subsubsection{Agrupamento de Ocupações}
 
 As ocupações são agrupadas pela sua classe equivalente e os dados são coletados em coleções com todos os seus elementos. Isso significa que todos os salários são colocados em uma única coleção, sem haver ainda uma sumarização, bem como todas as grafias da ocupação e os textos utilizados para descrevê-las.
 
-O resultado é utilizado como base para vários dos processos seguintes até a junção em um arquivo final com todos os dados processados e devidamente sumarizados.
+O resultado é utilizado como base para os processos seguintes até a junção em um arquivo final com todos os dados processados e devidamente sumarizados.
 
 
 \subsubsection{Remoção de Ocupações} \label{sec:remocao-ocupacoes-incorretas}
@@ -1010,7 +1017,7 @@ Mesmo após a remoção de casos únicos, alguns nomes presentes nesse campo pod
 Casos emblemáticos são os textos \enquote{sim}, \enquote{não} ou \enquote{o mesmo} encontrados no campo destinado ao nome da ocupação. A remoção desses casos precisou ser feita manualmente, ou seja, especialistas da empresa revisaram a lista de ocupações e criaram um dicionário com os erros mais comuns utilizados nessa etapa do processo. Esse dicionário foi aprimorado com sugestões dos usuários após a publicação do MCar.
 
 
-\subsubsection{Agrupamento de Ocupações por Currículo}
+\subsubsection{Agrupamento de Ocupações por Currículo} \label{sec:agrupamento-por-curriculo}
 
 As ocupações são agrupadas por currículo, formando uma sequência cronológica das experiências de um profissional. Até essa etapa, há uma experiência profissional por registro, após ela, cada registro contém uma sequência de experiências profissionais do mesmo indivíduo, ordenadas cronologicamente.
 
@@ -1021,47 +1028,64 @@ Na mesma etapa, removem-se experiências profissionais que se sobreponham. Uma v
 Nesse mesmo processo, são removidos os currículos que possuem apenas uma ou nenhuma experiência profissional.
 
 
-\subsubsection{Geração de Bigramas e Trigramas}
+\subsubsection{Geração de Bigramas e Trigramas} \label{sec:geracao-de-trigramas}
+
+Nesse ponto, o processo se divide para atender duas demandas distintas: a detecção de comunidades e a montagem de uma grafo para exibição do MCar e para a etapa de remoção de micro-componentes descrita na Seção~\ref{sec:remocao-de-componentes}.
 
 As experiências profissionais de cada currículo agrupadas por ordem cronológica para formar bigramas e trigramas. Por exemplo, um currículo que tenha a seguinte sequência de ocupações \enquote{Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro}, produz os trigramas:
 \begin{itemize}
     \item  Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro,
     \item Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro;
 \end{itemize}
-e os bigramas:
-\begin{itemize}
-    \item Faxineiro \textrightarrow~Copeiro,
-    \item Copeiro \textrightarrow~Chapeiro,
-    \item Chapeiro \textrightarrow~Cozinheiro.
-\end{itemize} 
 
-Os bigramas são usados para a montagem da rede, enquanto os trigramas são usados para a detecção de comunidades. No caso da detecção de comunidades, quando um currículo possui apenas duas experiências profissionais o um bigrama resultante é utilizado.
+O algoritmo utilizado para detecção de comunidades requer preferencialmente trigramas, mas trabalha com bigramas quando aqueles não estão disponíveis. Dessa forma, o processo gera trigramas quando existem ao menos 3 experiências profissionais no currículo ou bigramas se existem apenas 2 experiências. Currículos com 1 ou nenhuma experiência profissional são descartados no processo anterior (Seção~\ref{sec:agrupamento-por-curriculo}).
 
 A maioria dos trigramas e bigramas de ocupações ocorrem pouquíssimas vezes. No conjunto com 8.920.353 sequências utilizadas para a detecção de comunidades (entre trigramas e bigramas), cerca de 4.253.925 (47,69\%) ocorrem apenas uma vez. Esse grande número de sequências únicas é causada tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional.
 
 Essas sequências pouco comuns são removidas. Para encontrar um número de corte foi feita uma avaliação manual por amostragem. Amostras com algumas centenas de pares com números de corte entre 1 e 30 foram analisadas por especialistas da empresa junto com o pesquisador. O objetivo foi encontrar um número que não fosse conservador demais, removendo trajetórias válidas, nem liberal demais, permitindo trajetórias com erro.
 
-Após o processo de análise, chegou-se a um número próximo a 5 repetições. Sequências com menos de 5 repetições foram então removidas, resultando em 3.498.249 sequências efetivamente utilizadas. As repetições foram unificadas resultando em 146.548 sequências distintas.
+Após o processo de análise, chegou-se a um número próximo a 5 repetições. Sequências com menos de 5 repetições foram então removidas, resultando em 3.498.249 sequências efetivamente utilizadas que depois de unificadas resultaram em 146.548 sequências distintas com 7.267 nós distintos.
 
 Após esse processo, cada registro passa a ser uma sequência de experiências profissionais e um número que representa sua quantidade de repetições. A partir desse ponto, os dados para a montagem do grafo estão prontos em formato texto.
 
-\subsubsection{Remoção de Componentes} \label{sec:eliminacao-de-microcomponentes}
 
-(EXPANDIR...)
+\subsubsection{Montagem da Rede para Infomap} \label{sec:montagem-da-rede}
 
-\subsubsection{Desnormalização de Ocupações} 
+Para os processos de análise sobre a rede, como a conectividade dos \textit{hubs}, é preciso que ela seja criada a partir dos mesmos dados usados no processo de detecção de comunidades. É possível reconstruir a rede a partir dos trigramas, bastando dividi-los em bigramas para recriar as conexões da rede. Entretanto, a informação sobre o peso é perdida nesse processo.
 
-(EXPANDIR...)
+Seguindo o exemplo da Seção~\ref{sec:geracao-de-trigramas}, a sequência \enquote{Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro} gera os dois trigramas \enquote{Faxineiro \textrightarrow~Copeiro \textrightarrow~Chapeiro} e \enquote{Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro}. Esses dois trigramas podem ser divididos em bigramas para recuperar a sequência original, entretanto, essa operação gera o bigrama \enquote{Copeiro \textrightarrow~Chapeiro} duas vezes (uma para cada trigrama) fazendo com que seu peso seja duas vezes maior que o correto, como se duas pessoas fizessem essa transição ao invés de uma.
 
-\subsubsection{Posicionamento dos Vértices do Grafo}
+Para corrigir isso, a rede é criada a partir das conexões geradas pelos trigramas, mas seu peso é obtido a partir dos bigramas simples gerados pelo processo de montagem do MCar.
 
-Para que o grafo possa ser exibido bidimensionalmente, é preciso que seus vértices sejam posicionados de modo a evitar a sobreposição e que os vértices relacionados por arestas de maior peso estejam mais próximos.
-
-O algoritmo de \textit{Force-Directed} é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz. A saída do Graphviz é um arquivo texto com a posição X e Y do vértice em um plano cartesiano.
+O resultado final é uma rede que passou pelo mesmo processo de limpeza e poda que os trigramas, mas sem distorção em seus pesos.
 
 
+\subsubsection{Remoção de Componentes} \label{sec:remocao-de-componentes}
 
-\subsubsection{Criação de Dicionário para Exibição} \label{sec:criar-dicionario}
+Após o processo de montagem, a rede resultante é analisada quanto ao número de componentes. Os resultados na Tabela~\ref{tab:componentes} indicam vários componentes com apenas 1 nó, alguns poucos com 2 e 3 nós e um componente gigante com 7.267 nós.
+
+Os componentes com apenas um nó são sequências de ocupações que se repetem, por exemplo \enquote{engenheiro de tubulação} $\to$ \enquote{engenheiro de tubulação} causados por profissionais mudando de empresa, mas sem mudança na ocupação, resultando em uma ocupação que passou pelos processos anteriores de limpeza, mas que não se conecta ao restante da rede.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{@{} c r @{}}
+        \toprule
+        Tamanho & Componentes \\
+        \midrule
+        1        &  1.087 \\
+        2        &  19 \\
+        3        &  1 \\
+        7.267 &  1 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Tabela de frequência por tamanho de componente na rede.}
+    \label{tab:componentes}
+\end{table}
+
+Os micro-componentes (1 a 3 nós) são descartados e apenas as ocupações presentes no componente gigante são usadas. Esse é o última etapa no pré-processamento das informações e a rede resultante é utilizada para as análises apresentadas na Seção~\ref{sec:fronteiras-de-carreira}.
+
+
+\subsubsection{Geração de Dicionário e Desnormalização de Ocupações} \label{sec:criar-dicionario}
 
 Os textos resultantes do processo de normalização descrito na Seção~\ref{sec:normalizacao} não são adequados para exibição. Esse processo contabiliza o número de grafias exatamente idênticas para cada ocupação normalizada e assume como \enquote{nome de exibição} a grafia mais frequente.
 
@@ -1069,45 +1093,29 @@ A limitação desse processo é que algumas ocupações são descritas no mascul
 
 Apesar da regra da língua portuguesa do uso do masculino quando há um grupo de gênero misto, optou-se por não se modificar o gênero artificialmente, preservando a grafia da predominância do gênero na ocupação.
 
-O dicionário resultante mapeia a classe equivalente para um nome de exibição. A partir dele, é gerado um dicionário complementar com nomes sem espaços ou dígrafos (acentos), tornando-os mais significativos e mais fáceis de manipulá-los computacionalmente, por exemplo, como parte de URLs. Nessa pesquisa, essa versão \enquote{computacionalmente amigável} é preferida para exibição.
+O dicionário resultante mapeia a classe equivalente para um nome de exibição. A partir dele, é gerado outro dicionário complementar com nomes sem espaços ou dígrafos (acentos), tornando-os mais significativos e mais fáceis de manipulá-los computacionalmente, por exemplo, como parte de URLs.
 
-\subsubsection{Extração de Faixas Salariais}
+Por exemplo, a grafia mais comum para a ocupação normalizada \textit{bilingue secretario} produz o nome de exibição \textit{Secretária Bilíngue} e o nome \enquote{computacionalmente amigável} \textit{secretaria-bilingue}. Nessa pesquisa, essa versão é usada nos gráficos e exemplos produzidos por questões de simplicidade.
 
-(EXPANDIR...)
 
-\subsubsection{Extração de Palavras-Chave}
+\subsubsection{Posicionamento dos Vértices do Grafo}
 
-As palavras-chave são extraídas a partir das descrições digitadas pelos usuários no campo \enquote{Experiência Profissional} dos currículos. O processo descrito abaixo tenta criar expressões significativas, ou seja, pequenas frases, que ajudem a descrever o cargo ao invés de apenas indicar as palavras mais comuns. Um fato notável é que não é possível utilizar \textit{stemming} ou correção ortográfica nesse processo, pois existe uma grande quantidade de jargões e siglas específicas nas descrições.
+Para que o grafo possa ser exibido bidimensionalmente, é preciso que seus vértices sejam posicionados de modo a evitar a sobreposição e que os vértices relacionados por arestas de maior peso estejam mais próximos.
 
-Para formar expressões, são gerados unigramas, bigramas e trigramas para as descrições de cada experiência profissional. A seguir, elas são ordenadas por TF-IDF e as palavras que aparecem repetidas em um n-grama de menor TF-IDF são removidas. Por exemplo, se a palavra \enquote{fiscal} aparece com maior TF-IDF que o bigrama \enquote{nota fiscal}, a palavra \enquote{fiscal} é removida da lista.
+O algoritmo de \textit{Force-Directed} é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz~\cite{Gansner2000-oo}. O programa leva em conta o tamanho de exibição do nó para evitar a sobreposição, por isso, os nomes de exibição são utilizados em cada para que seu tamanho relativo seja levado em conta pelo Graphviz.
 
-O TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) é uma medição de relevância usada no processamento de linguagem natural. Ela é baseada na frequência em que um termo aparece em um documento e inversamente a sua frequência entre documentos.
+A saída final é um arquivo texto com a posição X e Y de cada nó em um plano cartesiano, sem a informação das conexões.
 
-\subsubsection{Geração do Arquivo Final}
 
-(EXPANDIR...)
+\subsubsection{Extrações de Faixas Salariais e Palavras-Chave}
 
-\subsection{Atributos das Ocupações}
+Esses dois processos são descritos brevemente aqui por questões de completude, uma vez que não são diretamente o objetivo desse trabalho. Entretanto, a disponibilidade dessas informações sugere extensões interessantes para ele.
 
-Complementar à montagem do grafo, os vértices com as ocupações são abastecidos com outras informações. São elas:
+Os salário são extraídos a partir do campo \enquote{Último Salário} dos currículos. Os valores são atualizados pelo IPCA e exibidos no formato de quartis.
 
-\begin{description}
-  \item[Idade] computada para cada ocupação considerando a data de nascimento do profissional e a data de entrada na ocupação.
-  \item[Salário] da ocupação atual corrigido pelo IPCA a partir da última data de atualização do currículo.
-  \item[Tempo de Permanência na Ocupação] extraída a partir do número de meses consecutivos do indivíduo naquela experiência profissional.
-  \item[Escolaridade] registrada no currículo com as opções 1º, 2º e 3º graus completos.
-  \item[Curso de Graduação] registrada a partir de uma lista de cursos, essa informação é coletada apenas para escolaridade acima de 2º grau completo. A graduação é considerada apenas para as ocupações que ocorrem depois do término do curso.
-  \item[Gênero] do profissional, apenas masculino ou feminino.
-  \item[Número de Profissionais na Ocupação] é obtido contando as ocupações que não possuem data de término.
-\end{description}
+Um fato notável que causou surpresa para o leigo na publicação no MCar é que a mediana salarial é inferior a média salarial, ou em outras palavras \enquote{em todas as ocupações, metade das pessoas ganha menos que a média salarial}. Essa constatação nada mais é do que um reflexo da \textit{pirâmide salarial}, em que poucos profissionais empurram a média para cima.
 
-A idade, o salário e o tempo de permanência são sumarizados usando o \textit{resumo de cinco números}, com seus intervalos de confiança 95\% e uma \textit{estimativa de densidade de probabilidade}. Já a escolaridade, o curso de graduação e o gênero são simples contagens de frequência.
-
-O \textit{resumo de cinco números} consiste no valor mínimo, 1º quartil, mediana, 3º quartil e valor máximo. Esse resumo é proposto por \citeonline{Hoaglin1983-aq} como estatística descritiva de uma amostra.
-
-O intervalo de confiança 95\% para todos os valores do resumo de cinco números é obtido por \textit{bootstrap} com 10.000 iterações. A técnica permite identificar os valores mais confiáveis independentemente do tamanho da amostra e das distribuições.
-
-A Tabela~\ref{tab:resumo-salario-programador} mostra os quartis e seus intervalos de confiança para a ocupação de \enquote{Programador}.
+Como exemplo, a Tabela~\ref{tab:resumo-salario-programador} mostra os quartis e seus intervalos de confiança para a ocupação de \enquote{Programador}.
 
 \begin{table}[htb]
     \centering
@@ -1121,23 +1129,33 @@ A Tabela~\ref{tab:resumo-salario-programador} mostra os quartis e seus intervalo
     \label{tab:resumo-salario-programador}
 \end{table}
 
-\begin{comment}
-A Tabela~\ref{tab:resumo-salario-programador} mostra o resumo e seus intervalos de confiança para a ocupação de \enquote{Programador}.
+As palavras-chave são extraídas a partir das descrições digitadas pelos usuários no campo \enquote{Experiência Profissional} dos currículos. O processo descrito abaixo tenta criar expressões significativas, ou seja, pequenas frases, que ajudem a descrever o cargo ao invés de apenas indicar as palavras mais comuns. Um fato notável é que não é possível utilizar \textit{stemming} ou correção ortográfica nesse processo, pois existe uma grande quantidade de jargões e siglas específicas nas descrições.
 
-\begin{table}[htb]
-\centering
-\begin{tabular}{r|c|c|c}
-                    & \textbf{2,5\%} & \textbf{Estimativa} & \textbf{97,5\%} \\ \hline
-\textbf{Mínimo}     & [coletar]      & [coletar]           & [coletar] \\ \hline
-\textbf{1º Quartil} & 1672           & 1709                & 1751 \\ \hline
-\textbf{Mediana}    & 2354           & 2403                & 2476 \\ \hline
-\textbf{3º Quartil} & 3225           & 3294                & 3354 \\ \hline
-\textbf{Máximo}     & [coletar]      & [coletar]           & [coletar]    
-\end{tabular}
-\caption{Resumo de 5 números para salário de \enquote{Programador}}
-\label{tab:resumo-salario-programador}
-\end{table}
-\end{comment}
+Para formar expressões, são gerados unigramas, bigramas e trigramas para as descrições de cada experiência profissional. A seguir, elas são ordenadas por TF-IDF e as palavras que aparecem repetidas em um n-grama de menor TF-IDF são removidas. Por exemplo, se a palavra \enquote{fiscal} aparece com maior TF-IDF que o bigrama \enquote{nota fiscal}, a palavra \enquote{fiscal} é removida da lista.
+
+O TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) é uma medição de relevância usada no processamento de linguagem natural. Ela é baseada na frequência em que um termo aparece em um documento e inversamente a sua frequência entre documentos.
+
+A rede final, junto com o nome de exibição e os dados de faixas salariais, palavras-Chave e posicionamento são gravados em um arquivo e posteriormente alimentam um banco de dados de grafos. O banco é usado como fonte de dados para o site disponível em \url{http://www.vagas.com.br/mapa-de-carreiras}~\cite{VAGAS_Tecnologia2014-yv}.
+
+
+\subsection{Atributos das Ocupações}
+
+Complementar à montagem do grafo, os vértices com as ocupações são abastecidos com outras informações. São elas:
+
+\begin{description}
+  \item[Idade] computada para cada ocupação considerando a data de nascimento do profissional e a data de entrada na ocupação.
+  \item[Tempo de Permanência na Ocupação] extraída a partir do número de meses consecutivos do indivíduo naquela experiência profissional.
+  \item[Escolaridade] registrada no currículo com as opções 1º, 2º e 3º graus completos.
+  \item[Curso de Graduação] registrada a partir de uma lista de cursos, essa informação é coletada apenas para escolaridade acima de 2º grau completo. A graduação é considerada apenas para as ocupações que ocorrem depois do término do curso.
+  \item[Gênero] do profissional, apenas masculino ou feminino.
+  \item[Número de Profissionais na Ocupação] é obtido contando as ocupações que não possuem data de término.
+\end{description}
+
+A idade, e o tempo de permanência são sumarizados usando o \textit{resumo de cinco números}, com seus intervalos de confiança 95\% e uma \textit{estimativa de densidade de probabilidade}. Já a escolaridade, o curso de graduação e o gênero são simples contagens de frequência.
+
+O \textit{resumo de cinco números} consiste no valor mínimo, 1º quartil, mediana, 3º quartil e valor máximo. Esse resumo é proposto por \citeonline{Hoaglin1983-aq} como estatística descritiva de uma amostra.
+
+O intervalo de confiança 95\% para todos os valores do resumo de cinco números é obtido por \textit{bootstrap} com 10.000 iterações. A técnica permite identificar os valores mais confiáveis independentemente do tamanho da amostra e das distribuições.
 
 A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador de Densidade de Kernel usando um distribuição gaussiana como função kernel. A largura de banda escolhida para cada estimativa é o menor valor limite para que a distribuição se mantenha unimodal.
 
@@ -1145,6 +1163,7 @@ A \textit{estimativa de densidade de probabilidade} é obtida por um Estimador d
 \subsection{Descrição dos Dados}  \label{sec:descricao-dos-dados}
 
 Os dados usados para esse trabalho são do MCar de fevereiro de 2017. Após o processo de limpeza da informação o grafo resultante possui 7.267 nós e 145.115 conexões, sendo 68.771 bigramas e 76.344 trigramas. A transformação dos bigramas e trigramas em conexões resulta em 73.064 conexões e essa versão é usada para caracterizar a rede quanto ao grau e conectividade.
+
 
 \subsection{Distribuição de Graus, Ego-Grafos e Modelos de Carreiras}  \label{sec:distribuicao-de-graus}
 
