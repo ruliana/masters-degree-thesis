@@ -1171,7 +1171,11 @@ A rede de ocupações possui a distribuição de grau exibida no gráfico de Par
 
 Por ser uma rede direcionada, um certo cuidado na análise é necessário, uma vez que o grau dos nós não corresponde diretamente ao número de nós conectados. Imaginando que cada nó pode ter uma ou duas conexões com o mesmo nó vizinho, o grau $k_i$, varia em relação ao número de vizinhos entre $k_i = v_i$ (uma conexão por vizinho) e $k_i = 2v_i$ (cada vizinho possui uma conexão de entrada e saída com $k$), onde $v$ é o número de nós conectados ao nó $i$ por uma conexão de entrada ou saída.
 
-A contribuição de cada nó para a conectividade da rede pode ser observada utilizando-se ego-grafos. Um ego-grafo é um subgrafo formado por um nó, todos os seus vizinhos e as conexões entre eles~\cite{Newman2010-od}. Como o número de conexões em uma rede direcionada não representa necessariamente o número de nós conectados, o uso do ego-grafo permite identificar \textit{hubs} que possuem maior conectividade sem que necessariamente possuam o maior número de conexões. Considerar o nó central junto aos seus vizinhos permite medir o quanto os subgrafos se sobrepõem sem a necessidade de ajustes quanto ao nó central.
+A contribuição de cada nó para a conectividade da rede pode ser observada utilizando-se ego-grafos. Um ego-grafo é um subgrafo formado por um nó, todos os seus vizinhos e as conexões entre eles~\cite{Newman2010-od}. Como o número de conexões em uma rede direcionada não representa necessariamente o número de nós conectados, o uso do ego-grafo permite identificar \textit{hubs} que possuem maior conectividade sem que necessariamente possuam o maior número de conexões.
+
+Considerar o nó central junto aos seus vizinhos permite medir o quanto os subgrafos se sobrepõem, identificando os \textit{hubs} que mais contribuem para conectar nós ainda não vistos pelos \textit{hubs} maiores. Por exemplo, a o ego-grafo centrado na ocupação \enquote{Auxiliar de Produção} na Tabela~\ref{tab:top-egografos} contribui com 20\% do seu tamanho em ocupações não conectadas pelos 5 \textit{hubs} maiores que ele.
+
+O efeito observado é que poucos \textit{hubs} são suficientes para conectar a maior parte da rede, como detalhado a seguir.
 
 No gráfico de Pareto da Figura~\ref{fig:pareto-egografo} as ocupações estão ordenadas pelo tamanho do ego-grafo. Exatamente 25\% dos maiores ego-grafos são suficientes para conectar 98,31\% da rede. O nó de maior grau, \textit{Auxiliar Administrativo}, possui um ego-grafo com 3.369 ocupações das 7.267, ou seja, 46,36\% das ocupações de alguma forma possui fluxo de profissionais saindo ou entrando dessa ocupação.
 
@@ -1197,13 +1201,7 @@ A Tabela~\ref{tab:top-egografos} contém os 5 maiores ego-grafos do MCar. Devido
 
 Essa característica reforça conceitos sobre movimentação profissional como a Carreira sem Fronteiras e a Carreira Proteana, indicando que uma grande quantidade de profissionais trilha por carreiras variadas e se adaptam a diferentes ocupações. No entanto, há uma rápida queda no número de conexões e no tamanho do ego-grafo, sugerindo que esses conceitos não se aplicam a todas as ocupações igualmente e que um número pequeno delas funciona como \enquote{coringa} ou \enquote{ponte} para movimentação profissional. Se essa característica está presente por que as ocupações são mais genéricas, por serem típicas do início de carreira ou por algum efeito de mercado é algo a ser investigado em trabalhos futuros.
 
-%% Ronie: Aqui em cima tem algo que posso investigar na dissertação, acredito. Se há alguma correlação entre essas ocupações e escolaridade (sei que tem), e alguma correlação com o tempo de trabalho ou a idade.
-
-O \enquote{Paradoxo da Amizade}~\cite{Barabasi2016-rn} parece valer para pessoas transitando entre ocupações. O paradoxo é dado como \enquote{na média, meus amigos são mais populares que eu}, transportado para o contexto desse trabalho seria enunciado como \enquote{na média, os outros trabalhos que eu poderia executar têm mais opções de movimentação que o meu}. Esse paradoxo tem uma explicação simples, como se observa na Figura~\ref{fig:pareto-egografo}, um nó qualquer tem grandes chances de estar conectado a um ou mais \textit{hubs} o que, na média, faz com que as ocupações vizinhas tenham mais conexões do que as suas próprias.
-
-% Ronie: Esses dois parágrafos abaixo estão meio estranhos no texto. Mas os pontos são:
-% 1 - Em uma rede direcionada, o ego-grafo é melhor de se analisar do que o grau. Isso pq, diferente de uma rede não-direcionada, o grau _não_ significa o número de vizinhos.
-% 2 - Eu poderia ter usado um histograma (distribuição de frequência) para fazer uma análise similar. Na literatura de ciência de redes é praticamente o único gráfico que se vê. Mas, apesar das propriedades estatísticas interessantes, o histograma é bem menos informativo (IMHO). O Pareto mostra claramente a contribuição dos hubs para a conectividade da rede, enquanto que o histograma relega eles a uma cauda fina e ruidosa (parece mais uma 'sujeira' do que a característica mais importante da rede). É um ponto que pode ser um pouco controverso (embora seja um detalhe), mas eu gostaria de tentar sustentá-lo eventualmente :)
+O \enquote{Paradoxo da Amizade}~\cite{Barabasi2016-rn} parece valer para pessoas transitando entre ocupações. O paradoxo é dado como \enquote{na média, meus amigos são mais populares que eu}, transportado para o contexto desse trabalho seria enunciado como \enquote{na média, os outros trabalhos que eu poderia executar têm mais opções de movimentação que o meu}. Esse paradoxo tem uma explicação simples, como se observa na Figura~\ref{fig:pareto-egografo}, um nó qualquer tem grandes chances de estar conectado a um ou mais \textit{hubs} o que, na média, faz com que as ocupações vizinhas tenham mais conexões do que a própria ocupação.
 
 A Figura~\ref{fig:pareto-egografo} ilustra a diferença entre o grau e a conectividade da rede que é importante do ponto de vista dessa pesquisa. Enquanto o grau identifica corretamente os \textit{hubs}, o gráfico de Pareto dos ego-grafos mostra que a rede é mais conectada do que seu número de conexões. Comparando os dois gráficos, percebe-se que, enquanto a distribuição de grau e do tamanho do ego-grafo são similares, o acumulado do primeiro cresce mais suavemente que o do segundo, indicando que os \textit{hubs} possuem proporcionalmente mais conexões unidirecionais, ou seja, menos conexões conectam mais nós.
 
@@ -1260,9 +1258,9 @@ Os resultados de compressão para cada variação são apresentados na Tabela~\r
     \label{tab:metodos}
 \end{table}
 
-Apesar de usar a expressão \enquote{compartilham ocupações}, a interpretação mais correta é que as ilhas possuem \textit{suas próprias versões} das ocupações. \citeonline{Viamontes_Esquivel2011-it} apresentam um exemplo intuitivo do significado desse \enquote{compartilhamento} usando aeroportos europeus e norte-americanos. Transposto para a realidade do MCar, uma ocupação que pertence a mais de uma comunidade significa que os profissionais que transitam por ela, em sua maioria, voltam aos seus grupos de origem ao invés de migrarem para outros. Não fosse dessa forma, esses grupos conectados seriam considerados como um conjunto único de ocupações pelo algoritmo ou a ocupação estaria apenas na comunidade com fluxo predominante.
+Apesar de expressão \enquote{compartilham ocupações} ser usada, a interpretação mais correta é que as ilhas possuem \textit{suas próprias versões} das ocupações. \citeonline{Viamontes_Esquivel2011-it} apresentam um exemplo intuitivo do significado desse \enquote{compartilhamento} usando aeroportos europeus e norte-americanos. Transposto para a realidade do MCar, uma ocupação que pertence a mais de uma comunidade significa que os profissionais que transitam por ela, em sua maioria, voltam aos seus grupos de origem ao invés de migrarem para outros. Não fosse dessa forma, esses grupos conectados seriam considerados como um conjunto único de ocupações pelo algoritmo ou a ocupação estaria apenas na comunidade com fluxo predominante.
 
-Existem duas explicações possíveis. A primeira é que essas ocupações são \textit{homônimas} e, portanto, distintas, o que significa que há uma fronteira entre elas, como exibido no exemplo da Figura~\ref{fig:homonimos}. A segunda é que essas ocupações são similares, mas fatores não especificados dificultam a transição de um grupo para outro, o que também indica uma fronteira de carreira, ainda que mais fraca.
+Existem três explicações possíveis. A primeira é que essas ocupações são \textit{homônimas} e, portanto, distintas, o que significa que há uma fronteira entre elas, como exibido no exemplo da Figura~\ref{fig:homonimos}. A segunda é que essas ocupações são similares, mas fatores não especificados dificultam a transição de um grupo para outro, o que também indica uma fronteira de carreira, ainda que mais fraca. A terceira é que são ocupações que podem ser exercidas por uma grande variedade de profissionais, mas que preferem voltar para ocupações em suas ilhas originais.
 
 \begin{figure}[htb]
     \centering
@@ -1278,53 +1276,20 @@ Existem duas explicações possíveis. A primeira é que essas ocupações são 
     \label{fig:homonimos}
 \end{figure}
 
-Um exemplo da primeira explicação é a ocupação \enquote{Coordenador de Projetos}, que está associada tanto à Arquitetura quanto à Software. Um possível exemplo da segunda é a ocupação de \enquote{Professor} que aparece em diversas ilhas, sugerindo que há especializações nessa ocupação que impedem que um Professor se movimente entre ilhas, o que condiz com o conhecimento tácito sobre a profissão, um Professor de Matemática não se transforma em um Professor de Língua Portuguesa facilmente.
+Um exemplo da primeira explicação é a ocupação \enquote{Coordenador de Projetos}, que está associada tanto à Arquitetura quanto à Software. Um possível exemplo da segunda é a ocupação de \enquote{Professor} que aparece em diversas ilhas, sugerindo que há especializações nessa ocupação que impedem que um Professor se movimente entre ilhas, o que condiz com o conhecimento tácito sobre a profissão, um Professor de Matemática não se transforma em um Professor de Língua Portuguesa facilmente. Finalmente, \enquote{Auxiliar Administrativo} figurando em diversas ilhas é um exemplo da terceira explicação; ela não é reconhecida como homônimo nem sugere uma especialização e profissionais que a exercem não a usam para transitar de uma ilha para outra.
 
 Em qualquer uma dessas interpretações, as ocupações que participam de mais de uma ilha ocupacional revelam uma fronteira e não uma ponte.
-
-\begin{comment}
-Ronie: Lá se vai mais um pedaço do trabalho pro brejo :D Lição aprendida: o trabalho de pesquisa tem muito 'vai e vem', não compensa escrever coisas em detalhes e caprichar no português até a trabalho estar quase concluído. O próximo vai funcionar melhor e ser bem mais rápido :)
-
-====
-
-Os resultados obtidos foram comparados com o trabalho de \citeonline{Viamontes_Esquivel2011-it} para obter uma perspectiva mais ampla sobre o significado da compressão (Tabela~\ref{tab:comparativo}). É possível observar que o MCar é a rede que mais se beneficia de uma estrutura que permite sobreposição de comunidades.
-
-\begin{table}
-\centering
-\begin{tabular}{@{} l r r r r r @{}}
-\toprule
-&      &          & \multicolumn{2}{c}{Compressão} & \\
-\cmidrule(r){4-5}
-Rede                                   & Nós  & Conexões & Simples & $\Delta$ Sobr.       & $N_{\text{sobr}}/N$ \\
-\midrule
-\rowcolor{yellow!25} Mapa de Carreiras & 7450 & 90800    & 14\%    & 30\%                 & 11\% \\
-Estradas Europeias                     & 1018 & 1274     & 46,2\%    & 10,4\%                 & 35,5\% \\
-Grade de Energia Leste dos EUA         & 4941 & 6994     & 53,4\%    & 8,8\%                  & 27,5\% \\
-Doenças Humanas                        & 516  & 1188     & 46,4\%    & 2,9\%                  & 15,3\% \\
-Coautoria de Artigos de Ciência de Redes                   & 552  & 1317     & 48,9\%    & 2,5\%                  & 14,6\% \\
-Rotas Aéreas                           & 3618 & 14142    & 31,1\%    & 1,2\%                  & 13,9\% \\
-Blogs Políticos (EUA)                  & 1222 & 16714    & 4,1\%     & 0,4\%                & 5,8\% \\
-Blogs Políticos (Suécia)               & 855  & 10315    & 0,5\%   & 0,2\%                & 4,8\% \\
-Rede Neural \textit{C. elegans}        & 297  & 2345     & 1,7\%     & 0,1\%                & 2,7\% \\
-\bottomrule
-\end{tabular}
-\caption{Comparativo da estrutura do Mapa de Carreiras (em destaque) com outras redes~\cite{Viamontes_Esquivel2011-it}. \textit{Compressão Simples} se refere à compressão de informação onde o Infomap obteve o melhor particionamento simples da rede (sem sobreposição ou hierarquia de partições). \textit{Compressão $\Delta$ Sobr.} se refere ao ganho na compressão obtido pela sobreposição de partições em relação à compressão simples. $N_{\text{sobr}}/N$ é a proporção de nós que participam em mais de uma comunidade em relação ao total de nós.}
-\label{tab:comparativo}
-\end{table}
-
-A distribuição de tamanho das ilhas resultantes da partição com sobreposição está na Figura~\ref{fig:pareto-comunidades}. Mais de 75\% delas possui uma única ocupação, representando apenas 8\% de todas as ocupações. 
-\end{comment}
 
 \begin{figure}[htb]
     \centering
     \includegraphics[width=0.9\linewidth]{pareto-comunidades.png}
-    \caption{Gráfico de Pareto com a distribuição de tamanho das ilhas ocupacionais. As comunidades estão ordenadas pelo número de ocupações que contêm, ilhas maiores estão à esquerda e menores à direita. O eixo direito, em escala logarítmica, está associado à linha cheia e representa o número de ocupações da ilha. O eixo esquerdo está associado à linha tracejada e representa o total de ocupações e qual a contribuição acumulativa das ilhas à esquerda do ponto para ela.}
+    \caption{Gráfico de Pareto com a distribuição de tamanho das ilhas ocupacionais. As comunidades estão ordenadas pelo número de ocupações que contêm, ilhas maiores estão à esquerda e menores à direita. O eixo direito, em escala logarítmica, está associado à linha cheia e representa o número de ocupações da ilha. O eixo esquerdo está associado à linha tracejada e representa o total de ocupações e qual a contribuição acumulativa das ilhas para o total de ocupações na rede.}
     \label{fig:pareto-comunidades}
 \end{figure}
 
 As comunidades, em sua maioria, possuem uma topologia em que predomina a forma de estrela ou estrelas com múltiplos centros. Isso significa poucos \textit{hubs} conectando quase todos os outros nós. Esse formato é caracterizado por uma assortatividade negativa, ou seja, nós de alto grau conectados a nós de baixo grau~\cite{Barabasi2016-rn}.
 
-A assortatividade das 624 ilhas com ao menos três ocupações é exibida na Figura~\ref{fig:assortatividade}. Quase todas elas possuem assortatividade negativa, reforçando o conceito de polos ocupacionais. Na Figura~\ref{fig:ex-ilhas-ocupacionais} são apresentados três exemplos que ilustram a importância dos polos ocupacionais.
+A assortatividade das 624 ilhas com ao menos três ocupações é exibida na Figura~\ref{fig:assortatividade}. Quase todas elas possuem assortatividade negativa, reforçando o conceito de polos ocupacionais. Na Figura~\ref{fig:ex-ilhas-ocupacionais} são apresentados três exemplos que ilustram a importância dos polos ocupacionais. O MCar, como um todo, possui assortatividade ligeiramente negativa (-0,18).
 
 \begin{figure}[htb]
     \centering
@@ -1339,7 +1304,7 @@ O polo ocupacional é claramente \textit{Aluno de Iniciação Científica} que r
 
 Por outro lado, o enfraquecimento do polo tende a minar o fluxo de pessoas para outras ocupações, provocando o enfraquecimento da ilha como um todo.
 
-Essa análise pontual dá dimensão à contribuição desse trabalho. Nesse caso, identificada a ilha, o polo e o fluxo predominante,  ações para reforçar uma ocupação, como \textit{Pos-Doutorando}, por exemplo, passam a ser óbvias. Essa análise superficial sugere que aumentar o número de alunos de iniciação científica, desestimular sua movimentação para outras ocupações ou incentivar o fluxo para o mestrado provocaria o efeito desejado. A proporção de pessoas em cada fluxo fornece um \enquote{funil} para se estimar quantas pessoas seriam necessárias em cada ocupação para atingir um certo resultado.
+Essa análise pontual dá dimensão à contribuição desse trabalho. Nesse caso, identificada a ilha, o polo e o fluxo predominante,  ações para reforçar uma ocupação, como \textit{Pos-Doutorando}, por exemplo, passam a ser óbvias. Sua topologia sugere que aumentar o número de alunos de iniciação científica, desestimular sua movimentação para outras ocupações ou incentivar o fluxo para o mestrado provocaria o efeito desejado. A proporção de pessoas em cada fluxo fornece um \enquote{funil} para se estimar quantas pessoas seriam necessárias em cada ocupação para atingir um certo resultado.
 
 A ilha ocupacional relacionada à \textit{Recursos Humanos}, exibida na Figura~\ref{fig:ex-sobreposicao-recursos-humanos}, possui uma topologia de estrela com polo em \textit{Analista de Recursos Humanos} que se alimenta principalmente de \textit{Assistente de Recursos Humanos} e \textit{Analista de Departamento Pessoal}. Apesar de alguma dispersão, o fluxo prossegue para ocupações mais administrativas \textit{Coordenador}, \textit{Supervisor} e \textit{Gerente}, com uma certa força para \textit{Consultor}.
 
