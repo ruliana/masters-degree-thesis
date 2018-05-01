@@ -444,133 +444,6 @@ r &= \frac{p - q}
 {\sqrt{ \sigma^2_\leftarrow } \sqrt{ \sigma^2_\rightarrow }}\,.
 \end{align*}
 
-%====================================
-\subsubsection{Coeficiente de Agrupamento} \label{sec:coeficiente-agrupamento}
-
-O \textit{coeficiente de agrupamento local} é a medida de quanto os vizinhos de um nó estão conectados entre si e é dado por:
-
-\begin{equation}
-c_c(i) \defn \begin{cases}
-    \frac{2m_i}{k_i(k_i - 1)} & \text{se}\ k_i > 1 \\
-    \text{indefinido}         & \text{caso contrário}
-  \end{cases}
-\end{equation}
-
-Onde $m_i$ é o número de conexões entre os vizinhos do nó $i$, e $k_i$ é o número de conexões de $i$.
-
-O coeficiente de agrupamento local pode ser estendido para grafos direcionados distinguindo-se a direção da conexão.
-
-\begin{equation}
-\linkboth{c}_c(i) \defn \begin{cases}
-    \frac{\linkboth{m}_i}{k_i(k_i - 1)} & \text{se}\ k_i > 1 \\
-    \text{indefinido}                  & \text{caso contrário}
-  \end{cases}
-\end{equation}
-
-Onde $\linkboth{m}_i$ é o número de conexões entre os vizinhos de $i$.
-
-Em um grafo ponderado, \citeonline{Barrat2004-xf} oferecem a seguinte versão do coeficiente de agrupamento:
-
-\begin{equation}
-\weighted{c}_c(i) \defn \frac{1}{s_i(k_i - 1)} \sum_{j,k \in N(i)} \frac{w_{ij} + w_{jk}}{2}
-\end{equation}
-
-Onde $N(i)$ é o conjunto de vizinhos de $i$, $w_{ij}$ é o peso da conexão entre os nós $i$ e $j$ e $s(i)$ é a força do nó.
-
-O \textit{coeficiente de agrupamento global} de um grafo é dado pela média dos coeficientes locais:
-
-\begin{equation}
-C_c \defn \frac{1}{|N'|} \sum_{i \in N'} c_c(i)
-\end{equation}
-
-Onde $N'$ é o conjunto de nós com grau maior que 1, ou seja, $N' = \left\lbrace i \in N \mid k_i > 1 \right\rbrace$. O coeficiente de agrupamento para um grafo ponderado é calculado da mesma forma, apenas substituindo-se o coeficiente local por sua versão ponderada.
-
-\begin{comment}
-%====================================
-\subsubsection{Similaridade} \label{sec:similaridade}
-
-A \textit{similaridade} é usada para medir se dois nós ou conexões são similares estruturalmente, ou seja, independente do seu conteúdo. De maneira simplificada, dois nós são tão mais similares quanto houverem vizinhos comuns. Já a \textit{similaridade de conexão}, como definida por \citeonline{Ahn2010-uh}, parte de conexões que compartilham um nó e verifica se os nós não compartilhados são similares.
-
-A similaridade também é usada como medida de distância em algoritmos de agrupamento hierárquico \cite{Barabasi2016-rn}.
-
-Existem diversas formulações para a similaridade e \citeonline{Lu2011-og} revisam dez delas sem considerar suas variações para redes direcionadas e ponderadas. Esse trabalho utiliza a similaridade baseada no índice de Jaccard (Equação~\ref{eq:similaridade-1}) e suas variações.
-
-Sejam $i$ e $j$ nós da rede, $N_i$ o conjunto de vizinhos do nó $i$ e $N_i^+ \defn N_i \cup \{i\}$, a Equação~\ref{eq:similaridade-1} define a similaridade por vizinhança e a Equação~\ref{eq:similaridade-2} define a mesma similaridade considerando a existência de conexão direta entre os nós sendo comparados.
-
-\noindent
-\begin{tabularx}{\linewidth}{@{}XX@{}}
-    \begin{equation} \label{eq:similaridade-1}
-        S_{ij} \defn \frac{|N_i \cap N_j|}{|N_i \cup N_j|} 
-    \end{equation} &
-    \begin{equation} \label{eq:similaridade-2}
-        S_{ij}^+ \defn \frac{|N_i^+ \cap N_j^+|}{|N_i^+ \cup N_j^+|} 
-    \end{equation}
-\end{tabularx}
-
-Em redes direcionadas é preciso distinguir os vizinhos de entrada e saída. A similaridade em uma rede direcionada $\linkboth{S}_{ij}$ é dada pela média entre similaridade de entrada e saída (Equação~\ref{eq:similaridade-3}).
-
-\begin{equation} \label{eq:similaridade-3}
-    \linkboth{S}_{ij} \defn \frac{1}{2} \left( \frac{|\linkin{N}_i \cap \linkin{N}_j|}{|\linkin{N}_i \cup \linkin{N}_j|} + \frac{|\linkout{N}_i \cap \linkout{N}_j|}{|\linkout{N}_i \cup \linkout{N}_j|} \right)
-\end{equation}
-
-Onde $\linkin{N}_i$ é o número vizinhos de $i$ em que as conexões chegam a ele e $\linkout{N}_i$ é o número de vizinhos onde a conexão parte de $i$.
-
-No caso de redes ponderadas e direcionadas, o índice de Jaccard pode ser generalizado no coeficiente de Tanimoto, resultando na similaridade $\weighteddir{S}_{ij}$ da Equação~\ref{eq:similaridade-3} \cite{Ahn2010-uh}. Sendo $W$ a matriz de pesos da rede e $w_{ij}$ o peso da conexão direcionada de $i$ a $j$, define-se o vetor $\vec{w}_i = (w_{i1},w_{i2},\ldots,w_{in})$ como sendo o vetor de pesos das conexões do nó $i$, onde $n$ é o número de nós da rede e $w_{ij} = 0$ se não há conexão entre os nós.
-
-\begin{equation}
-\weighteddir{S}_{ij} \defn \frac{\vec{w_i} \cdot \vec{w_j}}{|\vec{w_i}|^2 + |\vec{w_j}|^2 - \vec{w_i} \cdot \vec{w_j}}
-\end{equation}
-
-Para o agrupamento de conexões, como proposto por \citeonline{Evans2009-lq} e \citeonline{Ahn2010-uh}, é preciso definir a similaridade entre conexões. Sendo o vetor $\vec{r}_{i} \defn (r_{i1}, r_{i2}, \ldots, r_{iN})$ definido de acordo com a Equação~\ref{eq:similaridade-conexao-parcial}:
-
-\begin{equation} \label{eq:similaridade-conexao-parcial}
-r_{ij} \defn \frac{1}{k_i} \sum_{h \in N_i} w_{ih}\delta_{ij} + w_{ij}
-\end{equation}
-
-Onde $\delta_{ij} = 1$ se $i = j$ e zero caso contrário. A similaridade entre conexões $R_{(i,h),(h,j)}$ pode ser definida como \cite{Ahn2010-uh}:
-
-\begin{equation}
-R_{(i,h),(j,h)} \defn \frac{\vec{r_i} \cdot \vec{r_j}}{|\vec{r_i}|^2 + |\vec{r_j}|^2 -  \vec{r_i} \cdot \vec{r_j}}
-\end{equation}
-
-Onde $(i,h)$ e $(j,h)$ são as conexões que compartilham o nó $h$ e $i \neq h \neq j$. O nó compartilhado não é usado no cálculo da similaridade, mas é pré-requisito para considerar que duas conexões são similares. A similaridade de conexão é usada principalmente na detecção de comunidades.
-\end{comment}
-
-%====================================
-\subsubsection{Modularidade} \label{sec:modularidade}
-
-\question[inline]{Passar essa seção para dentro de detecção de comunidade?}
-
-A \textit{modularidade} é uma medida de qualidade para a detecção de comunidades. O algoritmo de Louvain~\cite{Blondel2008-qh}, por exemplo, usa a modularidade como função objetivo. De certa forma ela tem uma relação com o coeficiente de agrupamento, no sentido que ambas procuram quantificar o quanto nós estão mais densamente conectados que outros.
-
-Essa medida é aplicada apenas a um grafo que foi particionado em comunidades. Em termos gerais, ela indica se um grupo de nós é mais densamente conectado que o esperado em uma rede aleatória com o mesmo número de nós e conexões, em caso afirmativo, esse conjunto é uma possível comunidade. Para o caso em que ela reflete um comportamento próximo do que seria esperado em uma rede aleatória, não é possível afirmar que esse grupo tenha qualquer característica especial que o transforme em uma comunidade. No caso de modularidade negativa, isto é, em que a densidade de conexões é menor do que o esperado, esse grupo não representa uma comunidade~\cite{Barabasi2016-rn}.
-
-A modularidade $m_c$ de um grupo $c$ de nós pode ser definida como:
-
-\begin{equation} \label{eq:modularidade-local}
-m_c \defn \frac{L_c}{L} - \left( \frac{K_c}{K} \right)^2
-\end{equation}
-
-Onde $L$ é o número total de conexões da rede, $K = 2L$ é a soma de todos os seus graus, $L_c$ é o número de conexões do grupo e $K_c$ é a soma de seus graus.
-
-Assumindo que uma rede foi particionada em $N_c$ grupos, a modularidade total $M_c$ pode ser calculada somando-se a modularidade de cada grupo:
-
-\begin{equation} \label{eq:modularidade-global}
-M_c \defn \sum_{c \in N_c} m_c
-\end{equation}
-
-O uso da modularidade para detecção de comunidades possui a limitação que o maior valor possível da modularidade $M_\textit{max}$ possui a tendência de formar um platô, dificultando a detecção da partição ótima~\cite{Barabasi2016-rn}.
-
-Considerando as Equações \ref{eq:modularidade-local} e \ref{eq:modularidade-global}, quando dois grupos $A$ e $B$ são unidos, a diferença esperada em $M_c$ é:
-
-\begin{equation}
-\Delta M_{AB} \defn \frac{l_{AB}}{L} - \frac{k_A k_B}{2L^2}
-\end{equation}
-
-Onde $l_{AB}$ é o número de conexões que conectam os dois grupos, e $k_A$ e $k_B$ são as somas de graus de $A$ e $B$, respectivamente. Quando $\frac{k_A k_B}{2L^2} < \frac{l_{AB}}{L}$, a modularidade aumenta ($\Delta M_{AB} > 0$) se houver ao menos uma conexão entre os grupos ($l_{AB} \geq 1$). Isso significa que esses grupos unidos aumentam a modularidade, mesmo sendo grupos diferentes. Esse efeito é chamado de \textit{limite de resolução}.
-
-É possível observar que a resolução da modularidade é diretamente proporcional ao número total de conexões da rede. Diminuindo-se o número de conexões, $k_A$ e $k_B$ se tornam mais relevantes que $l_{AB} / L$. Portanto, para contornar essa limitação é possível considerar os maiores grupos da partição como uma única rede e reparticioná-la. Dessa forma, os grupos artificialmente unidos por conta da resolução serão separados.
-
 
 %====================================
 \subsection{Detecção de Comunidade} \label{sec:deteccao-comunidade}
@@ -941,14 +814,11 @@ O processo de montagem do MCar precisou ser estendido para essa pesquisa. Enquan
 Nessa seção, as etapas diretamente relacionadas à pesquisa são detalhadas, pois a preparação de dados tem forte influência no resultado final. As partes relevantes apenas para o MCar são resumidas ao final da Seção para completude do trabalho.
 
 
-\subsubsection{Os Dados}
+\subsubsection{Dados e Processamento}
 
 Os dados fonte para essa pesquisa são currículos anonimizados de usuários do site de carreiras VAGAS.com. Existem cerca de 10 milhões de currículos armazenados entre 1999 e o início de 2017, mas para esse trabalho foram utilizados apenas os currículos únicos atualizados entre Fevereiro de 2012 e Fevereiro de 2017, totalizando 7.005.639 currículos e 26.568.916 experiências profissionais. No início de 2018 o banco de dados do VAGAS.com já ultrapassa 12 milhões de currículos, mas os dados mais recentes não foram utilizados nessa pesquisa.
 
 Para as análises a serem explicadas nesse capítulo, os dados são primeiramente extraídos para arquivos texto e só então processados. Existem dois formatos principais usados nesse trabalho. O primeiro formato são arquivos em que cada linha é um \textit{array} em JSON (\textit{Javascript Object Notation}). Esse formato é usado como intermediário em quase todas as etapas devidos a velocidade de serialização, desserialização e sua interoperabilidade~\cite{Maeda2012-co}. O segundo formato é usado pelo algoritmo Infomap~\cite{Edler2012-hh} e é derivado do formato Pajek~\cite{Batagelj2002-ly}. Nele, a primeira seção descreve os nós e dá um identificador único a cada um enquanto a seção seguinte descreve as conexões (bigramas e trigramas) e seus pesos. Esse formato é usado na detecção das ilhas ocupacionais.
-
-
-\subsubsection{O Processamento da Informação}
 
 O volume de dados e a variedade de análises desse trabalho impõe algumas restrições de ordem prática. O volume de dados é grande o suficiente para exceder a memória de um computador convencional, algumas das ferramentas utilizadas não se comunicam com outras exceto através de arquivos texto e o tempo para processamento facilmente excede alguns dias se os processadores não forem adequadamente utilizados.
 
@@ -969,7 +839,7 @@ A maior parte dos processos foi implementada usando a linguagem Ruby, mas alguns
 O processo de montagem do grafo está resumido no fluxo apresentado na Figura~\ref{fig:montagem-do-grafo}.
 
 
-\subsubsection{Extração das Experiências Profissionais} \label{sec:extracao-experiencia}
+\subsubsection{Extração das Experiências Profissionais e Normalização} \label{sec:extracao-experiencia}
 
 O primeiro processo do \textit{pipeline} extrai os registros do banco de dados relacional e os grava em arquivos texto. O processo não extrai currículos, mas sim experiências profissionais. Cada registro representa uma única experiência.
 
@@ -990,8 +860,6 @@ Os dados extraídos são:
 
 Dos campos extraídos, o \textit{Nome da Ocupação}, \textit{Data de Início} e \textit{Data de Término} são utilizados para a identificação de Ilhas Ocupacionais, enquanto os outros campos são utilizados apenas dentro do MCar.
 
-\subsubsection{Normalização de Ocupações} \label{sec:normalizacao}
-
 Nessa etapa, o nome da ocupação é normalizado para uma classe de maneira que todas as grafias significando a mesma ocupação sejam transformadas em uma mesma classe. Nessa pesquisa a classe é chamada \enquote{classe equivalente} ou \enquote{ocupação normalizada}.
 
 Para transformar o texto digitado em uma ocupação normalizada os erros de digitação são corrigidos, pontuações são removidas, abreviaturas frequentes são expandidas, o texto é colocado em minúsculas, é feita a singularização das palavras que compõem a ocupação e os nomes são masculinizados (\enquote{secretária} se transforma em \enquote{secretário}, por exemplo).
@@ -1003,23 +871,17 @@ As classes resultantes lembram vagamente o termo original, como no exemplo acima
 A correção de erros de digitação necessitou de um corretor ortográfico especialmente criado para o MCar, pois os corretores disponíveis foram incapazes de reconhecer abreviações como \enquote{IRLA} ou jargões como \enquote{Enfermeiranda}. O corretor foi criado com base nos simples conceitos apresentados por \citeonline{Norvig2007-cz} e passou por uma revisão manual para reduzir erros. Por exemplo, o algoritmo inicialmente detectou \enquote{soldado} como um erro em \enquote{soldador}, bem como \enquote{contador} como erro em \enquote{montador}. Casos como esse justificaram sucessivas revisões do corretor até que nenhum outro caso fosse detectado.
 
 
-\subsubsection{Agrupamento de Ocupações}
+\subsubsection{Agrupamento de Ocupações} \label{sec:agrupamento-de-ocupacoes}
 
 As ocupações são agrupadas pela sua classe equivalente e os dados são coletados em coleções com todos os seus elementos. Isso significa que todos os salários são colocados em uma única coleção, sem haver ainda uma sumarização, bem como todas as grafias da ocupação e os textos utilizados para descrevê-las.
 
 O resultado é utilizado como base para os processos seguintes até a junção em um arquivo final com todos os dados processados e devidamente sumarizados.
 
-
-\subsubsection{Remoção de Ocupações} \label{sec:remocao-ocupacoes-incorretas}
-
 Mesmo após a remoção de casos únicos, alguns nomes presentes nesse campo podem não ser considerados ocupações. São erros comuns que a etapa de normalização não é capaz de corrigir ou representam um entendimento equivocado por parte do usuário.
 
 Casos emblemáticos são os textos \enquote{sim}, \enquote{não} ou \enquote{o mesmo} encontrados no campo destinado ao nome da ocupação. A remoção desses casos precisou ser feita manualmente, ou seja, especialistas da empresa revisaram a lista de ocupações e criaram um dicionário com os erros mais comuns utilizados nessa etapa do processo. Esse dicionário foi aprimorado com sugestões dos usuários após a publicação do MCar.
 
-
-\subsubsection{Agrupamento de Ocupações por Currículo} \label{sec:agrupamento-por-curriculo}
-
-As ocupações são agrupadas por currículo, formando uma sequência cronológica das experiências de um profissional. Até essa etapa, há uma experiência profissional por registro, após ela, cada registro contém uma sequência de experiências profissionais do mesmo indivíduo, ordenadas cronologicamente.
+A seguir, as ocupações são agrupadas por currículo, formando uma sequência cronológica das experiências de um profissional. Até essa etapa, há uma experiência profissional por registro, após ela, cada registro contém uma sequência de experiências profissionais do mesmo indivíduo, ordenadas cronologicamente.
 
 Como o objetivo final é criar um grafo que sumarize o \textit{movimento} de pessoas entre ocupações, as experiências profissionais que não se conectam cronologicamente com nenhuma outra são removidas.
 
@@ -1038,7 +900,7 @@ As experiências profissionais de cada currículo agrupadas por ordem cronológi
     \item Copeiro \textrightarrow~Chapeiro \textrightarrow~Cozinheiro;
 \end{itemize}
 
-O algoritmo utilizado para detecção de comunidades requer preferencialmente trigramas, mas trabalha com bigramas quando aqueles não estão disponíveis. Dessa forma, o processo gera trigramas quando existem ao menos 3 experiências profissionais no currículo ou bigramas se existem apenas 2 experiências. Currículos com 1 ou nenhuma experiência profissional são descartados no processo anterior (Seção~\ref{sec:agrupamento-por-curriculo}).
+O algoritmo utilizado para detecção de comunidades requer preferencialmente trigramas, mas trabalha com bigramas quando aqueles não estão disponíveis. Dessa forma, o processo gera trigramas quando existem ao menos 3 experiências profissionais no currículo ou bigramas se existem apenas 2 experiências. Currículos com 1 ou nenhuma experiência profissional são descartados no processo anterior (Seção~\ref{sec:agrupamento-de-ocupacoes}).
 
 A maioria dos trigramas e bigramas de ocupações ocorrem pouquíssimas vezes. No conjunto com 8.920.353 sequências utilizadas para a detecção de comunidades (entre trigramas e bigramas), cerca de 4.253.925 (47,69\%) ocorrem apenas uma vez. Esse grande número de sequências únicas é causada tanto por trajetórias incomuns, quanto por erros de digitação que as etapas anteriores não foram capazes de eliminar. Por vezes são apenas ocupações similares a outras, mas onde os usuários escrevem de maneira pouco convencional.
 
@@ -1058,9 +920,6 @@ Seguindo o exemplo da Seção~\ref{sec:geracao-de-trigramas}, a sequência \enqu
 Para corrigir isso, a rede é criada a partir das conexões geradas pelos trigramas, mas seu peso é obtido a partir dos bigramas simples gerados pelo processo de montagem do MCar.
 
 O resultado final é uma rede que passou pelo mesmo processo de limpeza e poda que os trigramas, mas sem distorção em seus pesos.
-
-
-\subsubsection{Remoção de Componentes} \label{sec:remocao-de-componentes}
 
 Após o processo de montagem, a rede resultante é analisada quanto ao número de componentes. Os resultados na Tabela~\ref{tab:componentes} indicam vários componentes com apenas 1 nó, alguns poucos com 2 e 3 nós e um componente gigante com 7.267 nós.
 
@@ -1085,7 +944,7 @@ Os componentes com apenas um nó são sequências de ocupações que se repetem,
 Os micro-componentes (1 a 3 nós) são descartados e apenas as ocupações presentes no componente gigante são usadas. Esse é o última etapa no pré-processamento das informações e a rede resultante é utilizada para as análises apresentadas na Seção~\ref{sec:fronteiras-de-carreira}.
 
 
-\subsubsection{Geração de Dicionário e Desnormalização de Ocupações} \label{sec:criar-dicionario}
+\subsubsection{Geração de Dicionário, Posicionamento e Extração de Dados} \label{sec:criar-dicionario}
 
 Os textos resultantes do processo de normalização descrito na Seção~\ref{sec:normalizacao} não são adequados para exibição. Esse processo contabiliza o número de grafias exatamente idênticas para cada ocupação normalizada e assume como \enquote{nome de exibição} a grafia mais frequente.
 
@@ -1097,17 +956,11 @@ O dicionário resultante mapeia a classe equivalente para um nome de exibição.
 
 Por exemplo, a grafia mais comum para a ocupação normalizada \textit{bilingue secretario} produz o nome de exibição \textit{Secretária Bilíngue} e o nome \enquote{computacionalmente amigável} \textit{secretaria-bilingue}. Nessa pesquisa, essa versão é usada nos gráficos e exemplos produzidos por questões de simplicidade.
 
-
-\subsubsection{Posicionamento dos Vértices do Grafo}
-
 Para que o grafo possa ser exibido bidimensionalmente, é preciso que seus vértices sejam posicionados de modo a evitar a sobreposição e que os vértices relacionados por arestas de maior peso estejam mais próximos.
 
 O algoritmo de \textit{Force-Directed} é usado para posicioná-los corretamente. Esse algoritmo é aplicado nesse passo utilizando o programa Graphviz~\cite{Gansner2000-oo}. O programa leva em conta o tamanho de exibição do nó para evitar a sobreposição, por isso, os nomes de exibição são utilizados em cada para que seu tamanho relativo seja levado em conta pelo Graphviz.
 
 A saída final é um arquivo texto com a posição X e Y de cada nó em um plano cartesiano, sem a informação das conexões.
-
-
-\subsubsection{Extrações de Faixas Salariais e Palavras-Chave}
 
 Esses dois processos são descritos brevemente aqui por questões de completude, uma vez que não são diretamente o objetivo desse trabalho. Entretanto, a disponibilidade dessas informações sugere extensões interessantes para ele.
 
@@ -1136,9 +989,6 @@ Para formar expressões, são gerados unigramas, bigramas e trigramas para as de
 O TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) é uma medição de relevância usada no processamento de linguagem natural. Ela é baseada na frequência em que um termo aparece em um documento e inversamente a sua frequência entre documentos.
 
 A rede final, junto com o nome de exibição e os dados de faixas salariais, palavras-Chave e posicionamento são gravados em um arquivo e posteriormente alimentam um banco de dados de grafos. O banco é usado como fonte de dados para o site disponível em \url{http://www.vagas.com.br/mapa-de-carreiras}~\cite{VAGAS_Tecnologia2014-yv}.
-
-
-\subsection{Atributos das Ocupações}
 
 Complementar à montagem do grafo, os vértices com as ocupações são abastecidos com outras informações. São elas:
 
